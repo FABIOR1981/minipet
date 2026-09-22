@@ -357,6 +357,23 @@ body {
   font-size: 1.2rem;
 }
 
+/* EXPRESIONES FACIALES */
+.kawaii-face.sleeping .eye {
+  height: 3px !important;
+  border-radius: 2px !important;
+  background: #333 !important;
+  margin-top: 15px !important;
+}
+
+.kawaii-face.sleeping .sparkle {
+  display: none !important;
+}
+
+.kawaii-face.sick .eye {
+  height: 4px;
+  border-radius: 2px;
+}
+
 /* =========================================================
    ACCESORIOS Y EFECTOS
    ========================================================= */

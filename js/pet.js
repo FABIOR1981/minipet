@@ -16,7 +16,7 @@ const PetState = {
     await this.loadDialogues();
     this.updateUI();
     setInterval(() => this.tick(), 8000);
-    this.startWandering(); // Inicia el movimiento autónomo de la mascota
+    this.startWandering();
   },
 
   async loadDialogues() {
@@ -43,6 +43,7 @@ const PetState = {
 
   startWandering() {
     setInterval(() => {
+      // Solo se mueve si NO está durmiendo ni enferma
       if (!this.isSleeping && !this.isSick) {
         this.moveRandomly();
       }
@@ -183,6 +184,11 @@ const PetState = {
 
   sleep() {
     this.isSleeping = !this.isSleeping;
+    
+    // Si se duerme, quita la animación de caminar de inmediato
+    const petEl = document.getElementById('pet');
+    if (petEl) petEl.classList.remove('walking');
+
     if (this.isSleeping) {
       this.energy = 100;
       AudioEffects.playTone(300, 'sine', 0.3);
