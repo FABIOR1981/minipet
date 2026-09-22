@@ -175,12 +175,13 @@ body {
 /* Posicionamiento de Imágenes de Accesorios */
 .accessory {
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 4;
   pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .accessory img {
