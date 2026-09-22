@@ -19,7 +19,7 @@ const PetState = {
 
   async loadDialogues() {
     try {
-      const response = await fetch('dialogues.json');
+      const response = await fetch('data/dialogues.json');
       this.dialogues = await response.json();
     } catch (e) {
       // Frases de respaldo por si aún no has creado el archivo JSON
