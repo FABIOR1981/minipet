@@ -16,7 +16,11 @@ const ASSETS_TO_CACHE = [
   './img/accessories/bow_tie.svg',
   './img/accessories/party_hat.svg',
   './img/accessories/headphones.svg',
-  './img/accessories/magic_wand.svg'
+  './img/accessories/magic_wand.svg',
+  './img/accessories/ribbon_pink.svg',
+  './img/accessories/star_glasses.svg',
+  './img/accessories/flower_pink.svg',
+  './img/accessories/cat_ears.svg'
 ];
 
 // Instalación del Service Worker
