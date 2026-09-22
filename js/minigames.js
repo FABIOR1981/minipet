@@ -2,12 +2,12 @@ const Minigames = {
   renderMenu() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2>?? Elige un Minijuego</h2>
-      <p style="margin-bottom:15px; font-size:0.9rem; color:#555;">?Gana monedas para comprar accesorios en la tienda!</p>
+      <h2>🎮 Elige un Minijuego</h2>
+      <p style="margin-bottom:15px; font-size:0.9rem; color:#555;">¡Gana monedas para comprar accesorios en la tienda!</p>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <button class="menu-btn" onclick="Minigames.startCatchGame()">?? Atrapa las Manzanas</button>
-        <button class="menu-btn" onclick="Minigames.startSimonGame()">?? Sim��n Dice (Memoria)</button>
-        <button class="menu-btn" onclick="Minigames.startRunnerGame()">?? Runner Infinito</button>
+        <button class="menu-btn" onclick="Minigames.startCatchGame()">🍎 Atrapa las Manzanas</button>
+        <button class="menu-btn" onclick="Minigames.startSimonGame()">🎯 Simón Dice (Memoria)</button>
+        <button class="menu-btn" onclick="Minigames.startRunnerGame()">🏃 Runner Infinito</button>
       </div>
     `;
   },
@@ -15,9 +15,9 @@ const Minigames = {
   startCatchGame() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h3>?? Atrapa las Manzanas</h3>
+      <h3>🍎 Atrapa las Manzanas</h3>
       <canvas id="gameCanvas" width="300" height="320" style="background:#e0f7fa; border-radius:12px; margin:10px auto; display:block;"></canvas>
-      <p style="font-size:0.85rem; text-align:center;">Usa las Flechas ?? ?? para moverte</p>
+      <p style="font-size:0.85rem; text-align:center;">Usa las Flechas ⬅️ ➡️ para moverte</p>
     `;
 
     const canvas = document.getElementById('gameCanvas');
@@ -40,7 +40,7 @@ const Minigames = {
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('keyup', handleKeyUp);
         PetState.addCoins(score);
-        alert(`?Juego terminado! Ganaste ?? ${score} monedas.`);
+        alert(`¡Juego terminado! Ganaste 🪙 ${score} monedas.`);
         Minigames.renderMenu();
         return;
       }
@@ -82,8 +82,8 @@ const Minigames = {
   startSimonGame() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h3>?? Sim��n Dice</h3>
-      <p id="simon-status" style="margin-top:5px;">?Memoriza el patr��n!</p>
+      <h3>🎯 Simón Dice</h3>
+      <p id="simon-status" style="margin-top:5px;">¡Memoriza el patrón!</p>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0;">
         <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:80px; background:#ef5350; border:none; border-radius:12px; cursor:pointer;"></button>
         <button id="simon-1" onclick="Minigames.simonClick(1)" style="height:80px; background:#42a5f5; border:none; border-radius:12px; cursor:pointer;"></button>
@@ -131,7 +131,7 @@ const Minigames = {
     if (this.userSequence[currentIndex] !== this.simonSequence[currentIndex]) {
       const reward = this.simonScore * 10;
       PetState.addCoins(reward);
-      alert(`?Te equivocaste! Ganaste ?? ${reward} monedas.`);
+      alert(`¡Te equivocaste! Ganaste 🪙 ${reward} monedas.`);
       Minigames.renderMenu();
       return;
     }
@@ -145,7 +145,7 @@ const Minigames = {
   startRunnerGame() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h3>?? Runner Infinito</h3>
+      <h3>🏃 Runner Infinito</h3>
       <canvas id="runnerCanvas" width="300" height="280" style="background:#fff3e0; border-radius:12px; margin:10px auto; display:block;"></canvas>
       <p style="font-size:0.85rem; text-align:center;">Presiona <b>Espacio</b> o Toca la pantalla para Saltar</p>
     `;
@@ -176,7 +176,7 @@ const Minigames = {
       if (gameOver) {
         window.removeEventListener('keydown', handleKeyDown);
         PetState.addCoins(score);
-        alert(`?Juego terminado! Ganaste ?? ${score} monedas.`);
+        alert(`¡Juego terminado! Ganaste 🪙 ${score} monedas.`);
         Minigames.renderMenu();
         return;
       }

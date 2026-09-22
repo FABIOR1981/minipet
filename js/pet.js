@@ -5,7 +5,7 @@ const PetState = {
   energy: 100,
   isSick: false,
   isSleeping: false,
-  inventory: [],
+  inventory: ['bow_tie'],
   equippedAccessory: 'bow_tie',
 
   init() {
