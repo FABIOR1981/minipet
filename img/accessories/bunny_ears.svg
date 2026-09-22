@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80">
+  <!-- Diadema -->
+  <path d="M 20 65 Q 50 55 80 65" fill="none" stroke="#ff80ab" stroke-width="4" stroke-linecap="round"/>
+  <!-- Oreja Izquierda -->
+  <path d="M 28 60 C 10 20 25 0 38 10 C 45 25 38 55 35 60 Z" fill="#ffffff" stroke="#f50057" stroke-width="2"/>
+  <path d="M 28 50 C 18 25 28 12 34 18 C 38 28 34 48 32 50 Z" fill="#ff80ab"/>
+  <!-- Oreja Derecha (Doblada) -->
+  <path d="M 72 60 C 90 20 75 0 62 10 C 55 25 62 55 65 60 Z" fill="#ffffff" stroke="#f50057" stroke-width="2"/>
+  <path d="M 72 50 C 82 25 72 12 66 18 C 62 28 66 48 68 50 Z" fill="#ff80ab"/>
+</svg>
