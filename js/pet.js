@@ -3,19 +3,11 @@ const PetState = {
   happiness: 100,
   hunger: 100,
   energy: 100,
+  petColor: '#ff80ab',
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie'],
   equippedAccessory: 'bow_tie',
-
-  petColor: '#ff80ab',
-
-setColor(color) {
-  this.petColor = color;
-  const petEl = document.getElementById('pet');
-  if (petEl) petEl.style.backgroundColor = color;
-  this.saveData();
-}
 
   init() {
     this.loadData();
@@ -28,6 +20,10 @@ setColor(color) {
     document.getElementById('happy-count').innerText = this.happiness;
     document.getElementById('hunger-count').innerText = this.hunger;
     document.getElementById('energy-count').innerText = this.energy;
+
+    // Aplicar color de piel a la mascota
+    const petEl = document.getElementById('pet');
+    if (petEl) petEl.style.backgroundColor = this.petColor;
 
     // Renderizar imagen del accesorio equipado
     const accessoryEl = document.getElementById('pet-accessory');
@@ -78,31 +74,30 @@ setColor(color) {
     }
   },
 
- petPet() {
-  if (this.isSleeping) return;
-  this.happiness = Math.min(100, this.happiness + 10);
-  
-  const petEl = document.getElementById('pet');
-  petEl.classList.add('happy-jump');
-  setTimeout(() => petEl.classList.remove('happy-jump'), 500);
+  petPet() {
+    if (this.isSleeping) return;
+    this.happiness = Math.min(100, this.happiness + 10);
+    const petEl = document.getElementById('pet');
+    petEl.classList.add('happy-jump');
+    setTimeout(() => petEl.classList.remove('happy-jump'), 500);
 
-  // Crear corazones flotantes en posiciones aleatorias
-  for (let i = 0; i < 3; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'heart-particle';
-    heart.innerText = '❤️';
-    const offsetX = (Math.random() - 0.5) * 60;
-    heart.style.setProperty('--dx', `${offsetX}px`);
-    heart.style.left = `calc(50% + ${offsetX / 2}px)`;
-    heart.style.top = '20px';
-    petEl.appendChild(heart);
-    setTimeout(() => heart.remove(), 800);
-  }
+    // Animación de corazones flotantes
+    for (let i = 0; i < 3; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle';
+      heart.innerText = '❤️';
+      const offsetX = (Math.random() - 0.5) * 60;
+      heart.style.setProperty('--dx', `${offsetX}px`);
+      heart.style.left = `calc(50% + ${offsetX / 2}px)`;
+      heart.style.top = '10px';
+      petEl.appendChild(heart);
+      setTimeout(() => heart.remove(), 800);
+    }
 
-  AudioEffects.playTone(600, 'sine', 0.1);
-  this.saveData();
-  this.updateUI();
-},
+    AudioEffects.playTone(600, 'sine', 0.1);
+    this.saveData();
+    this.updateUI();
+  },
 
   feed() {
     if (this.isSleeping) return;
@@ -138,6 +133,12 @@ setColor(color) {
     this.updateUI();
   },
 
+  setColor(color) {
+    this.petColor = color;
+    this.saveData();
+    this.updateUI();
+  },
+
   equipAccessory(itemId) {
     this.equippedAccessory = (this.equippedAccessory === itemId) ? null : itemId;
     AudioEffects.playTone(800, 'sine', 0.08);
@@ -148,9 +149,9 @@ setColor(color) {
   addCoins(amount) {
     this.coins += amount;
     if (amount > 0) {
-    this.happiness = Math.min(100, this.happiness + 15); // ¡Aumenta +15% de felicidad al ganar!
-    AudioEffects.playCoin();
-  }
+      this.happiness = Math.min(100, this.happiness + 15);
+      AudioEffects.playCoin();
+    }
     this.saveData();
     this.updateUI();
   },
@@ -178,6 +179,7 @@ setColor(color) {
       happiness: this.happiness,
       hunger: this.hunger,
       energy: this.energy,
+      petColor: this.petColor,
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory
@@ -192,6 +194,7 @@ setColor(color) {
       this.happiness = data.happiness ?? 100;
       this.hunger = data.hunger ?? 100;
       this.energy = data.energy ?? 100;
+      this.petColor = data.petColor || '#ff80ab';
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || [];
       this.equippedAccessory = data.equippedAccessory || null;

@@ -32,21 +32,22 @@ const Store = {
   },
 
   renderWardrobe() {
-   const content = document.getElementById('modal-content');
-  content.innerHTML = `
-    <h2>🎒 Mi Armario</h2>
-    <div style="margin: 10px 0;">
-      <p style="font-size:0.85rem; color:#666; margin-bottom:6px;">Color de Mascota:</p>
-      <div style="display:flex; gap:10px;">
-        <button onclick="PetState.setColor('#ff80ab')" style="width:30px; height:30px; border-radius:50%; background:#ff80ab; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.2);"></button>
-        <button onclick="PetState.setColor('#b388ff')" style="width:30px; height:30px; border-radius:50%; background:#b388ff; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.2);"></button>
-        <button onclick="PetState.setColor('#80cbc4')" style="width:30px; height:30px; border-radius:50%; background:#80cbc4; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.2);"></button>
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <h2>🎒 Mi Armario</h2>
+      <div style="margin: 10px 0;">
+        <p style="font-size:0.85rem; color:#666; margin-bottom:6px;">Color de Mascota:</p>
+        <div style="display:flex; gap:10px;">
+          <button onclick="PetState.setColor('#ff80ab')" style="width:32px; height:32px; border-radius:50%; background:#ff80ab; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
+          <button onclick="PetState.setColor('#b388ff')" style="width:32px; height:32px; border-radius:50%; background:#b388ff; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
+          <button onclick="PetState.setColor('#80cbc4')" style="width:32px; height:32px; border-radius:50%; background:#80cbc4; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
+        </div>
       </div>
-    </div>
-    <hr style="border:none; border-top:1px solid #eee; margin:10px 0;">
-    <p style="font-size:0.85rem; color:#666;">Accesorios:</p>
-    <div class="wardrobe-list" style="margin-top:10px;"></div>
-  `;
+      <hr style="border:none; border-top:1px solid #eee; margin:10px 0;">
+      <p style="font-size:0.85rem; color:#666;">Accesorios:</p>
+      <div class="wardrobe-list" style="margin-top:10px;"></div>
+    `;
+    
     const list = content.querySelector('.wardrobe-list');
     
     if (PetState.inventory.length === 0) {
