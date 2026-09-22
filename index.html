@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Mascota Kawaii</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Barra Superior -->
+    <header class="top-bar">
+      <div class="stat-box">🪙 <span id="coin-count">100</span></div>
+      <div class="stat-box">❤️ <span id="happy-count">100</span>%</div>
+      <div class="stat-box">🍕 <span id="hunger-count">100</span>%</div>
+      <div class="stat-box">⚡ <span id="energy-count">100</span>%</div>
+    </header>
+
+    <!-- Globo de Petición / Pensamiento -->
+    <div id="pet-thought" class="thought-bubble">¡Hola! ¿Jugamos?</div>
+
+    <!-- Escenario Principal -->
+    <main id="pet-room" class="room">
+      <div id="pet" class="pet-sprite" onclick="PetState.petPet()">
+        <!-- Accesorio Equipado -->
+        <div id="pet-accessory" class="accessory"></div>
+
+        <!-- Cara Kawaii Modular -->
+        <div class="kawaii-face" id="kawaii-face">
+          <div class="eyebrows">
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+          </div>
+          <div class="eyes">
+            <div class="eye left"><div class="sparkle">★</div></div>
+            <div class="eye right"><div class="sparkle">★</div></div>
+          </div>
+          <div class="cheeks">
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+          </div>
+          <div class="mouth">:3</div>
+          <div id="extra-prop" class="extra-prop"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Menú Inferior de Acciones -->
+    <nav class="bottom-nav">
+      <button onclick="PetState.feed()" title="Comer">🍗 Comer</button>
+      <button onclick="PetState.heal()" title="Curar">🏥 Medicina</button>
+      <button onclick="PetState.sleep()" title="Dormir">😴 Dormir</button>
+      <button onclick="switchTab('wardrobe')" title="Armario">🎒 Armario</button>
+      <button onclick="switchTab('store')" title="Tienda">🛍️ Tienda</button>
+      <button onclick="switchTab('minigames')" title="Minijuegos">🎮 Juegos</button>
+    </nav>
+
+    <!-- Modales -->
+    <section id="modal-screen" class="modal hidden">
+      <button class="close-btn" onclick="closeModal()">❌ Cerrar</button>
+      <div id="modal-content"></div>
+    </section>
+  </div>
+
+  <script src="js/pet.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/minigames.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

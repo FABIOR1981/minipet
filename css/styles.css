@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+body {
+  background-color: #f0e6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#app-container {
+  width: 380px;
+  height: 660px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #d4b2ff;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 8px;
+  background: #f8f0ff;
+  border-bottom: 2px solid #ebd5ff;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.room {
+  flex: 1;
+  background: linear-gradient(180deg, #e0f7fa 0%, #fff9c4 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Mascota con animación de flotación */
+.pet-sprite {
+  width: 120px;
+  height: 120px;
+  background-color: #ff80ab;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.1);
+  animation: bounce 2s infinite ease-in-out;
+  cursor: pointer;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Animación al acariciar */
+.happy-jump {
+  animation: petJump 0.4s ease-in-out !important;
+}
+
+@keyframes petJump {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.15) translateY(-25px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Globo de pensamiento */
+.thought-bubble {
+  position: absolute;
+  top: 60px;
+  background: white;
+  padding: 8px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #4a148c;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 5;
+}
+
+/* Cara Kawaii Modular */
+.kawaii-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.eyes {
+  display: flex;
+  gap: 26px;
+  margin-top: 10px;
+}
+
+.eye {
+  width: 22px;
+  height: 26px;
+  background: #222;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.sparkle {
+  color: white;
+  font-size: 10px;
+  position: absolute;
+  top: 2px;
+  right: 3px;
+}
+
+.cheeks {
+  display: flex;
+  gap: 44px;
+  position: absolute;
+  top: 52px;
+}
+
+.cheek {
+  width: 14px;
+  height: 8px;
+  background: #ff4081;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.mouth {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 2px;
+  transition: transform 0.2s ease;
+}
+
+.extra-prop {
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+  font-size: 1.2rem;
+}
+
+/* Modificadores de Expresiones */
+.kawaii-face.sleeping .eye, .kawaii-face.tired .eye {
+  height: 4px;
+  border-radius: 2px;
+}
+
+.kawaii-face.sick .mouth {
+  transform: rotate(180deg);
+}
+
+.kawaii-face.sick .cheek {
+  background: #80deea;
+}
+
+.kawaii-face.hungry .eye {
+  border-radius: 50% 50% 0 0;
+}
+
+/* Posicionamiento Inteligente de Accesorios */
+.accessory {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.accessory.pos-head {
+  top: -22px;
+  font-size: 2.2rem;
+}
+
+.accessory.pos-eyes {
+  top: 30px;
+  font-size: 2.2rem;
+}
+
+.accessory.pos-neck {
+  bottom: -10px;
+  font-size: 1.8rem;
+}
+
+.accessory.pos-ears {
+  top: -12px;
+  font-size: 3.4rem;
+}
+
+/* Menú inferior scrollable y compacto */
+.bottom-nav {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: #f8f0ff;
+  border-top: 2px solid #ebd5ff;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.bottom-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.bottom-nav button {
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  border: none;
+  background: #b388ff;
+  color: white;
+  font-weight: bold;
+  font-size: 0.82rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.bottom-nav button:active {
+  transform: scale(0.95);
+  background-color: #9575cd;
+}
+
+/* Modales */
+.modal {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.close-btn {
+  align-self: flex-end;
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.menu-btn {
+  padding: 14px;
+  background: #7e57c2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.menu-btn:active {
+  transform: scale(0.98);
+  background-color: #5e35b1;
+}
