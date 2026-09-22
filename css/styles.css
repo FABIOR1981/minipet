@@ -205,37 +205,45 @@ body {
   font-size: 3.4rem;
 }
 
-/* Menú inferior scrollable y compacto */
+/* Menú inferior reorganizado en Rejilla 3x2 */
 .bottom-nav {
-  display: flex;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   padding: 10px;
   background: #f8f0ff;
   border-top: 2px solid #ebd5ff;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.bottom-nav::-webkit-scrollbar {
-  display: none;
 }
 
 .bottom-nav button {
-  flex: 0 0 auto;
-  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
   border: none;
   background: #b388ff;
   color: white;
-  font-weight: bold;
-  font-size: 0.82rem;
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.1s, background-color 0.2s;
+  box-shadow: 0 3px 0 #9575cd;
 }
 
 .bottom-nav button:active {
-  transform: scale(0.95);
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #9575cd;
   background-color: #9575cd;
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.btn-text {
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 /* Modales */

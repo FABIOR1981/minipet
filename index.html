@@ -47,13 +47,31 @@
 
     <!-- Menú Inferior de Acciones -->
     <nav class="bottom-nav">
-      <button onclick="PetState.feed()" title="Comer">🍗 Comer</button>
-      <button onclick="PetState.heal()" title="Curar">🏥 Medicina</button>
-      <button onclick="PetState.sleep()" title="Dormir">😴 Dormir</button>
-      <button onclick="switchTab('wardrobe')" title="Armario">🎒 Armario</button>
-      <button onclick="switchTab('store')" title="Tienda">🛍️ Tienda</button>
-      <button onclick="switchTab('minigames')" title="Minijuegos">🎮 Juegos</button>
-    </nav>
+  <button onclick="PetState.feed()">
+    <span class="btn-icon">🍗</span>
+    <span class="btn-text">Comer</span>
+  </button>
+  <button onclick="PetState.heal()">
+    <span class="btn-icon">🏥</span>
+    <span class="btn-text">Medicina</span>
+  </button>
+  <button onclick="PetState.sleep()">
+    <span class="btn-icon">😴</span>
+    <span class="btn-text">Dormir</span>
+  </button>
+  <button onclick="switchTab('wardrobe')">
+    <span class="btn-icon">🎒</span>
+    <span class="btn-text">Armario</span>
+  </button>
+  <button onclick="switchTab('store')">
+    <span class="btn-icon">🛍️</span>
+    <span class="btn-text">Tienda</span>
+  </button>
+  <button onclick="switchTab('minigames')">
+    <span class="btn-icon">🎮</span>
+    <span class="btn-text">Juegos</span>
+  </button>
+</nav>
 
     <!-- Modales -->
     <section id="modal-screen" class="modal hidden">
