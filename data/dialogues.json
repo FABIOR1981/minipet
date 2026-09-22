@@ -2,35 +2,55 @@
   "happy": [
     "❤️ ¡Me encanta estar contigo!",
     "✨ ¡Hoy es un día genial!",
-    "🌸 ¡Eres mi mejor persona favorita!",
+    "🌸 ¡Eres mi persona favorita!",
     "🎶 ¡La la la! Qué feliz soy contigo.",
-    "⭐ ¡Gracias por cuidarme tanto!"
+    "⭐ ¡Gracias por cuidarme tanto!",
+    "🌈 ¡Contigo todo es más divertido!",
+    "🐥 ¡Me siento lleno de energía y alegría!",
+    "🍭 ¡Eres el mejor compañero del mundo!",
+    "🥳 ¡Hoy va a ser un día increíble!",
+    "🌻 ¡Haces que mi corazoncito brille!"
   ],
   "hungry": [
     "🍕 ¡Tengo hambre! ¡Comida rica!",
     "🍗 Mmm... ¿Hay algo para picar?",
     "🧁 ¡Mi pancita está rugiendo!",
-    "🍎 ¡Un bocadito por favor!"
+    "🍎 ¡Un bocadito por favor!",
+    "🍔 ¿Es la hora del almuerzo?",
+    "🍓 ¡Se me antoja algo dulce!",
+    "🥨 ¡Tengo un huequito en la pancita!",
+    "🥞 ¿Me invitas un postrecito?"
   ],
   "sick": [
     "🥺 Me siento mal... ¿Me das medicina?",
     "🤒 Me dolió la pancita...",
     "💊 Necesito un remedio por favor...",
-    "💧 No me siento muy bien hoy..."
+    "💧 No me siento muy bien hoy...",
+    "🩹 ¿Me pones un curita y me das un abrazo?",
+    "🌡️ Tengo un poquito de fiebre...",
+    "🧸 Necesito mimos para recuperarme..."
   ],
   "tired": [
     "😴 Tengo sueño... ¡A dormir!",
     "💤 Mis ojitos se cierran...",
     "🌙 ¿Podemos tomar una siesta?",
-    "🥱 Qué cansancio... a descansar."
+    "🥱 Qué cansancio... a descansar.",
+    "🧸 ¿Me acuestas en mi camita?",
+    "🌌 Ya no puedo tener los ojos abiertos..."
   ],
   "bored": [
     "🎮 ¿Jugamos un minijuego?",
     "🎈 ¡Estoy aburrida! Vamos a jugar.",
-    "🪙 ¡Quiero ganar monedas para la tienda!"
+    "🪙 ¡Quiero ganar monedas para la tienda!",
+    "🎲 ¡Se me ocurre una gran idea! ¿Jugamos?",
+    "🎯 ¡Demuestra tus habilidades en un juego!",
+    "🎨 ¡Hagamos algo divertido juntos!"
   ],
   "sleeping": [
     "💤 Zzz... Descansando...",
-    "🌙 Zzz... Soñando con caramelos..."
+    "🌙 Zzz... Soñando con caramelos...",
+    "⭐ Zzz... Volando entre las estrellas...",
+    "☁️ Zzz... Durmiendo en una nube esponjosa...",
+    "💤 Zzz... Mmm... pastelitos..."
   ]
 }
