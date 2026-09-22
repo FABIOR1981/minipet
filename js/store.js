@@ -1,27 +1,72 @@
 const Store = {
   items: [
-    // Accesorios
+    // -----------------------------------------------------------------
+    // ACCESORIOS (Organizados para combinar con los escenarios)
+    // -----------------------------------------------------------------
+    // Básicos y Fiesta (Living, Dormitorio, Playroom)
     { id: 'hat_crown', name: 'Corona Real', price: 50, image: 'img/accessories/hat_crown.svg', type: 'head', category: 'acc' },
     { id: 'party_hat', name: 'Gorro Fiesta', price: 25, image: 'img/accessories/party_hat.svg', type: 'head', category: 'acc' },
     { id: 'ribbon_pink', name: 'Lazo Rosado', price: 15, image: 'img/accessories/ribbon_pink.svg', type: 'head', category: 'acc' },
-    { id: 'flower_pink', name: 'Flor Primavera', price: 18, image: 'img/accessories/flower_pink.svg', type: 'head', category: 'acc' },
-    { id: 'pirate_hat', name: 'Gorro Pirata', price: 55, image: 'img/accessories/pirate_hat.svg', type: 'head', category: 'acc' },
-    { id: 'wizard_hat', name: 'Gorro de Mago', price: 60, image: 'img/accessories/wizard_hat.svg', type: 'head', category: 'acc' },
-    { id: 'chef_hat', name: 'Gorro de Chef', price: 35, image: 'img/accessories/chef_hat.svg', type: 'head', category: 'acc' },
-    { id: 'glasses_cool', name: 'Lentes Corazón', price: 30, image: 'img/accessories/glasses_cool.svg', type: 'eyes', category: 'acc' },
-    { id: 'star_glasses', name: 'Lentes Estrella', price: 35, image: 'img/accessories/star_glasses.svg', type: 'eyes', category: 'acc' },
+    { id: 'bow_tie', name: 'Moño Coquette', price: 20, image: 'img/accessories/bow_tie.svg', type: 'neck', category: 'acc' },
     { id: 'headphones', name: 'Auriculares Gato', price: 40, image: 'img/accessories/headphones.svg', type: 'ears', category: 'acc' },
     { id: 'cat_ears', name: 'Orejitas Violeta', price: 45, image: 'img/accessories/cat_ears.svg', type: 'ears', category: 'acc' },
     { id: 'bunny_ears', name: 'Orejas Conejo', price: 40, image: 'img/accessories/bunny_ears.svg', type: 'ears', category: 'acc' },
-    { id: 'bow_tie', name: 'Moño Coquette', price: 20, image: 'img/accessories/bow_tie.svg', type: 'neck', category: 'acc' },
-    { id: 'magic_wand', name: 'Varita Mágica', price: 60, image: 'img/accessories/magic_wand.svg', type: 'neck', category: 'acc' },
 
-    // Fondos / Escenarios Temáticos
+    // Para "Playa Tropical" / "Oasis del Desierto"
+    { id: 'glasses_cool', name: 'Lentes Corazón', price: 30, image: 'img/accessories/glasses_cool.svg', type: 'eyes', category: 'acc' },
+    { id: 'star_glasses', name: 'Lentes Estrella', price: 35, image: 'img/accessories/star_glasses.svg', type: 'eyes', category: 'acc' },
+    { id: 'pirate_hat', name: 'Gorro Pirata', price: 55, image: 'img/accessories/pirate_hat.svg', type: 'head', category: 'acc' },
+    { id: 'snorkel_mask', name: 'Visor de Buceo', price: 45, image: 'img/accessories/snorkel.svg', type: 'eyes', category: 'acc' },
+
+    // Para "Cocina del Chef"
+    { id: 'chef_hat', name: 'Gorro de Chef', price: 35, image: 'img/accessories/chef_hat.svg', type: 'head', category: 'acc' },
+
+    // Para "Parque Mágico" / "Bosque Encantado" / "Castillo Real"
+    { id: 'flower_pink', name: 'Flor Primavera', price: 18, image: 'img/accessories/flower_pink.svg', type: 'head', category: 'acc' },
+    { id: 'wizard_hat', name: 'Gorro de Mago', price: 60, image: 'img/accessories/wizard_hat.svg', type: 'head', category: 'acc' },
+    { id: 'magic_wand', name: 'Varita Mágica', price: 60, image: 'img/accessories/magic_wand.svg', type: 'neck', category: 'acc' },
+    { id: 'fairy_wings', name: 'Alas de Hada', price: 75, image: 'img/accessories/fairy_wings.svg', type: 'neck', category: 'acc' },
+
+    // Para "Dojo Ninja"
+    { id: 'ninja_band', name: 'Vanda Ninja', price: 50, image: 'img/accessories/ninja_band.svg', type: 'head', category: 'acc' },
+
+    // Para "Estación Espacial"
+    { id: 'space_helmet', name: 'Casco Espacial', price: 90, image: 'img/accessories/space_helmet.svg', type: 'head', category: 'acc' },
+
+    // Para "Montaña Nevada" / "Campamento Nocturno"
+    { id: 'winter_beanie', name: 'Gorro de Lana', price: 30, image: 'img/accessories/winter_beanie.svg', type: 'head', category: 'acc' },
+    { id: 'winter_scarf', name: 'Bufanda Calientita', price: 25, image: 'img/accessories/winter_scarf.svg', type: 'neck', category: 'acc' },
+
+    // Para "Baño de Burbujas"
+    { id: 'shower_cap', name: 'Gorro de Baño', price: 20, image: 'img/accessories/shower_cap.svg', type: 'head', category: 'acc' },
+
+    // -----------------------------------------------------------------
+    // ESCENARIOS / FONDOS (Categoría 'bg')
+    // -----------------------------------------------------------------
+    // Básicos
     { id: 'bg_living', name: 'Sala de Estar', price: 0, image: '🛋️', type: 'bg', category: 'bg' },
     { id: 'bg_bedroom', name: 'Dormitorio', price: 40, image: '🛏️', type: 'bg', category: 'bg' },
     { id: 'bg_playroom', name: 'Sala de Juegos', price: 60, image: '🧸', type: 'bg', category: 'bg' },
     { id: 'bg_park', name: 'Parque Mágico', price: 80, image: '🌳', type: 'bg', category: 'bg' },
-    { id: 'bg_beach', name: 'Playa Tropical', price: 50, image: '🏖️', type: 'bg', category: 'bg' }
+    { id: 'bg_beach', name: 'Playa Tropical', price: 50, image: '🏖️', type: 'bg', category: 'bg' },
+
+    // Naturaleza y Exteriores
+    { id: 'bg_forest', name: 'Bosque Encantado', price: 90, image: '🌲', type: 'bg', category: 'bg' },
+    { id: 'bg_mountain', name: 'Montaña Nevada', price: 100, image: '🏔️', type: 'bg', category: 'bg' },
+    { id: 'bg_camping', name: 'Campamento Nocturno', price: 120, image: '⛺', type: 'bg', category: 'bg' },
+    { id: 'bg_desert', name: 'Oasis del Desierto', price: 110, image: '🏜️', type: 'bg', category: 'bg' },
+
+    // Interiores y Temáticos
+    { id: 'bg_kitchen', name: 'Cocina del Chef', price: 45, image: '🍳', type: 'bg', category: 'bg' },
+    { id: 'bg_bathroom', name: 'Baño de Burbujas', price: 35, image: '🛁', type: 'bg', category: 'bg' },
+    { id: 'bg_dojo', name: 'Dojo Ninja', price: 130, image: '⛩️', type: 'bg', category: 'bg' },
+    { id: 'bg_disco', name: 'Pista de Baile', price: 150, image: '🪩', type: 'bg', category: 'bg' },
+
+    // Fantásticos y Especiales
+    { id: 'bg_space', name: 'Estación Espacial', price: 200, image: '🚀', type: 'bg', category: 'bg' },
+    { id: 'bg_castle', name: 'Castillo Real', price: 250, image: '🏰', type: 'bg', category: 'bg' },
+    { id: 'bg_underwater', name: 'Mundo Submarino', price: 180, image: '🪸', type: 'bg', category: 'bg' },
+    { id: 'bg_volcano', name: 'Guarida Volcánica', price: 300, image: '🌋', type: 'bg', category: 'bg' }
   ],
 
   renderStore() {
