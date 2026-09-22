@@ -1,7 +1,6 @@
-// Función global para manejar el cambio de pestañas/modales
+// Manejador global de navegación y modales
 function switchTab(tab) {
   const modal = document.getElementById('modal-overlay');
-  
   if (!modal) return;
 
   if (tab === 'store') {
@@ -18,16 +17,9 @@ function switchTab(tab) {
   }
 }
 
-// Inicialización de la aplicación al cargar el DOM
+// Inicialización de la aplicación
 document.addEventListener('DOMContentLoaded', () => {
-  // Inicializar estado de la mascota
   if (typeof PetState !== 'undefined') {
     PetState.init();
-  }
-
-  // Evento para cerrar modal con el botón de cerrar
-  const closeBtn = document.getElementById('modal-close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => switchTab('close'));
   }
 });

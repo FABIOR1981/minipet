@@ -2,71 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <!-- Deshabilita el zoom táctil molesto en móviles -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mi Mascota</title>
-
-  <!-- PWA Meta Tags -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#b388ff">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Mascota Virtual</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
   <div id="app-container">
-    <!-- Barra Superior -->
-    <header class="top-bar">
+    <!-- Barra Superior de Estadísticas -->
+    <div class="top-bar">
       <div class="stat-box">🪙 <span id="coin-count">100</span></div>
-      <div class="stat-box">❤️ <span id="happy-count">100</span>%</div>
-      <div class="stat-box">🍕 <span id="hunger-count">100</span>%</div>
-      <div class="stat-box">⚡ <span id="energy-count">100</span>%</div>
-    </header>
+      <div class="stat-box">❤️ <span id="happy-count">100</span></div>
+      <div class="stat-box">🍕 <span id="hunger-count">100</span></div>
+      <div class="stat-box">⚡ <span id="energy-count">100</span></div>
+    </div>
 
     <!-- Globo de Pensamiento -->
-    <div id="pet-thought" class="thought-bubble">¡Hola! ¿Jugamos?</div>
+    <div id="pet-thought" class="thought-bubble">❤️ ¡Hola!</div>
 
-    <!-- Escenario Principal -->
-    <main id="pet-room" class="room">
+    <!-- Escenario Principal / Habitación -->
+    <div id="pet-room" class="room bg_living">
       <div id="pet" class="pet-sprite" onclick="PetState.petPet()">
-        <!-- Accesorio Equipado -->
-        <div id="pet-accessory" class="accessory"></div>
-
-        <!-- Cara Kawaii Modular -->
-        <div class="kawaii-face" id="kawaii-face">
-          <div class="eyebrows">
-            <div class="eyebrow left"></div>
-            <div class="eyebrow right"></div>
-          </div>
+        <div id="kawaii-face" class="kawaii-face happy">
           <div class="eyes">
-            <div class="eye left"><div class="sparkle">★</div></div>
-            <div class="eye right"><div class="sparkle">★</div></div>
+            <div class="eye"><span class="sparkle">✨</span></div>
+            <div class="eye"><span class="sparkle">✨</span></div>
           </div>
           <div class="cheeks">
-            <div class="cheek left"></div>
-            <div class="cheek right"></div>
+            <div class="cheek"></div>
+            <div class="cheek"></div>
           </div>
-          <div class="mouth">:3</div>
+          <div class="mouth">w</div>
           <div id="extra-prop" class="extra-prop"></div>
         </div>
+        <div id="pet-accessory" class="accessory"></div>
       </div>
-    </main>
+    </div>
 
-    <!-- Menú Inferior en Rejilla 3x2 -->
-    <nav class="bottom-nav">
+    <!-- Barra de Navegación Inferior -->
+    <div class="bottom-nav">
       <button onclick="PetState.feed()">
-        <span class="btn-icon">🍗</span>
+        <span class="btn-icon">🍕</span>
         <span class="btn-text">Comer</span>
       </button>
       <button onclick="PetState.heal()">
-        <span class="btn-icon">🏥</span>
+        <span class="btn-icon">💊</span>
         <span class="btn-text">Medicina</span>
       </button>
       <button onclick="PetState.sleep()">
-        <span class="btn-icon">😴</span>
+        <span class="btn-icon">🌙</span>
         <span class="btn-text">Dormir</span>
       </button>
       <button onclick="switchTab('wardrobe')">
@@ -81,16 +65,16 @@
         <span class="btn-icon">🎮</span>
         <span class="btn-text">Juegos</span>
       </button>
-    </nav>
+    </div>
 
-    <!-- Modales -->
-    <section id="modal-screen" class="modal hidden">
-      <button class="close-btn" onclick="closeModal()">❌ Cerrar</button>
+    <!-- Ventana Modal para Tienda / Armario / Juegos -->
+    <div id="modal-overlay" class="modal hidden">
+      <button class="close-btn" onclick="switchTab('close')">❌ Cerrar</button>
       <div id="modal-content"></div>
-    </section>
+    </div>
   </div>
 
- <!-- Importación en orden correcto -->
+  <!-- Carga de Scripts en Orden Estricto -->
   <script src="js/audio.js"></script>
   <script src="js/store.js"></script>
   <script src="js/minigames.js"></script>
