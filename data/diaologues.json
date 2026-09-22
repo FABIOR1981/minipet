@@ -1,0 +1,36 @@
+{
+  "happy": [
+    "❤️ ¡Me encanta estar contigo!",
+    "✨ ¡Hoy es un día genial!",
+    "🌸 ¡Eres mi mejor persona favorita!",
+    "🎶 ¡La la la! Qué feliz soy contigo.",
+    "⭐ ¡Gracias por cuidarme tanto!"
+  ],
+  "hungry": [
+    "🍕 ¡Tengo hambre! ¡Comida rica!",
+    "🍗 Mmm... ¿Hay algo para picar?",
+    "🧁 ¡Mi pancita está rugiendo!",
+    "🍎 ¡Un bocadito por favor!"
+  ],
+  "sick": [
+    "🥺 Me siento mal... ¿Me das medicina?",
+    "🤒 Me dolió la pancita...",
+    "💊 Necesito un remedio por favor...",
+    "💧 No me siento muy bien hoy..."
+  ],
+  "tired": [
+    "😴 Tengo sueño... ¡A dormir!",
+    "💤 Mis ojitos se cierran...",
+    "🌙 ¿Podemos tomar una siesta?",
+    "🥱 Qué cansancio... a descansar."
+  ],
+  "bored": [
+    "🎮 ¿Jugamos un minijuego?",
+    "🎈 ¡Estoy aburrida! Vamos a jugar.",
+    "🪙 ¡Quiero ganar monedas para la tienda!"
+  ],
+  "sleeping": [
+    "💤 Zzz... Descansando...",
+    "🌙 Zzz... Soñando con caramelos..."
+  ]
+}

@@ -8,11 +8,36 @@ const PetState = {
   isSleeping: false,
   inventory: ['bow_tie'],
   equippedAccessory: 'bow_tie',
+  dialogues: {},
 
-  init() {
+  async init() {
     this.loadData();
+    await this.loadDialogues();
     this.updateUI();
     setInterval(() => this.tick(), 8000);
+  },
+
+  async loadDialogues() {
+    try {
+      const response = await fetch('dialogues.json');
+      this.dialogues = await response.json();
+    } catch (e) {
+      // Frases de respaldo por si aún no has creado el archivo JSON
+      this.dialogues = {
+        happy: ['❤️ ¡Me encanta estar contigo!', '✨ ¡Hoy es un día genial!', '🌸 ¡Eres mi persona favorita!'],
+        hungry: ['🍕 ¡Tengo hambre! ¡Comida rica!', '🍗 Mmm... ¿Hay algo para picar?'],
+        sick: ['🥺 Me siento mal... ¿Me das medicina?', '🤒 Me dolió la pancita...'],
+        tired: ['😴 Tengo sueño... ¡A dormir!', '💤 Mis ojitos se cierran...'],
+        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Estoy aburrida! vamos a jugar.'],
+        sleeping: ['💤 Zzz... Descansando...', '🌙 Zzz... Soñando con caramelos...']
+      };
+    }
+  },
+
+  getRandomPhrase(category) {
+    const list = this.dialogues[category] || ['❤️ ¡Hola!'];
+    const index = Math.floor(Math.random() * list.length);
+    return list[index];
   },
 
   updateUI() {
@@ -52,25 +77,25 @@ const PetState = {
 
     if (this.isSleeping) {
       face.classList.add('sleeping');
-      thought.innerText = '💤 Zzz... Descansando...';
+      thought.innerText = this.getRandomPhrase('sleeping');
       extraProp.innerText = '💤';
     } else if (this.isSick) {
       face.classList.add('sick');
-      thought.innerText = '🥺 Me siento mal... ¿Me das medicina?';
+      thought.innerText = this.getRandomPhrase('sick');
       extraProp.innerText = '🌡️';
     } else if (this.hunger < 30) {
       face.classList.add('hungry');
-      thought.innerText = '🍕 ¡Tengo hambre! ¡Comida rica!';
+      thought.innerText = this.getRandomPhrase('hungry');
       extraProp.innerText = '💧';
     } else if (this.energy < 30) {
       face.classList.add('tired');
-      thought.innerText = '😴 Tengo sueño... ¡A dormir!';
+      thought.innerText = this.getRandomPhrase('tired');
     } else if (this.happiness < 40) {
       face.classList.add('bored');
-      thought.innerText = '🎮 ¿Jugamos un minijuego?';
+      thought.innerText = this.getRandomPhrase('bored');
     } else {
       face.classList.add('happy');
-      thought.innerText = '❤️ ¡Me encanta estar contigo!';
+      thought.innerText = this.getRandomPhrase('happy');
     }
   },
 
