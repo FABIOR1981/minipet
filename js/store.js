@@ -6,7 +6,6 @@ const Store = {
     { id: 'party_hat', name: 'Gorro Fiesta', price: 25, image: 'img/accessories/party_hat.svg', type: 'head' },
     { id: 'headphones', name: 'Auriculares Gato', price: 40, image: 'img/accessories/headphones.svg', type: 'ears' },
     { id: 'magic_wand', name: 'Varita Mágica', price: 60, image: 'img/accessories/magic_wand.svg', type: 'neck' },
-    // Nuevos Accesorios
     { id: 'ribbon_pink', name: 'Lazo Rosado', price: 15, image: 'img/accessories/ribbon_pink.svg', type: 'head' },
     { id: 'star_glasses', name: 'Lentes Estrella', price: 35, image: 'img/accessories/star_glasses.svg', type: 'eyes' },
     { id: 'flower_pink', name: 'Flor Primavera', price: 18, image: 'img/accessories/flower_pink.svg', type: 'head' },
@@ -15,48 +14,50 @@ const Store = {
 
   renderStore() {
     const content = document.getElementById('modal-content');
-    content.innerHTML = '<h2>🛍️ Tienda de Objetos</h2><div class="store-list" style="margin-top:15px;"></div>';
+    content.innerHTML = `
+      <h2 style="text-align:center; color:#6a1b9a;">🛍️ Tienda de Objetos</h2>
+      <div class="grid-container"></div>
+    `;
     
-    const list = content.querySelector('.store-list');
+    const container = content.querySelector('.grid-container');
     
     this.items.forEach(item => {
       const isOwned = PetState.inventory.includes(item.id);
       const card = document.createElement('div');
-      card.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:10px 8px; border-bottom:1px solid #eee;';
+      card.className = 'item-card';
       card.innerHTML = `
-        <div style="display:flex; align-items:center; gap:10px;">
-          <img src="${item.image}" class="store-icon" alt="${item.name}">
-          <span style="font-size:0.95rem; font-weight:600;">${item.name} - 🪙 ${item.price}</span>
-        </div>
-        <button onclick="Store.buyItem('${item.id}')" ${isOwned ? 'disabled' : ''} style="padding:6px 12px; border-radius:8px; border:none; background:${isOwned ? '#ccc' : '#7e57c2'}; color:white; font-weight:bold; cursor:pointer;">
+        <img src="${item.image}" class="card-icon" alt="${item.name}">
+        <span class="card-title">${item.name}</span>
+        <span class="card-price">🪙 ${item.price}</span>
+        <button onclick="Store.buyItem('${item.id}')" ${isOwned ? 'disabled' : ''} class="card-btn ${isOwned ? 'owned' : ''}">
           ${isOwned ? 'Comprado' : 'Comprar'}
         </button>
       `;
-      list.appendChild(card);
+      container.appendChild(card);
     });
   },
 
   renderWardrobe() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2>🎒 Mi Armario</h2>
-      <div style="margin: 10px 0;">
-        <p style="font-size:0.85rem; color:#666; margin-bottom:6px;">Color de Mascota:</p>
-        <div style="display:flex; gap:10px;">
-          <button onclick="PetState.setColor('#ff80ab')" style="width:32px; height:32px; border-radius:50%; background:#ff80ab; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
-          <button onclick="PetState.setColor('#b388ff')" style="width:32px; height:32px; border-radius:50%; background:#b388ff; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
-          <button onclick="PetState.setColor('#80cbc4')" style="width:32px; height:32px; border-radius:50%; background:#80cbc4; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
+      <h2 style="text-align:center; color:#6a1b9a;">🎒 Mi Armario</h2>
+      <div style="margin: 10px 0; text-align:center;">
+        <p style="font-size:0.85rem; color:#666; margin-bottom:6px; font-weight:bold;">Color de Mascota:</p>
+        <div style="display:flex; justify-content:center; gap:12px;">
+          <button onclick="PetState.setColor('#ff80ab')" style="width:32px; height:32px; border-radius:50%; background:#ff80ab; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.2);"></button>
+          <button onclick="PetState.setColor('#b388ff')" style="width:32px; height:32px; border-radius:50%; background:#b388ff; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.2);"></button>
+          <button onclick="PetState.setColor('#80cbc4')" style="width:32px; height:32px; border-radius:50%; background:#80cbc4; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.2);"></button>
         </div>
       </div>
       <hr style="border:none; border-top:1px solid #eee; margin:10px 0;">
-      <p style="font-size:0.85rem; color:#666;">Accesorios:</p>
-      <div class="wardrobe-list" style="margin-top:10px;"></div>
+      <p style="font-size:0.85rem; color:#666; text-align:center; font-weight:bold; margin-bottom:8px;">Mis Accesorios:</p>
+      <div class="grid-container"></div>
     `;
     
-    const list = content.querySelector('.wardrobe-list');
+    const container = content.querySelector('.grid-container');
     
     if (PetState.inventory.length === 0) {
-      list.innerHTML = '<p style="margin-top:20px; color:#888;">¡Tu armario está vacío! Ve a la tienda a comprar accesorios.</p>';
+      container.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#888; margin-top:20px;">¡Tu armario está vacío! Ve a la tienda a comprar accesorios.</p>';
       return;
     }
 
@@ -66,17 +67,15 @@ const Store = {
 
       const isEquipped = PetState.equippedAccessory === item.id;
       const card = document.createElement('div');
-      card.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:10px 8px; border-bottom:1px solid #eee;';
+      card.className = 'item-card';
       card.innerHTML = `
-        <div style="display:flex; align-items:center; gap:10px;">
-          <img src="${item.image}" class="store-icon" alt="${item.name}">
-          <span style="font-size:0.95rem; font-weight:600;">${item.name}</span>
-        </div>
-        <button onclick="PetState.equipAccessory('${item.id}'); Store.renderWardrobe();" style="padding:6px 12px; border-radius:8px; border:none; background:${isEquipped ? '#ff4081' : '#b388ff'}; color:white; font-weight:bold; cursor:pointer;">
+        <img src="${item.image}" class="card-icon" alt="${item.name}">
+        <span class="card-title">${item.name}</span>
+        <button onclick="PetState.equipAccessory('${item.id}'); Store.renderWardrobe();" class="card-btn ${isEquipped ? 'equipped' : ''}">
           ${isEquipped ? '✨ Quitar' : 'Poner'}
         </button>
       `;
-      list.appendChild(card);
+      container.appendChild(card);
     });
   },
 
