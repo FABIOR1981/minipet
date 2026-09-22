@@ -1,21 +1,22 @@
 const Minigames = {
-  // Menú Principal de Minijuegos
+  // Menú Principal de Minijuegos (6 Opciones Kawaii)
   renderMenu() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2>🎮 Elige un Minijuego</h2>
-      <p style="margin-bottom:15px; font-size:0.9rem; color:#555;">¡Gana monedas para comprar accesorios en la tienda!</p>
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        <button class="menu-btn" onclick="Minigames.startCatchGame()">🍎 Atrapa las Manzanas</button>
-        <button class="menu-btn" onclick="Minigames.startSimonGame()">🎯 Simón Dice (Memoria)</button>
-        <button class="menu-btn" onclick="Minigames.startRunnerGame()">🏃 Runner Infinito</button>
+      <h2 style="color:#6a1b9a; text-align:center;">🎮 Minijuegos Kawaii</h2>
+      <p style="margin-bottom:12px; font-size:0.85rem; color:#666; text-align:center;">¡Gana monedas y haz feliz a tu mascota!</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; max-height:360px; overflow-y:auto; padding:4px;">
+        <button class="menu-btn" onclick="Minigames.startCatchGame()">🎈 Atrapa Dulces</button>
+        <button class="menu-btn" onclick="Minigames.startPopGame()">🌸 Explotar Globos</button>
+        <button class="menu-btn" onclick="Minigames.startCakeGame()">🍰 Torre de Postres</button>
+        <button class="menu-btn" onclick="Minigames.startSimonGame()">🧠 Simón Memoria</button>
+        <button class="menu-btn" onclick="Minigames.startRunnerGame()">🦄 Runner Mágico</button>
+        <button class="menu-btn" onclick="Minigames.startBubbleGame()">✨ Burbujas Kawaii</button>
       </div>
     `;
   },
 
-  // =========================================================
-  // PANTALLA DE CONTEO REGRESIVO KAWAII (3, 2, 1, ¡A JUGAR!)
-  // =========================================================
+  // Conteos Regresivo Estilo Kawaii
   showCountdown(onComplete) {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
@@ -26,7 +27,7 @@ const Minigames = {
     `;
 
     let count = 3;
-    AudioEffects.playTone(523, 'sine', 0.15); // Tono "3"
+    AudioEffects.playTone(523, 'sine', 0.15);
 
     const interval = setInterval(() => {
       count--;
@@ -40,41 +41,39 @@ const Minigames = {
 
       if (count > 0) {
         numEl.innerText = count;
-        // Reiniciar animación CSS
         numEl.style.animation = 'none';
-        numEl.offsetHeight; // Reflow
+        numEl.offsetHeight;
         numEl.style.animation = 'popNum 0.6s ease-out';
         AudioEffects.playTone(523 + (3 - count) * 100, 'sine', 0.15);
       } else if (count === 0) {
         numEl.innerText = '¡A JUGAR! 🌸';
-        numEl.style.fontSize = '2.2rem';
+        numEl.style.fontSize = '2rem';
         subEl.innerText = '✨ ¡Diviértete! ✨';
         AudioEffects.playTone(880, 'triangle', 0.3);
       } else {
         clearInterval(interval);
-        onComplete(); // Inicia el minijuego correspondiente
+        onComplete();
       }
     }, 900);
   },
 
   // =========================================================
-  // MINIJUEGO 1: ATRAPA LAS MANZANAS
+  // 1. ATRAPA DULCES KAWAII
   // =========================================================
   startCatchGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
       content.innerHTML = `
-        <h3>🍎 Atrapa las Manzanas</h3>
-        <canvas id="gameCanvas" width="300" height="320" style="background:#e0f7fa; border-radius:12px; margin:10px auto; display:block;"></canvas>
-        <p style="font-size:0.85rem; text-align:center;">Usa las Flechas ⬅️ ➡️ para moverte</p>
+        <h3 style="color:#ab47bc;">🎈 Atrapa Dulces</h3>
+        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ce93d8;"></canvas>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">Usa ⬅️ ➡️ para mover la cesta pastel</p>
       `;
 
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
-      
       let basketX = 120;
-      let appleX = Math.random() * 260;
-      let appleY = 0;
+      let itemX = Math.random() * 260 + 10;
+      let itemY = 0;
       let score = 0;
       let gameOver = false;
 
@@ -94,33 +93,39 @@ const Minigames = {
           return;
         }
 
-        if (keys['ArrowLeft'] && basketX > 0) basketX -= 5;
-        if (keys['ArrowRight'] && basketX < 240) basketX += 5;
+        if (keys['ArrowLeft'] && basketX > 5) basketX -= 6;
+        if (keys['ArrowRight'] && basketX < 235) basketX += 6;
 
-        appleY += 3.5;
+        itemY += 3.8;
 
-        if (appleY >= 280 && appleX >= basketX - 15 && appleX <= basketX + 60) {
+        if (itemY >= 260 && itemX >= basketX - 10 && itemX <= basketX + 60) {
           score += 5;
           AudioEffects.playTone(800, 'sine', 0.05);
-          appleY = 0;
-          appleX = Math.random() * 260;
+          itemY = 0;
+          itemX = Math.random() * 250 + 10;
         }
 
-        if (appleY > 320) gameOver = true;
+        if (itemY > 300) gameOver = true;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#8d6e63';
-        ctx.fillRect(basketX, 290, 60, 15);
 
-        ctx.fillStyle = '#e53935';
+        // Cesta Nube Kawaii
+        ctx.fillStyle = '#ff80ab';
         ctx.beginPath();
-        ctx.arc(appleX + 10, appleY + 10, 10, 0, Math.PI * 2);
+        ctx.roundRect(basketX, 270, 60, 20, 10);
         ctx.fill();
 
-        ctx.fillStyle = '#333';
-        ctx.font = '16px sans-serif';
-        ctx.fillText(`Monedas: ${score}`, 10, 25);
+        // Fresita / Fruta cayendo
+        ctx.fillStyle = '#ff4081';
+        ctx.beginPath();
+        ctx.arc(itemX, itemY, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#76ff03'; // Hoja
+        ctx.fillRect(itemX - 3, itemY - 15, 6, 5);
+
+        ctx.fillStyle = '#4a148c';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`Monedas: 🪙 ${score}`, 12, 25);
 
         requestAnimationFrame(loop);
       }
@@ -130,19 +135,197 @@ const Minigames = {
   },
 
   // =========================================================
-  // MINIJUEGO 2: SIMÓN DICE
+  // 2. EXPLOTAR GLOBOS KAWAII (NUEVO)
+  // =========================================================
+  startPopGame() {
+    this.showCountdown(() => {
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <h3 style="color:#ab47bc;">🌸 Explotar Globos</h3>
+        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ff80ab;"></canvas>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">¡Haz clic sobre los globos antes de que suban!</p>
+      `;
+
+      const canvas = document.getElementById('popCanvas');
+      const ctx = canvas.getContext('2d');
+      let balloons = [];
+      let score = 0;
+      let timeLeft = 20;
+
+      const timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          canvas.onclick = null;
+          PetState.addCoins(score);
+          alert(`¡Tiempo! Explotaste un montón de globos y ganaste 🪙 ${score} monedas.`);
+          Minigames.renderMenu();
+        }
+      }, 1000);
+
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        balloons.forEach((b, index) => {
+          const dist = Math.hypot(b.x - mouseX, b.y - mouseY);
+          if (dist < b.radius) {
+            score += 5;
+            AudioEffects.playTone(900, 'triangle', 0.08);
+            balloons.splice(index, 1);
+          }
+        });
+      };
+
+      function loop() {
+        if (timeLeft <= 0) return;
+
+        if (Math.random() < 0.05 && balloons.length < 6) {
+          balloons.push({
+            x: Math.random() * 260 + 20,
+            y: 320,
+            radius: 18,
+            speed: Math.random() * 1.5 + 1.2,
+            color: ['#ff80ab', '#b388ff', '#80cbc4', '#ffe082'][Math.floor(Math.random() * 4)]
+          });
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        balloons.forEach((b, index) => {
+          b.y -= b.speed;
+          
+          // Dibujar Globo con forma suave
+          ctx.fillStyle = b.color;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Hilo del globo
+          ctx.strokeStyle = '#aaa';
+          ctx.beginPath();
+          ctx.moveTo(b.x, b.y + b.radius);
+          ctx.lineTo(b.x, b.y + b.radius + 12);
+          ctx.stroke();
+
+          if (b.y < -20) balloons.splice(index, 1);
+        });
+
+        ctx.fillStyle = '#4a148c';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`🪙 ${score}`, 12, 25);
+        ctx.fillText(`⏰ ${timeLeft}s`, 230, 25);
+
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+    });
+  },
+
+  // =========================================================
+  // 3. TORRE DE POSTRES KAWAII (NUEVO)
+  // =========================================================
+  startCakeGame() {
+    this.showCountdown(() => {
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <h3 style="color:#ab47bc;">🍰 Torre de Postres</h3>
+        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:8px auto; display:block; border:3px solid #b388ff;"></canvas>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">Haz clic o pulsa Espacio para soltar el pastel</p>
+      `;
+
+      const canvas = document.getElementById('cakeCanvas');
+      const ctx = canvas.getContext('2d');
+      let layers = [{ x: 100, width: 100, y: 270 }];
+      let currentX = 0;
+      let currentSpeed = 3;
+      let score = 0;
+      let gameOver = false;
+
+      const dropLayer = () => {
+        if (gameOver) return;
+        const prev = layers[layers.length - 1];
+        const diff = currentX - prev.x;
+
+        if (Math.abs(diff) > prev.width) {
+          gameOver = true;
+          PetState.addCoins(score);
+          alert(`¡Ups, se cayó la torre! Ganaste 🪙 ${score} monedas.`);
+          Minigames.renderMenu();
+          return;
+        }
+
+        score += 10;
+        AudioEffects.playTone(700, 'sine', 0.1);
+        const newWidth = prev.width - Math.abs(diff);
+        const newX = diff > 0 ? currentX : prev.x;
+
+        layers.push({ x: newX, width: newWidth, y: prev.y - 25 });
+        currentX = 0;
+
+        if (layers.length > 8) {
+          layers.forEach(l => l.y += 25);
+        }
+      };
+
+      canvas.onclick = dropLayer;
+      const handleSpace = (e) => { if (e.code === 'Space') dropLayer(); };
+      window.addEventListener('keydown', handleSpace);
+
+      function loop() {
+        if (gameOver) {
+          window.removeEventListener('keydown', handleSpace);
+          return;
+        }
+
+        currentX += currentSpeed;
+        const prevWidth = layers[layers.length - 1].width;
+        if (currentX > 300 - prevWidth || currentX < 0) currentSpeed *= -1;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar capas apiladas
+        layers.forEach((l, i) => {
+          ctx.fillStyle = i % 2 === 0 ? '#ff80ab' : '#80cbc4';
+          ctx.beginPath();
+          ctx.roundRect(l.x, l.y, l.width, 22, 6);
+          ctx.fill();
+        });
+
+        // Capa móvil actual
+        const currentY = layers[layers.length - 1].y - 25;
+        ctx.fillStyle = '#ffd54f';
+        ctx.beginPath();
+        ctx.roundRect(currentX, currentY, prevWidth, 22, 6);
+        ctx.fill();
+
+        ctx.fillStyle = '#4a148c';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`Puntos: 🪙 ${score}`, 12, 25);
+
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+    });
+  },
+
+  // =========================================================
+  // 4. SIMÓN DICE KAWAII
   // =========================================================
   startSimonGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
       content.innerHTML = `
-        <h3>🎯 Simón Dice</h3>
-        <p id="simon-status" style="margin-top:5px;">¡Memoriza el patrón!</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0;">
-          <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:80px; background:#ef5350; border:none; border-radius:12px; cursor:pointer;"></button>
-          <button id="simon-1" onclick="Minigames.simonClick(1)" style="height:80px; background:#42a5f5; border:none; border-radius:12px; cursor:pointer;"></button>
-          <button id="simon-2" onclick="Minigames.simonClick(2)" style="height:80px; background:#66bb6a; border:none; border-radius:12px; cursor:pointer;"></button>
-          <button id="simon-3" onclick="Minigames.simonClick(3)" style="height:80px; background:#ffee58; border:none; border-radius:12px; cursor:pointer;"></button>
+        <h3 style="color:#ab47bc;">🎯 Simón Memoria</h3>
+        <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">¡Memoriza la secuencia!</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
+          <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057;"></button>
+          <button id="simon-1" onclick="Minigames.simonClick(1)" style="height:75px; background:#80deea; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #00acc1;"></button>
+          <button id="simon-2" onclick="Minigames.simonClick(2)" style="height:75px; background:#b388ff; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #673ab7;"></button>
+          <button id="simon-3" onclick="Minigames.simonClick(3)" style="height:75px; background:#ffe082; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #ffb300;"></button>
         </div>
       `;
 
@@ -156,7 +339,7 @@ const Minigames = {
   nextSimonRound() {
     this.userSequence = [];
     this.simonSequence.push(Math.floor(Math.random() * 4));
-    document.getElementById('simon-status').innerText = `Ronda ${this.simonSequence.length}`;
+    document.getElementById('simon-status').innerText = `Ronda ${this.simonSequence.length} ✨`;
     
     let i = 0;
     const interval = setInterval(() => {
@@ -166,16 +349,16 @@ const Minigames = {
       }
       this.flashSimonButton(this.simonSequence[i]);
       i++;
-    }, 800);
+    }, 700);
   },
 
   flashSimonButton(index) {
     const btn = document.getElementById(`simon-${index}`);
     if (!btn) return;
-    const freqs = [300, 400, 500, 600];
+    const freqs = [350, 450, 550, 650];
     AudioEffects.playTone(freqs[index], 'sine', 0.15);
     btn.style.opacity = '0.3';
-    setTimeout(() => btn.style.opacity = '1', 400);
+    setTimeout(() => btn.style.opacity = '1', 350);
   },
 
   simonClick(index) {
@@ -198,15 +381,15 @@ const Minigames = {
   },
 
   // =========================================================
-  // MINIJUEGO 3: RUNNER INFINITO
+  // 5. RUNNER MÁGICO KAWAII
   // =========================================================
   startRunnerGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
       content.innerHTML = `
-        <h3>🏃 Runner Infinito</h3>
-        <canvas id="runnerCanvas" width="300" height="280" style="background:#fff3e0; border-radius:12px; margin:10px auto; display:block;"></canvas>
-        <p style="font-size:0.85rem; text-align:center;">Presiona <b>Espacio</b> o Toca la pantalla para Saltar</p>
+        <h3 style="color:#ab47bc;">🦄 Runner Mágico</h3>
+        <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ffd54f;"></canvas>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla o Espacio para saltar</p>
       `;
 
       const canvas = document.getElementById('runnerCanvas');
@@ -221,9 +404,9 @@ const Minigames = {
 
       const jump = () => {
         if (!isJumping) {
-          playerVY = -12;
+          playerVY = -11;
           isJumping = true;
-          AudioEffects.playTone(500, 'square', 0.08);
+          AudioEffects.playTone(550, 'square', 0.08);
         }
       };
 
@@ -241,37 +424,126 @@ const Minigames = {
         }
 
         playerY += playerVY;
-        playerVY += 0.7;
+        playerVY += 0.65;
 
         if (playerY >= 210) {
           playerY = 210;
           isJumping = false;
         }
 
-        obstacleX -= 4;
-        if (obstacleX < -20) {
+        obstacleX -= 4.2;
+        if (obstacleX < -25) {
           obstacleX = 300;
           score += 10;
         }
 
-        if (obstacleX < 50 && obstacleX > 10 && playerY > 180) {
-          gameOver = true;
+        if (obstacleX < 45 && obstacleX > 15 && playerY > 180) gameOver = true;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Suelo Nube
+        ctx.fillStyle = '#e1bee7';
+        ctx.fillRect(0, 240, 300, 40);
+
+        // Personaje Kawaii (Círculo brillante)
+        ctx.fillStyle = '#ff4081';
+        ctx.beginPath();
+        ctx.arc(35, playerY + 15, 15, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Obstáculo Estrella
+        ctx.fillStyle = '#ffb300';
+        ctx.beginPath();
+        ctx.arc(obstacleX + 10, 225, 12, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#4a148c';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`Monedas: 🪙 ${score}`, 12, 25);
+
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+    });
+  },
+
+  // =========================================================
+  // 6. BURBUJAS KAWAII (NUEVO)
+  // =========================================================
+  startBubbleGame() {
+    this.showCountdown(() => {
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <h3 style="color:#ab47bc;">✨ Burbujas Kawaii</h3>
+        <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #80cbc4;"></canvas>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">Haz clic sobre las burbujas doradas para atraparlas</p>
+      `;
+
+      const canvas = document.getElementById('bubbleCanvas');
+      const ctx = canvas.getContext('2d');
+      let bubbles = [];
+      let score = 0;
+      let timeLeft = 15;
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          canvas.onclick = null;
+          PetState.addCoins(score);
+          alert(`¡Tiempo! Ganaste 🪙 ${score} monedas.`);
+          Minigames.renderMenu();
+        }
+      }, 1000);
+
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+
+        bubbles.forEach((b, i) => {
+          if (Math.hypot(b.x - mx, b.y - my) < b.r) {
+            score += b.isGolden ? 15 : 5;
+            AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
+            bubbles.splice(i, 1);
+          }
+        });
+      };
+
+      function loop() {
+        if (timeLeft <= 0) return;
+
+        if (Math.random() < 0.08 && bubbles.length < 7) {
+          const isGolden = Math.random() < 0.3;
+          bubbles.push({
+            x: Math.random() * 250 + 25,
+            y: Math.random() * 220 + 40,
+            r: Math.random() * 8 + 16,
+            isGolden: isGolden,
+            color: isGolden ? '#ffd54f' : '#b388ff'
+          });
         }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#8d6e63';
-        ctx.fillRect(0, 240, 300, 40);
+        bubbles.forEach(b => {
+          ctx.fillStyle = b.color;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+          ctx.fill();
 
-        ctx.fillStyle = '#ab47bc';
-        ctx.fillRect(20, playerY, 30, 30);
+          // Brillo de la burbuja
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(b.x - b.r / 3, b.y - b.r / 3, b.r / 4, 0, Math.PI * 2);
+          ctx.fill();
+        });
 
-        ctx.fillStyle = '#2e7d32';
-        ctx.fillRect(obstacleX, 210, 20, 30);
-
-        ctx.fillStyle = '#333';
-        ctx.font = '16px sans-serif';
-        ctx.fillText(`Monedas: ${score}`, 10, 25);
+        ctx.fillStyle = '#4a148c';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`🪙 ${score}`, 12, 25);
+        ctx.fillText(`⏰ ${timeLeft}s`, 230, 25);
 
         requestAnimationFrame(loop);
       }
