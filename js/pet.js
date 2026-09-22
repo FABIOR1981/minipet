@@ -124,7 +124,10 @@ const PetState = {
 
   addCoins(amount) {
     this.coins += amount;
-    if (amount > 0) AudioEffects.playCoin();
+    if (amount > 0) {
+    this.happiness = Math.min(100, this.happiness + 15); // ¡Aumenta +15% de felicidad al ganar!
+    AudioEffects.playCoin();
+  }
     this.saveData();
     this.updateUI();
   },
