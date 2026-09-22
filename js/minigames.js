@@ -3,7 +3,7 @@ const Minigames = {
   renderMenu() {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2 style="color:#6a1b9a; text-align:center;">🎮 Minijuegos Kawaii</h2>
+      <h2 style="color:#6a1b9a; text-align:center;">🎮 Minijuegos</h2>
       <p style="margin-bottom:12px; font-size:0.85rem; color:#666; text-align:center;">¡Gana monedas y haz feliz a tu mascota!</p>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; max-height:360px; overflow-y:auto; padding:4px;">
         <button class="menu-btn" onclick="Minigames.startCatchGame()">🎈 Atrapa Dulces</button>
