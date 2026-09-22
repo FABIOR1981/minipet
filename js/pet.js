@@ -20,18 +20,18 @@ const PetState = {
     document.getElementById('hunger-count').innerText = this.hunger;
     document.getElementById('energy-count').innerText = this.energy;
 
-    // Actualizar Accesorio y Posición
+    // Renderizar imagen del accesorio equipado
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
 
     if (this.equippedAccessory) {
       const item = Store.items.find(i => i.id === this.equippedAccessory);
       if (item) {
-        accessoryEl.innerText = item.icon;
+        accessoryEl.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
         accessoryEl.classList.add(`pos-${item.type}`);
       }
     } else {
-      accessoryEl.innerText = '';
+      accessoryEl.innerHTML = '';
     }
 
     this.updateFaceAndThought();

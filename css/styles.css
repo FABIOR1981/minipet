@@ -46,7 +46,7 @@ body {
   position: relative;
 }
 
-/* Mascota con animación de flotación */
+/* Mascota */
 .pet-sprite {
   width: 120px;
   height: 120px;
@@ -66,7 +66,6 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-/* Animación al acariciar */
 .happy-jump {
   animation: petJump 0.4s ease-in-out !important;
 }
@@ -173,36 +172,47 @@ body {
   border-radius: 50% 50% 0 0;
 }
 
-/* Posicionamiento Inteligente de Accesorios */
+/* Posicionamiento de Imágenes de Accesorios */
 .accessory {
   position: absolute;
   z-index: 4;
   pointer-events: none;
-  transition: all 0.2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
+.accessory img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .accessory.pos-head {
-  top: -22px;
-  font-size: 2.2rem;
+  top: -30px;
+  width: 65px;
 }
 
 .accessory.pos-eyes {
-  top: 30px;
-  font-size: 2.2rem;
+  top: 28px;
+  width: 80px;
 }
 
 .accessory.pos-neck {
-  bottom: -10px;
-  font-size: 1.8rem;
+  bottom: -12px;
+  width: 55px;
 }
 
 .accessory.pos-ears {
   top: -12px;
-  font-size: 3.4rem;
+  width: 136px;
+}
+
+.store-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 /* Menú inferior reorganizado en Rejilla 3x2 */

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
+  <!-- Puente -->
+  <line x1="40" y1="20" x2="60" y2="20" stroke="#ff4081" stroke-width="4"/>
+  <!-- Ojo Izquierdo Corazón -->
+  <path d="M 25 10 C 15 0, 0 15, 25 32 C 50 15, 35 0, 25 10 Z" fill="#ff80ab" stroke="#f50057" stroke-width="3"/>
+  <!-- Ojo Derecho Corazón -->
+  <path d="M 75 10 C 65 0, 50 15, 75 32 C 100 15, 85 0, 75 10 Z" fill="#ff80ab" stroke="#f50057" stroke-width="3"/>
+  <!-- Brillo Lentes -->
+  <line x1="15" y1="12" x2="22" y2="22" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="65" y1="12" x2="72" y2="22" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+</svg>
