@@ -22,7 +22,7 @@ const AudioEffects = {
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
     } catch (e) {
-      // Ignorar si el audio aún no fue activado por interacción
+      // Ignorar
     }
   },
 
@@ -43,9 +43,30 @@ const AudioEffects = {
   }
 };
 
+// Inicialización del Juego y Registro del Service Worker PWA
 document.addEventListener('DOMContentLoaded', () => {
   PetState.init();
+  registerServiceWorker();
 });
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then((reg) => {
+      // Escucha si hay una versión nueva esperando activarse
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // Notificar al usuario que hay una actualización lista
+            if (confirm('✨ ¡Hay una nueva versión del juego disponible! ¿Quieres actualizar ahora?')) {
+              window.location.reload();
+            }
+          }
+        });
+      });
+    }).catch((err) => console.log('Error al registrar PWA:', err));
+  }
+}
 
 function switchTab(tab) {
   const modal = document.getElementById('modal-screen');
