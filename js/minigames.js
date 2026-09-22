@@ -11,7 +11,7 @@ const Minigames = {
         <button class="menu-btn" onclick="Minigames.startCakeGame()">🍰 Torre de Postres</button>
         <button class="menu-btn" onclick="Minigames.startSimonGame()">🧠 Simón Memoria</button>
         <button class="menu-btn" onclick="Minigames.startRunnerGame()">🦄 Runner Mágico</button>
-        <button class="menu-btn" onclick="Minigames.startBubbleGame()">✨ Burbujas Kawaii</button>
+        <button class="menu-btn" onclick="Minigames.startBubbleGame()">✨ Burbujas Mágicas</button>
       </div>
     `;
   },
@@ -495,7 +495,7 @@ const Minigames = {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">✨ Burbujas Kawaii</h3>
+        <h3 style="color:#ab47bc;">✨ Burbujas Mágicas</h3>
         <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #80cbc4; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca las burbujas para atraparlas</p>
       `;

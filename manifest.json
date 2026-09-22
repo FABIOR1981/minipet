@@ -1,7 +1,7 @@
 {
   "name": "Mi Mascota Kawaii",
   "short_name": "MiniPet",
-  "description": "Tu mascota virtual Kawaii con minijuegos y tienda de accesorios.",
+  "description": "Tu mascota virtual con minijuegos y tienda de accesorios.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f0e6ff",
