@@ -1,20 +1,46 @@
 const Minigames = {
   // Menú Principal de Minijuegos (6 Opciones Kawaii)
-  renderMenu() {
-    const content = document.getElementById('modal-content');
-    content.innerHTML = `
-      <h2 style="color:#6a1b9a; text-align:center;">🎮 Minijuegos</h2>
-      <p style="margin-bottom:12px; font-size:0.85rem; color:#666; text-align:center;">¡Gana monedas y haz feliz a tu mascota!</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; max-height:360px; overflow-y:auto; padding:4px;">
-        <button class="menu-btn" onclick="Minigames.startCatchGame()">🎈 Atrapa Dulces</button>
-        <button class="menu-btn" onclick="Minigames.startPopGame()">🌸 Explotar Globos</button>
-        <button class="menu-btn" onclick="Minigames.startCakeGame()">🍰 Torre de Postres</button>
-        <button class="menu-btn" onclick="Minigames.startSimonGame()">🧠 Simón Memoria</button>
-        <button class="menu-btn" onclick="Minigames.startRunnerGame()">🦄 Runner Mágico</button>
-        <button class="menu-btn" onclick="Minigames.startBubbleGame()">✨ Burbujas Mágicas</button>
+ renderMenu() {
+  const content = document.getElementById('modal-content');
+  content.innerHTML = `
+    <h2 style="text-align:center; color:#6a1b9a; margin-bottom:4px;">🎮 Minijuegos</h2>
+    <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
+      ¡Gana monedas y haz feliz a tu mascota!
+    </p>
+    <div class="grid-container">
+      <div class="item-card" onclick="Minigames.startCatchGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🎈</span>
+        <span class="card-title">Atrapa Dulces</span>
+        <button class="card-btn">Jugar</button>
       </div>
-    `;
-  },
+      <div class="item-card" onclick="Minigames.startPopGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🌸</span>
+        <span class="card-title">Explotar Globos</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startCakeGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🍰</span>
+        <span class="card-title">Torre de Postres</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startSimonGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🧠</span>
+        <span class="card-title">Simón Memoria</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startRunnerGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🦄</span>
+        <span class="card-title">Runner Mágico</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startBubbleGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">✨</span>
+        <span class="card-title">Burbujas Mágicas</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+    </div>
+  `;
+},
 
   // Conteo Regresivo Estilo Kawaii
   showCountdown(onComplete) {
