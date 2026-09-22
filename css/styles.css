@@ -1,4 +1,6 @@
-/* Reseteo Global y Adaptabilidad Táctil */
+/* =========================================================
+   RESETEO GLOBAL Y OPTIMIZACIÓN TÁCTIL (MÓVIL / TABLET)
+   ========================================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,7 +20,9 @@ body {
   touch-action: manipulation;
 }
 
-/* Contenedor Principal (Marco de App Móvil) */
+/* =========================================================
+   CONTENEDOR PRINCIPAL (MARCO DE APP MÓVIL)
+   ========================================================= */
 #app-container {
   width: 100%;
   max-width: 380px;
@@ -35,7 +39,9 @@ body {
   touch-action: manipulation;
 }
 
-/* Barra Superior de Estadísticas */
+/* =========================================================
+   BARRA SUPERIOR Y GLOBO DE PENSAMIENTO
+   ========================================================= */
 .top-bar {
   display: flex;
   justify-content: space-around;
@@ -56,7 +62,6 @@ body {
   border: 1px solid #e1bee7;
 }
 
-/* Globo de Pensamiento */
 .thought-bubble {
   position: absolute;
   top: 62px;
@@ -75,7 +80,9 @@ body {
   text-align: center;
 }
 
-/* ESCENARIOS TEMÁTICOS (Habitaciones) */
+/* =========================================================
+   ESCENARIOS DETALLADOS CON MUEBLES FIJOS (CSS PURO)
+   ========================================================= */
 .room {
   flex: 1;
   display: flex;
@@ -83,26 +90,87 @@ body {
   align-items: center;
   position: relative;
   transition: background 0.4s ease;
+  overflow: hidden;
 }
 
-/* 1. Sala de Estar */
+/* 1. Sala de Estar: Lámpara de pie y Cuadro */
 .room.bg_living {
   background: 
-    linear-gradient(to bottom, transparent 70%, #d7ccc8 70%, #a1887f 100%),
-    linear-gradient(180deg, #ffe0b2 0%, #fff3e0 70%);
+    linear-gradient(to bottom, transparent 72%, #d7ccc8 72%, #a1887f 100%),
+    linear-gradient(180deg, #ffe0b2 0%, #fff3e0 72%);
 }
 
-/* 2. Dormitorio */
+.room.bg_living::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  bottom: 28%;
+  width: 35px;
+  height: 110px;
+  background: 
+    radial-gradient(ellipse at top, #ffee58 60%, transparent 65%),
+    linear-gradient(to right, transparent 45%, #8d6e63 45%, #8d6e63 55%, transparent 55%);
+  background-size: 100% 35px, 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.room.bg_living::after {
+  content: '🖼️';
+  font-size: 1.8rem;
+  position: absolute;
+  right: 25px;
+  top: 18%;
+  padding: 4px;
+  background: #ffffff;
+  border: 3px solid #8d6e63;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 2. Dormitorio: Ventana con Luna y Cama */
 .room.bg_bedroom {
   background: 
-    radial-gradient(circle at 80% 20%, #fff 2px, transparent 3px),
-    radial-gradient(circle at 20% 40%, #fff 2px, transparent 3px),
-    radial-gradient(circle at 60% 60%, #fff 2px, transparent 3px),
     linear-gradient(to bottom, transparent 72%, #b388ff 72%, #7c4dff 100%),
+    radial-gradient(circle at 80% 20%, #fff 2px, transparent 3px),
+    radial-gradient(circle at 20% 35%, #fff 2px, transparent 3px),
     linear-gradient(180deg, #311b92 0%, #512da8 72%);
 }
 
-/* 3. Sala de Juegos */
+.room.bg_bedroom::before {
+  content: '🌙';
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+  top: 15%;
+  width: 55px;
+  height: 55px;
+  background: #1a237e;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255,255,255,0.3);
+}
+
+.room.bg_bedroom::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  bottom: 25%;
+  width: 90px;
+  height: 50px;
+  background: 
+    radial-gradient(ellipse at center, #ffffff 50%, transparent 55%),
+    linear-gradient(to right, #ff80ab, #f50057);
+  background-size: 40px 20px, 100% 35px;
+  background-position: 10px 0, 0 15px;
+  background-repeat: no-repeat;
+  border-radius: 12px 0 0 8px;
+}
+
+/* 3. Sala de Juegos: Repisa con Juguetes y Pelota */
 .room.bg_playroom {
   background: 
     linear-gradient(to bottom, transparent 70%, #80deea 70%, #4dd0e1 100%),
@@ -113,15 +181,91 @@ body {
   background-position: 0 0, 0 0, 20px 20px, 0 0;
 }
 
-/* 4. Parque Mágico */
+.room.bg_playroom::before {
+  content: '🧸🤖';
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 15px;
+  top: 22%;
+  width: 85px;
+  height: 12px;
+  background: #ffb74d;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.room.bg_playroom::after {
+  content: '⚽';
+  font-size: 1.8rem;
+  position: absolute;
+  right: 20px;
+  bottom: 20%;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
+}
+
+/* 4. Parque Mágico: Sol Giratorio y Árbol */
 .room.bg_park {
   background: 
-    radial-gradient(circle at 85% 18%, #ffee58 25px, transparent 26px),
     linear-gradient(to bottom, transparent 68%, #aed581 68%, #7cb342 100%),
     linear-gradient(180deg, #81d4fa 0%, #e1f5fe 68%);
 }
 
-/* Cuerpecito de la Mascota */
+.room.bg_park::before {
+  content: '☀️';
+  font-size: 2.2rem;
+  position: absolute;
+  right: 20px;
+  top: 12%;
+  animation: spinSun 20s linear infinite;
+}
+
+@keyframes spinSun {
+  100% { transform: rotate(360deg); }
+}
+
+.room.bg_park::after {
+  content: '🌳';
+  font-size: 3.8rem;
+  position: absolute;
+  left: -10px;
+  bottom: 22%;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.12));
+}
+
+/* 5. Playa Tropical (Nuevo escenario en reemplazo del baño) */
+.room.bg_beach {
+  background: 
+    /* Franja de Arena */
+    linear-gradient(to bottom, transparent 68%, #ffe082 68%, #ffd54f 100%),
+    /* Mar turquesa y Cielo despejado */
+    linear-gradient(180deg, #80deea 0%, #26c6da 50%, #00acc1 68%);
+}
+
+.room.bg_beach::before {
+  content: '🌴';
+  font-size: 3.8rem;
+  position: absolute;
+  right: -5px;
+  bottom: 22%;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+}
+
+.room.bg_beach::after {
+  content: '🏖️';
+  font-size: 2.5rem;
+  position: absolute;
+  left: 15px;
+  bottom: 24%;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+}
+
+/* =========================================================
+   SPRITE DE LA MASCOTA Y CARA
+   ========================================================= */
 .pet-sprite {
   width: 120px;
   height: 120px;
@@ -145,7 +289,6 @@ body {
   50% { transform: translateY(-25px); }
 }
 
-/* Cara Modular */
 .kawaii-face {
   width: 100%;
   height: 100%;
@@ -207,7 +350,9 @@ body {
   font-size: 1.2rem;
 }
 
-/* Posición de Accesorios */
+/* =========================================================
+   ACCESORIOS Y EFECTOS
+   ========================================================= */
 .accessory {
   position: absolute;
   width: 100%;
@@ -228,7 +373,6 @@ body {
 .accessory.pos-ears img { top: -15px; left: 30px; width: 70px; }
 .accessory.pos-neck img { top: 70px; left: 30px; }
 
-/* Corazones Flotantes */
 .heart-particle {
   position: absolute;
   font-size: 1.2rem;
@@ -242,7 +386,9 @@ body {
   100% { transform: translate(var(--dx), -50px) scale(1.2); opacity: 0; }
 }
 
-/* Navegación Inferior */
+/* =========================================================
+   NAVEGACIÓN INFERIOR Y MODALES (CATÁLOGO GRID 2 COLUMNAS)
+   ========================================================= */
 .bottom-nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -273,7 +419,6 @@ body {
 .btn-icon { font-size: 1.2rem; }
 .btn-text { font-size: 0.72rem; font-weight: bold; color: #4a148c; margin-top: 2px; }
 
-/* Modal y Catálogo en Cuadrícula (Grid) */
 .modal {
   position: absolute;
   top: 0; left: 0;
@@ -346,7 +491,9 @@ body {
 .card-btn.owned { background: #ccc; cursor: default; }
 .card-btn.equipped { background: #ff4081; }
 
-/* Animación Conteo Regresivo */
+/* =========================================================
+   ANIMACIÓN CONTEO REGRESIVO MINIJUEGOS
+   ========================================================= */
 .kawaii-countdown {
   font-size: 4rem;
   font-weight: 800;
