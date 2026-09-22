@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
+  <!-- Ala Izquierda -->
+  <path d="M 50 30 L 10 10 C 5 25, 5 35, 10 50 Z" fill="#ff80ab" stroke="#f50057" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Ala Derecha -->
+  <path d="M 50 30 L 90 10 C 95 25, 95 35, 90 50 Z" fill="#ff80ab" stroke="#f50057" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Pliegues internos -->
+  <path d="M 25 22 Q 35 30 25 38" fill="none" stroke="#f50057" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 75 22 Q 65 30 75 38" fill="none" stroke="#f50057" stroke-width="2" stroke-linecap="round"/>
+  <!-- Nudo central Corazón -->
+  <path d="M 50 22 C 45 16, 38 24, 50 35 C 62 24, 55 16, 50 22 Z" fill="#ff4081" stroke="#c51162" stroke-width="2"/>
+</svg>

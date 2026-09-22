@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60">
+  <!-- Oreja Izquierda -->
+  <polygon points="20,55 35,10 60,45" fill="#b388ff" stroke="#7c4dff" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="28,50 37,20 52,43" fill="#ea80fc"/>
+  <!-- Oreja Derecha -->
+  <polygon points="100,55 85,10 60,45" fill="#b388ff" stroke="#7c4dff" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="92,50 83,20 68,43" fill="#ea80fc"/>
+</svg>
