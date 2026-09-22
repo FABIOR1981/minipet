@@ -16,6 +16,7 @@ const PetState = {
     await this.loadDialogues();
     this.updateUI();
     setInterval(() => this.tick(), 8000);
+    this.startWandering(); // Inicia el movimiento autónomo de la mascota
   },
 
   async loadDialogues() {
@@ -23,7 +24,6 @@ const PetState = {
       const response = await fetch('data/dialogues.json');
       this.dialogues = await response.json();
     } catch (e) {
-      // Frases de respaldo por si falla la carga del JSON
       this.dialogues = {
         happy: ['❤️ ¡Me encanta estar contigo!', '✨ ¡Hoy es un día genial!', '🌸 ¡Eres mi persona favorita!'],
         hungry: ['🍕 ¡Tengo hambre! ¡Comida rica!', '🍗 Mmm... ¿Hay algo para picar?'],
@@ -41,23 +41,48 @@ const PetState = {
     return list[index];
   },
 
+  startWandering() {
+    setInterval(() => {
+      if (!this.isSleeping && !this.isSick) {
+        this.moveRandomly();
+      }
+    }, 6000);
+  },
+
+  moveRandomly() {
+    const petEl = document.getElementById('pet');
+    const roomEl = document.getElementById('pet-room');
+    if (!petEl || !roomEl) return;
+
+    const roomWidth = roomEl.clientWidth;
+    const petWidth = petEl.clientWidth;
+    const minX = 20;
+    const maxX = roomWidth - petWidth - 20;
+
+    const targetX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+
+    petEl.classList.add('walking');
+    petEl.style.left = `${targetX}px`;
+
+    setTimeout(() => {
+      petEl.classList.remove('walking');
+    }, 2500);
+  },
+
   updateUI() {
     document.getElementById('coin-count').innerText = this.coins;
     document.getElementById('happy-count').innerText = this.happiness;
     document.getElementById('hunger-count').innerText = this.hunger;
     document.getElementById('energy-count').innerText = this.energy;
 
-    // Aplicar color de piel
     const petEl = document.getElementById('pet');
     if (petEl) petEl.style.backgroundColor = this.petColor;
 
-    // Aplicar Fondo de Habitación
     const roomEl = document.getElementById('pet-room');
     if (roomEl) {
       roomEl.className = `room ${this.equippedBackground}`;
     }
 
-    // Renderizar Accesorio Equipado
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
 
@@ -115,7 +140,6 @@ const PetState = {
     petEl.classList.add('happy-jump');
     setTimeout(() => petEl.classList.remove('happy-jump'), 500);
 
-    // Animación de corazones flotantes
     for (let i = 0; i < 3; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart-particle';

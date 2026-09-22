@@ -236,12 +236,10 @@ body {
   filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.12));
 }
 
-/* 5. Playa Tropical (Nuevo escenario en reemplazo del baño) */
+/* 5. Playa Tropical */
 .room.bg_beach {
   background: 
-    /* Franja de Arena */
     linear-gradient(to bottom, transparent 68%, #ffe082 68%, #ffd54f 100%),
-    /* Mar turquesa y Cielo despejado */
     linear-gradient(180deg, #80deea 0%, #26c6da 50%, #00acc1 68%);
 }
 
@@ -264,24 +262,33 @@ body {
 }
 
 /* =========================================================
-   SPRITE DE LA MASCOTA Y CARA
+   SPRITE DE LA MASCOTA Y MOVIMIENTO AUTÓNOMO
    ========================================================= */
 .pet-sprite {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  position: relative;
+  position: absolute;
   cursor: pointer;
   box-shadow: 0 8px 15px rgba(0,0,0,0.12);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  transition: left 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease;
 }
 
 .pet-sprite:active {
   transform: scale(0.95);
 }
 
+.pet-sprite.walking {
+  animation: walkWiggle 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes walkWiggle {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-6px) rotate(2deg); }
+}
+
 .happy-jump {
-  animation: jump 0.5s ease;
+  animation: jump 0.5s ease !important;
 }
 
 @keyframes jump {
