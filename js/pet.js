@@ -1,5 +1,5 @@
 const PetState = {
-  coins: 100,
+  coins: 500,
   happiness: 100,
   hunger: 100,
   energy: 100,
