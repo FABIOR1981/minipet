@@ -6,8 +6,9 @@ const PetState = {
   petColor: '#ff80ab',
   isSick: false,
   isSleeping: false,
-  inventory: ['bow_tie'],
+  inventory: ['bow_tie', 'bg_living'],
   equippedAccessory: 'bow_tie',
+  equippedBackground: 'bg_living',
   dialogues: {},
 
   async init() {
@@ -22,13 +23,13 @@ const PetState = {
       const response = await fetch('data/dialogues.json');
       this.dialogues = await response.json();
     } catch (e) {
-      // Frases de respaldo por si aún no has creado el archivo JSON
+      // Frases de respaldo por si falla la carga del JSON
       this.dialogues = {
         happy: ['❤️ ¡Me encanta estar contigo!', '✨ ¡Hoy es un día genial!', '🌸 ¡Eres mi persona favorita!'],
         hungry: ['🍕 ¡Tengo hambre! ¡Comida rica!', '🍗 Mmm... ¿Hay algo para picar?'],
         sick: ['🥺 Me siento mal... ¿Me das medicina?', '🤒 Me dolió la pancita...'],
         tired: ['😴 Tengo sueño... ¡A dormir!', '💤 Mis ojitos se cierran...'],
-        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Estoy aburrida! vamos a jugar.'],
+        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Estoy aburrida! Vamos a jugar.'],
         sleeping: ['💤 Zzz... Descansando...', '🌙 Zzz... Soñando con caramelos...']
       };
     }
@@ -46,11 +47,17 @@ const PetState = {
     document.getElementById('hunger-count').innerText = this.hunger;
     document.getElementById('energy-count').innerText = this.energy;
 
-    // Aplicar color de piel a la mascota
+    // Aplicar color de piel
     const petEl = document.getElementById('pet');
     if (petEl) petEl.style.backgroundColor = this.petColor;
 
-    // Renderizar imagen del accesorio equipado
+    // Aplicar Fondo de Habitación
+    const roomEl = document.getElementById('pet-room');
+    if (roomEl) {
+      roomEl.className = `room ${this.equippedBackground}`;
+    }
+
+    // Renderizar Accesorio Equipado
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
 
@@ -72,6 +79,8 @@ const PetState = {
     const thought = document.getElementById('pet-thought');
     const extraProp = document.getElementById('extra-prop');
     
+    if (!face || !thought) return;
+
     face.className = 'kawaii-face';
     extraProp.innerText = '';
 
@@ -164,8 +173,16 @@ const PetState = {
     this.updateUI();
   },
 
-  equipAccessory(itemId) {
-    this.equippedAccessory = (this.equippedAccessory === itemId) ? null : itemId;
+  equipItem(itemId) {
+    const item = Store.items.find(i => i.id === itemId);
+    if (!item) return;
+
+    if (item.type === 'bg') {
+      this.equippedBackground = (this.equippedBackground === itemId) ? 'bg_living' : itemId;
+    } else {
+      this.equippedAccessory = (this.equippedAccessory === itemId) ? null : itemId;
+    }
+
     AudioEffects.playTone(800, 'sine', 0.08);
     this.saveData();
     this.updateUI();
@@ -207,7 +224,8 @@ const PetState = {
       petColor: this.petColor,
       isSick: this.isSick,
       inventory: this.inventory,
-      equippedAccessory: this.equippedAccessory
+      equippedAccessory: this.equippedAccessory,
+      equippedBackground: this.equippedBackground
     }));
   },
 
@@ -221,8 +239,9 @@ const PetState = {
       this.energy = data.energy ?? 100;
       this.petColor = data.petColor || '#ff80ab';
       this.isSick = data.isSick ?? false;
-      this.inventory = data.inventory || [];
+      this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;
+      this.equippedBackground = data.equippedBackground || 'bg_living';
     }
   }
 };
