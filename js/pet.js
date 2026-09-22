@@ -8,6 +8,15 @@ const PetState = {
   inventory: ['bow_tie'],
   equippedAccessory: 'bow_tie',
 
+  petColor: '#ff80ab',
+
+setColor(color) {
+  this.petColor = color;
+  const petEl = document.getElementById('pet');
+  if (petEl) petEl.style.backgroundColor = color;
+  this.saveData();
+}
+
   init() {
     this.loadData();
     this.updateUI();
@@ -69,17 +78,31 @@ const PetState = {
     }
   },
 
-  petPet() {
-    if (this.isSleeping) return;
-    this.happiness = Math.min(100, this.happiness + 10);
-    const petEl = document.getElementById('pet');
-    petEl.classList.add('happy-jump');
-    setTimeout(() => petEl.classList.remove('happy-jump'), 500);
-    
-    AudioEffects.playTone(600, 'sine', 0.1);
-    this.saveData();
-    this.updateUI();
-  },
+ petPet() {
+  if (this.isSleeping) return;
+  this.happiness = Math.min(100, this.happiness + 10);
+  
+  const petEl = document.getElementById('pet');
+  petEl.classList.add('happy-jump');
+  setTimeout(() => petEl.classList.remove('happy-jump'), 500);
+
+  // Crear corazones flotantes en posiciones aleatorias
+  for (let i = 0; i < 3; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart-particle';
+    heart.innerText = '❤️';
+    const offsetX = (Math.random() - 0.5) * 60;
+    heart.style.setProperty('--dx', `${offsetX}px`);
+    heart.style.left = `calc(50% + ${offsetX / 2}px)`;
+    heart.style.top = '20px';
+    petEl.appendChild(heart);
+    setTimeout(() => heart.remove(), 800);
+  }
+
+  AudioEffects.playTone(600, 'sine', 0.1);
+  this.saveData();
+  this.updateUI();
+},
 
   feed() {
     if (this.isSleeping) return;

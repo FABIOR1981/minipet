@@ -300,3 +300,23 @@ body {
   transform: scale(0.98);
   background-color: #5e35b1;
 }
+
+/* Partículas de Corazones Flotantes */
+.heart-particle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.2rem;
+  animation: floatHeart 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes floatHeart {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), -50px) scale(1.4);
+  }
+}
