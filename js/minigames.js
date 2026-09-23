@@ -186,9 +186,11 @@ const Minigames = {
 
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
+      const CANDY_EMOJIS = ['🍬', '🍭', '🍡', '🍫'];
       let basketX = 120;
       let itemX = Math.random() * 260 + 10;
       let itemY = 0;
+      let currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
       let score = 0;
       let gameOver = false;
 
@@ -231,25 +233,22 @@ const Minigames = {
           AudioEffects.playTone(800, 'sine', 0.05);
           itemY = 0;
           itemX = Math.random() * 250 + 10;
+          currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
         }
 
         if (itemY > 300) gameOver = true;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
 
         // Cesta
-        ctx.fillStyle = '#ff80ab';
-        ctx.beginPath();
-        ctx.roundRect(basketX, 270, 60, 20, 10);
-        ctx.fill();
+        ctx.font = '38px sans-serif';
+        ctx.fillText('🧺', basketX + 30, 285);
 
-        // Fruta
-        ctx.fillStyle = '#ff4081';
-        ctx.beginPath();
-        ctx.arc(itemX, itemY, 12, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#76ff03';
-        ctx.fillRect(itemX - 3, itemY - 15, 6, 5);
+        // Dulce cayendo
+        ctx.font = '26px sans-serif';
+        ctx.fillText(currentCandy, itemX, itemY);
 
         requestAnimationFrame(loop);
       }
@@ -318,26 +317,19 @@ const Minigames = {
             x: Math.random() * 260 + 20,
             y: 320,
             radius: 18,
-            speed: Math.random() * 1.5 + 1.2,
-            color: ['#ff80ab', '#b388ff', '#80cbc4', '#ffe082'][Math.floor(Math.random() * 4)]
+            speed: Math.random() * 1.5 + 1.2
           });
         }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
 
         balloons.forEach((b, index) => {
           b.y -= b.speed;
-          
-          ctx.fillStyle = b.color;
-          ctx.beginPath();
-          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-          ctx.fill();
 
-          ctx.strokeStyle = '#aaa';
-          ctx.beginPath();
-          ctx.moveTo(b.x, b.y + b.radius);
-          ctx.lineTo(b.x, b.y + b.radius + 12);
-          ctx.stroke();
+          ctx.font = `${b.radius * 2}px sans-serif`;
+          ctx.fillText('🎈', b.x, b.y);
 
           if (b.y < -20) balloons.splice(index, 1);
         });
@@ -655,23 +647,17 @@ const Minigames = {
             x: Math.random() * 250 + 25,
             y: Math.random() * 220 + 40,
             r: Math.random() * 8 + 16,
-            isGolden: isGolden,
-            color: isGolden ? '#ffd54f' : '#b388ff'
+            isGolden: isGolden
           });
         }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
 
         bubbles.forEach(b => {
-          ctx.fillStyle = b.color;
-          ctx.beginPath();
-          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#fff';
-          ctx.beginPath();
-          ctx.arc(b.x - b.r / 3, b.y - b.r / 3, b.r / 4, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.font = `${b.r * 2}px sans-serif`;
+          ctx.fillText(b.isGolden ? '🌟' : '🫧', b.x, b.y);
         });
 
         requestAnimationFrame(loop);
