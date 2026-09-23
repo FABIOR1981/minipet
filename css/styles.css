@@ -705,6 +705,7 @@ body {
   width: 56px;
   height: 56px;
   margin: -28px 0 0 -28px;
+  background-color: #ff80ab;
   transform-origin: center;
 }
 
