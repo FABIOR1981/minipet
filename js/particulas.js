@@ -9,10 +9,10 @@
 const Particles = {
   CONFIG: {
     // --- Bloque 4 parte 1 ---
-    bg_space:      { mode: 'twinkle',   emojis: ['⭐', '✨'], count: 8 },
-    bg_underwater: { mode: 'float-up',  emojis: ['🫧'],       count: 6, interval: 1800 },
-    bg_beach:      { mode: 'twinkle',   emojis: ['✨'],       count: 5 },
-    bg_forest:     { mode: 'fall-slow', emojis: ['🍃'],       count: 5, interval: 2200 },
+    bg_space:      { mode: 'twinkle',   emojis: ['⭐', '☄️'], count: 8 },
+    bg_underwater: { mode: 'float-up',  emojis: ['🫧', '💧', '🐟'], count: 6, interval: 1800 }, // 🐟 Pequeños peces subiendo
+    bg_beach:      { mode: 'twinkle',   emojis: ['☀️', '🐚', '🌊'],       count: 5 },
+    bg_forest:     { mode: 'fall-slow', emojis: ['🍃', '🍂', '🦋'], count: 5, interval: 2200 }, // 🦋 Mariposas cayendo/volando suavemente
 
     // --- Bloque 4 parte 2 ---
     bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 6 },
