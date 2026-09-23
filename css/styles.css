@@ -569,6 +569,7 @@ body {
   cursor: pointer;
   box-shadow: 0 8px 15px rgba(0,0,0,0.12);
   background-image: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 45%);
+  transform: scale(var(--pet-scale));
   transition: left 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
   z-index: 4;
 }
@@ -690,6 +691,15 @@ body {
     34px 8px 0 -10px currentColor,
     -16px -16px 0 -16px currentColor,
     16px -16px 0 -16px currentColor;
+}
+
+/* Las siluetas del selector usan una base pequeña para que las tres
+   escalas queden completas dentro de sus tarjetas. */
+.size-preview .pet-sprite.shape-squircle {
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  transform-origin: center;
 }
 
 .pet-sprite.walking {
