@@ -5,10 +5,10 @@ const Store = {
     { id: 'shape-mochi',    name: 'Mochi',      emoji: '🍡' },
     { id: 'shape-onigiri',  name: 'Gotita',     emoji: '💧' },
     { id: 'shape-squircle', name: 'Squircle',   emoji: '🔲' },
-    { id: 'shape-capsule',  name: 'Cápsula',    emoji: '💊' },
-    { id: 'shape-heart',    name: 'Corazón',    emoji: '❤️' },
-    { id: 'shape-cathead',  name: 'Animalito',  emoji: '🐱' },
-    { id: 'shape-cloud',    name: 'Nube',       emoji: '☁️' }
+    //{ id: 'shape-capsule',  name: 'Cápsula',    emoji: '💊' },
+    //{ id: 'shape-heart',    name: 'Corazón',    emoji: '❤️' },
+    //{ id: 'shape-cathead',  name: 'Animalito',  emoji: '🐱' },
+    //{ id: 'shape-cloud',    name: 'Nube',       emoji: '☁️' }
   ],
 
   items: [
