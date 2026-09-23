@@ -20,12 +20,12 @@ const Particles = {
     bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 5, interval: 2000 },
     bg_park:       { mode: 'fall-slow', emojis: ['🍃', '🌸'], count: 5, interval: 2200 },
     bg_mountain:   { mode: 'fall-slow', emojis: ['❄️'],       count: 8, interval: 1400 },
-    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '✨'], count: 7 },
-    bg_desert:     { mode: 'twinkle',   emojis: ['✨'],       count: 5 },
-    bg_kitchen:    { mode: 'float-up',  emojis: ['💨'],       count: 4, interval: 2200 },
-    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧'],       count: 6, interval: 1600 },
-    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸'],       count: 5, interval: 2200 },
-    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '💫'], count: 8 },
+    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '🔥', '🦉'], count: 7 }, // 🦉 Búhos y brasas de la fogata
+    bg_desert:     { mode: 'twinkle',   emojis: ['☀️', '💨', '🔥'], count: 5 }, // 💨 Ráfagas de viento y sol intenso
+    bg_kitchen:    { mode: 'float-up',  emojis: ['♨️', '🧂', '🧁'], count: 4, interval: 2200 }, // 🧂 Especias y vapor subiendo
+    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧', '💧', '🦆'], count: 6, interval: 1600 }, // 🦆 Patitos de hule flotando entre burbujas
+    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸', '🍃', '☯️'], count: 5, interval: 2200 }, // ☯️ Equilibrio y pétalos de cerezo
+    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶', '🪩'], count: 8 }, // 🎶 Música y destellos de la bola de espejos
     bg_castle:     { mode: 'float-up',  emojis: ['✨'],       count: 5, interval: 2400 },
     bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 5, interval: 2000 }
   },
