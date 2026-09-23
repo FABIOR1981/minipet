@@ -565,12 +565,94 @@ body {
   position: absolute;
   cursor: pointer;
   box-shadow: 0 8px 15px rgba(0,0,0,0.12);
-  transition: left 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease;
+  background-image: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 45%);
+  transition: left 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
   z-index: 4;
 }
 
 .pet-sprite:active {
   transform: scale(0.95);
+}
+
+/* =========================================================
+   FORMAS DE LA MASCOTA (8 opciones elegibles en el Armario)
+   ========================================================= */
+.pet-sprite.shape-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+.pet-sprite.shape-mochi {
+  width: 138px; height: 96px;
+  border-radius: 50%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+.pet-sprite.shape-onigiri {
+  width: 120px; height: 118px;
+  border-radius: 50% 50% 40% 40% / 62% 62% 30% 30%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+.pet-sprite.shape-squircle {
+  width: 120px; height: 120px;
+  border-radius: 28%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+.pet-sprite.shape-capsule {
+  width: 92px; height: 142px;
+  border-radius: 46px;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+/* Corazón vía clip-path (evita el truco de rotar el elemento,
+   que chocaría con las animaciones de caminar/saltar) */
+.pet-sprite.shape-heart {
+  width: 120px; height: 112px;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: path("M60,110 C15,82 0,54 0,32 C0,12 16,0 35,0 C50,0 60,9 60,20 C60,9 70,0 85,0 C104,0 120,12 120,32 C120,54 105,82 60,110 Z");
+}
+
+/* Cabeza de animalito: círculo + orejitas triangulares por pseudo-elementos */
+.pet-sprite.shape-cathead {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+.pet-sprite.shape-cathead::before,
+.pet-sprite.shape-cathead::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 24px solid currentColor;
+}
+.pet-sprite.shape-cathead::before { left: 10px; transform: rotate(-12deg); }
+.pet-sprite.shape-cathead::after { right: 10px; transform: rotate(12deg); }
+
+/* Nube esponjosa: círculo base + bultos extra vía box-shadow (sin elementos de más) */
+.pet-sprite.shape-cloud {
+  width: 128px; height: 100px;
+  border-radius: 50%;
+  clip-path: none;
+  box-shadow:
+    0 8px 15px rgba(0,0,0,0.12),
+    -34px 8px 0 -10px currentColor,
+    34px 8px 0 -10px currentColor,
+    -16px -16px 0 -16px currentColor,
+    16px -16px 0 -16px currentColor;
 }
 
 .pet-sprite.walking {
@@ -627,7 +709,7 @@ body {
   display: flex;
   gap: 40px;
   position: absolute;
-  top: 58px;
+  top: 48%;
 }
 
 .cheek {

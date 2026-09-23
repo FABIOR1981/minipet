@@ -4,6 +4,7 @@ const PetState = {
   hunger: 100,
   energy: 100,
   petColor: '#ff80ab',
+  petShape: 'shape-circle',
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie', 'bg_living'],
@@ -78,7 +79,14 @@ const PetState = {
     document.getElementById('energy-count').innerText = this.energy;
 
     const petEl = document.getElementById('pet');
-    if (petEl) petEl.style.backgroundColor = this.petColor;
+    if (petEl) {
+      petEl.style.backgroundColor = this.petColor;
+      // currentColor: lo usan las formas decorativas (orejitas, nube, corazón)
+      petEl.style.color = this.petColor;
+      // No pisa 'walking'/'happy-jump' u otras clases temporales que ya tenga el elemento
+      petEl.className = petEl.className.replace(/\bshape-\S+/g, '').trim();
+      petEl.classList.add(this.petShape || 'shape-circle');
+    }
 
     const roomEl = document.getElementById('pet-room');
     if (roomEl) {
@@ -208,6 +216,13 @@ const PetState = {
     this.updateUI();
   },
 
+  setShape(shapeId) {
+    this.petShape = shapeId;
+    AudioEffects.playTone(700, 'sine', 0.1);
+    this.saveData();
+    this.updateUI();
+  },
+
   equipItem(itemId) {
     const item = Store.items.find(i => i.id === itemId);
     if (!item) return;
@@ -290,6 +305,7 @@ const PetState = {
       hunger: this.hunger,
       energy: this.energy,
       petColor: this.petColor,
+      petShape: this.petShape,
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory,
@@ -307,6 +323,7 @@ const PetState = {
       this.hunger = data.hunger ?? 100;
       this.energy = data.energy ?? 100;
       this.petColor = data.petColor || '#ff80ab';
+      this.petShape = data.petShape || 'shape-circle';
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;

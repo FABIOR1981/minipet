@@ -1,4 +1,16 @@
 const Store = {
+  // Las 8 formas de mascota disponibles (elegibles en el Armario)
+  shapes: [
+    { id: 'shape-circle',   name: 'Círculo',   emoji: '⚪' },
+    { id: 'shape-mochi',    name: 'Mochi',      emoji: '🍡' },
+    { id: 'shape-onigiri',  name: 'Gotita',     emoji: '💧' },
+    { id: 'shape-squircle', name: 'Squircle',   emoji: '🔲' },
+    { id: 'shape-capsule',  name: 'Cápsula',    emoji: '💊' },
+    { id: 'shape-heart',    name: 'Corazón',    emoji: '❤️' },
+    { id: 'shape-cathead',  name: 'Animalito',  emoji: '🐱' },
+    { id: 'shape-cloud',    name: 'Nube',       emoji: '☁️' }
+  ],
+
   items: [
     // -----------------------------------------------------------------
     // ACCESORIOS (Organizados para combinar con los escenarios)
@@ -137,6 +149,11 @@ const Store = {
       </div>
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div style="margin: 4px 0 8px; text-align:center;">
+        <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">Forma:</p>
+        <div id="shape-picker" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; max-width:280px; margin:0 auto;"></div>
+      </div>
+      <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
+      <div style="margin: 4px 0 8px; text-align:center;">
         <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
         <div id="looks-list" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:8px;"></div>
         <button onclick="Store.saveCurrentLook()" class="card-btn" style="width:auto; padding:6px 16px; background:#7e57c2;">💾 Guardar look actual</button>
@@ -144,6 +161,18 @@ const Store = {
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div class="grid-container"></div>
     `;
+
+    const shapePicker = content.querySelector('#shape-picker');
+    this.shapes.forEach(shape => {
+      const isSelected = PetState.petShape === shape.id;
+      const btn = document.createElement('button');
+      btn.className = `card-btn ${isSelected ? 'equipped' : ''}`;
+      btn.style.padding = '6px 2px';
+      btn.style.fontSize = '0.68rem';
+      btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
+      btn.onclick = () => { PetState.setShape(shape.id); Store.renderWardrobe(); };
+      shapePicker.appendChild(btn);
+    });
 
     const looksList = content.querySelector('#looks-list');
     if (!PetState.looks || PetState.looks.length === 0) {
