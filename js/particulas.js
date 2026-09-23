@@ -8,10 +8,26 @@
 // =========================================================
 const Particles = {
   CONFIG: {
+    // --- Bloque 4 parte 1 ---
     bg_space:      { mode: 'twinkle',   emojis: ['⭐', '✨'], count: 8 },
     bg_underwater: { mode: 'float-up',  emojis: ['🫧'],       count: 6, interval: 1800 },
     bg_beach:      { mode: 'twinkle',   emojis: ['✨'],       count: 5 },
-    bg_forest:     { mode: 'fall-slow', emojis: ['🍃'],       count: 5, interval: 2200 }
+    bg_forest:     { mode: 'fall-slow', emojis: ['🍃'],       count: 5, interval: 2200 },
+
+    // --- Bloque 4 parte 2 ---
+    bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 6 },
+    bg_bedroom:    { mode: 'twinkle',   emojis: ['⭐', '💤'], count: 6 },
+    bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 5, interval: 2000 },
+    bg_park:       { mode: 'fall-slow', emojis: ['🍃', '🌸'], count: 5, interval: 2200 },
+    bg_mountain:   { mode: 'fall-slow', emojis: ['❄️'],       count: 8, interval: 1400 },
+    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '✨'], count: 7 },
+    bg_desert:     { mode: 'twinkle',   emojis: ['✨'],       count: 5 },
+    bg_kitchen:    { mode: 'float-up',  emojis: ['💨'],       count: 4, interval: 2200 },
+    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧'],       count: 6, interval: 1600 },
+    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸'],       count: 5, interval: 2200 },
+    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '💫'], count: 8 },
+    bg_castle:     { mode: 'float-up',  emojis: ['✨'],       count: 5, interval: 2400 },
+    bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 5, interval: 2000 }
   },
 
   _current: null,
