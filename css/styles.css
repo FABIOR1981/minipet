@@ -78,6 +78,8 @@ body {
   z-index: 10;
   max-width: 80%;
   text-align: center;
+  width: max-content;  /* Hace que la burbuja tome el ancho de la frase en una sola línea... */
+  max-width: 92%;      /* ...pero si la frase supera el 92% de la pantalla, la obliga a bajar de renglón */
 }
 
 /* =========================================================
