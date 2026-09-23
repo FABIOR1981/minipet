@@ -69,6 +69,7 @@ function registerServiceWorker() {
 }
 
 function switchTab(tab) {
+  Minigames.forceExitIfActive();
   const modal = document.getElementById('modal-screen');
   modal.classList.remove('hidden');
   
@@ -82,5 +83,6 @@ function switchTab(tab) {
 }
 
 function closeModal() {
+  Minigames.forceExitIfActive();
   document.getElementById('modal-screen').classList.add('hidden');
 }

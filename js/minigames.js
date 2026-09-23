@@ -1,4 +1,22 @@
 const Minigames = {
+  // Estado de un minijuego en curso. Si el usuario cierra el modal o
+  // navega a otra pestaña mientras `inProgress` es true, `exitHandler()`
+  // se ejecuta para limpiar listeners/timers y devolver las monedas
+  // ganadas hasta ese momento, en vez de perderlas en silencio.
+  inProgress: false,
+  exitHandler: null,
+
+  forceExitIfActive() {
+    if (this.inProgress && this.exitHandler) {
+      const earned = this.exitHandler();
+      this.inProgress = false;
+      this.exitHandler = null;
+      if (earned > 0) {
+        PetState.addCoins(earned);
+      }
+    }
+  },
+
   // Menú Principal de Minijuegos (6 Opciones Kawaii)
  renderMenu() {
   const content = document.getElementById('modal-content');
@@ -85,6 +103,10 @@ const Minigames = {
 
   // Pantalla de Resultado Kawaii (reemplaza los alert() nativos)
   showResult(title, emoji, score, restartFn, isRecord = false) {
+    // El juego terminó de forma natural: ya no hay nada que cobrar al salir
+    this.inProgress = false;
+    this.exitHandler = null;
+
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <div class="result-screen">
@@ -224,6 +246,16 @@ const Minigames = {
       canvas.addEventListener('touchstart', handleTouch, { passive: false });
       canvas.addEventListener('touchmove', handleTouch, { passive: false });
 
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener('keyup', handleKeyUp);
+        canvas.removeEventListener('touchstart', handleTouch);
+        canvas.removeEventListener('touchmove', handleTouch);
+        gameOver = true;
+        return score;
+      };
+
       function loop() {
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
@@ -289,6 +321,7 @@ const Minigames = {
       let balloons = [];
       let score = 0;
       let timeLeft = 20;
+      let stopped = false;
 
       const timerInterval = setInterval(() => {
         timeLeft--;
@@ -323,8 +356,17 @@ const Minigames = {
       canvas.addEventListener('touchstart', handlePop, { passive: false });
       canvas.onclick = handlePop;
 
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => {
+        stopped = true;
+        clearInterval(timerInterval);
+        canvas.removeEventListener('touchstart', handlePop);
+        canvas.onclick = null;
+        return score;
+      };
+
       function loop() {
-        if (timeLeft <= 0) return;
+        if (stopped || timeLeft <= 0) return;
 
         if (Math.random() < 0.05 && balloons.length < 6) {
           balloons.push({
@@ -410,6 +452,15 @@ const Minigames = {
       const handleSpace = (e) => { if (e.code === 'Space') dropLayer(); };
       window.addEventListener('keydown', handleSpace);
 
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => {
+        canvas.removeEventListener('touchstart', dropLayer);
+        canvas.onclick = null;
+        window.removeEventListener('keydown', handleSpace);
+        gameOver = true;
+        return score;
+      };
+
       function loop() {
         if (gameOver) {
           window.removeEventListener('keydown', handleSpace);
@@ -465,6 +516,9 @@ const Minigames = {
       this.userSequence = [];
       this.simonScore = 0;
       this.nextSimonRound();
+
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => Minigames.simonScore * 10;
     });
   },
 
@@ -550,6 +604,15 @@ const Minigames = {
       canvas.addEventListener('touchstart', jump, { passive: false });
       canvas.onclick = jump;
 
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        canvas.removeEventListener('touchstart', jump);
+        canvas.onclick = null;
+        gameOver = true;
+        return score;
+      };
+
       function loop() {
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
@@ -620,6 +683,7 @@ const Minigames = {
       let bubbles = [];
       let score = 0;
       let timeLeft = 15;
+      let stopped = false;
 
       const timer = setInterval(() => {
         timeLeft--;
@@ -653,8 +717,17 @@ const Minigames = {
       canvas.addEventListener('touchstart', handleTouchBubble, { passive: false });
       canvas.onclick = handleTouchBubble;
 
+      Minigames.inProgress = true;
+      Minigames.exitHandler = () => {
+        stopped = true;
+        clearInterval(timer);
+        canvas.removeEventListener('touchstart', handleTouchBubble);
+        canvas.onclick = null;
+        return score;
+      };
+
       function loop() {
-        if (timeLeft <= 0) return;
+        if (stopped || timeLeft <= 0) return;
 
         if (Math.random() < 0.08 && bubbles.length < 7) {
           const isGolden = Math.random() < 0.3;
