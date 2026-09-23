@@ -590,7 +590,7 @@ body {
   margin: 0 auto;
 }
 
-.size-option {
+.size-picker .size-option {
   flex: 1;
   min-width: 0;
   height: 70px;
@@ -614,7 +614,7 @@ body {
   pointer-events: none;
 }
 
-.size-option.equipped {
+.size-picker .size-option.equipped {
   background: #ff4081;
 }
 
