@@ -170,6 +170,18 @@ const Minigames = {
     if (el) el.innerText = t;
   },
 
+  // Factor de escala entre la resolución lógica del canvas (width/height)
+  // y su tamaño real en pantalla (que ahora es responsive vía CSS).
+  // Necesario para que los toques/clics caigan en el punto correcto
+  // sin importar qué tan grande o chico se vea el canvas.
+  getCanvasScale(canvas) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: canvas.width / rect.width,
+      y: canvas.height / rect.height
+    };
+  },
+
   // =========================================================
   // 1. ATRAPA DULCES KAWAII (Soporte Táctil)
   // =========================================================
@@ -180,7 +192,7 @@ const Minigames = {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">🎈 Atrapa Dulces</h3>
         ${Minigames.renderHUD('🍬', best)}
-        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ce93d8; touch-action:none;"></canvas>
+        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ce93d8; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Arrastra el dedo o usa ⬅️ ➡️ para moverte</p>
       `;
 
@@ -205,7 +217,8 @@ const Minigames = {
       const handleTouch = (e) => {
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
-        const touchX = e.touches[0].clientX - rect.left;
+        const scale = Minigames.getCanvasScale(canvas);
+        const touchX = (e.touches[0].clientX - rect.left) * scale.x;
         basketX = Math.max(0, Math.min(240, touchX - 30));
       };
       canvas.addEventListener('touchstart', handleTouch, { passive: false });
@@ -267,7 +280,7 @@ const Minigames = {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">🌸 Explotar Globos</h3>
         ${Minigames.renderHUD('🎈', best, 20)}
-        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none;"></canvas>
+        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">¡Toca los globos antes de que suban!</p>
       `;
 
@@ -290,10 +303,11 @@ const Minigames = {
       const handlePop = (e) => {
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
+        const scale = Minigames.getCanvasScale(canvas);
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        const mouseX = clientX - rect.left;
-        const mouseY = clientY - rect.top;
+        const mouseX = (clientX - rect.left) * scale.x;
+        const mouseY = (clientY - rect.top) * scale.y;
 
         balloons.forEach((b, index) => {
           const dist = Math.hypot(b.x - mouseX, b.y - mouseY);
@@ -351,7 +365,7 @@ const Minigames = {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">🍰 Torre de Postres</h3>
         ${Minigames.renderHUD('🍰', best)}
-        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none;"></canvas>
+        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla para apilar el pastel</p>
       `;
 
@@ -508,7 +522,7 @@ const Minigames = {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">🦄 Runner Mágico</h3>
         ${Minigames.renderHUD('🦄', best)}
-        <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ffd54f; touch-action:none;"></canvas>
+        <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ffd54f; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:300/280;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla o Espacio para saltar</p>
       `;
 
@@ -597,7 +611,7 @@ const Minigames = {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">✨ Burbujas Mágicas</h3>
         ${Minigames.renderHUD('✨', best, 15)}
-        <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #80cbc4; touch-action:none;"></canvas>
+        <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #80cbc4; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca las burbujas para atraparlas</p>
       `;
 
@@ -620,10 +634,11 @@ const Minigames = {
       const handleTouchBubble = (e) => {
         if (e) e.preventDefault();
         const rect = canvas.getBoundingClientRect();
+        const scale = Minigames.getCanvasScale(canvas);
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        const mx = clientX - rect.left;
-        const my = clientY - rect.top;
+        const mx = (clientX - rect.left) * scale.x;
+        const my = (clientY - rect.top) * scale.y;
 
         bubbles.forEach((b, i) => {
           if (Math.hypot(b.x - mx, b.y - my) < b.r + 8) { // Margen táctil
