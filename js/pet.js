@@ -84,6 +84,10 @@ const PetState = {
       roomEl.className = `room ${this.equippedBackground}`;
     }
 
+    if (typeof Particles !== 'undefined') {
+      Particles.render(this.equippedBackground);
+    }
+
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
 
