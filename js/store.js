@@ -154,6 +154,21 @@ const Store = {
       </div>
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div style="margin: 4px 0 8px; text-align:center;">
+        <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">Tamaño:</p>
+        <div id="size-picker" class="size-picker">
+          <button class="card-btn size-option ${PetState.petSize === 'small' ? 'equipped' : ''}" data-size="small" aria-label="Tamaño chico">
+            <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.6);"></span></span>
+          </button>
+          <button class="card-btn size-option ${PetState.petSize === 'medium' ? 'equipped' : ''}" data-size="medium" aria-label="Tamaño mediano">
+            <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.8);"></span></span>
+          </button>
+          <button class="card-btn size-option ${PetState.petSize === 'large' ? 'equipped' : ''}" data-size="large" aria-label="Tamaño grande">
+            <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(1);"></span></span>
+          </button>
+        </div>
+      </div>
+      <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
+      <div style="margin: 4px 0 8px; text-align:center;">
         <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
         <div id="looks-list" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:8px;"></div>
         <button onclick="Store.saveCurrentLook()" class="card-btn" style="width:auto; padding:6px 16px; background:#7e57c2;">💾 Guardar look actual</button>
@@ -172,6 +187,10 @@ const Store = {
       btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
       btn.onclick = () => { PetState.setShape(shape.id); Store.renderWardrobe(); };
       shapePicker.appendChild(btn);
+    });
+
+    content.querySelectorAll('.size-option').forEach(btn => {
+      btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderWardrobe(); };
     });
 
     const looksList = content.querySelector('#looks-list');

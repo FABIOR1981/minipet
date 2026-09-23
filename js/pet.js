@@ -5,6 +5,7 @@ const PetState = {
   energy: 100,
   petColor: '#ff80ab',
   petShape: 'shape-circle',
+  petSize: 'medium',
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie', 'bg_living'],
@@ -86,6 +87,8 @@ const PetState = {
       // No pisa 'walking'/'happy-jump' u otras clases temporales que ya tenga el elemento
       petEl.className = petEl.className.replace(/\bshape-\S+/g, '').trim();
       petEl.classList.add(this.petShape || 'shape-circle');
+      petEl.className = petEl.className.replace(/\bsize-\S+/g, '').trim();
+      petEl.classList.add(`size-${this.petSize || 'medium'}`);
     }
 
     const roomEl = document.getElementById('pet-room');
@@ -223,6 +226,14 @@ const PetState = {
     this.updateUI();
   },
 
+  setSize(size) {
+    if (!['small', 'medium', 'large'].includes(size)) return;
+    this.petSize = size;
+    AudioEffects.playTone(700, 'sine', 0.1);
+    this.saveData();
+    this.updateUI();
+  },
+
   equipItem(itemId) {
     const item = Store.items.find(i => i.id === itemId);
     if (!item) return;
@@ -306,6 +317,7 @@ const PetState = {
       energy: this.energy,
       petColor: this.petColor,
       petShape: this.petShape,
+      petSize: this.petSize,
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory,
@@ -324,6 +336,7 @@ const PetState = {
       this.energy = data.energy ?? 100;
       this.petColor = data.petColor || '#ff80ab';
       this.petShape = data.petShape || 'shape-circle';
+      this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;

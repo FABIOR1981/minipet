@@ -1,4 +1,4 @@
-# 🐾 Mi Mascota Kawaii (MiniPet)
+# 🐾 Mi Mascota  (MiniPet)
 
 Mascota virtual estilo Tamagotchi, 100% web, instalable como **PWA**. Cuidá a tu mascota, vestila con accesorios, decorá su escenario y ganá monedas jugando minijuegos.
 

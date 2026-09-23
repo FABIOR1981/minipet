@@ -563,6 +563,7 @@ body {
 .pet-sprite {
   width: 120px;
   height: 120px;
+  --pet-scale: 1;
   border-radius: 50%;
   position: absolute;
   cursor: pointer;
@@ -573,7 +574,41 @@ body {
 }
 
 .pet-sprite:active {
-  transform: scale(0.95);
+  transform: scale(calc(var(--pet-scale) * 0.95));
+}
+
+.pet-sprite.size-small { --pet-scale: 0.7; }
+.pet-sprite.size-medium { --pet-scale: 0.9; }
+.pet-sprite.size-large { --pet-scale: 1.1; }
+
+.size-picker {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.size-option {
+  flex: 1;
+  min-width: 0;
+  height: 78px;
+  padding: 4px;
+}
+
+.size-preview {
+  display: block;
+  position: relative;
+  height: 66px;
+  overflow: hidden;
+}
+
+.size-preview .pet-sprite {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -60px 0 0 -60px;
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -662,8 +697,8 @@ body {
 }
 
 @keyframes walkWiggle {
-  0% { transform: translateY(0) rotate(-2deg); }
-  100% { transform: translateY(-6px) rotate(2deg); }
+  0% { transform: scale(var(--pet-scale)) translateY(0) rotate(-2deg); }
+  100% { transform: scale(var(--pet-scale)) translateY(-6px) rotate(2deg); }
 }
 
 .happy-jump {
@@ -671,8 +706,8 @@ body {
 }
 
 @keyframes jump {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-25px); }
+  0%, 100% { transform: scale(var(--pet-scale)) translateY(0); }
+  50% { transform: scale(var(--pet-scale)) translateY(-25px); }
 }
 
 .kawaii-face {
