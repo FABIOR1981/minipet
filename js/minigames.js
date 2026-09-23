@@ -84,12 +84,13 @@ const Minigames = {
   },
 
   // Pantalla de Resultado Kawaii (reemplaza los alert() nativos)
-  showResult(title, emoji, score, restartFn) {
+  showResult(title, emoji, score, restartFn, isRecord = false) {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <div class="result-screen">
         <div class="result-emoji">${emoji}</div>
         <h2 class="result-title">${title}</h2>
+        ${isRecord ? '<div class="result-record">🏆 ¡Nuevo récord!</div>' : ''}
         <div class="result-coins-box">
           <span>🪙</span>
           <span id="result-coin-num">0</span>
@@ -118,14 +119,68 @@ const Minigames = {
   },
 
   // =========================================================
+  // MEJOR PUNTAJE POR JUEGO (persistido en localStorage)
+  // =========================================================
+  BEST_SCORES_KEY: 'minipetBestScores',
+
+  getBestScore(gameId) {
+    try {
+      const data = JSON.parse(localStorage.getItem(this.BEST_SCORES_KEY) || '{}');
+      return data[gameId] || 0;
+    } catch (e) {
+      return 0;
+    }
+  },
+
+  // Guarda el puntaje si es un nuevo récord. Devuelve true si lo fue.
+  saveBestScore(gameId, score) {
+    try {
+      const data = JSON.parse(localStorage.getItem(this.BEST_SCORES_KEY) || '{}');
+      if (score > (data[gameId] || 0)) {
+        data[gameId] = score;
+        localStorage.setItem(this.BEST_SCORES_KEY, JSON.stringify(data));
+        return true;
+      }
+    } catch (e) {
+      // Si localStorage falla, seguimos sin romper el juego
+    }
+    return false;
+  },
+
+  // =========================================================
+  // HUD REUTILIZABLE (marcador + mejor puntaje + tiempo opcional)
+  // =========================================================
+  renderHUD(icon, best, timeLeft) {
+    return `
+      <div class="game-hud">
+        <span class="hud-chip">${icon} <span id="hud-score">0</span></span>
+        <span class="hud-chip hud-best">⭐ <span id="hud-best">${best}</span></span>
+        ${timeLeft !== undefined ? `<span class="hud-chip hud-timer">⏰ <span id="hud-timer">${timeLeft}</span>s</span>` : ''}
+      </div>
+    `;
+  },
+
+  updateHudScore(score) {
+    const el = document.getElementById('hud-score');
+    if (el) el.innerText = score;
+  },
+
+  updateHudTimer(t) {
+    const el = document.getElementById('hud-timer');
+    if (el) el.innerText = t;
+  },
+
+  // =========================================================
   // 1. ATRAPA DULCES KAWAII (Soporte Táctil)
   // =========================================================
   startCatchGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('catch');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">🎈 Atrapa Dulces</h3>
-        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ce93d8; touch-action:none;"></canvas>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">🎈 Atrapa Dulces</h3>
+        ${Minigames.renderHUD('🍬', best)}
+        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ce93d8; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Arrastra el dedo o usa ⬅️ ➡️ para moverte</p>
       `;
 
@@ -160,7 +215,8 @@ const Minigames = {
           window.removeEventListener('keyup', handleKeyUp);
           canvas.removeEventListener('touchstart', handleTouch);
           canvas.removeEventListener('touchmove', handleTouch);
-          Minigames.showResult('¡Juego terminado!', '🎈', score, () => Minigames.startCatchGame());
+          const isRecord = Minigames.saveBestScore('catch', score);
+          Minigames.showResult('¡Juego terminado!', '🎈', score, () => Minigames.startCatchGame(), isRecord);
           return;
         }
 
@@ -171,6 +227,7 @@ const Minigames = {
 
         if (itemY >= 260 && itemX >= basketX - 10 && itemX <= basketX + 60) {
           score += 5;
+          Minigames.updateHudScore(score);
           AudioEffects.playTone(800, 'sine', 0.05);
           itemY = 0;
           itemX = Math.random() * 250 + 10;
@@ -194,10 +251,6 @@ const Minigames = {
         ctx.fillStyle = '#76ff03';
         ctx.fillRect(itemX - 3, itemY - 15, 6, 5);
 
-        ctx.fillStyle = '#4a148c';
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`Monedas: 🪙 ${score}`, 12, 25);
-
         requestAnimationFrame(loop);
       }
 
@@ -211,9 +264,11 @@ const Minigames = {
   startPopGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('pop');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">🌸 Explotar Globos</h3>
-        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ff80ab; touch-action:none;"></canvas>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">🌸 Explotar Globos</h3>
+        ${Minigames.renderHUD('🎈', best, 20)}
+        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">¡Toca los globos antes de que suban!</p>
       `;
 
@@ -225,9 +280,11 @@ const Minigames = {
 
       const timerInterval = setInterval(() => {
         timeLeft--;
+        Minigames.updateHudTimer(timeLeft);
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
-          Minigames.showResult('¡Tiempo!', '🌸', score, () => Minigames.startPopGame());
+          const isRecord = Minigames.saveBestScore('pop', score);
+          Minigames.showResult('¡Tiempo!', '🌸', score, () => Minigames.startPopGame(), isRecord);
         }
       }, 1000);
 
@@ -243,6 +300,7 @@ const Minigames = {
           const dist = Math.hypot(b.x - mouseX, b.y - mouseY);
           if (dist < b.radius + 10) { // Margen extra para dedos en pantalla táctil
             score += 5;
+            Minigames.updateHudScore(score);
             AudioEffects.playTone(900, 'triangle', 0.08);
             balloons.splice(index, 1);
           }
@@ -284,11 +342,6 @@ const Minigames = {
           if (b.y < -20) balloons.splice(index, 1);
         });
 
-        ctx.fillStyle = '#4a148c';
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`🪙 ${score}`, 12, 25);
-        ctx.fillText(`⏰ ${timeLeft}s`, 230, 25);
-
         requestAnimationFrame(loop);
       }
 
@@ -302,9 +355,11 @@ const Minigames = {
   startCakeGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('cake');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">🍰 Torre de Postres</h3>
-        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:8px auto; display:block; border:3px solid #b388ff; touch-action:none;"></canvas>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">🍰 Torre de Postres</h3>
+        ${Minigames.renderHUD('🍰', best)}
+        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla para apilar el pastel</p>
       `;
 
@@ -324,11 +379,13 @@ const Minigames = {
 
         if (Math.abs(diff) > prev.width) {
           gameOver = true;
-          Minigames.showResult('¡Se cayó la torre!', '🍰', score, () => Minigames.startCakeGame());
+          const isRecord = Minigames.saveBestScore('cake', score);
+          Minigames.showResult('¡Se cayó la torre!', '🍰', score, () => Minigames.startCakeGame(), isRecord);
           return;
         }
 
         score += 10;
+        Minigames.updateHudScore(score);
         AudioEffects.playTone(700, 'sine', 0.1);
         const newWidth = prev.width - Math.abs(diff);
         const newX = diff > 0 ? currentX : prev.x;
@@ -372,10 +429,6 @@ const Minigames = {
         ctx.roundRect(currentX, currentY, prevWidth, 22, 6);
         ctx.fill();
 
-        ctx.fillStyle = '#4a148c';
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`Puntos: 🪙 ${score}`, 12, 25);
-
         requestAnimationFrame(loop);
       }
 
@@ -389,8 +442,10 @@ const Minigames = {
   startSimonGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('simon');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">🎯 Simón Memoria</h3>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">🎯 Simón Memoria</h3>
+        ${Minigames.renderHUD('🧠', best)}
         <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">¡Memoriza la secuencia!</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
           <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
@@ -439,12 +494,14 @@ const Minigames = {
     const currentIndex = this.userSequence.length - 1;
     if (this.userSequence[currentIndex] !== this.simonSequence[currentIndex]) {
       const reward = this.simonScore * 10;
-      Minigames.showResult('¡Te equivocaste!', '🧠', reward, () => Minigames.startSimonGame());
+      const isRecord = Minigames.saveBestScore('simon', this.simonScore);
+      Minigames.showResult('¡Te equivocaste!', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
       return;
     }
 
     if (this.userSequence.length === this.simonSequence.length) {
       this.simonScore++;
+      Minigames.updateHudScore(this.simonScore);
       setTimeout(() => this.nextSimonRound(), 1000);
     }
   },
@@ -455,9 +512,11 @@ const Minigames = {
   startRunnerGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('runner');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">🦄 Runner Mágico</h3>
-        <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #ffd54f; touch-action:none;"></canvas>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">🦄 Runner Mágico</h3>
+        ${Minigames.renderHUD('🦄', best)}
+        <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ffd54f; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla o Espacio para saltar</p>
       `;
 
@@ -489,7 +548,8 @@ const Minigames = {
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
           canvas.removeEventListener('touchstart', jump);
-          Minigames.showResult('¡Juego terminado!', '🦄', score, () => Minigames.startRunnerGame());
+          const isRecord = Minigames.saveBestScore('runner', score);
+          Minigames.showResult('¡Juego terminado!', '🦄', score, () => Minigames.startRunnerGame(), isRecord);
           return;
         }
 
@@ -505,6 +565,7 @@ const Minigames = {
         if (obstacleX < -25) {
           obstacleX = 300;
           score += 10;
+          Minigames.updateHudScore(score);
         }
 
         if (obstacleX < 45 && obstacleX > 15 && playerY > 180) gameOver = true;
@@ -527,10 +588,6 @@ const Minigames = {
         ctx.arc(obstacleX + 10, 225, 12, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = '#4a148c';
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`Monedas: 🪙 ${score}`, 12, 25);
-
         requestAnimationFrame(loop);
       }
 
@@ -544,9 +601,11 @@ const Minigames = {
   startBubbleGame() {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
+      const best = Minigames.getBestScore('bubble');
       content.innerHTML = `
-        <h3 style="color:#ab47bc;">✨ Burbujas Mágicas</h3>
-        <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:8px auto; display:block; border:3px solid #80cbc4; touch-action:none;"></canvas>
+        <h3 style="color:#ab47bc; margin-bottom:2px;">✨ Burbujas Mágicas</h3>
+        ${Minigames.renderHUD('✨', best, 15)}
+        <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #80cbc4; touch-action:none;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca las burbujas para atraparlas</p>
       `;
 
@@ -558,9 +617,11 @@ const Minigames = {
 
       const timer = setInterval(() => {
         timeLeft--;
+        Minigames.updateHudTimer(timeLeft);
         if (timeLeft <= 0) {
           clearInterval(timer);
-          Minigames.showResult('¡Tiempo!', '✨', score, () => Minigames.startBubbleGame());
+          const isRecord = Minigames.saveBestScore('bubble', score);
+          Minigames.showResult('¡Tiempo!', '✨', score, () => Minigames.startBubbleGame(), isRecord);
         }
       }, 1000);
 
@@ -575,6 +636,7 @@ const Minigames = {
         bubbles.forEach((b, i) => {
           if (Math.hypot(b.x - mx, b.y - my) < b.r + 8) { // Margen táctil
             score += b.isGolden ? 15 : 5;
+            Minigames.updateHudScore(score);
             AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
             bubbles.splice(i, 1);
           }
@@ -611,11 +673,6 @@ const Minigames = {
           ctx.arc(b.x - b.r / 3, b.y - b.r / 3, b.r / 4, 0, Math.PI * 2);
           ctx.fill();
         });
-
-        ctx.fillStyle = '#4a148c';
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`🪙 ${score}`, 12, 25);
-        ctx.fillText(`⏰ ${timeLeft}s`, 230, 25);
 
         requestAnimationFrame(loop);
       }

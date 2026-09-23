@@ -843,6 +843,54 @@ body {
 }
 
 /* =========================================================
+   HUD DE MINIJUEGOS (marcador + mejor puntaje + tiempo)
+   ========================================================= */
+.game-hud {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px auto 2px;
+  flex-wrap: wrap;
+}
+
+.hud-chip {
+  background: #fff3e0;
+  border: 2px solid #ffd54f;
+  border-radius: 14px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #4a148c;
+  box-shadow: 0 2px 0 #ffca28;
+}
+
+.hud-best {
+  background: #ede7f6;
+  border-color: #b39ddb;
+  color: #4527a0;
+  box-shadow: 0 2px 0 #9575cd;
+}
+
+.hud-timer {
+  background: #ffebee;
+  border-color: #ef9a9a;
+  color: #c62828;
+  box-shadow: 0 2px 0 #e57373;
+}
+
+.result-record {
+  background: #fff9c4;
+  border: 2px solid #ffd54f;
+  color: #f57f17;
+  border-radius: 14px;
+  padding: 4px 14px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  animation: resultBounce 1s ease-in-out infinite;
+}
+
+/* =========================================================
    PANTALLA DE RESULTADO DE MINIJUEGOS
    ========================================================= */
 .result-screen {
