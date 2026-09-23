@@ -9,6 +9,7 @@ const PetState = {
   inventory: ['bow_tie', 'bg_living'],
   equippedAccessory: 'bow_tie',
   equippedBackground: 'bg_living',
+  looks: [],
   dialogues: {},
 
   async init() {
@@ -222,6 +223,39 @@ const PetState = {
     this.updateUI();
   },
 
+  // Guarda la combinación actual (accesorio + fondo + color) como un "look".
+  // Máximo 6 guardados: al superar el límite se descarta el más viejo.
+  saveLook(name) {
+    if (!this.looks) this.looks = [];
+    const look = {
+      id: 'look_' + Date.now(),
+      name: (name && name.length > 0) ? name : `Look ${this.looks.length + 1}`,
+      accessory: this.equippedAccessory,
+      background: this.equippedBackground,
+      color: this.petColor
+    };
+    this.looks.push(look);
+    if (this.looks.length > 6) this.looks.shift();
+    AudioEffects.playCoin();
+    this.saveData();
+  },
+
+  applyLook(lookId) {
+    const look = (this.looks || []).find(l => l.id === lookId);
+    if (!look) return;
+    this.equippedAccessory = look.accessory;
+    this.equippedBackground = look.background;
+    this.petColor = look.color;
+    AudioEffects.playTone(800, 'sine', 0.08);
+    this.saveData();
+    this.updateUI();
+  },
+
+  deleteLook(lookId) {
+    this.looks = (this.looks || []).filter(l => l.id !== lookId);
+    this.saveData();
+  },
+
   addCoins(amount) {
     this.coins += amount;
     if (amount > 0) {
@@ -259,7 +293,8 @@ const PetState = {
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory,
-      equippedBackground: this.equippedBackground
+      equippedBackground: this.equippedBackground,
+      looks: this.looks
     }));
   },
 
@@ -276,6 +311,7 @@ const PetState = {
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;
       this.equippedBackground = data.equippedBackground || 'bg_living';
+      this.looks = data.looks || [];
     }
   }
 };

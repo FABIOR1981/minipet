@@ -42,32 +42,60 @@ const Store = {
 
     // -----------------------------------------------------------------
     // ESCENARIOS / FONDOS (Categoría 'bg')
+    // El campo `preview` reproduce el gradiente real de css/styles.css
+    // para mostrar una miniatura fiel en vez de un emoji genérico.
     // -----------------------------------------------------------------
     // Básicos
-    { id: 'bg_living', name: 'Sala de Estar', price: 0, image: '🛋️', type: 'bg', category: 'bg' },
-    { id: 'bg_bedroom', name: 'Dormitorio', price: 40, image: '🛏️', type: 'bg', category: 'bg' },
-    { id: 'bg_playroom', name: 'Sala de Juegos', price: 60, image: '🧸', type: 'bg', category: 'bg' },
-    { id: 'bg_park', name: 'Parque Mágico', price: 80, image: '🌳', type: 'bg', category: 'bg' },
-    { id: 'bg_beach', name: 'Playa Tropical', price: 50, image: '🏖️', type: 'bg', category: 'bg' },
+    { id: 'bg_living', name: 'Sala de Estar', price: 0, image: '🛋️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 72%, #d7ccc8 72%, #a1887f 100%), linear-gradient(180deg, #ffe0b2 0%, #fff3e0 72%);' },
+    { id: 'bg_bedroom', name: 'Dormitorio', price: 40, image: '🛏️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 72%, #b388ff 72%, #7c4dff 100%), radial-gradient(circle at 80% 20%, #fff 2px, transparent 3px), radial-gradient(circle at 20% 35%, #fff 2px, transparent 3px), linear-gradient(180deg, #311b92 0%, #512da8 72%);' },
+    { id: 'bg_playroom', name: 'Sala de Juegos', price: 60, image: '🧸', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #80deea 70%, #4dd0e1 100%), radial-gradient(#ff80ab 15%, transparent 16%), radial-gradient(#ffd54f 15%, transparent 16%), #f3e5f5; background-size: 100% 100%, 20px 20px, 20px 20px, 100% 100%; background-position: 0 0, 0 0, 10px 10px, 0 0;' },
+    { id: 'bg_park', name: 'Parque Mágico', price: 80, image: '🌳', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 68%, #aed581 68%, #7cb342 100%), linear-gradient(180deg, #81d4fa 0%, #e1f5fe 68%);' },
+    { id: 'bg_beach', name: 'Playa Tropical', price: 50, image: '🏖️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 68%, #ffe082 68%, #ffd54f 100%), linear-gradient(180deg, #80deea 0%, #26c6da 50%, #00acc1 68%);' },
 
     // Naturaleza y Exteriores
-    { id: 'bg_forest', name: 'Bosque Encantado', price: 90, image: '🌲', type: 'bg', category: 'bg' },
-    { id: 'bg_mountain', name: 'Montaña Nevada', price: 100, image: '🏔️', type: 'bg', category: 'bg' },
-    { id: 'bg_camping', name: 'Campamento Nocturno', price: 120, image: '⛺', type: 'bg', category: 'bg' },
-    { id: 'bg_desert', name: 'Oasis del Desierto', price: 110, image: '🏜️', type: 'bg', category: 'bg' },
+    { id: 'bg_forest', name: 'Bosque Encantado', price: 90, image: '🌲', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 65%, #33691e 65%, #1b5e20 100%), linear-gradient(180deg, #aed581 0%, #558b2f 65%);' },
+    { id: 'bg_mountain', name: 'Montaña Nevada', price: 100, image: '🏔️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #cfd8dc 70%, #90a4ae 100%), linear-gradient(180deg, #e0f7fa 0%, #80deea 70%);' },
+    { id: 'bg_camping', name: 'Campamento Nocturno', price: 120, image: '⛺', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 72%, #2e7d32 72%, #1b5e20 100%), radial-gradient(circle at 75% 20%, #fff9c4 3px, transparent 4px), radial-gradient(circle at 25% 15%, #fff9c4 2px, transparent 3px), linear-gradient(180deg, #0d1b2a 0%, #1b263b 72%);' },
+    { id: 'bg_desert', name: 'Oasis del Desierto', price: 110, image: '🏜️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 68%, #f57c00 68%, #e65100 100%), linear-gradient(180deg, #ffe0b2 0%, #ffcc80 68%);' },
 
     // Interiores y Temáticos
-    { id: 'bg_kitchen', name: 'Cocina del Chef', price: 45, image: '🍳', type: 'bg', category: 'bg' },
-    { id: 'bg_bathroom', name: 'Baño de Burbujas', price: 35, image: '🛁', type: 'bg', category: 'bg' },
-    { id: 'bg_dojo', name: 'Dojo Ninja', price: 130, image: '⛩️', type: 'bg', category: 'bg' },
-    { id: 'bg_disco', name: 'Pista de Baile', price: 150, image: '🪩', type: 'bg', category: 'bg' },
+    { id: 'bg_kitchen', name: 'Cocina del Chef', price: 45, image: '🍳', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #d7ccc8 70%, #8d6e63 100%), linear-gradient(180deg, #fff3e0 0%, #ffe0b2 70%);' },
+    { id: 'bg_bathroom', name: 'Baño de Burbujas', price: 35, image: '🛁', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #b2ebf2 70%, #4dd0e1 100%), linear-gradient(180deg, #e0f7fa 0%, #80deea 70%);' },
+    { id: 'bg_dojo', name: 'Dojo Ninja', price: 130, image: '⛩️', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #8d6e63 70%, #4e342e 100%), linear-gradient(180deg, #efebe9 0%, #d7ccc8 70%);' },
+    { id: 'bg_disco', name: 'Pista de Baile', price: 150, image: '🪩', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #311b92 70%, #1a237e 100%), linear-gradient(135deg, #4a148c 0%, #880e4f 50%, #311b92 100%);' },
 
     // Fantásticos y Especiales
-    { id: 'bg_space', name: 'Estación Espacial', price: 200, image: '🚀', type: 'bg', category: 'bg' },
-    { id: 'bg_castle', name: 'Castillo Real', price: 250, image: '🏰', type: 'bg', category: 'bg' },
-    { id: 'bg_underwater', name: 'Mundo Submarino', price: 180, image: '🪸', type: 'bg', category: 'bg' },
-    { id: 'bg_volcano', name: 'Guarida Volcánica', price: 300, image: '🌋', type: 'bg', category: 'bg' }
+    { id: 'bg_space', name: 'Estación Espacial', price: 200, image: '🚀', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 75%, #263238 75%, #102027 100%), radial-gradient(circle at 50% 30%, #37474f 0%, #000000 100%);' },
+    { id: 'bg_castle', name: 'Castillo Real', price: 250, image: '🏰', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #9c27b0 70%, #4a148c 100%), linear-gradient(180deg, #f3e5f5 0%, #ce93d8 70%);' },
+    { id: 'bg_underwater', name: 'Mundo Submarino', price: 180, image: '🪸', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #004d40 70%, #00251a 100%), linear-gradient(180deg, #00838f 0%, #006064 70%);' },
+    { id: 'bg_volcano', name: 'Guarida Volcánica', price: 300, image: '🌋', type: 'bg', category: 'bg',
+      preview: 'background: linear-gradient(to bottom, transparent 70%, #3e2723 70%, #1b0000 100%), linear-gradient(180deg, #bf360c 0%, #dd2c00 70%);' }
   ],
+
+  // Ícono de la card: mini-preview del gradiente real para fondos,
+  // ícono SVG para accesorios.
+  renderIcon(item) {
+    if (item.category === 'bg') {
+      return `<div class="bg-preview" style="${item.preview}"><span class="bg-preview-badge">${item.image}</span></div>`;
+    }
+    return `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
+  },
 
   renderStore() {
     const content = document.getElementById('modal-content');
@@ -82,13 +110,9 @@ const Store = {
       const isOwned = PetState.inventory.includes(item.id);
       const card = document.createElement('div');
       card.className = 'item-card';
-      
-      const iconHTML = item.category === 'bg' 
-        ? `<span style="font-size: 2.2rem;">${item.image}</span>`
-        : `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
 
       card.innerHTML = `
-        ${iconHTML}
+        ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
         <span class="card-price">${item.price === 0 ? 'Gratis' : '🪙 ' + item.price}</span>
         <button onclick="Store.buyItem('${item.id}')" ${isOwned ? 'disabled' : ''} class="card-btn ${isOwned ? 'owned' : ''}">
@@ -112,9 +136,33 @@ const Store = {
         </div>
       </div>
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
+      <div style="margin: 4px 0 8px; text-align:center;">
+        <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
+        <div id="looks-list" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:8px;"></div>
+        <button onclick="Store.saveCurrentLook()" class="card-btn" style="width:auto; padding:6px 16px; background:#7e57c2;">💾 Guardar look actual</button>
+      </div>
+      <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div class="grid-container"></div>
     `;
-    
+
+    const looksList = content.querySelector('#looks-list');
+    if (!PetState.looks || PetState.looks.length === 0) {
+      looksList.innerHTML = `<span style="font-size:0.72rem; color:#999;">Todavía no guardaste ningún look</span>`;
+    } else {
+      PetState.looks.forEach(look => {
+        const chip = document.createElement('div');
+        chip.className = 'look-chip';
+        chip.innerHTML = `
+          <span class="look-chip-name">${look.name}</span>
+          <div class="look-chip-actions">
+            <button onclick="PetState.applyLook('${look.id}'); Store.renderWardrobe();" title="Aplicar look">✨</button>
+            <button onclick="PetState.deleteLook('${look.id}'); Store.renderWardrobe();" title="Borrar look">🗑️</button>
+          </div>
+        `;
+        looksList.appendChild(chip);
+      });
+    }
+
     const container = content.querySelector('.grid-container');
 
     PetState.inventory.forEach(itemId => {
@@ -128,12 +176,8 @@ const Store = {
       const card = document.createElement('div');
       card.className = 'item-card';
 
-      const iconHTML = item.category === 'bg' 
-        ? `<span style="font-size: 2.2rem;">${item.image}</span>`
-        : `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
-
       card.innerHTML = `
-        ${iconHTML}
+        ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
         <button onclick="PetState.equipItem('${item.id}'); Store.renderWardrobe();" class="card-btn ${isEquipped ? 'equipped' : ''}">
           ${isEquipped ? '✨ Usando' : 'Poner'}
@@ -141,6 +185,13 @@ const Store = {
       `;
       container.appendChild(card);
     });
+  },
+
+  saveCurrentLook() {
+    const name = prompt('Nombre para este look:', `Look ${(PetState.looks ? PetState.looks.length : 0) + 1}`);
+    if (name === null) return; // El usuario canceló
+    PetState.saveLook(name.trim());
+    this.renderWardrobe();
   },
 
   buyItem(itemId) {
