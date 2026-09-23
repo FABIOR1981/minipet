@@ -9,25 +9,25 @@
 const Particles = {
   CONFIG: {
     // --- Bloque 4 parte 1 ---
-    bg_space:      { mode: 'twinkle',   emojis: ['⭐', '☄️'], count: 8 },
-    bg_underwater: { mode: 'float-up',  emojis: ['🫧', '💧', '🐟'], count: 6, interval: 1800 }, // 🐟 Pequeños peces subiendo
-    bg_beach:      { mode: 'twinkle',   emojis: ['☀️', '🐚'], count: 5 },
-    bg_forest:     { mode: 'fall-slow', emojis: ['🍃', '🍂', '🦋'], count: 5, interval: 2200 }, // 🦋 Mariposas cayendo/volando suavemente
+    bg_space:      { mode: 'twinkle',   emojis: ['⭐', '☄️'], count: 12 },
+    bg_underwater: { mode: 'float-up',  emojis: ['🫧', '💧', '🐟'], count: 9, interval: 1800 }, // 🐟 Pequeños peces subiendo
+    bg_beach:      { mode: 'twinkle',   emojis: ['☀️', '🐚'], count: 8 },
+    bg_forest:     { mode: 'fall-slow', emojis: ['🍃', '🍂', '🦋'], count: 8, interval: 2200 }, // 🦋 Mariposas cayendo/volando suavemente
 
     // --- Bloque 4 parte 2 ---
-    bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 6 },
-    bg_bedroom:    { mode: 'twinkle',   emojis: ['⭐', '💤'], count: 6 },
-    bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 5, interval: 2000 },
-    bg_park:       { mode: 'fall-slow', emojis: ['🍃', '🌸'], count: 5, interval: 2200 },
-    bg_mountain:   { mode: 'fall-slow', emojis: ['❄️'],       count: 8, interval: 1400 },
-    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '🔥', '🦉'], count: 7 }, // 🦉 Búhos y brasas de la fogata
-    bg_desert:     { mode: 'twinkle',   emojis: ['☀️', '💨'], count: 5 },
-    bg_kitchen:    { mode: 'float-up',  emojis: ['♨️', '🧂', '🧁'], count: 4, interval: 2200 }, // 🧂 Especias y vapor subiendo
-    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧', '💧', '🦆'], count: 6, interval: 1600 }, // 🦆 Patitos de hule flotando entre burbujas
-    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸', '🍃', '☯️'], count: 5, interval: 2200 }, // ☯️ Equilibrio y pétalos de cerezo
-    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶', '🪩'], count: 8 }, // 🎶 Música y destellos de la bola de espejos
-    bg_castle:     { mode: 'float-up',  emojis: ['✨'],       count: 5, interval: 2400 },
-    bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 5, interval: 2000 }
+    bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 9 },
+    bg_bedroom:    { mode: 'twinkle',   emojis: ['⭐', '💤'], count: 9 },
+    bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 8, interval: 2000 },
+    bg_park:       { mode: 'fall-slow', emojis: ['🍃', '🌸'], count: 8, interval: 2200 },
+    bg_mountain:   { mode: 'fall-slow', emojis: ['❄️'],       count: 12, interval: 1400 },
+    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '🔥', '🦉'], count: 10 }, // 🦉 Búhos y brasas de la fogata
+    bg_desert:     { mode: 'twinkle',   emojis: ['☀️', '💨'], count: 8 },
+    bg_kitchen:    { mode: 'float-up',  emojis: ['♨️', '🧂', '🧁'], count: 6, interval: 2200 }, // 🧂 Especias y vapor subiendo
+    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧', '💧', '🦆'], count: 9, interval: 1600 }, // 🦆 Patitos de hule flotando entre burbujas
+    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸', '🍃', '☯️'], count: 8, interval: 2200 }, // ☯️ Equilibrio y pétalos de cerezo
+    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶', '🪩'], count: 12 }, // 🎶 Música y destellos de la bola de espejos
+    bg_castle:     { mode: 'float-up',  emojis: ['✨'],       count: 8, interval: 2400 },
+    bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 8, interval: 2000 }
   },
 
   _current: null,
@@ -58,12 +58,18 @@ const Particles = {
         this.spawnTwinkle(container, config.emojis);
       }
     } else {
-      // Partículas que recorren la pantalla (burbujas, hojas) y se renuevan solas
+      // Ráfaga inicial para no esperar al primer intervalo
       for (let i = 0; i < config.count; i++) {
         setTimeout(() => this.spawnStream(container, config), i * (config.interval / config.count));
       }
+      // Cuántas partículas nacen por tick para que la densidad sostenida
+      // en pantalla siga reflejando el `count` configurado (antes solo
+      // nacía 1 por tick sin importar cuánto se subiera `count`).
+      const perTick = Math.max(1, Math.round(config.count / 5));
       this._spawnTimer = setInterval(() => {
-        this.spawnStream(container, config);
+        for (let i = 0; i < perTick; i++) {
+          this.spawnStream(container, config);
+        }
       }, config.interval);
     }
   },
