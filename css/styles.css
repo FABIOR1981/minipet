@@ -582,40 +582,51 @@ body {
 .pet-sprite.size-medium { --pet-scale: 0.9; }
 .pet-sprite.size-large { --pet-scale: 1.1; }
 
+.wardrobe-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
 .size-picker {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  max-width: 280px;
+  gap: 8px;
+  max-width: none;
   margin: 0 auto;
 }
 
 .size-picker .size-option {
-  flex: 1;
-  min-width: 0;
-  height: 70px;
-  padding: 4px;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   background: transparent;
   color: inherit;
+  border: 2px solid transparent;
+  border-radius: 50%;
 }
 
 .size-preview {
   display: block;
   position: relative;
-  height: 60px;
-  overflow: hidden;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
 }
 
 .size-preview .pet-sprite {
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: -60px 0 0 -60px;
+  margin: -14px 0 0 -14px;
   pointer-events: none;
 }
 
 .size-picker .size-option.equipped {
-  background: #ff4081;
+  background: transparent;
+  border-color: #ff4081;
 }
 
 /* =========================================================
@@ -702,9 +713,9 @@ body {
 /* Las siluetas del selector usan una base pequeña para que las tres
    escalas queden completas dentro de sus tarjetas. */
 .size-preview .pet-sprite.shape-squircle {
-  width: 56px;
-  height: 56px;
-  margin: -28px 0 0 -28px;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
   background-color: #ff80ab;
   transform-origin: center;
 }
