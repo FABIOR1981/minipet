@@ -593,14 +593,16 @@ body {
 .size-option {
   flex: 1;
   min-width: 0;
-  height: 78px;
+  height: 70px;
   padding: 4px;
+  background: transparent;
+  color: inherit;
 }
 
 .size-preview {
   display: block;
   position: relative;
-  height: 66px;
+  height: 60px;
   overflow: hidden;
 }
 
@@ -610,6 +612,10 @@ body {
   top: 50%;
   margin: -60px 0 0 -60px;
   pointer-events: none;
+}
+
+.size-option.equipped {
+  background: #ff4081;
 }
 
 /* =========================================================
@@ -696,9 +702,9 @@ body {
 /* Las siluetas del selector usan una base pequeña para que las tres
    escalas queden completas dentro de sus tarjetas. */
 .size-preview .pet-sprite.shape-squircle {
-  width: 72px;
-  height: 72px;
-  margin: -36px 0 0 -36px;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
   transform-origin: center;
 }
 
