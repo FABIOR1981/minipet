@@ -83,6 +83,40 @@ const Minigames = {
     }, 900);
   },
 
+  // Pantalla de Resultado Kawaii (reemplaza los alert() nativos)
+  showResult(title, emoji, score, restartFn) {
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <div class="result-screen">
+        <div class="result-emoji">${emoji}</div>
+        <h2 class="result-title">${title}</h2>
+        <div class="result-coins-box">
+          <span>🪙</span>
+          <span id="result-coin-num">0</span>
+        </div>
+        <div class="result-actions">
+          <button class="card-btn result-btn-again" id="result-again">🔁 Jugar de nuevo</button>
+          <button class="card-btn result-btn-menu" id="result-menu">🎮 Menú</button>
+        </div>
+      </div>
+    `;
+
+    PetState.addCoins(score);
+
+    // Animación de conteo de monedas ganadas
+    const numEl = document.getElementById('result-coin-num');
+    let current = 0;
+    const step = Math.max(1, Math.ceil(score / 25));
+    const counter = setInterval(() => {
+      current = Math.min(score, current + step);
+      numEl.innerText = current;
+      if (current >= score) clearInterval(counter);
+    }, 25);
+
+    document.getElementById('result-again').onclick = () => restartFn();
+    document.getElementById('result-menu').onclick = () => Minigames.renderMenu();
+  },
+
   // =========================================================
   // 1. ATRAPA DULCES KAWAII (Soporte Táctil)
   // =========================================================
@@ -126,9 +160,7 @@ const Minigames = {
           window.removeEventListener('keyup', handleKeyUp);
           canvas.removeEventListener('touchstart', handleTouch);
           canvas.removeEventListener('touchmove', handleTouch);
-          PetState.addCoins(score);
-          alert(`¡Juego terminado! Ganaste 🪙 ${score} monedas.`);
-          Minigames.renderMenu();
+          Minigames.showResult('¡Juego terminado!', '🎈', score, () => Minigames.startCatchGame());
           return;
         }
 
@@ -195,9 +227,7 @@ const Minigames = {
         timeLeft--;
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
-          PetState.addCoins(score);
-          alert(`¡Tiempo! Explotaste un montón de globos y ganaste 🪙 ${score} monedas.`);
-          Minigames.renderMenu();
+          Minigames.showResult('¡Tiempo!', '🌸', score, () => Minigames.startPopGame());
         }
       }, 1000);
 
@@ -294,9 +324,7 @@ const Minigames = {
 
         if (Math.abs(diff) > prev.width) {
           gameOver = true;
-          PetState.addCoins(score);
-          alert(`¡Ups, se cayó la torre! Ganaste 🪙 ${score} monedas.`);
-          Minigames.renderMenu();
+          Minigames.showResult('¡Se cayó la torre!', '🍰', score, () => Minigames.startCakeGame());
           return;
         }
 
@@ -411,9 +439,7 @@ const Minigames = {
     const currentIndex = this.userSequence.length - 1;
     if (this.userSequence[currentIndex] !== this.simonSequence[currentIndex]) {
       const reward = this.simonScore * 10;
-      PetState.addCoins(reward);
-      alert(`¡Te equivocaste! Ganaste 🪙 ${reward} monedas.`);
-      Minigames.renderMenu();
+      Minigames.showResult('¡Te equivocaste!', '🧠', reward, () => Minigames.startSimonGame());
       return;
     }
 
@@ -463,9 +489,7 @@ const Minigames = {
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
           canvas.removeEventListener('touchstart', jump);
-          PetState.addCoins(score);
-          alert(`¡Juego terminado! Ganaste 🪙 ${score} monedas.`);
-          Minigames.renderMenu();
+          Minigames.showResult('¡Juego terminado!', '🦄', score, () => Minigames.startRunnerGame());
           return;
         }
 
@@ -536,9 +560,7 @@ const Minigames = {
         timeLeft--;
         if (timeLeft <= 0) {
           clearInterval(timer);
-          PetState.addCoins(score);
-          alert(`¡Tiempo! Ganaste 🪙 ${score} monedas.`);
-          Minigames.renderMenu();
+          Minigames.showResult('¡Tiempo!', '✨', score, () => Minigames.startBubbleGame());
         }
       }, 1000);
 
