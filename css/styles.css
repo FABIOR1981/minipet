@@ -721,6 +721,26 @@ body {
   box-shadow: 0 8px 15px rgba(0,0,0,0.12);
 }
 
+.pet-sprite.shape-dumpling {
+  width: 145px;
+  height: 95px;
+  border-radius: 45% 45% 45% 45% / 55% 55% 40% 40%;
+  clip-path: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+.pet-sprite.shape-dumpling::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 15px;
+  background-color: currentColor;
+  border-radius: 50px 50px 0 0;
+}
+
 .pet-sprite.shape-capsule {
   width: 92px; height: 142px;
   border-radius: 46px;

@@ -1,10 +1,11 @@
 const Store = {
-  // Las 8 formas de mascota disponibles (elegibles en el Armario)
+  // Las formas de mascota disponibles (elegibles en el Armario)
   shapes: [
     { id: 'shape-circle',   name: 'Círculo',   emoji: '⚪' },
     { id: 'shape-mochi',    name: 'Mochi',      emoji: '🍡' },
     { id: 'shape-onigiri',  name: 'Gotita',     emoji: '💧' },
     { id: 'shape-squircle', name: 'Squircle',   emoji: '🔲' },
+    { id: 'shape-dumpling', name: 'Dumpling',   emoji: '🥟' },
     //{ id: 'shape-capsule',  name: 'Cápsula',    emoji: '💊' },
     //{ id: 'shape-heart',    name: 'Corazón',    emoji: '❤️' },
     //{ id: 'shape-cathead',  name: 'Animalito',  emoji: '🐱' },
