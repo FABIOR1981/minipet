@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba visual de formas y accesorios</title>
+  <style>
+    @page { size: landscape; margin: 8mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; color: #222; font-size: 9px; }
+    h1 { margin: 0 0 4px; color: #5d2a86; font-size: 18px; }
+    p { margin: 2px 0 8px; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    th, td { border: 1px solid #aaa; text-align: center; vertical-align: middle; padding: 3px; }
+    th { background: #eee4f8; color: #44206a; }
+    th.accessory-name { width: 70px; }
+    th.accessory-head { height: 58px; font-size: 7px; }
+    td { height: 48px; }
+    .form-label { display: block; font-weight: bold; font-size: 8px; }
+    .form-cell { display: flex; align-items: center; justify-content: center; gap: 3px; }
+    .form-preview { position: relative; width: 30px; height: 26px; flex: 0 0 30px; }
+    .mini-pet { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%); background: #ff80ab; box-shadow: 0 1px 3px #999; }
+    .circle { border-radius: 50%; }
+    .mochi { width: 28px; height: 20px; border-radius: 50%; }
+    .gotita { border-radius: 50% 50% 40% 40% / 62% 62% 30% 30%; }
+    .squircle { border-radius: 28%; }
+    .dumpling { width: 29px; height: 20px; border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%; }
+    .accessory-image { display: block; width: 30px; height: 30px; object-fit: contain; margin: 0 auto 2px; }
+    .accessory-fallback { display: none; font-size: 24px; line-height: 30px; height: 30px; }
+    .blank-cell { color: transparent; }
+    .legend { margin-top: 8px; font-size: 9px; }
+    .instructions { margin-top: 10px; border-top: 2px solid #5d2a86; padding-top: 6px; font-size: 9px; }
+    .instructions h2 { margin: 4px 0 2px; color: #5d2a86; font-size: 12px; }
+    .instructions ol { margin: 2px 0 6px 18px; padding: 0; }
+    .instructions li { margin-bottom: 2px; }
+    @media print { .legend { display: none; } }
+  </style>
+</head>
+<body>
+  <h1>Prueba visual: formas y accesorios</h1>
+  <p>Las imágenes identifican cada accesorio y cada forma. Completa las celdas vacías con OK o el código del error. Imprimir en orientación horizontal.</p>
+  <table id="test-table"></table>
+  <section class="instructions">
+    <h2>Cómo completar la hoja</h2>
+    <ol>
+      <li>Lee la forma y el tamaño de la primera columna, por ejemplo: <strong>Dumpling - Grande</strong>.</li>
+      <li>En la aplicación, selecciona exactamente esa forma y ese tamaño.</li>
+      <li>Prueba el accesorio que aparece en cada columna.</li>
+      <li>Escribe <strong>OK</strong> si se ve bien en esa combinación.</li>
+      <li>Si hay un problema, escribe el código y una nota corta. Ejemplo: <strong>CHICO - la corona no cubre la cabeza</strong>.</li>
+    </ol>
+    <h2>Qué enviarme después</h2>
+    <p>Envíame solo las celdas con errores usando este formato:</p>
+    <p><strong>Forma | Tamaño | Accesorio | Código | Explicación</strong></p>
+    <p>Ejemplo: <strong>Dumpling | Grande | Corona Real | ARRIBA | La corona queda demasiado alta</strong>.</p>
+    <p class="legend"><strong>Códigos:</strong> CHICO = demasiado pequeño; GRANDE = demasiado grande; ARRIBA = demasiado alto; ABAJO = demasiado bajo; IZQ = hacia la izquierda; DER = hacia la derecha; ROT = necesita rotación; SVG = tiene espacio vacío; FORMA = no se adapta a la silueta.</p>
+  </section>
+  <script>
+    const forms = [
+      ['Círculo', 'circle'], ['Mochi', 'mochi'], ['Gotita', 'gotita'],
+      ['Squircle', 'squircle'], ['Dumpling', 'dumpling']
+    ];
+    const sizes = ['Chico', 'Mediano', 'Grande'];
+    const fallbackIcons = {
+      'Corona Real': '👑', 'Gorro Fiesta': '🥳', 'Lazo Rosado': '🎀',
+      'Gorro de Chef': '👨‍🍳', 'Gorro de Mago': '🧙', 'Gorro Pirata': '🏴‍☠️',
+      'Casco Espacial': '👨‍🚀', 'Gorro de Lana': '🧶', 'Gorro de Baño': '🛁',
+      'Flor Primavera': '🌸', 'Gorro Ninja': '🥷', 'Lentes Corazón': '💖',
+      'Lentes Estrella': '⭐', 'Visor de Buceo': '🤿', 'Auriculares Gato': '🎧',
+      'Orejitas Violeta': '🐱', 'Orejas Conejo': '🐰', 'Moño Coquette': '🎀',
+      'Varita Mágica': '🪄', 'Alas de Hada': '🧚', 'Bufanda Calientita': '🧣'
+    };
+    const accessories = [
+      ['Corona Real', 'img/accessories/hat_crown.svg', 'head'],
+      ['Gorro Fiesta', 'img/accessories/party_hat.svg', 'head'],
+      ['Lazo Rosado', 'img/accessories/ribbon_pink.svg', 'head'],
+      ['Gorro de Chef', 'img/accessories/chef_hat.svg', 'head'],
+      ['Gorro de Mago', 'img/accessories/wizard_hat.svg', 'head'],
+      ['Gorro Pirata', 'img/accessories/pirate_hat.svg', 'head'],
+      ['Casco Espacial', 'img/accessories/space_helmet.svg', 'head'],
+      ['Gorro de Lana', 'img/accessories/winter_beanie.svg', 'head'],
+      ['Gorro de Baño', 'img/accessories/shower_cap.svg', 'head'],
+      ['Flor Primavera', 'img/accessories/flower_pink.svg', 'head'],
+      ['Gorro Ninja', 'img/accessories/ninja_band.svg', 'head'],
+      ['Lentes Corazón', 'img/accessories/glasses_cool.svg', 'eyes'],
+      ['Lentes Estrella', 'img/accessories/star_glasses.svg', 'eyes'],
+      ['Visor de Buceo', 'img/accessories/snorkel.svg', 'eyes'],
+      ['Auriculares Gato', 'img/accessories/headphones.svg', 'ears'],
+      ['Orejitas Violeta', 'img/accessories/cat_ears.svg', 'ears'],
+      ['Orejas Conejo', 'img/accessories/bunny_ears.svg', 'ears'],
+      ['Moño Coquette', 'img/accessories/bow_tie.svg', 'neck'],
+      ['Varita Mágica', 'img/accessories/magic_wand.svg', 'neck'],
+      ['Alas de Hada', 'img/accessories/fairy_wings.svg', 'neck'],
+      ['Bufanda Calientita', 'img/accessories/winter_scarf.svg', 'neck']
+    ];
+
+    const table = document.getElementById('test-table');
+    const header = document.createElement('tr');
+    header.innerHTML = '<th class="accessory-name">Forma<br>Tamaño</th>';
+    accessories.forEach(([name, image]) => {
+      const th = document.createElement('th');
+      th.className = 'accessory-head';
+      th.innerHTML = `<span class="accessory-fallback">${fallbackIcons[name] || '🎁'}</span><img class="accessory-image" src="./${image}" alt="${name}" onerror="this.style.display='none'; this.previousElementSibling.style.display='block';">${name}`;
+      header.appendChild(th);
+    });
+    table.appendChild(header);
+
+    forms.forEach(([formName, formClass]) => {
+      sizes.forEach(size => {
+      const row = document.createElement('tr');
+      const label = document.createElement('th');
+      label.className = 'accessory-name';
+      label.innerHTML = `<div class="form-cell"><div class="form-preview"><div class="mini-pet ${formClass}"></div></div><span><span class="form-label">${formName}</span>${size}</span></div>`;
+      row.appendChild(label);
+
+      accessories.forEach(() => {
+        const cell = document.createElement('td');
+        cell.className = 'blank-cell';
+        cell.innerHTML = '&nbsp;';
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+      });
+    });
+  </script>
+</body>
+</html>
