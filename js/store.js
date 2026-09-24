@@ -101,6 +101,30 @@ const Store = {
       preview: 'background: linear-gradient(to bottom, transparent 70%, #3e2723 70%, #1b0000 100%), linear-gradient(180deg, #bf360c 0%, #dd2c00 70%);' }
   ],
 
+  accessoryFits: {
+    hat_crown: { scale: 1.25, y: -4 },
+    party_hat: { scale: 1.2, y: -4 },
+    ribbon_pink: { scale: 1.15, y: -2 },
+    chef_hat: { scale: 1.25, y: -4 },
+    wizard_hat: { scale: 1.25, y: -5 },
+    pirate_hat: { scale: 1.2, y: -3 },
+    space_helmet: { scale: 1.2, y: -2 },
+    winter_beanie: { scale: 1.2, y: -3 },
+    shower_cap: { scale: 1.2, y: -2 },
+    flower_pink: { scale: 1.1, y: 0 },
+    headphones: { scale: 1.15, y: 0 },
+    cat_ears: { scale: 1.1, y: -2 },
+    bunny_ears: { scale: 1.15, y: -3 },
+    glasses_cool: { scale: 1.15, y: 1 },
+    star_glasses: { scale: 1.15, y: 1 },
+    snorkel_mask: { scale: 1.2, y: 1 },
+    bow_tie: { scale: 1.25, y: -2 },
+    magic_wand: { scale: 1.1, y: -4 },
+    fairy_wings: { scale: 1.2, y: -3 },
+    ninja_band: { scale: 1.15, y: 0 },
+    winter_scarf: { scale: 1.25, y: -3 }
+  },
+
   // Ícono de la card: mini-preview del gradiente real para fondos,
   // ícono SVG para accesorios.
   renderIcon(item) {

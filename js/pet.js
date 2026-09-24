@@ -114,6 +114,7 @@ const PetState = {
 
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
+    accessoryEl.style.cssText = '';
 
     if (this.equippedAccessory) {
       const item = Store.items.find(i => i.id === this.equippedAccessory);
@@ -121,6 +122,12 @@ const PetState = {
         accessoryEl.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
         accessoryEl.classList.add(`pos-${item.type}`);
         accessoryEl.classList.add(`item-${item.id}`);
+        const fit = Store.accessoryFits?.[item.id];
+        if (fit) {
+          const accessoryImg = accessoryEl.querySelector('img');
+          accessoryImg.style.setProperty('--accessory-scale', fit.scale);
+          accessoryImg.style.setProperty('--accessory-y', `${fit.y}px`);
+        }
       }
     } else {
       accessoryEl.innerHTML = '';
