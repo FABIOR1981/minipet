@@ -132,22 +132,23 @@
     .space::after { content: ''; position: absolute; z-index: 2; left: 18px; bottom: 68px; width: 42px; height: 30px; background: #324563; border: 3px solid #8aa0bd; box-shadow: 0 0 12px rgba(159,247,255,.4); }
     .scene.extra::before { position: absolute; z-index: 2; left: 28%; top: 42%; transform: translate(-50%, -50%); font-size: 48px; }
     .scene.extra .pet { left: 72%; }
-    .scene.extra.playroom-new { background: radial-gradient(circle at 20% 25%, #ff80ab 0 5px, transparent 6px), radial-gradient(circle at 70% 35%, #ffd54f 0 7px, transparent 8px), linear-gradient(180deg, #f7d6ed 0 65%, #6cc7d1 65%); }
+    .scene.extra.playroom-new { background: radial-gradient(circle at 20% 25%, #ff80ab 0 5px, transparent 6px), radial-gradient(circle at 70% 35%, #ffd54f 0 7px, transparent 8px), linear-gradient(180deg, #f7d6ed 0 65%, #6cc7d1 65%); box-shadow: inset 0 -22px 0 rgba(54,140,152,.35); }
     .scene.extra.playroom-new::before { content: '🧸'; font-size: 58px; }
     .scene.extra.playroom-new::after { content: '🎈'; display: block; position: absolute; z-index: 2; right: 17%; top: 22%; font-size: 30px; }
-    .scene.extra.park-new { background: linear-gradient(180deg, #81d4fa 0 53%, #aed581 53% 76%, #689f38 76%); }
+    .scene.extra.park-new { background: radial-gradient(circle at 78% 22%, #fff2a6 0 17px, transparent 18px), linear-gradient(180deg, #81d4fa 0 53%, #aed581 53% 76%, #689f38 76%); }
     .scene.extra.park-new::before { content: '🌳'; font-size: 72px; left: 24%; top: 44%; }
     .scene.extra.park-new::after { content: '✦  ✧  ✦'; display: block; position: absolute; z-index: 2; right: 14%; top: 27%; color: #fff4a3; font-size: 18px; letter-spacing: 5px; text-shadow: 0 0 12px #fff4a3; }
     .scene.extra.mountain-new { background: linear-gradient(180deg, #e0f7fa 0 58%, #cfd8dc 58% 76%, #90a4ae 76%); }
     .scene.extra.mountain-new::before { content: '🏔️'; font-size: 75px; top: 40%; }
     .scene.extra.mountain-new::after { content: ''; display: block; position: absolute; z-index: 2; left: 0; right: 0; bottom: 23px; height: 25px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #f5fbff, #cfd8dc); }
-    .scene.extra.camping-new { background: radial-gradient(circle at 75% 22%, #fff9c4 0 3px, transparent 4px), linear-gradient(180deg, #102a43 0 62%, #477a47 62%); }
+    .scene.extra.camping-new { background: radial-gradient(circle at 75% 22%, #fff9c4 0 3px, transparent 4px), radial-gradient(circle at 22% 28%, #fff9c4 0 2px, transparent 3px), linear-gradient(180deg, #102a43 0 62%, #477a47 62%); }
     .scene.extra.camping-new::before { content: '⛺'; font-size: 64px; top: 48%; }
+    .scene.extra.camping-new::after { content: '🔥'; display: block; position: absolute; z-index: 2; left: 24%; bottom: 34px; font-size: 25px; }
     .scene.extra.desert-new { background: linear-gradient(180deg, #ffe0b2 0 54%, #ffcc80 54% 76%, #e88928 76%); }
     .scene.extra.desert-new::before { content: '🌵'; font-size: 70px; left: 27%; }
     .scene.extra.desert-new::after { content: '🌴'; display: block; position: absolute; z-index: 2; right: 18%; bottom: 47px; font-size: 42px; }
     .oasis-water { position: absolute; z-index: 1; left: 47%; bottom: 49px; width: 72px; height: 20px; border-radius: 50%; background: #55c7d1; box-shadow: 0 4px 0 #2d9da9, inset 0 4px 0 rgba(255,255,255,.45); }
-    .scene.extra.bathroom-new { background: radial-gradient(circle at 25% 30%, rgba(255,255,255,.9) 0 5px, transparent 6px), linear-gradient(180deg, #e0f7fa 0 60%, #80deea 60% 77%, #4dd0e1 77%); }
+    .scene.extra.bathroom-new { background: radial-gradient(circle at 25% 30%, rgba(255,255,255,.9) 0 5px, transparent 6px), radial-gradient(circle at 72% 22%, rgba(255,255,255,.75) 0 7px, transparent 8px), linear-gradient(180deg, #e0f7fa 0 60%, #80deea 60% 77%, #4dd0e1 77%); }
     .scene.extra.bathroom-new::before { content: '🛁'; font-size: 62px; }
     .scene.extra.dojo-new { background: radial-gradient(circle at 78% 24%, #d95c58 0 18px, transparent 19px), linear-gradient(180deg, #dce5ed 0 58%, transparent 58%), repeating-linear-gradient(90deg, transparent 0 34px, rgba(92,52,39,.22) 35px 37px), linear-gradient(180deg, #dce5ed 0 58%, #b88668 58% 100%); }
     .scene.extra.dojo-new::before, .scene.extra.dojo-new::after { content: none; }
@@ -163,11 +164,11 @@
     .scene.extra.disco-new { background: radial-gradient(circle at 50% 25%, #f06292 0 3px, transparent 4px), linear-gradient(135deg, #4a148c, #880e4f 55%, #311b92); }
     .scene.extra.disco-new::before { content: '🪩'; font-size: 65px; }
     .scene.extra.disco-new::after { content: ''; display: block; position: absolute; z-index: 1; inset: 0; background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.25) 45%, transparent 49%), linear-gradient(65deg, transparent 48%, rgba(255,100,190,.28) 51%, transparent 55%); }
-    .scene.extra.castle-new { background: linear-gradient(180deg, #f3e5f5 0 60%, #ce93d8 60% 78%, #6a1b9a 78%); }
+    .scene.extra.castle-new { background: radial-gradient(circle at 77% 22%, #fff0a8 0 15px, transparent 16px), linear-gradient(180deg, #f3e5f5 0 60%, #ce93d8 60% 78%, #6a1b9a 78%); }
     .scene.extra.castle-new::before { content: '🏰'; font-size: 68px; }
-    .scene.extra.underwater-new { background: radial-gradient(circle at 25% 28%, #80deea 0 3px, transparent 4px), linear-gradient(180deg, #00838f 0 70%, #006064 70%); }
+    .scene.extra.underwater-new { background: radial-gradient(circle at 25% 28%, #80deea 0 3px, transparent 4px), radial-gradient(circle at 74% 20%, #b2ebf2 0 5px, transparent 6px), linear-gradient(180deg, #00838f 0 70%, #006064 70%); }
     .scene.extra.underwater-new::before { content: '🪸'; font-size: 68px; }
-    .scene.extra.volcano-new { background: linear-gradient(180deg, #bf360c 0 56%, #dd2c00 56% 77%, #4e342e 77%); }
+    .scene.extra.volcano-new { background: radial-gradient(circle at 70% 28%, #ffcc80 0 5px, transparent 6px), linear-gradient(180deg, #bf360c 0 56%, #dd2c00 56% 77%, #4e342e 77%); }
     .scene.extra.volcano-new::before { content: '🌋'; font-size: 70px; }
     .scene.old.playroom-old { background: linear-gradient(180deg, #f3e5f5 0 70%, #80deea 70%); }
     .scene.old.playroom-old::before { content: '🧸'; }
