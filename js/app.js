@@ -77,6 +77,8 @@ function switchTab(tab) {
     Store.renderStore();
   } else if (tab === 'wardrobe') {
     Store.renderWardrobe();
+  } else if (tab === 'my-pet') {
+    Store.renderMyPet();
   } else if (tab === 'minigames') {
     Minigames.renderMenu();
   }

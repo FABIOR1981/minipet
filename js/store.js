@@ -136,19 +136,17 @@ const Store = {
     });
   },
 
-  renderWardrobe() {
-    const content = document.getElementById('modal-content');
-    content.innerHTML = `
-      <h2 style="text-align:center; color:#6a1b9a;">🎒 Mi Armario</h2>
+  renderPetCustomization() {
+    return `
       <section class="pet-customization-panel" aria-label="Personalizar Mi Pet">
         <h3>Mi Pet</h3>
         <div class="wardrobe-top-row">
           <div style="margin: 8px 0; text-align:center;">
             <p class="wardrobe-label">Color de Piel:</p>
             <div class="color-picker">
-              <button class="color-option ${PetState.petColor === '#ff80ab' ? 'selected' : ''}" onclick="PetState.setColor('#ff80ab'); Store.renderWardrobe();" aria-label="Color rosa" style="background:#ff80ab;"></button>
-              <button class="color-option ${PetState.petColor === '#b388ff' ? 'selected' : ''}" onclick="PetState.setColor('#b388ff'); Store.renderWardrobe();" aria-label="Color violeta" style="background:#b388ff;"></button>
-              <button class="color-option ${PetState.petColor === '#80cbc4' ? 'selected' : ''}" onclick="PetState.setColor('#80cbc4'); Store.renderWardrobe();" aria-label="Color turquesa" style="background:#80cbc4;"></button>
+              <button class="color-option ${PetState.petColor === '#ff80ab' ? 'selected' : ''}" onclick="PetState.setColor('#ff80ab'); Store.renderMyPet();" aria-label="Color rosa" style="background:#ff80ab;"></button>
+              <button class="color-option ${PetState.petColor === '#b388ff' ? 'selected' : ''}" onclick="PetState.setColor('#b388ff'); Store.renderMyPet();" aria-label="Color violeta" style="background:#b388ff;"></button>
+              <button class="color-option ${PetState.petColor === '#80cbc4' ? 'selected' : ''}" onclick="PetState.setColor('#80cbc4'); Store.renderMyPet();" aria-label="Color turquesa" style="background:#80cbc4;"></button>
             </div>
           </div>
           <div style="margin: 8px 0; text-align:center;">
@@ -171,7 +169,39 @@ const Store = {
           <div id="shape-picker" class="shape-picker"></div>
         </div>
       </section>
-      <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
+    `;
+  },
+
+  bindPetCustomization(content) {
+    const shapePicker = content.querySelector('#shape-picker');
+    this.shapes.forEach(shape => {
+      const isSelected = PetState.petShape === shape.id;
+      const btn = document.createElement('button');
+      btn.className = `card-btn shape-option ${isSelected ? 'selected' : ''}`;
+      btn.setAttribute('aria-label', `Forma ${shape.name}`);
+      btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
+      btn.onclick = () => { PetState.setShape(shape.id); Store.renderMyPet(); };
+      shapePicker.appendChild(btn);
+    });
+
+    content.querySelectorAll('.size-option').forEach(btn => {
+      btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderMyPet(); };
+    });
+  },
+
+  renderMyPet() {
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <h2 style="text-align:center; color:#6a1b9a;">🐾 Mi Pet</h2>
+      ${this.renderPetCustomization()}
+    `;
+    this.bindPetCustomization(content);
+  },
+
+  renderWardrobe() {
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <h2 style="text-align:center; color:#6a1b9a;">🎒 Mi Armario</h2>
       <div style="margin: 4px 0 8px; text-align:center;">
         <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
         <div id="looks-list" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:8px;"></div>
@@ -180,21 +210,6 @@ const Store = {
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div class="grid-container"></div>
     `;
-
-    const shapePicker = content.querySelector('#shape-picker');
-    this.shapes.forEach(shape => {
-      const isSelected = PetState.petShape === shape.id;
-      const btn = document.createElement('button');
-      btn.className = `card-btn shape-option ${isSelected ? 'selected' : ''}`;
-      btn.setAttribute('aria-label', `Forma ${shape.name}`);
-      btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
-      btn.onclick = () => { PetState.setShape(shape.id); Store.renderWardrobe(); };
-      shapePicker.appendChild(btn);
-    });
-
-    content.querySelectorAll('.size-option').forEach(btn => {
-      btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderWardrobe(); };
-    });
 
     const looksList = content.querySelector('#looks-list');
     if (!PetState.looks || PetState.looks.length === 0) {
