@@ -578,6 +578,48 @@ body {
   transform: scale(calc(var(--pet-scale) * 0.95));
 }
 
+.pet-glitter {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 72% 18%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 42% 68%, rgba(255,255,255,0.75) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 86% 76%, rgba(255,255,255,0.9) 0 1.4px, transparent 2.2px);
+  background-size: 38px 38px, 52px 52px, 46px 46px, 61px 61px;
+  animation: glitter-drift 4s linear infinite;
+}
+
+.pet-glitter.enabled {
+  opacity: 0.78;
+}
+
+.pet-glitter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, transparent 25%, rgba(255,255,255,0.4) 45%, transparent 62%);
+  background-size: 220% 100%;
+  animation: slime-shine 3.8s ease-in-out infinite;
+}
+
+@keyframes glitter-drift {
+  from { background-position: 0 0, 12px 4px, 0 0, 18px 12px; }
+  to { background-position: 38px 38px, -40px 52px, 46px -46px, -43px 61px; }
+}
+
+@keyframes slime-shine {
+  0%, 100% { background-position: 180% 0; opacity: 0.25; }
+  45%, 60% { background-position: -80% 0; opacity: 0.75; }
+}
+
 .pet-sprite.size-small { --pet-scale: 0.7; }
 .pet-sprite.size-medium { --pet-scale: 0.9; }
 .pet-sprite.size-large { --pet-scale: 1.1; }
@@ -601,6 +643,22 @@ body {
   text-align: center;
   color: #6a1b9a;
   font-size: 0.78rem;
+}
+
+.glitter-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0 5px;
+  color: #6a1b9a;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.glitter-toggle input {
+  accent-color: #ff4081;
 }
 
 .wardrobe-label {

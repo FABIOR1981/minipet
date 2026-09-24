@@ -204,6 +204,10 @@ const Store = {
           <p class="wardrobe-label">Forma:</p>
           <div id="shape-picker" class="shape-picker"></div>
         </div>
+        <label class="glitter-toggle">
+          <input id="glitter-toggle" type="checkbox" ${PetState.glitterEnabled ? 'checked' : ''}>
+          <span>✨ Brillantina slime</span>
+        </label>
       </section>
     `;
   },
@@ -223,6 +227,11 @@ const Store = {
     content.querySelectorAll('.size-option').forEach(btn => {
       btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderMyPet(); };
     });
+
+    content.querySelector('#glitter-toggle').onchange = event => {
+      PetState.setGlitterEnabled(event.target.checked);
+      Store.renderMyPet();
+    };
   },
 
   renderMyPet() {

@@ -6,6 +6,7 @@ const PetState = {
   petColor: '#ff80ab',
   petShape: 'shape-circle',
   petSize: 'medium',
+  glitterEnabled: false,
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie', 'bg_living'],
@@ -101,6 +102,7 @@ const PetState = {
       petEl.classList.add(this.petShape || 'shape-circle');
       petEl.className = petEl.className.replace(/\bsize-\S+/g, '').trim();
       petEl.classList.add(`size-${this.petSize || 'medium'}`);
+      document.getElementById('pet-glitter')?.classList.toggle('enabled', this.glitterEnabled);
     }
 
     const roomEl = document.getElementById('pet-room');
@@ -256,6 +258,12 @@ const PetState = {
     this.updateUI();
   },
 
+  setGlitterEnabled(enabled) {
+    this.glitterEnabled = Boolean(enabled);
+    this.saveData();
+    this.updateUI();
+  },
+
   equipItem(itemId) {
     const item = Store.items.find(i => i.id === itemId);
     if (!item) return;
@@ -340,6 +348,7 @@ const PetState = {
       petColor: this.petColor,
       petShape: this.petShape,
       petSize: this.petSize,
+      glitterEnabled: this.glitterEnabled,
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory,
@@ -359,6 +368,7 @@ const PetState = {
       this.petColor = data.petColor || '#ff80ab';
       this.petShape = data.petShape || 'shape-circle';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
+      this.glitterEnabled = data.glitterEnabled ?? false;
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;
