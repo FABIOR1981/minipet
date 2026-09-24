@@ -277,6 +277,103 @@ El Dojo Ninja se usa como referencia de calidad visual y tiene:
 - Sol rojo.
 - Mascota separada de los elementos importantes.
 
+## Cómo agregar un minijuego
+
+Los minijuegos se gestionan desde `js/minigames.js`. Para agregar uno nuevo:
+
+1. Añadir una tarjeta dentro de `renderMenu()` con un icono, nombre y llamada a un método nuevo:
+
+```html
+<div class="item-card" onclick="Minigames.startNewGame()" style="cursor:pointer;">
+	<span style="font-size:2rem;">🎯</span>
+	<span class="card-title">Nuevo juego</span>
+	<button class="card-btn">Jugar</button>
+</div>
+```
+
+2. Crear `startNewGame()` dentro del objeto `Minigames`.
+3. Usar `showCountdown()` si el juego necesita cuenta regresiva.
+4. Marcar `inProgress = true` cuando comience.
+5. Registrar `exitHandler` para limpiar timers, listeners y devolver monedas si el usuario cierra el modal.
+6. Usar `renderHUD()` para mostrar puntuación, récord y tiempo.
+7. Guardar récords con `getBestScore()` y `saveBestScore()` usando un identificador único.
+8. Terminar con `showResult()` para entregar monedas y ofrecer volver a jugar o volver al menú.
+
+Normalmente no hace falta tocar `index.html`: el menú se genera desde `minigames.js`. Solo agregar CSS si el juego necesita estilos propios en `styles.css` y actualizar `sw.js` si se incorporan imágenes o sonidos.
+
+## Cómo agregar un escenario
+
+Los escenarios se registran como objetos en `Store.items`, dentro de `js/store.js`:
+
+```js
+{
+	id: 'bg_new_scene',
+	name: 'Nuevo Escenario',
+	price: 80,
+	image: '🌿',
+	type: 'bg',
+	category: 'bg',
+	preview: 'background: ...;'
+}
+```
+
+Pasos:
+
+1. Crear una clase CSS con el mismo identificador, por ejemplo `.room.bg_new_scene`, en `css/styles.css`.
+2. Definir fondo, suelo, capas y objetos del ambiente mediante pseudo-elementos o elementos auxiliares.
+3. Mantener a la mascota como protagonista y no taparla con los objetos principales.
+4. Si necesita partículas, agregar el caso correspondiente en `js/particulas.js`.
+5. Verificar que `renderScenery()` lo muestre automáticamente: filtra los artículos con `category: 'bg'`.
+6. Añadir la imagen o recurso a `ASSETS_TO_CACHE` en `sw.js` si el escenario usa archivos externos.
+7. Incrementar `CACHE_VERSION` cuando se modifique la aplicación publicada.
+
+La clase del escenario debe coincidir con el valor usado por `PetState.equippedBackground`, porque `updateUI()` aplica esa clase al elemento `#pet-room`.
+
+## Cómo agregar un accesorio
+
+Los accesorios se registran en `Store.items` dentro de `js/store.js`:
+
+```js
+{
+	id: 'new_accessory',
+	name: 'Nuevo Accesorio',
+	price: 40,
+	image: 'img/accessories/new_accessory.svg',
+	type: 'head',
+	category: 'acc'
+}
+```
+
+El campo `type` debe ser uno de los anclajes existentes:
+
+- `head`: sombreros, coronas, flores y accesorios superiores.
+- `eyes`: gafas y visores.
+- `ears`: orejas y auriculares.
+- `neck`: moños, bufandas, varitas y alas.
+
+Pasos:
+
+1. Crear el SVG o imagen dentro de `img/accessories/`.
+2. Añadir el artículo a `Store.items` con `category: 'acc'`.
+3. Añadirlo a `Store.accessoryFits` en `js/store.js` para definir `scale`, `x`, `y` y, si hace falta, `rotate`.
+4. Probarlo con Círculo, Mochi y Dumpling.
+5. Probarlo en Chico, Mediano y Grande.
+6. Si una forma necesita una excepción, añadir una regla específica en `styles.css` sin romper el ajuste individual.
+7. Añadir el recurso a `ASSETS_TO_CACHE` en `sw.js` si debe funcionar offline.
+
+Ejemplo de ajuste:
+
+```js
+new_accessory: {
+	scale: 1.15,
+	x: 0,
+	y: -3,
+	rotate: 0
+}
+```
+
+El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inventario y se equipa mediante `PetState.equipItem()`.
+
 ## Reglas de trabajo para otra IA
 
 1. Leer este documento antes de explorar todos los archivos.
