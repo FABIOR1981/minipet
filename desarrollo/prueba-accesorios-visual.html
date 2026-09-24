@@ -99,7 +99,7 @@
     accessories.forEach(([name, image]) => {
       const th = document.createElement('th');
       th.className = 'accessory-head';
-      th.innerHTML = `<span class="accessory-fallback">${fallbackIcons[name] || '🎁'}</span><img class="accessory-image" src="./${image}" alt="${name}" onerror="this.style.display='none'; this.previousElementSibling.style.display='block';">${name}`;
+      th.innerHTML = `<span class="accessory-fallback">${fallbackIcons[name] || '🎁'}</span><img class="accessory-image" src="../${image}" alt="${name}" onerror="this.style.display='none'; this.previousElementSibling.style.display='block';">${name}`;
       header.appendChild(th);
     });
     table.appendChild(header);
