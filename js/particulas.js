@@ -1,7 +1,7 @@
 // =========================================================
 // PARTÍCULAS AMBIENTALES POR ESCENARIO (CSS puro + spawn en JS)
 // Usa el contenedor #bg-particles y las animaciones .fall-slow,
-// .float-up y .twinkle ya definidas en css/styles.css.
+// .float-up y .twinkle ya definidas en css/escenarios.css.
 //
 // Para sumar partículas a un fondo nuevo, alcanza con agregar
 // una entrada en CONFIG con su modo y sus emojis.

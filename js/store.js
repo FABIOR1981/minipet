@@ -57,7 +57,7 @@ const Store = {
 
     // -----------------------------------------------------------------
     // ESCENARIOS / FONDOS (Categoría 'bg')
-    // El campo `preview` reproduce el gradiente real de css/styles.css
+    // El campo `preview` reproduce el gradiente real de css/escenarios.css
     // para mostrar una miniatura fiel en vez de un emoji genérico.
     // -----------------------------------------------------------------
     // Básicos
