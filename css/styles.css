@@ -917,7 +917,7 @@ body {
   position: absolute;
   object-fit: contain;
   left: 50%;
-  transform: translateX(calc(-50% + var(--accessory-x, 0px))) scale(var(--accessory-scale, 1));
+  transform: translateX(calc(-50% + var(--accessory-x, 0px))) scale(var(--accessory-scale, 1)) rotate(var(--accessory-rotate, 0deg));
   transform-origin: center center;
 }
 

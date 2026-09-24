@@ -127,6 +127,8 @@ const PetState = {
           const accessoryImg = accessoryEl.querySelector('img');
           accessoryImg.style.setProperty('--accessory-scale', fit.scale);
           accessoryImg.style.setProperty('--accessory-y', `${fit.y}px`);
+          accessoryImg.style.setProperty('--accessory-x', `${fit.x || 0}px`);
+          accessoryImg.style.setProperty('--accessory-rotate', `${fit.rotate || 0}deg`);
         }
       }
     } else {
