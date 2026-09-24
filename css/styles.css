@@ -722,9 +722,9 @@ body {
 }
 
 .pet-sprite.shape-dumpling {
-  width: 145px;
+  width: 140px;
   height: 95px;
-  border-radius: 45% 45% 45% 45% / 55% 55% 40% 40%;
+  border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%;
   clip-path: none;
   box-shadow: 0 8px 15px rgba(0,0,0,0.12);
 }
@@ -732,13 +732,18 @@ body {
 .pet-sprite.shape-dumpling::before {
   content: '';
   position: absolute;
-  top: -8px;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 35px;
-  height: 15px;
-  background-color: currentColor;
-  border-radius: 50px 50px 0 0;
+  width: 22px;
+  height: 14px;
+  background-color: inherit;
+  border-radius: 50%;
+  box-shadow:
+    -18px 2px 0 -1px currentColor,
+    18px 2px 0 -1px currentColor,
+    -34px 8px 0 -3px currentColor,
+    34px 8px 0 -3px currentColor;
 }
 
 .pet-sprite.shape-capsule {
