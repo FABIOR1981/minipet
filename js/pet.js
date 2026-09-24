@@ -48,6 +48,14 @@ const PetState = {
     return this.dialogues.alerts?.[key] || fallback;
   },
 
+  showDialogue(message) {
+    const thought = document.getElementById('pet-thought');
+    if (!thought) return;
+    thought.innerText = message;
+    clearTimeout(this.dialogueTimeout);
+    this.dialogueTimeout = setTimeout(() => this.updateFaceAndThought(), 3000);
+  },
+
   startWandering() {
     setInterval(() => {
       // Solo se mueve si NO está durmiendo ni enferma
@@ -181,7 +189,7 @@ const PetState = {
   feed() {
     if (this.isSleeping) return;
     if (this.hunger >= 100) {
-      alert(this.getDialogue('full', 'No preciso comer ahora.'));
+      this.showDialogue(this.getDialogue('full', 'No preciso comer ahora.'));
       return;
     }
     this.hunger = Math.min(100, this.hunger + 30);
@@ -192,7 +200,7 @@ const PetState = {
 
   heal() {
     if (!this.isSick) {
-      alert(this.getDialogue('healthy', 'No preciso un doctor ahora.'));
+      this.showDialogue(this.getDialogue('healthy', 'No preciso un doctor ahora.'));
       return;
     }
     this.isSick = false;
