@@ -1003,9 +1003,13 @@ body {
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .modal.hidden { display: none; }
+
+.modal::-webkit-scrollbar { width: 5px; }
+.modal::-webkit-scrollbar-thumb { background: #ce93d8; border-radius: 5px; }
 
 .close-btn {
   align-self: flex-end;
