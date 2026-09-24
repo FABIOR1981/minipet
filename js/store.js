@@ -139,35 +139,37 @@ const Store = {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">🎒 Mi Armario</h2>
-      <div class="wardrobe-top-row">
-        <div style="margin: 8px 0; text-align:center;">
-          <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">Color de Piel:</p>
-          <div style="display:flex; justify-content:center; gap:10px;">
-            <button onclick="PetState.setColor('#ff80ab')" style="width:28px; height:28px; border-radius:50%; background:#ff80ab; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
-            <button onclick="PetState.setColor('#b388ff')" style="width:28px; height:28px; border-radius:50%; background:#b388ff; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
-            <button onclick="PetState.setColor('#80cbc4')" style="width:28px; height:28px; border-radius:50%; background:#80cbc4; border:2px solid #fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.15);"></button>
+      <section class="pet-customization-panel" aria-label="Personalizar Mi Pet">
+        <h3>Mi Pet</h3>
+        <div class="wardrobe-top-row">
+          <div style="margin: 8px 0; text-align:center;">
+            <p class="wardrobe-label">Color de Piel:</p>
+            <div class="color-picker">
+              <button class="color-option ${PetState.petColor === '#ff80ab' ? 'selected' : ''}" onclick="PetState.setColor('#ff80ab'); Store.renderWardrobe();" aria-label="Color rosa" style="background:#ff80ab;"></button>
+              <button class="color-option ${PetState.petColor === '#b388ff' ? 'selected' : ''}" onclick="PetState.setColor('#b388ff'); Store.renderWardrobe();" aria-label="Color violeta" style="background:#b388ff;"></button>
+              <button class="color-option ${PetState.petColor === '#80cbc4' ? 'selected' : ''}" onclick="PetState.setColor('#80cbc4'); Store.renderWardrobe();" aria-label="Color turquesa" style="background:#80cbc4;"></button>
+            </div>
+          </div>
+          <div style="margin: 8px 0; text-align:center;">
+            <p class="wardrobe-label">Tamaño:</p>
+            <div id="size-picker" class="size-picker">
+              <button class="card-btn size-option ${PetState.petSize === 'small' ? 'equipped' : ''}" data-size="small" aria-label="Tamaño chico">
+                <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.6);"></span></span>
+              </button>
+              <button class="card-btn size-option ${PetState.petSize === 'medium' ? 'equipped' : ''}" data-size="medium" aria-label="Tamaño mediano">
+                <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.8);"></span></span>
+              </button>
+              <button class="card-btn size-option ${PetState.petSize === 'large' ? 'equipped' : ''}" data-size="large" aria-label="Tamaño grande">
+                <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(1);"></span></span>
+              </button>
+            </div>
           </div>
         </div>
-        <div style="margin: 8px 0; text-align:center;">
-          <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">Tamaño:</p>
-          <div id="size-picker" class="size-picker">
-            <button class="card-btn size-option ${PetState.petSize === 'small' ? 'equipped' : ''}" data-size="small" aria-label="Tamaño chico">
-              <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.6);"></span></span>
-            </button>
-            <button class="card-btn size-option ${PetState.petSize === 'medium' ? 'equipped' : ''}" data-size="medium" aria-label="Tamaño mediano">
-              <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.8);"></span></span>
-            </button>
-            <button class="card-btn size-option ${PetState.petSize === 'large' ? 'equipped' : ''}" data-size="large" aria-label="Tamaño grande">
-              <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(1);"></span></span>
-            </button>
-          </div>
+        <div style="margin: 4px 0 8px; text-align:center;">
+          <p class="wardrobe-label">Forma:</p>
+          <div id="shape-picker" class="shape-picker"></div>
         </div>
-      </div>
-      <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
-      <div style="margin: 4px 0 8px; text-align:center;">
-        <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">Forma:</p>
-        <div id="shape-picker" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; max-width:280px; margin:0 auto;"></div>
-      </div>
+      </section>
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div style="margin: 4px 0 8px; text-align:center;">
         <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
@@ -182,9 +184,8 @@ const Store = {
     this.shapes.forEach(shape => {
       const isSelected = PetState.petShape === shape.id;
       const btn = document.createElement('button');
-      btn.className = `card-btn ${isSelected ? 'equipped' : ''}`;
-      btn.style.padding = '6px 2px';
-      btn.style.fontSize = '0.68rem';
+      btn.className = `card-btn shape-option ${isSelected ? 'selected' : ''}`;
+      btn.setAttribute('aria-label', `Forma ${shape.name}`);
       btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
       btn.onclick = () => { PetState.setShape(shape.id); Store.renderWardrobe(); };
       shapePicker.appendChild(btn);

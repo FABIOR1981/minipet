@@ -589,6 +589,65 @@ body {
   align-items: start;
 }
 
+.pet-customization-panel {
+  border: 1px solid #eadff2;
+  border-radius: 12px;
+  padding: 4px 8px 2px;
+  background: rgba(255,255,255,0.72);
+}
+
+.pet-customization-panel h3 {
+  margin: 0;
+  text-align: center;
+  color: #6a1b9a;
+  font-size: 0.78rem;
+}
+
+.wardrobe-label {
+  margin: 0 0 5px;
+  color: #666;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.color-picker {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.color-option {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.color-option.selected,
+.shape-option.selected {
+  outline: 2px solid #ff4081;
+  outline-offset: 2px;
+}
+
+.shape-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.shape-picker .shape-option {
+  background: transparent;
+  color: #6a1b9a;
+  border: 2px solid transparent;
+  padding: 6px 2px;
+  font-size: 0.68rem;
+}
+
 .size-picker {
   display: flex;
   justify-content: center;
