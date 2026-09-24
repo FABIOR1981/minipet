@@ -59,12 +59,14 @@ const PetState = {
   },
 
   startWandering() {
-    setInterval(() => {
+    clearInterval(this.wanderingTimer);
+    this.moveRandomly();
+    this.wanderingTimer = setInterval(() => {
       // Solo se mueve si NO está durmiendo ni enferma
       if (!this.isSleeping && !this.isSick) {
         this.moveRandomly();
       }
-    }, 6000);
+    }, 5000);
   },
 
   moveRandomly() {
@@ -73,9 +75,9 @@ const PetState = {
     if (!petEl || !roomEl) return;
 
     const roomWidth = roomEl.clientWidth;
-    const petWidth = petEl.clientWidth;
+    const petWidth = petEl.offsetWidth;
     const minX = 20;
-    const maxX = roomWidth - petWidth - 20;
+    const maxX = Math.max(minX, roomWidth - petWidth - 20);
 
     const targetX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
 
