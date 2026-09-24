@@ -1069,8 +1069,15 @@ body {
 .store-tabs {
   display: flex;
   gap: 6px;
-  margin: 4px auto 8px;
-  max-width: 320px;
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 132px;
+  padding: 7px 0;
+  max-width: none;
+  background: rgba(255,255,255,0.98);
+  border-top: 1px solid #eadff2;
+  z-index: 3;
 }
 
 .store-tab {

@@ -141,12 +141,12 @@ const Store = {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">🛍️ Tienda de Objetos</h2>
+      <div class="grid-container"></div>
       <div class="store-tabs" role="tablist" aria-label="Categorías de la tienda">
         <button class="store-tab ${category === 'all' ? 'active' : ''}" data-category="all">Todos</button>
         <button class="store-tab ${category === 'acc' ? 'active' : ''}" data-category="acc">Accesorios</button>
         <button class="store-tab ${category === 'bg' ? 'active' : ''}" data-category="bg">Escenarios</button>
       </div>
-      <div class="grid-container"></div>
     `;
 
     content.querySelectorAll('.store-tab').forEach(tab => {
