@@ -75,8 +75,10 @@ function switchTab(tab) {
   
   if (tab === 'store') {
     Store.renderStore();
-  } else if (tab === 'wardrobe') {
-    Store.renderWardrobe();
+  } else if (tab === 'accessories') {
+    Store.renderAccessories();
+  } else if (tab === 'scenery') {
+    Store.renderScenery();
   } else if (tab === 'my-pet') {
     Store.renderMyPet();
   } else if (tab === 'minigames') {
