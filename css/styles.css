@@ -645,22 +645,6 @@ body {
   font-size: 0.78rem;
 }
 
-.glitter-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  margin: 8px 0 5px;
-  color: #6a1b9a;
-  font-size: 0.75rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.glitter-toggle input {
-  accent-color: #ff4081;
-}
-
 .glitter-intensity {
   display: flex;
   align-items: center;

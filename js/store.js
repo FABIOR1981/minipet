@@ -204,13 +204,9 @@ const Store = {
           <p class="wardrobe-label">Forma:</p>
           <div id="shape-picker" class="shape-picker"></div>
         </div>
-        <label class="glitter-toggle">
-          <input id="glitter-toggle" type="checkbox" ${PetState.glitterEnabled ? 'checked' : ''}>
-          <span>✨ Brillantina slime</span>
-        </label>
         <div class="glitter-intensity">
-          <label for="glitter-intensity">Brillo: <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
-          <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}" ${PetState.glitterEnabled ? '' : 'disabled'}>
+          <label for="glitter-intensity">✨ Brillantina: <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
+          <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}">
         </div>
       </section>
     `;
@@ -231,11 +227,6 @@ const Store = {
     content.querySelectorAll('.size-option').forEach(btn => {
       btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderMyPet(); };
     });
-
-    content.querySelector('#glitter-toggle').onchange = event => {
-      PetState.setGlitterEnabled(event.target.checked);
-      Store.renderMyPet();
-    };
 
     const glitterIntensity = content.querySelector('#glitter-intensity');
     const glitterIntensityValue = content.querySelector('#glitter-intensity-value');

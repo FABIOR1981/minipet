@@ -7,7 +7,7 @@ const PetState = {
   petShape: 'shape-circle',
   petSize: 'medium',
   glitterEnabled: false,
-  glitterIntensity: 50,
+  glitterIntensity: 0,
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie', 'bg_living'],
@@ -105,7 +105,7 @@ const PetState = {
       petEl.classList.add(`size-${this.petSize || 'medium'}`);
       const glitterEl = document.getElementById('pet-glitter');
       if (glitterEl) {
-        glitterEl.classList.toggle('enabled', this.glitterEnabled);
+        glitterEl.classList.toggle('enabled', this.glitterIntensity > 0);
         glitterEl.style.setProperty('--glitter-opacity', (0.1 + this.glitterIntensity / 100 * 0.9).toFixed(2));
       }
     }
@@ -263,14 +263,9 @@ const PetState = {
     this.updateUI();
   },
 
-  setGlitterEnabled(enabled) {
-    this.glitterEnabled = Boolean(enabled);
-    this.saveData();
-    this.updateUI();
-  },
-
   setGlitterIntensity(intensity) {
     this.glitterIntensity = Math.max(0, Math.min(100, Number(intensity) || 0));
+    this.glitterEnabled = this.glitterIntensity > 0;
     this.saveData();
     this.updateUI();
   },
@@ -386,8 +381,9 @@ const PetState = {
       this.petColor = data.petColor || '#ff80ab';
       this.petShape = data.petShape || 'shape-circle';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
-      this.glitterEnabled = data.glitterEnabled ?? false;
-      this.glitterIntensity = Math.max(0, Math.min(100, Number(data.glitterIntensity ?? 50)));
+      const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);
+      this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));
+      this.glitterEnabled = this.glitterIntensity > 0;
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;
