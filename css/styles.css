@@ -1066,6 +1066,31 @@ body {
 .grid-container::-webkit-scrollbar { width: 4px; }
 .grid-container::-webkit-scrollbar-thumb { background: #ce93d8; border-radius: 4px; }
 
+.store-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 4px auto 8px;
+  max-width: 320px;
+}
+
+.store-tab {
+  flex: 1;
+  padding: 6px 4px;
+  border: 1px solid #d1c4e9;
+  border-radius: 10px;
+  background: #fff;
+  color: #6a1b9a;
+  font-size: 0.72rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.store-tab.active {
+  background: #ff80ab;
+  border-color: #ff4081;
+  color: #fff;
+}
+
 .item-card {
   background: #fdf8ff;
   border: 2px solid #e1bee7;

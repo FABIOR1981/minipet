@@ -1,4 +1,6 @@
 const Store = {
+  storeCategory: 'all',
+
   // Las formas de mascota disponibles (elegibles en el Armario)
   shapes: [
     { id: 'shape-circle',   name: 'Círculo',   emoji: '⚪' },
@@ -134,16 +136,26 @@ const Store = {
     return `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
   },
 
-  renderStore() {
+  renderStore(category = this.storeCategory) {
+    this.storeCategory = category;
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">🛍️ Tienda de Objetos</h2>
+      <div class="store-tabs" role="tablist" aria-label="Categorías de la tienda">
+        <button class="store-tab ${category === 'all' ? 'active' : ''}" data-category="all">Todos</button>
+        <button class="store-tab ${category === 'acc' ? 'active' : ''}" data-category="acc">Accesorios</button>
+        <button class="store-tab ${category === 'bg' ? 'active' : ''}" data-category="bg">Escenarios</button>
+      </div>
       <div class="grid-container"></div>
     `;
+
+    content.querySelectorAll('.store-tab').forEach(tab => {
+      tab.onclick = () => this.renderStore(tab.dataset.category);
+    });
     
     const container = content.querySelector('.grid-container');
     
-    this.items.forEach(item => {
+    this.items.filter(item => category === 'all' || item.category === category).forEach(item => {
       const isOwned = PetState.inventory.includes(item.id);
       const card = document.createElement('div');
       card.className = 'item-card';
@@ -306,7 +318,7 @@ const Store = {
       AudioEffects.playCoin();
       PetState.saveData();
       PetState.updateUI();
-      this.renderStore();
+      this.renderStore(this.storeCategory);
     } else if (item && PetState.coins < item.price) {
       alert('¡No tienes suficientes monedas!');
     }
