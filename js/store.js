@@ -208,6 +208,10 @@ const Store = {
           <input id="glitter-toggle" type="checkbox" ${PetState.glitterEnabled ? 'checked' : ''}>
           <span>✨ Brillantina slime</span>
         </label>
+        <div class="glitter-intensity">
+          <label for="glitter-intensity">Brillo: <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
+          <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}" ${PetState.glitterEnabled ? '' : 'disabled'}>
+        </div>
       </section>
     `;
   },
@@ -231,6 +235,14 @@ const Store = {
     content.querySelector('#glitter-toggle').onchange = event => {
       PetState.setGlitterEnabled(event.target.checked);
       Store.renderMyPet();
+    };
+
+    const glitterIntensity = content.querySelector('#glitter-intensity');
+    const glitterIntensityValue = content.querySelector('#glitter-intensity-value');
+    glitterIntensity.oninput = event => {
+      glitterIntensityValue.value = `${event.target.value}%`;
+      glitterIntensityValue.textContent = `${event.target.value}%`;
+      PetState.setGlitterIntensity(event.target.value);
     };
   },
 

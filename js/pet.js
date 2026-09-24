@@ -7,6 +7,7 @@ const PetState = {
   petShape: 'shape-circle',
   petSize: 'medium',
   glitterEnabled: false,
+  glitterIntensity: 50,
   isSick: false,
   isSleeping: false,
   inventory: ['bow_tie', 'bg_living'],
@@ -102,7 +103,11 @@ const PetState = {
       petEl.classList.add(this.petShape || 'shape-circle');
       petEl.className = petEl.className.replace(/\bsize-\S+/g, '').trim();
       petEl.classList.add(`size-${this.petSize || 'medium'}`);
-      document.getElementById('pet-glitter')?.classList.toggle('enabled', this.glitterEnabled);
+      const glitterEl = document.getElementById('pet-glitter');
+      if (glitterEl) {
+        glitterEl.classList.toggle('enabled', this.glitterEnabled);
+        glitterEl.style.setProperty('--glitter-opacity', (0.1 + this.glitterIntensity / 100 * 0.9).toFixed(2));
+      }
     }
 
     const roomEl = document.getElementById('pet-room');
@@ -264,6 +269,18 @@ const PetState = {
     this.updateUI();
   },
 
+  setGlitterIntensity(intensity) {
+    this.glitterIntensity = Math.max(0, Math.min(100, Number(intensity) || 0));
+    this.saveData();
+    this.updateUI();
+  },
+
+  setGlitterEnabled(enabled) {
+    this.glitterEnabled = Boolean(enabled);
+    this.saveData();
+    this.updateUI();
+  },
+
   equipItem(itemId) {
     const item = Store.items.find(i => i.id === itemId);
     if (!item) return;
@@ -349,6 +366,7 @@ const PetState = {
       petShape: this.petShape,
       petSize: this.petSize,
       glitterEnabled: this.glitterEnabled,
+      glitterIntensity: this.glitterIntensity,
       isSick: this.isSick,
       inventory: this.inventory,
       equippedAccessory: this.equippedAccessory,
@@ -369,6 +387,7 @@ const PetState = {
       this.petShape = data.petShape || 'shape-circle';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       this.glitterEnabled = data.glitterEnabled ?? false;
+      this.glitterIntensity = Math.max(0, Math.min(100, Number(data.glitterIntensity ?? 50)));
       this.isSick = data.isSick ?? false;
       this.inventory = data.inventory || ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;

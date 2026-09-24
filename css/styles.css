@@ -597,7 +597,7 @@ body {
 }
 
 .pet-glitter.enabled {
-  opacity: 0.78;
+  opacity: var(--glitter-opacity, 0.55);
 }
 
 .pet-glitter::before {
@@ -658,6 +658,25 @@ body {
 }
 
 .glitter-toggle input {
+  accent-color: #ff4081;
+}
+
+.glitter-intensity {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 10px 8px;
+  color: #6a1b9a;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.glitter-intensity label {
+  min-width: 76px;
+}
+
+.glitter-intensity input[type="range"] {
+  flex: 1;
   accent-color: #ff4081;
 }
 
