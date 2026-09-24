@@ -85,6 +85,9 @@
     .pet-shadow { position: absolute; z-index: 3; left: 50%; bottom: 19px; width: 115px; height: 18px; transform: translateX(-50%); background: rgba(34, 19, 38, .22); border-radius: 50%; filter: blur(5px); }
     .window, .mountain, .tree, .sofa, .bed, .counter, .planet, .wave, .sand, .floor, .rug { position: absolute; }
 
+    /* ========================================================
+       CÓDIGO DE LAS "PROPUESTAS" (Nuevos diseños enriquecidos)
+       ======================================================== */
     .living { background: linear-gradient(180deg, #ffdcb4 0 68%, #b9866f 68%); }
     .living .window { z-index: 0; top: 30px; left: 28px; width: 120px; height: 100px; border: 8px solid #8c5b58; background: linear-gradient(#87d8ed 0 62%, #9fd37c 62%); box-shadow: inset 0 0 0 3px #e9c99c; }
     .living .window::before, .living .window::after { content: ''; position: absolute; top: -8px; bottom: -8px; width: 25px; background: #c87886; }
@@ -105,7 +108,7 @@
     .beach { background: linear-gradient(180deg, #82d9ee 0 55%, #29aebc 55% 73%, #f5d58c 73%); }
     .beach .sun { position: absolute; top: 25px; right: 35px; width: 52px; height: 52px; border-radius: 50%; background: #ffe58d; box-shadow: 0 0 30px #ffe58d; }
     .beach .palm { position: absolute; z-index: 2; left: 24px; bottom: 45px; width: 14px; height: 130px; border-radius: 50%; background: #956140; transform: rotate(8deg); }
-    .beach .palm::before { content: '🌴'; position: absolute; top: -37px; left: -24px; font-size: 53px; }
+    .beach .palm::before { content: ''; position: absolute; top: -37px; left: -34px; width: 80px; height: 60px; background: #4caf50; border-radius: 50%; box-shadow: 15px 15px 0 #388e3c, -15px 5px 0 #2e7d32; }
     .beach .wave { z-index: 1; left: -5%; bottom: 70px; width: 110%; height: 22px; border-radius: 50%; background: rgba(211,255,255,.7); }
     .beach .shell { position: absolute; z-index: 2; right: 25px; bottom: 34px; font-size: 27px; }
 
@@ -130,30 +133,64 @@
     .space .light { position: absolute; z-index: 2; left: 32px; bottom: 69px; width: 18px; height: 10px; border-radius: 50%; background: #9ff7ff; box-shadow: 0 0 20px #9ff7ff; }
     .space::before { content: ''; position: absolute; z-index: 0; inset: 22px 18px 62px; border: 7px solid #667b9b; border-radius: 8px; background: repeating-linear-gradient(90deg, transparent 0 30px, rgba(180,214,238,.18) 31px 34px); box-shadow: inset 0 0 0 5px #202d4e; }
     .space::after { content: ''; position: absolute; z-index: 2; left: 18px; bottom: 68px; width: 42px; height: 30px; background: #324563; border: 3px solid #8aa0bd; box-shadow: 0 0 12px rgba(159,247,255,.4); }
-    .scene.extra::before { position: absolute; z-index: 2; left: 28%; top: 42%; transform: translate(-50%, -50%); font-size: 48px; }
-    .scene.extra .pet { left: 72%; }
-    .scene.extra.playroom-new { background: radial-gradient(circle at 20% 25%, #ff80ab 0 5px, transparent 6px), radial-gradient(circle at 70% 35%, #ffd54f 0 7px, transparent 8px), linear-gradient(180deg, #f7d6ed 0 65%, #6cc7d1 65%); box-shadow: inset 0 -22px 0 rgba(54,140,152,.35); }
-    .scene.extra.playroom-new::before { content: '🧸'; font-size: 58px; }
-    .scene.extra.playroom-new::after { content: '🎈'; display: block; position: absolute; z-index: 2; right: 17%; top: 22%; font-size: 30px; }
-    .scene.extra.park-new { background: radial-gradient(circle at 78% 22%, #fff2a6 0 17px, transparent 18px), linear-gradient(180deg, #81d4fa 0 53%, #aed581 53% 76%, #689f38 76%); }
-    .scene.extra.park-new::before { content: '🌳'; font-size: 72px; left: 24%; top: 44%; }
-    .scene.extra.park-new::after { content: '✦  ✧  ✦'; display: block; position: absolute; z-index: 2; right: 14%; top: 27%; color: #fff4a3; font-size: 18px; letter-spacing: 5px; text-shadow: 0 0 12px #fff4a3; }
+
+    /* Propuestas Extras (Mejoradas con CSS) */
+    .scene.extra::before { position: absolute; z-index: 2; }
+    
+    .scene.extra.playroom-new { background: linear-gradient(180deg, #f7d6ed 0 65%, #6cc7d1 65%); box-shadow: inset 0 -22px 0 rgba(54,140,152,.35); }
+    .scene.extra.playroom-new::before { content: ''; width: 40px; height: 40px; background: #ff5252; position: absolute; left: 20%; bottom: 40%; z-index: 2; box-shadow: 4px 4px 0 rgba(0,0,0,0.1); border: 2px solid #fff; }
+    .scene.extra.playroom-new::after { content: '🎈'; display: block; position: absolute; z-index: 2; right: 25%; top: 22%; font-size: 35px; }
+    
+    .scene.extra.park-new { background: linear-gradient(180deg, #81d4fa 0 53%, #aed581 53% 76%, #689f38 76%); }
+    .scene.extra.park-new::before { content: ''; width: 20px; height: 60px; background: #795548; position: absolute; left: 25%; bottom: 35%; border-radius: 10px; box-shadow: 0 -30px 0 40px #4caf50; z-index: 1;}
+    .scene.extra.park-new::after { content: '✨'; display: block; position: absolute; z-index: 2; right: 20%; top: 20%; font-size: 24px; }
+    
     .scene.extra.mountain-new { background: linear-gradient(180deg, #e0f7fa 0 58%, #cfd8dc 58% 76%, #90a4ae 76%); }
-    .scene.extra.mountain-new::before { content: '🏔️'; font-size: 75px; top: 40%; }
-    .scene.extra.mountain-new::after { content: ''; display: block; position: absolute; z-index: 2; left: 0; right: 0; bottom: 23px; height: 25px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #f5fbff, #cfd8dc); }
-    .scene.extra.camping-new { background: radial-gradient(circle at 75% 22%, #fff9c4 0 3px, transparent 4px), radial-gradient(circle at 22% 28%, #fff9c4 0 2px, transparent 3px), linear-gradient(180deg, #102a43 0 62%, #477a47 62%); }
-    .scene.extra.camping-new::before { content: '⛺'; font-size: 64px; top: 48%; }
-    .scene.extra.camping-new::after { content: '🔥'; display: block; position: absolute; z-index: 2; left: 8%; bottom: 32px; font-size: 22px; }
+    .scene.extra.mountain-new::before { content: ''; position: absolute; z-index: 1; left: 15%; bottom: 38%; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 90px solid #cfd8dc; }
+    .scene.extra.mountain-new::after { content: '⛄'; display: block; position: absolute; z-index: 2; right: 25%; bottom: 30px; font-size: 30px; }
+    
+    .scene.extra.camping-new { background: linear-gradient(180deg, #102a43 0 62%, #477a47 62%); }
+    .scene.extra.camping-new::before { content: ''; position: absolute; z-index: 1; left: 15%; bottom: 35%; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 60px solid #1b5e20; }
+    .scene.extra.camping-new::after { content: '🔥'; display: block; position: absolute; z-index: 2; right: 20%; bottom: 35px; font-size: 30px; }
+    
     .scene.extra.desert-new { background: linear-gradient(180deg, #ffe0b2 0 54%, #ffcc80 54% 76%, #e88928 76%); }
-    .scene.extra.desert-new::before { content: '🌵'; font-size: 70px; left: 27%; }
-    .scene.extra.desert-new::after { content: '🌴'; display: block; position: absolute; z-index: 2; right: 18%; bottom: 47px; font-size: 42px; }
-    .oasis-water { position: absolute; z-index: 1; left: 47%; bottom: 49px; width: 72px; height: 20px; border-radius: 50%; background: #55c7d1; box-shadow: 0 4px 0 #2d9da9, inset 0 4px 0 rgba(255,255,255,.45); }
-    .scene.extra.bathroom-new { background: radial-gradient(circle at 25% 30%, rgba(255,255,255,.9) 0 5px, transparent 6px), radial-gradient(circle at 72% 22%, rgba(255,255,255,.75) 0 7px, transparent 8px), linear-gradient(180deg, #e0f7fa 0 60%, #80deea 60% 77%, #4dd0e1 77%); }
-    .scene.extra.bathroom-new::before { content: '🛁'; font-size: 62px; }
-    .scene.extra.dojo-new { background: radial-gradient(circle at 78% 24%, #d95c58 0 18px, transparent 19px), linear-gradient(180deg, #dce5ed 0 58%, transparent 58%), repeating-linear-gradient(90deg, transparent 0 34px, rgba(92,52,39,.22) 35px 37px), linear-gradient(180deg, #dce5ed 0 58%, #b88668 58% 100%); }
+    .scene.extra.desert-new::before { content: ''; position: absolute; z-index: 1; right: -20px; bottom: 24%; width: 150px; height: 80px; background: #ffb74d; border-radius: 50% 50% 0 0; }
+    .scene.extra.desert-new::after { content: '🌵'; display: block; position: absolute; z-index: 2; right: 20%; bottom: 30px; font-size: 42px; }
+    .oasis-water { position: absolute; z-index: 1; left: 15%; bottom: 35px; width: 90px; height: 25px; border-radius: 50%; background: #4fc3f7; border: 2px solid #29b6f6; }
+    
+    .scene.extra.bathroom-new { background: repeating-linear-gradient(0deg, #e1f5fe, #e1f5fe 20px, #b3e5fc 20px, #b3e5fc 22px); }
+    .scene.extra.bathroom-new::before { content: ''; position: absolute; z-index: 1; left: 15%; bottom: 25%; width: 100px; height: 45px; background: #fff; border-radius: 10px 10px 20px 20px; box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1); border-top: 5px solid #eceff1; }
+    .scene.extra.bathroom-new::after { content: '🫧'; position: absolute; z-index: 2; left: 30%; bottom: 35%; font-size: 25px; }
+
+    /* =======================================================
+       DOJO NINJA - PROPUESTA CORREGIDA (Referencia Calidad)
+       ======================================================= */
+    .scene.extra.dojo-new { 
+      background-color: #dce5ed; /* Cielo */
+      background-image: 
+        radial-gradient(circle at 75% 25%, #d9534f 0 25px, transparent 26px), /* Sol rojo verdadero */
+        repeating-linear-gradient(90deg, transparent 0 34px, rgba(92,52,39,.22) 35px 37px), /* Rayas de madera */
+        linear-gradient(180deg, transparent 58%, #b88668 58%); /* Base del piso */
+      /* El fondo de líneas solo ocupa el 42% inferior (el suelo), no el cielo */
+      background-position: top left, center bottom, top left;
+      background-size: 100% 100%, 100% 42%, 100% 100%;
+      background-repeat: no-repeat;
+    }
     .scene.extra.dojo-new::before, .scene.extra.dojo-new::after { content: none; }
-    .dojo-fuji { position: absolute; z-index: 1; left: 54%; top: 27%; width: 128px; height: 94px; transform: translateX(-50%); clip-path: polygon(0 100%, 36% 43%, 48% 15%, 52% 0, 56% 15%, 68% 43%, 100% 100%); background: linear-gradient(155deg, #f9fcff 0 37%, transparent 38%), linear-gradient(155deg, #718096 0 50%, #536275 51%); opacity: .92; }
-    .dojo-fuji::after { content: ''; position: absolute; left: 45%; top: 17%; width: 28px; height: 32px; transform: rotate(25deg); background: #fff; clip-path: polygon(0 0, 100% 0, 72% 100%, 30% 78%); }
+    
+    /* Monte Fuji real (no un cono), centrado y con nieve */
+    .dojo-fuji { 
+      position: absolute; z-index: 1; left: 50%; top: 22%; width: 160px; height: 110px; 
+      transform: translateX(-50%); 
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%); 
+      background: linear-gradient(180deg, #fff 0 38%, #536275 38%); 
+    }
+    /* Picos de nieve irregulares del Fuji */
+    .dojo-fuji::after {
+      content: ''; position: absolute; top: 38%; left: 0; width: 100%; height: 12px; background: #fff;
+      clip-path: polygon(0 0, 15% 100%, 30% 0, 50% 100%, 70% 0, 85% 100%, 100% 0);
+    }
+    
     .dojo-torii { position: absolute; z-index: 2; left: 9%; top: 25%; width: 116px; height: 110px; }
     .dojo-torii .torii-beam { position: absolute; left: 0; top: 0; width: 116px; height: 13px; border-radius: 50% 50% 0 0; background: #272027; box-shadow: 0 11px 0 #b84832, 0 17px 0 #963c2d; }
     .dojo-torii .torii-post { position: absolute; top: 18px; width: 12px; height: 91px; background: #b84832; border-left: 4px solid #8c3028; border-right: 3px solid #d35d3d; }
@@ -161,15 +198,34 @@
     .dojo-torii .torii-cross { position: absolute; left: 12px; top: 44px; width: 92px; height: 9px; background: #b84832; box-shadow: 0 10px 0 #8c3028; }
     .dojo-torii .torii-base { position: absolute; bottom: 0; width: 23px; height: 9px; background: #303441; }
     .dojo-torii .torii-base.left { left: 12px; } .dojo-torii .torii-base.right { right: 12px; }
-    .scene.extra.disco-new { background: radial-gradient(circle at 50% 25%, #f06292 0 3px, transparent 4px), linear-gradient(135deg, #4a148c, #880e4f 55%, #311b92); }
-    .scene.extra.disco-new::before { content: '🪩'; font-size: 65px; }
-    .scene.extra.disco-new::after { content: ''; display: block; position: absolute; z-index: 1; inset: 0; background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.25) 45%, transparent 49%), linear-gradient(65deg, transparent 48%, rgba(255,100,190,.28) 51%, transparent 55%); }
-    .scene.extra.castle-new { background: radial-gradient(circle at 77% 22%, #fff0a8 0 15px, transparent 16px), linear-gradient(180deg, #f3e5f5 0 60%, #ce93d8 60% 78%, #6a1b9a 78%); }
-    .scene.extra.castle-new::before { content: '🏰'; font-size: 68px; }
-    .scene.extra.underwater-new { background: radial-gradient(circle at 25% 28%, #80deea 0 3px, transparent 4px), radial-gradient(circle at 74% 20%, #b2ebf2 0 5px, transparent 6px), linear-gradient(180deg, #00838f 0 70%, #006064 70%); }
-    .scene.extra.underwater-new::before { content: '🪸'; font-size: 68px; }
-    .scene.extra.volcano-new { background: radial-gradient(circle at 70% 28%, #ffcc80 0 5px, transparent 6px), linear-gradient(180deg, #bf360c 0 56%, #dd2c00 56% 77%, #4e342e 77%); }
-    .scene.extra.volcano-new::before { content: '🌋'; font-size: 70px; }
+    /* Fin Dojo */
+
+    .scene.extra.disco-new { background: #111; }
+    .scene.extra.disco-new::before { content: ''; position: absolute; z-index: 1; top: -10px; left: 20%; width: 100px; height: 180px; background: linear-gradient(to bottom, rgba(233,30,99,0.5), transparent); clip-path: polygon(50% 0, 0 100%, 100% 100%); }
+    .scene.extra.disco-new::after { content: ''; display: block; position: absolute; z-index: 0; bottom: 0; left: 0; width: 100%; height: 45%; background: repeating-linear-gradient(90deg, #111, #111 20px, #e91e63 20px, #e91e63 22px), repeating-linear-gradient(0deg, #111, #111 20px, #00bcd4 20px, #00bcd4 22px); transform: perspective(200px) rotateX(40deg); transform-origin: bottom; }
+    
+    .scene.extra.castle-new { background: #9e9e9e; }
+    .scene.extra.castle-new::before { content: ''; position: absolute; z-index: 1; left: 50%; bottom: 42%; transform: translateX(-50%); width: 60px; height: 75px; background: #fbc02d; border-radius: 20px 20px 0 0; }
+    .scene.extra.castle-new::after { content: ''; display: block; position: absolute; z-index: 0; bottom: 0; left: 50%; width: 80px; height: 42%; transform: translateX(-50%) perspective(150px) rotateX(40deg); background: #b71c1c; transform-origin: bottom; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    
+    .scene.extra.underwater-new { background: linear-gradient(180deg, #0277bd 0 70%, #e6c280 70%); }
+    .scene.extra.underwater-new::before { content: ''; position: absolute; z-index: 1; left: 20%; bottom: 30%; width: 12px; height: 70px; background: #00c853; border-radius: 10px; box-shadow: 15px 15px 0 -2px #00e676; }
+    .scene.extra.underwater-new::after { content: ''; display: block; position: absolute; z-index: 0; top: 0; left: 25%; width: 60px; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); transform: rotate(15deg); }
+    
+    .scene.extra.volcano-new { background: linear-gradient(180deg, #3e2723 0 65%, #212121 65%); }
+    .scene.extra.volcano-new::before { content: ''; position: absolute; z-index: 1; left: 50%; bottom: 25%; transform: translateX(-50%); width: 140px; height: 35px; background: #ff3d00; border-radius: 50%; box-shadow: 0 0 20px #ff3d00; }
+    .scene.extra.volcano-new::after { content: ''; display: block; position: absolute; z-index: 0; left: 10%; bottom: 40%; width: 70px; height: 50px; background: #424242; border-radius: 20px 30px 10px 10px; }
+
+    /* Desplazar la mascota en ciertas "propuestas" para que no se superponga al escenario principal */
+    .scene.extra.dojo-new .pet, .scene.extra.dojo-new .pet-shadow,
+    .scene.extra.bathroom-new .pet, .scene.extra.bathroom-new .pet-shadow { left: 80%; }
+    .scene.extra.castle-new .pet, .scene.extra.castle-new .pet-shadow { left: 25%; }
+    .scene.extra.camping-new .pet, .scene.extra.camping-new .pet-shadow { left: 50%; } /* Medio exacto entre fogata y tienda */
+    .scene.extra.desert-new .pet, .scene.extra.desert-new .pet-shadow { left: 65%; }
+
+    /* ==========================================================
+       CÓDIGO ORIGINAL DEL "ANTES" (Sin modificaciones absolutas)
+       ========================================================== */
     .scene.old.playroom-old { background: linear-gradient(180deg, #f3e5f5 0 70%, #80deea 70%); }
     .scene.old.playroom-old::before { content: '🧸'; }
     .scene.old.park-old { background: linear-gradient(180deg, #81d4fa 0 68%, #7cb342 68%); }
@@ -223,25 +279,27 @@
     <p>Propuesta de profundidad para Mi Pet: fondo lejano, plano medio, primer plano, iluminación y mascota protagonista.</p>
   </header>
   <main class="gallery">
+    <!-- El HTML del ANTES está idéntico. El HTML de las Propuestas se mantiene optimizado. -->
     <article class="scene-card"><div class="comparison"><div class="scene old living-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene living"><span class="version-tag">Propuesta</span><div class="window"></div><div class="sofa"></div><div class="lamp"></div><div class="rug"></div><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Sala de estar</h2><p>Ventana, sofá, alfombra y luz cálida.</p></div></article>
     <article class="scene-card"><div class="comparison"><div class="scene old bedroom-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene bedroom"><span class="version-tag">Propuesta</span><div class="moon"></div><span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span><div class="bed"><div class="pillow"></div></div><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Dormitorio nocturno</h2><p>Luna, estrellas y cama en capas.</p></div></article>
     <article class="scene-card"><div class="comparison"><div class="scene old beach-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene beach"><span class="version-tag">Propuesta</span><div class="sun"></div><div class="palm"></div><div class="wave"></div><span class="shell">🐚</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Playa tropical</h2><p>Horizonte, agua, arena, palmera y luz solar.</p></div></article>
     <article class="scene-card"><div class="comparison"><div class="scene old forest-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene forest"><span class="version-tag">Propuesta</span><div class="mountain"></div><div class="tree tree-a"></div><div class="tree tree-b"></div><span class="leaf leaf-a">✦</span><span class="leaf leaf-b">✧</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Bosque encantado</h2><p>Montaña lejana, árboles cercanos y suelo profundo.</p></div></article>
     <article class="scene-card"><div class="comparison"><div class="scene old kitchen-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene kitchen"><span class="version-tag">Propuesta</span><div class="tiles"></div><div class="cabinet"></div><div class="counter"></div><span class="pan">🍳</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Cocina del chef</h2><p>Azulejos, muebles, mesada y objetos de cocina.</p></div></article>
     <article class="scene-card"><div class="comparison"><div class="scene old space-old"><span class="version-tag">Antes</span><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div><div class="scene space"><span class="version-tag">Propuesta</span><div class="planet"></div><div class="platform"></div><div class="light"></div><div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div></div></div><div class="scene-label"><h2>Estación espacial</h2><p>Planeta, estrellas, plataforma y luces de ambiente.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old playroom-old"><span class="version-tag">Antes</span></div><div class="scene extra playroom-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Sala de juegos</h2><p>Juguetes, burbujas de color y suelo acuático.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old park-old"><span class="version-tag">Antes</span></div><div class="scene extra park-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Parque mágico</h2><p>Cielo abierto, árbol protagonista y césped en capas.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old mountain-old"><span class="version-tag">Antes</span></div><div class="scene extra mountain-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Montaña nevada</h2><p>Montañas lejanas, nieve y suelo frío con profundidad.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old camping-old"><span class="version-tag">Antes</span></div><div class="scene extra camping-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Campamento nocturno</h2><p>Cielo oscuro, estrellas, pasto y tienda iluminada.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old desert-old"><span class="version-tag">Antes</span></div><div class="scene extra desert-new"><span class="version-tag">Propuesta</span><span class="oasis-water"></span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Oasis del desierto</h2><p>Capas cálidas, oasis de agua y cactus en primer plano.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old bathroom-old"><span class="version-tag">Antes</span></div><div class="scene extra bathroom-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Baño de burbujas</h2><p>Agua, espuma, burbujas y ambiente luminoso.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old dojo-old"><span class="version-tag">Antes</span></div><div class="scene extra dojo-new"><span class="version-tag">Propuesta</span><div class="dojo-fuji"></div><div class="dojo-torii"><span class="torii-beam"></span><span class="torii-post left"></span><span class="torii-post right"></span><span class="torii-cross"></span><span class="torii-base left"></span><span class="torii-base right"></span></div><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Dojo ninja</h2><p>Piso de madera, torii, Monte Fuji y sol rojo.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old disco-old"><span class="version-tag">Antes</span></div><div class="scene extra disco-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Pista de baile</h2><p>Luz de color, reflejos y ambiente nocturno.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old castle-old"><span class="version-tag">Antes</span></div><div class="scene extra castle-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Castillo real</h2><p>Arquitectura, suelo ceremonial y luz violeta.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old underwater-old"><span class="version-tag">Antes</span></div><div class="scene extra underwater-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Mundo submarino</h2><p>Agua profunda, corales y puntos de luz.</p></div></article>
-    <article class="scene-card"><div class="comparison"><div class="scene old volcano-old"><span class="version-tag">Antes</span></div><div class="scene extra volcano-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Guarida volcánica</h2><p>Lava, roca oscura y luz naranja de fondo.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old playroom-old"><span class="version-tag">Antes</span></div><div class="scene extra playroom-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Sala de juegos</h2><p>Juguetes, bloques y colores vibrantes.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old park-old"><span class="version-tag">Antes</span></div><div class="scene extra park-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Parque mágico</h2><p>Cielo abierto, árbol con sombra y destellos.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old mountain-old"><span class="version-tag">Antes</span></div><div class="scene extra mountain-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Montaña nevada</h2><p>Montañas en CSS, nieve y cielo despejado.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old camping-old"><span class="version-tag">Antes</span></div><div class="scene extra camping-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Campamento nocturno</h2><p>Carpa y fogata separadas bajo la noche.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old desert-old"><span class="version-tag">Antes</span></div><div class="scene extra desert-new"><span class="version-tag">Propuesta</span><span class="oasis-water"></span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Oasis del desierto</h2><p>Dunas suaves, oasis de agua y cactus de fondo.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old bathroom-old"><span class="version-tag">Antes</span></div><div class="scene extra bathroom-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Baño de burbujas</h2><p>Bañera real en CSS, azulejos y burbujas.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old dojo-old"><span class="version-tag">Antes</span></div><div class="scene extra dojo-new"><span class="version-tag">Propuesta</span><div class="dojo-fuji"></div><div class="dojo-torii"><span class="torii-beam"></span><span class="torii-post left"></span><span class="torii-post right"></span><span class="torii-cross"></span><span class="torii-base left"></span><span class="torii-base right"></span></div><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Dojo ninja</h2><p>Suelo de madera ajustado, Monte Fuji, torii y sol.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old disco-old"><span class="version-tag">Antes</span></div><div class="scene extra disco-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Pista de baile</h2><p>Haz de luz, pista en perspectiva y fondo oscuro.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old castle-old"><span class="version-tag">Antes</span></div><div class="scene extra castle-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Castillo real</h2><p>Muros grises, alfombra extendida y trono.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old underwater-old"><span class="version-tag">Antes</span></div><div class="scene extra underwater-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Mundo submarino</h2><p>Rayos de luz acuática, arena y vegetación.</p></div></article>
+    <article class="scene-card"><div class="comparison"><div class="scene old volcano-old"><span class="version-tag">Antes</span></div><div class="scene extra volcano-new"><span class="version-tag">Propuesta</span><div class="pet-shadow"></div><div class="pet"></div></div></div><div class="scene-label"><h2>Guarida volcánica</h2><p>Piscinas de lava, rocas y ambiente oscuro.</p></div></article>
   </main>
   <script>
+    // JS del archivo original intacto.
     document.querySelectorAll('.scene.old').forEach(scene => {
       if (scene.querySelector('.pet')) return;
       scene.insertAdjacentHTML('beforeend', '<div class="pet-shadow"></div><div class="pet"><div class="face"><span class="mouth">⌣</span></div></div>');
