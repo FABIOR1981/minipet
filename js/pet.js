@@ -44,6 +44,10 @@ const PetState = {
     return list[index];
   },
 
+  getDialogue(key, fallback) {
+    return this.dialogues.alerts?.[key] || fallback;
+  },
+
   startWandering() {
     setInterval(() => {
       // Solo se mueve si NO está durmiendo ni enferma
@@ -177,7 +181,7 @@ const PetState = {
   feed() {
     if (this.isSleeping) return;
     if (this.hunger >= 100) {
-      alert('¡Tu mascota ya está pancita llena!');
+      alert(this.getDialogue('full', 'No preciso comer ahora.'));
       return;
     }
     this.hunger = Math.min(100, this.hunger + 30);
@@ -188,7 +192,7 @@ const PetState = {
 
   heal() {
     if (!this.isSick) {
-      alert('¡Tu mascota no está enferma!');
+      alert(this.getDialogue('healthy', 'No preciso un doctor ahora.'));
       return;
     }
     this.isSick = false;

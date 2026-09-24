@@ -52,5 +52,9 @@
     "⭐ Zzz... Volando entre las estrellas...",
     "☁️ Zzz... Durmiendo en una nube esponjosa...",
     "💤 Zzz... Mmm... pastelitos..."
-  ]
+  ],
+  "alerts": {
+    "full": "No preciso comer ahora.",
+    "healthy": "No preciso un doctor ahora."
+  }
 }
