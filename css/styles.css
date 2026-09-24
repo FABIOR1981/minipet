@@ -917,7 +917,8 @@ body {
   position: absolute;
   object-fit: contain;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(var(--accessory-scale, 1));
+  transform-origin: center center;
 }
 
 /* Sombreros y Coronas (Cabeza) */
@@ -925,6 +926,7 @@ body {
   top: -28px;
   width: 65px;
   height: 65px;
+  --accessory-scale: 1.1;
 }
 
 /* Lentes y Gafas (Ojos) */
@@ -932,6 +934,7 @@ body {
   top: 26px;
   width: 50px;
   height: 35px;
+  --accessory-scale: 1.05;
 }
 
 /* Diademas y Orejas Grandes (Orejas) */
@@ -939,6 +942,7 @@ body {
   top: -22px;
   width: 85px;
   height: 60px;
+  --accessory-scale: 1.1;
 }
 
 /* Moños y Varitas (Cuello) */
@@ -946,6 +950,32 @@ body {
   top: 78px;
   width: 45px;
   height: 40px;
+  --accessory-scale: 1.1;
+}
+
+/* Las formas anchas necesitan accesorios algo mayores y más bajos. */
+.pet-sprite.shape-dumpling .accessory.pos-head img,
+.pet-sprite.shape-mochi .accessory.pos-head img {
+  --accessory-scale: 1.3;
+  top: -25px;
+}
+
+.pet-sprite.shape-dumpling .accessory.pos-eyes img,
+.pet-sprite.shape-mochi .accessory.pos-eyes img {
+  --accessory-scale: 1.15;
+  top: 22px;
+}
+
+.pet-sprite.shape-dumpling .accessory.pos-ears img,
+.pet-sprite.shape-mochi .accessory.pos-ears img {
+  --accessory-scale: 1.2;
+  top: -18px;
+}
+
+.pet-sprite.shape-dumpling .accessory.pos-neck img,
+.pet-sprite.shape-mochi .accessory.pos-neck img {
+  --accessory-scale: 1.15;
+  top: 55px;
 }
 
 .heart-particle {

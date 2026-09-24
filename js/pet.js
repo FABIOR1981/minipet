@@ -120,6 +120,7 @@ const PetState = {
       if (item) {
         accessoryEl.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
         accessoryEl.classList.add(`pos-${item.type}`);
+        accessoryEl.classList.add(`item-${item.id}`);
       }
     } else {
       accessoryEl.innerHTML = '';
