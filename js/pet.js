@@ -126,12 +126,12 @@ const PetState = {
     accessoryEl.style.cssText = '';
 
     if (this.equippedAccessory) {
-      const item = Store.items.find(i => i.id === this.equippedAccessory);
+      const item = Catalogo.items.find(i => i.id === this.equippedAccessory);
       if (item) {
         accessoryEl.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
         accessoryEl.classList.add(`pos-${item.type}`);
         accessoryEl.classList.add(`item-${item.id}`);
-        const fit = Store.accessoryFits?.[item.id];
+        const fit = Catalogo.accessoryFits?.[item.id];
         if (fit) {
           const accessoryImg = accessoryEl.querySelector('img');
           accessoryImg.style.setProperty('--accessory-scale', fit.scale);
@@ -279,7 +279,7 @@ const PetState = {
   },
 
   equipItem(itemId) {
-    const item = Store.items.find(i => i.id === itemId);
+    const item = Catalogo.items.find(i => i.id === itemId);
     if (!item) return;
 
     if (item.type === 'bg') {
