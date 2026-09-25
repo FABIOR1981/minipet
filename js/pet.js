@@ -342,7 +342,7 @@ const PetState = {
       if (this.energy === 100) this.isSleeping = false;
     } else {
       this.hunger = Math.max(0, this.hunger - 3);
-      this.happiness = Math.max(0, this.happiness - 2);
+      this.happiness = Math.max(0, this.happiness - 3);
       this.energy = Math.max(0, this.energy - 2);
 
       if (!this.isSick && (this.hunger < 40 || this.happiness < 40) && Math.random() < 0.2) {
