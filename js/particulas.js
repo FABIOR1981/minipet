@@ -26,7 +26,7 @@ const Particles = {
     bg_bathroom:   { mode: 'float-up',  emojis: ['🫧', '💧', '🦆'], count: 9, interval: 1600 }, // 🦆 Patitos de hule flotando entre burbujas
     bg_dojo:       { mode: 'fall-slow', emojis: ['🌸', '🍃', '☯️'], count: 8, interval: 2200 }, // ☯️ Equilibrio y pétalos de cerezo
     bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶', '🪩'], count: 12 }, // 🎶 Música y destellos de la bola de espejos
-    bg_castle:     { mode: 'float-up',  emojis: ['✨'],       count: 8, interval: 2400 },
+    bg_castle:     { mode: 'float-up',  emojis: ['✨', '🧚', '🪄'], count: 8, interval: 2400 },
     bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 8, interval: 2000 }
   },
 
