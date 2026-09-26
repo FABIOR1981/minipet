@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Deshabilita el zoom táctil molesto en móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mi Mascota</title>
+
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#b388ff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/escenarios.css">
+  <link rel="stylesheet" href="css/mascota.css">
+  <link rel="stylesheet" href="css/juegos.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Barra Superior -->
+    <header class="top-bar">
+      <div class="stat-box">🪙 <span id="coin-count">100</span></div>
+      <div class="stat-box">❤️ <span id="happy-count">100</span>%</div>
+      <div class="stat-box">🍕 <span id="hunger-count">100</span>%</div>
+      <div class="stat-box">⚡ <span id="energy-count">100</span>%</div>
+    </header>
+
+    <!-- Globo de Pensamiento -->
+    <div id="pet-thought" class="thought-bubble">¡Hola! ¿Jugamos?</div>
+
+    <!-- Escenario Principal -->
+    <main id="pet-room" class="room">
+      <div id="bg-particles"></div>
+      <div id="pet" class="pet-sprite" onclick="PetState.petPet()">
+        <div id="pet-glitter" class="pet-glitter" aria-hidden="true"></div>
+        <!-- Accesorio Equipado -->
+        <div id="pet-accessory" class="accessory"></div>
+
+        <!-- Cara Kawaii Modular -->
+        <div class="kawaii-face" id="kawaii-face">
+          <div class="eyebrows">
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+          </div>
+          <div class="eyes">
+            <div class="eye left"><div class="sparkle">★</div></div>
+            <div class="eye right"><div class="sparkle">★</div></div>
+          </div>
+          <div class="cheeks">
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+          </div>
+          <div class="mouth">:3</div>
+          <div id="extra-prop" class="extra-prop"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Menú Inferior en Rejilla 4x2 -->
+    <nav class="bottom-nav">
+      <button onclick="PetState.feed()">
+        <span class="btn-icon">🍗</span>
+        <span class="btn-text">Comer</span>
+      </button>
+      <button onclick="PetState.heal()">
+        <span class="btn-icon">🏥</span>
+        <span class="btn-text">Medicina</span>
+      </button>
+      <button onclick="PetState.sleep()">
+        <span class="btn-icon">😴</span>
+        <span class="btn-text">Dormir</span>
+      </button>
+      <button onclick="switchTab('minigames')">
+        <span class="btn-icon">🎮</span>
+        <span class="btn-text">Juegos</span>
+      </button>
+      <button onclick="switchTab('my-pet')">
+        <span class="btn-icon">🐾</span>
+        <span class="btn-text">Mi Pet</span>
+      </button>
+      <button onclick="switchTab('accessories')">
+        <span class="btn-icon">🎀</span>
+        <span class="btn-text">Accesorios</span>
+      </button>
+      <button onclick="switchTab('scenery')">
+        <span class="btn-icon">🏡</span>
+        <span class="btn-text">Escenario</span>
+      </button>
+      <button onclick="switchTab('store')">
+        <span class="btn-icon">🛍️</span>
+        <span class="btn-text">Tienda</span>
+      </button>
+    </nav>
+
+    <!-- Modales -->
+    <section id="modal-screen" class="modal hidden">
+      <button class="close-btn" onclick="closeModal()">❌ Cerrar</button>
+      <div id="modal-content"></div>
+    </section>
+  </div>
+
+  <script src="js/mascota-estado.js"></script>
+  <script src="js/mascota-visual.js"></script>
+  <script src="js/particulas.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/tienda.js"></script>
+  <script src="js/juegos/juegos-base.js"></script>
+  <script src="js/juegos/atrapa-dulces.js"></script>
+  <script src="js/juegos/explota-globos.js"></script>
+  <script src="js/juegos/torre-postres.js"></script>
+  <script src="js/juegos/simon-memoria.js"></script>
+  <script src="js/juegos/runner-magico.js"></script>
+  <script src="js/juegos/burbujas-magicas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
