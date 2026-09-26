@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.2.0'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.3.0'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -13,7 +13,13 @@ const ASSETS_TO_CACHE = [
   './js/particulas.js',
   './js/catalogo.js',
   './js/tienda.js',
-  './js/minigames.js',
+  './js/juegos/juegos-base.js',
+  './js/juegos/atrapa-dulces.js',
+  './js/juegos/explota-globos.js',
+  './js/juegos/torre-postres.js',
+  './js/juegos/simon-memoria.js',
+  './js/juegos/runner-magico.js',
+  './js/juegos/burbujas-magicas.js',
   './data/dialogues.json',
   './manifest.json',
   './img/accessories/hat_crown.svg',
