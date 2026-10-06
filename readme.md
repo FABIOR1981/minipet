@@ -2,6 +2,10 @@
 
 Mascota virtual estilo Tamagotchi, 100% web, instalable como **PWA**. Cuidá a tu mascota, vestila con accesorios, decorá su escenario y ganá monedas jugando minijuegos.
 
+## Documentación
+
+El manual de usuario está en [documentacion-central](https://github.com/FABIOR1981/documentacion-central/tree/main/minipet/documentacion) ([PDF](https://github.com/FABIOR1981/documentacion-central/blob/main/minipet/documentacion/MANUAL_USUARIO.pdf)). También se puede consultar desde la bitácora de proyectos.
+
 ## ✨ Funcionalidades
 
 - **Estado en vivo**: monedas 🪙, felicidad ❤️, hambre 🍕 y energía ⚡, que decaen con el tiempo (`tick()` cada 8s).
