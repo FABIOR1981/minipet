@@ -17,7 +17,10 @@ El contexto técnico detallado (para quien vaya a tocar el código) está en [`d
 - **Mi Pet**: color de piel, tamaño, forma y brillantina.
 - **Accesorios**: 21 accesorios equipables (sombreros, orejas, lentes, alas, etc.) y looks guardados (hasta 6).
 - **Escenarios**: 17 escenarios ilustrados (sala, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas, con partículas ambientales y detalles animados propios (fuego, nubes, luces, luciérnagas).
-- **6 minijuegos** para ganar monedas: Atrapa Dulces, Explotar Globos, Torre de Postres, Simón Memoria, Runner Mágico y Burbujas Mágicas — con soporte táctil y de teclado, y mejor puntaje guardado por juego. Tu mascota participa en todos: es la protagonista en Runner y Atrapa Dulces, mira y reacciona en los demás, hace la cuenta regresiva y festeja el resultado.
+- **10 minijuegos** para ganar monedas, con soporte táctil y mejor puntaje guardado por juego:
+  - De reflejos: Atrapa Dulces, Explotar Globos, Burbujas Mágicas, Runner Mágico, Torre de Postres y Lluvia de Comida (atrapar la comida y esquivar lo que no se come).
+  - De memoria y atención: Simón Memoria, Parejas (memotest con los accesorios), ¿Dónde Está? (seguir a la mascota entre tres cajas que se mezclan) y Vestirla Igual (memorizar un look y armarlo).
+  - Tu mascota participa en todos: es la protagonista en Runner, Atrapa Dulces, Lluvia de Comida y ¿Dónde Está?, mira y reacciona en los demás, hace la cuenta regresiva y festeja el resultado.
 - **Efectos de sonido** generados con Web Audio API (sin archivos de audio externos).
 - **PWA instalable**: `manifest.json` + `sw.js` con estrategia *network-first* y caché offline; avisa al usuario cuando hay una versión nueva disponible.
 - **Persistencia local**: todo el progreso se guarda en `localStorage`.
@@ -36,7 +39,7 @@ minipet/
 │   ├── base.css               # Layout general, barras, modal, tienda
 │   ├── escenarios.css         # Los 17 escenarios, su primer plano y las partículas
 │   ├── mascota.css            # Mascota, formas, accesorios, sombra y animaciones
-│   └── juegos.css             # Minijuegos: HUD, conteo y pantalla de resultado
+│   └── juegos.css             # Minijuegos: HUD, conteo, resultado y juegos sin canvas
 ├── js/
 │   ├── app.js                 # Sonidos (AudioEffects), inicio, navegación y registro del SW
 │   ├── mascota-estado.js      # PetState: stats, acciones, inventario, looks, guardado
@@ -53,7 +56,11 @@ minipet/
 │       ├── torre-postres.js
 │       ├── simon-memoria.js
 │       ├── runner-magico.js
-│       └── burbujas-magicas.js
+│       ├── burbujas-magicas.js
+│       ├── parejas.js
+│       ├── donde-esta.js
+│       ├── vestir-igual.js
+│       └── lluvia-comida.js
 ├── img/
 │   ├── accessories/           # SVG de los accesorios equipables
 │   └── escenarios/            # Ilustración SVG de cada escenario

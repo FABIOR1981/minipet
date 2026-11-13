@@ -1,5 +1,5 @@
 // =========================================================
-// JUEGOS-BASE.JS — Estado y utilidades compartidas por los 6
+// JUEGOS-BASE.JS — Estado y utilidades compartidas por los
 // minijuegos: salida segura (forceExitIfActive), menú principal,
 // conteo regresivo, pantalla de resultado, mejor puntaje por
 // juego (localStorage), HUD reutilizable y escala de canvas.
@@ -53,7 +53,7 @@ const Minigames = {
     };
   },
 
-  // Menú Principal de Minijuegos (6 Opciones Kawaii)
+  // Menú Principal de Minijuegos
  renderMenu() {
   const content = document.getElementById('modal-content');
   content.innerHTML = `
@@ -61,7 +61,7 @@ const Minigames = {
     <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
       ¡Gana monedas y haz feliz a tu mascota!
     </p>
-    <div class="grid-container">
+    <div class="grid-container games-grid">
       <div class="item-card" onclick="Minigames.startCatchGame()" style="cursor:pointer;">
         <span style="font-size:2rem; margin-bottom:4px;">🎈</span>
         <span class="card-title">Atrapa Dulces</span>
@@ -90,6 +90,26 @@ const Minigames = {
       <div class="item-card" onclick="Minigames.startBubbleGame()" style="cursor:pointer;">
         <span style="font-size:2rem; margin-bottom:4px;">✨</span>
         <span class="card-title">Burbujas Mágicas</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startPairsGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🃏</span>
+        <span class="card-title">Parejas</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startHideGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🎁</span>
+        <span class="card-title">¿Dónde Está?</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startDressGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">👗</span>
+        <span class="card-title">Vestirla Igual</span>
+        <button class="card-btn">Jugar</button>
+      </div>
+      <div class="item-card" onclick="Minigames.startFoodGame()" style="cursor:pointer;">
+        <span style="font-size:2rem; margin-bottom:4px;">🍎</span>
+        <span class="card-title">Lluvia de Comida</span>
         <button class="card-btn">Jugar</button>
       </div>
     </div>
