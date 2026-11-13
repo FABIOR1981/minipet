@@ -56,7 +56,7 @@ Object.assign(PetState, {
 
     this.walkPos = { x: Math.random(), t: Math.random() };
     petEl.classList.add('walking');
-    this.applyWalkPosition();
+    this.applyWalkPosition(true);
 
     setTimeout(() => {
       petEl.classList.remove('walking');
@@ -66,12 +66,15 @@ Object.assign(PetState, {
   // Coloca la mascota y su sombra en el punto guardado en walkPos.
   // Zona caminable: todo el ancho de la habitación y todo el piso del
   // escenario, desde el horizonte hasta el borde de abajo. Cuanto más al
-  // fondo, más chica se ve (--pet-depth).
-  applyWalkPosition() {
+  // fondo, más chica se ve. Con walking = true el traslado dura lo que el
+  // paseo; si no (cambio de tamaño, forma o pantalla) se acomoda enseguida.
+  applyWalkPosition(walking = false) {
     const petEl = document.getElementById('pet');
     const roomEl = document.getElementById('pet-room');
     const shadowEl = document.getElementById('pet-shadow');
     if (!petEl || !roomEl || !this.walkPos) return;
+
+    roomEl.style.setProperty('--walk-time', walking ? '2.5s' : '0.2s');
 
     const roomW = roomEl.clientWidth;
     const roomH = roomEl.clientHeight;
@@ -102,7 +105,7 @@ Object.assign(PetState, {
     // left/top son los de la caja sin escalar (la escala se aplica desde el centro)
     petEl.style.left = `${Math.round(centerX - halfW)}px`;
     petEl.style.top = `${Math.round(feetY - halfH * (1 + scale))}px`;
-    petEl.style.setProperty('--pet-depth', depth.toFixed(3));
+    petEl.style.scale = depth.toFixed(3);
 
     if (shadowEl) {
       shadowEl.style.left = `${Math.round(centerX)}px`;
