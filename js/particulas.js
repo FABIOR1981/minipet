@@ -71,7 +71,10 @@ const Particles = {
     } else {
       // Ráfaga inicial para no esperar al primer intervalo
       for (let i = 0; i < config.count; i++) {
-        setTimeout(() => this.spawnStream(container, config), i * (config.interval / config.count));
+        setTimeout(() => {
+          // Si mientras tanto se cambió de escenario, esta tanda ya no corresponde
+          if (this._current === backgroundId) this.spawnStream(container, config);
+        }, i * (config.interval / config.count));
       }
       // Cuántas partículas nacen por tick para que la densidad sostenida
       // en pantalla siga reflejando el `count` configurado (antes solo

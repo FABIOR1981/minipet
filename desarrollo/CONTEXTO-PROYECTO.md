@@ -31,16 +31,17 @@ La mascota puede:
 - `js/catalogo.js`: objeto `Catalogo`, solo datos: `items` (accesorios y escenarios), `shapes` y `accessoryFits`.
 - `js/tienda.js`: objeto `Store`, que dibuja la Tienda, Accesorios, Escenario y Mi Pet.
 - `js/particulas.js`: objeto `Particles`, partículas ambientales por escenario.
+- `js/ambiente.js`: objeto `Ambiente`, detalles animados de cada escenario (luces, nubes, humo, fuego).
 - `js/juegos/juegos-base.js`: objeto `Minigames` con menú, conteo, resultado, récords, HUD y reloj de frames.
 - `js/juegos/*.js`: un archivo por minijuego; cada uno agrega su método a `Minigames`.
 - `img/accessories/`: SVG de los accesorios.
-- `img/escenarios/`: ilustración SVG de cada escenario; `img/escenarios/frente/` tiene los objetos que van por delante de la mascota.
+- `img/escenarios/`: ilustración SVG de cada escenario; `img/escenarios/frente/` tiene los objetos que van por delante de la mascota e `img/escenarios/fx/` los sprites del ambiente animado.
 - `data/dialogues.json`: frases de la mascota y mensajes hablados.
 - `sw.js`: Service Worker y caché PWA.
 - `manifest.json`: configuración PWA.
 - `netlify.toml` y `herramientas/construir.js`: build y publicación.
 
-Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
+Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
 
 ## Navegación actual
 
@@ -158,7 +159,16 @@ Profundidad: al ir al fondo la mascota se achica hasta `PetState.FAR_DEPTH` (0.7
 
 La duración del traslado sale de la variable `--walk-time` de `#pet-room`: 2.5 s durante un paseo y 0.2 s cuando solo se reacomoda (cambio de tamaño, forma o pantalla).
 
-Capas dentro de `#pet-room`, de atrás hacia adelante: fondo del escenario, partículas (`z-index: 2`), sombra (3), mascota (4) y primer plano del escenario (5, no recibe toques).
+Capas dentro de `#pet-room`, de atrás hacia adelante: fondo del escenario, ambiente animado `#scene-fx` (`z-index: 1`), partículas (2), sombra (3), mascota (4), primer plano del escenario (5, no recibe toques) y la capa de noche `#night-overlay` (6).
+
+### Vida en reposo y reacciones
+
+- En reposo, `#pet` respira (animación `breathe`) y los ojos parpadean (`blink`). La respiración se aplica solo a `#pet`, no a `.pet-sprite`, para no afectar las miniaturas de `Mi Pet`.
+- Al caminar, `moveRandomly()` agrega `look-left` o `look-right` a `#pet`, que corre la cara y los lentes unos píxeles hacia ese lado.
+- `PetState.floatText(texto)` muestra un cartelito que sube desde la mascota; `burst(emojis)` lanza una ráfaga de emojis; `showEating()` anima el bocado y la masticación. Los usan `feed()`, `heal()` y `petPet()`.
+- Al dormir, `updateUI()` pone la clase `sleeping` en `#pet-room`, que enciende `#night-overlay`.
+- Cuando una stat sube, su casillero de la barra superior hace un pulso (`.stat-box.bump`).
+- Todo respeta `prefers-reduced-motion`.
 
 ## Accesorios: sistema de ajuste
 
@@ -340,6 +350,7 @@ Pasos:
 3. Añadir en `css/escenarios.css` la regla `.room.bg_new_scene` con el color de respaldo y la imagen.
 4. Si lleva objetos por delante de la mascota, dibujarlos en un segundo SVG transparente del mismo tamaño en `img/escenarios/frente/nuevo.svg` y añadir la regla `.room.bg_new_scene::after`. Esos objetos deben apoyarse en el borde inferior, para quedar siempre más cerca que la mascota, y conviene que ocupen solo las esquinas.
 5. Si necesita partículas, agregar su entrada en `Particles.CONFIG` (`js/particulas.js`). Pocas, chicas y sin repetir lo que ya está dibujado.
+   Para detalles animados (una luz que late, humo, una nube), agregar su entrada en `Ambiente.CONFIG` (`js/ambiente.js`) con las coordenadas del dibujo; los tipos disponibles están listados al inicio de ese archivo.
 6. Verificar que `renderScenery()` lo muestre automáticamente: filtra los artículos con `category: 'bg'`.
 7. Añadir los SVG a `ASSETS_TO_CACHE` en `sw.js`.
 8. Incrementar `CACHE_VERSION`.

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.6.0'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.7.0'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -12,6 +12,7 @@ const ASSETS_TO_CACHE = [
   './js/mascota-estado.js',
   './js/mascota-visual.js',
   './js/particulas.js',
+  './js/ambiente.js',
   './js/catalogo.js',
   './js/tienda.js',
   './js/juegos/juegos-base.js',
@@ -75,7 +76,11 @@ const ASSETS_TO_CACHE = [
   './img/escenarios/frente/dojo.svg',
   './img/escenarios/frente/castillo.svg',
   './img/escenarios/frente/submarino.svg',
-  './img/escenarios/frente/volcan.svg'
+  './img/escenarios/frente/volcan.svg',
+  './img/escenarios/fx/nube.svg',
+  './img/escenarios/fx/llama.svg',
+  './img/escenarios/fx/pez.svg',
+  './img/escenarios/fx/ola.svg'
 ];
 
 // Instalación del Service Worker
