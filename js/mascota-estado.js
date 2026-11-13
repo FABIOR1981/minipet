@@ -54,10 +54,13 @@ const PetState = {
       this.showDialogue(this.getDialogue('full', 'No preciso comer ahora.'));
       return;
     }
+    const before = this.hunger;
     this.hunger = Math.min(100, this.hunger + 30);
     AudioEffects.playEat();
     this.saveData();
     this.updateUI();
+    this.showEating();
+    this.floatText(`+${this.hunger - before} 🍕`);
   },
 
   heal() {
@@ -66,10 +69,13 @@ const PetState = {
       return;
     }
     this.isSick = false;
+    const before = this.happiness;
     this.happiness = Math.min(100, this.happiness + 20);
     AudioEffects.playHeal();
     this.saveData();
     this.updateUI();
+    this.burst(['💚', '✨', '💊', '✨']);
+    this.floatText(this.happiness > before ? `+${this.happiness - before} ❤️` : '¡Curada! 💚');
   },
 
   sleep() {

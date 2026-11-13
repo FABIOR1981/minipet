@@ -523,3 +523,94 @@
   100% { transform: translate(var(--dx), -50px) scale(1.2); opacity: 0; }
 }
 
+
+/* =========================================================
+   VIDA EN REPOSO Y REACCIONES
+   ========================================================= */
+
+/* Respiración: solo la mascota real (#pet), no las miniaturas de Mi Pet.
+   Al caminar o saltar manda la animación correspondiente. */
+#pet:not(.walking) {
+  animation: breathe 3.2s ease-in-out infinite;
+}
+
+.room.sleeping #pet:not(.walking) { animation-duration: 5.5s; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(var(--pet-scale)); }
+  50% { transform: scale(calc(var(--pet-scale) * 1.025), calc(var(--pet-scale) * 0.975)); }
+}
+
+/* Parpadeo */
+.eye { animation: blink 5s infinite; }
+.kawaii-face.sleeping .eye,
+.kawaii-face.sick .eye { animation: none; }
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+/* Mira hacia donde camina: se corre la cara (y los lentes, que van aparte) */
+.kawaii-face,
+.accessory.pos-eyes { transition: translate 0.5s ease; }
+#pet.look-left .kawaii-face,
+#pet.look-left .accessory.pos-eyes { translate: -7px 0; }
+#pet.look-right .kawaii-face,
+#pet.look-right .accessory.pos-eyes { translate: 7px 0; }
+
+/* Comer: la comida viaja a la boca y la boca mastica */
+.food-bite {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 12;
+  animation: foodBite 0.9s ease-in forwards;
+}
+
+@keyframes foodBite {
+  0% { transform: translate(34px, -34px) scale(1) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.9) rotate(-20deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.1) rotate(-30deg); opacity: 0; }
+}
+
+.kawaii-face.eating .mouth {
+  display: inline-block;
+  animation: chew 0.22s ease-in-out 0.6s 6 alternate;
+}
+
+@keyframes chew {
+  from { transform: scale(1, 1); }
+  to { transform: scale(1.25, 0.6); }
+}
+
+/* Cartelito que sube desde la mascota (+30 🍕, +20 ❤️) */
+.float-text {
+  position: absolute;
+  transform: translate(-50%, 0);
+  padding: 2px 9px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #ce93d8;
+  color: #6a1b9a;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 7;
+  animation: floatText 1.2s ease-out forwards;
+}
+
+@keyframes floatText {
+  0% { transform: translate(-50%, 6px) scale(0.7); opacity: 0; }
+  20% { transform: translate(-50%, -4px) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(-50%, -34px) scale(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pet:not(.walking), .eye { animation: none; }
+}

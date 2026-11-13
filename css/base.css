@@ -271,3 +271,11 @@ body {
 .card-btn.owned { background: #ccc; cursor: default; }
 .card-btn.equipped { background: #ff4081; }
 
+
+/* Pulso de una stat cuando sube (comer, curar, acariciar, ganar monedas) */
+.stat-box.bump { animation: statBump 0.45s ease; }
+
+@keyframes statBump {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.18); background: #f3e5f5; }
+}

@@ -54,12 +54,20 @@ Object.assign(PetState, {
     const petEl = document.getElementById('pet');
     if (!petEl) return;
 
+    const previousX = this.walkPos ? this.walkPos.x : 0.5;
     this.walkPos = { x: Math.random(), t: Math.random() };
+
+    // Mira hacia el lado al que va (si el trayecto es casi vertical, de frente)
+    petEl.classList.remove('look-left', 'look-right');
+    const deltaX = this.walkPos.x - previousX;
+    if (Math.abs(deltaX) > 0.08) petEl.classList.add(deltaX < 0 ? 'look-left' : 'look-right');
+
     petEl.classList.add('walking');
     this.applyWalkPosition(true);
 
-    setTimeout(() => {
-      petEl.classList.remove('walking');
+    clearTimeout(this.walkEndTimer);
+    this.walkEndTimer = setTimeout(() => {
+      petEl.classList.remove('walking', 'look-left', 'look-right');
     }, 2500);
   },
 
@@ -116,10 +124,19 @@ Object.assign(PetState, {
   },
 
   updateUI() {
-    document.getElementById('coin-count').innerText = this.coins;
-    document.getElementById('happy-count').innerText = this.happiness;
-    document.getElementById('hunger-count').innerText = this.hunger;
-    document.getElementById('energy-count').innerText = this.energy;
+    const stats = { coin: this.coins, happy: this.happiness, hunger: this.hunger, energy: this.energy };
+    Object.keys(stats).forEach(key => {
+      const el = document.getElementById(`${key}-count`);
+      el.innerText = stats[key];
+      // Pulso en la barra superior cuando el valor sube
+      if (this.lastStats && stats[key] > this.lastStats[key]) {
+        const box = el.closest('.stat-box');
+        box.classList.remove('bump');
+        void box.offsetWidth; // reinicia la animación
+        box.classList.add('bump');
+      }
+    });
+    this.lastStats = stats;
 
     const petEl = document.getElementById('pet');
     if (petEl) {
@@ -141,10 +158,15 @@ Object.assign(PetState, {
     const roomEl = document.getElementById('pet-room');
     if (roomEl) {
       roomEl.className = `room ${this.equippedBackground}`;
+      // Al dormir se hace de noche en la habitación
+      roomEl.classList.toggle('sleeping', this.isSleeping);
     }
 
     if (typeof Particles !== 'undefined') {
       Particles.render(this.equippedBackground);
+    }
+    if (typeof Ambiente !== 'undefined') {
+      Ambiente.render(this.equippedBackground);
     }
 
     const accessoryEl = document.getElementById('pet-accessory');
@@ -210,6 +232,56 @@ Object.assign(PetState, {
     }
   },
 
+  // Cartelito que sube desde la mascota: "+30 🍕", "+20 ❤️"
+  floatText(text) {
+    const petEl = document.getElementById('pet');
+    const roomEl = document.getElementById('pet-room');
+    if (!petEl || !roomEl) return;
+    const pet = petEl.getBoundingClientRect();
+    const room = roomEl.getBoundingClientRect();
+    const el = document.createElement('div');
+    el.className = 'float-text';
+    el.textContent = text;
+    el.style.left = `${Math.round(pet.left - room.left + pet.width / 2)}px`;
+    el.style.top = `${Math.round(Math.max(4, pet.top - room.top - 22))}px`;
+    roomEl.appendChild(el);
+    setTimeout(() => el.remove(), 1250);
+  },
+
+  // Ráfaga de emojis que salen de la mascota (corazones, brillos de curación)
+  burst(emojis) {
+    const petEl = document.getElementById('pet');
+    if (!petEl) return;
+    emojis.forEach((emoji, i) => {
+      const particle = document.createElement('div');
+      particle.className = 'heart-particle';
+      particle.innerText = emoji;
+      const offsetX = (i / Math.max(1, emojis.length - 1) - 0.5) * 80 + (Math.random() - 0.5) * 14;
+      particle.style.setProperty('--dx', `${offsetX}px`);
+      particle.style.left = `calc(50% + ${offsetX / 2}px)`;
+      particle.style.top = '10px';
+      petEl.appendChild(particle);
+      setTimeout(() => particle.remove(), 800);
+    });
+  },
+
+  // Comer: un bocado viaja hasta la boca y la mascota mastica
+  showEating() {
+    const petEl = document.getElementById('pet');
+    const face = document.getElementById('kawaii-face');
+    if (!petEl || !face) return;
+    const foods = ['🍎', '🍗', '🍪', '🍓', '🧀', '🥕'];
+    const bite = document.createElement('div');
+    bite.className = 'food-bite';
+    bite.innerText = foods[Math.floor(Math.random() * foods.length)];
+    petEl.appendChild(bite);
+    setTimeout(() => bite.remove(), 950);
+
+    face.classList.add('eating');
+    clearTimeout(this.eatingTimer);
+    this.eatingTimer = setTimeout(() => face.classList.remove('eating'), 2100);
+  },
+
   petPet() {
     if (this.isSleeping) return;
     this.happiness = Math.min(100, this.happiness + 10);
@@ -217,17 +289,7 @@ Object.assign(PetState, {
     petEl.classList.add('happy-jump');
     setTimeout(() => petEl.classList.remove('happy-jump'), 500);
 
-    for (let i = 0; i < 3; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart-particle';
-      heart.innerText = '❤️';
-      const offsetX = (Math.random() - 0.5) * 60;
-      heart.style.setProperty('--dx', `${offsetX}px`);
-      heart.style.left = `calc(50% + ${offsetX / 2}px)`;
-      heart.style.top = '10px';
-      petEl.appendChild(heart);
-      setTimeout(() => heart.remove(), 800);
-    }
+    this.burst(['❤️', '❤️', '❤️']);
 
     AudioEffects.playTone(600, 'sine', 0.1);
     this.saveData();
