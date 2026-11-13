@@ -23,6 +23,7 @@ Object.assign(Minigames, {
       let obstacleX = 300;
       let score = 0;
       let gameOver = false;
+      let stopped = false; // Salida forzada: las monedas ya las cobra forceExitIfActive()
 
       const jump = (e) => {
         if (e) e.preventDefault();
@@ -43,11 +44,15 @@ Object.assign(Minigames, {
         window.removeEventListener('keydown', handleKeyDown);
         canvas.removeEventListener('touchstart', jump);
         canvas.onclick = null;
-        gameOver = true;
+        stopped = true;
         return score;
       };
 
-      function loop() {
+      const frameClock = Minigames.createFrameClock();
+
+      function loop(now) {
+        const f = frameClock(now); // 1 = un frame a 60 Hz
+        if (stopped) return;
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
           canvas.removeEventListener('touchstart', jump);
@@ -56,15 +61,15 @@ Object.assign(Minigames, {
           return;
         }
 
-        playerY += playerVY;
-        playerVY += 0.65;
+        playerY += playerVY * f;
+        playerVY += 0.65 * f;
 
         if (playerY >= 210) {
           playerY = 210;
           isJumping = false;
         }
 
-        obstacleX -= 4.2;
+        obstacleX -= 4.2 * f;
         if (obstacleX < -25) {
           obstacleX = 300;
           score += 10;

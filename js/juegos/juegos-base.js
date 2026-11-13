@@ -15,6 +15,7 @@ const Minigames = {
   exitHandler: null,
 
   forceExitIfActive() {
+    this.cancelCountdown();
     if (this.inProgress && this.exitHandler) {
       const earned = this.exitHandler();
       this.inProgress = false;
@@ -23,6 +24,33 @@ const Minigames = {
         PetState.addCoins(earned);
       }
     }
+  },
+
+  // Conteo regresivo en curso (si lo hay). Se cancela al iniciar otro
+  // o al salir, para que un doble toque en "Jugar" no arranque dos
+  // partidas a la vez.
+  countdownTimer: null,
+
+  cancelCountdown() {
+    if (this.countdownTimer) {
+      clearInterval(this.countdownTimer);
+      this.countdownTimer = null;
+    }
+  },
+
+  // Devuelve una función que, llamada en cada frame con el timestamp de
+  // requestAnimationFrame, da el factor de tiempo transcurrido respecto
+  // a un frame de 60 Hz (1 a 60 Hz, 0.5 a 120 Hz). Multiplicar los
+  // movimientos por ese factor hace que los juegos vayan a la misma
+  // velocidad en cualquier pantalla. Se limita a 3 para que una pausa
+  // (pestaña en segundo plano) no provoque un salto enorme.
+  createFrameClock() {
+    let last = null;
+    return (now) => {
+      const factor = last === null ? 1 : Math.min(3, Math.max(0, (now - last) / (1000 / 60)));
+      last = now;
+      return factor;
+    };
   },
 
   // Menú Principal de Minijuegos (6 Opciones Kawaii)
@@ -70,6 +98,7 @@ const Minigames = {
 
   // Conteo Regresivo Estilo Kawaii
   showCountdown(onComplete) {
+    this.cancelCountdown();
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:260px;">
@@ -87,7 +116,7 @@ const Minigames = {
       const subEl = document.getElementById('countdown-sub');
 
       if (!numEl) {
-        clearInterval(interval);
+        this.cancelCountdown();
         return;
       }
 
@@ -103,10 +132,11 @@ const Minigames = {
         subEl.innerText = '✨ ¡Diviértete! ✨';
         AudioEffects.playTone(880, 'triangle', 0.3);
       } else {
-        clearInterval(interval);
+        this.cancelCountdown();
         onComplete();
       }
     }, 900);
+    this.countdownTimer = interval;
   },
 
   // Pantalla de Resultado Kawaii (reemplaza los alert() nativos)

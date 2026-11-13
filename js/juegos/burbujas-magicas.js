@@ -40,14 +40,16 @@ Object.assign(Minigames, {
         const mx = (clientX - rect.left) * scale.x;
         const my = (clientY - rect.top) * scale.y;
 
-        bubbles.forEach((b, i) => {
+        // Recorrido hacia atrás: quitar una burbuja no saltea a la siguiente
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          const b = bubbles[i];
           if (Math.hypot(b.x - mx, b.y - my) < b.r + 8) { // Margen táctil
             score += b.isGolden ? 15 : 5;
             Minigames.updateHudScore(score);
             AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
             bubbles.splice(i, 1);
           }
-        });
+        }
       };
 
       canvas.addEventListener('touchstart', handleTouchBubble, { passive: false });
@@ -62,10 +64,13 @@ Object.assign(Minigames, {
         return score;
       };
 
-      function loop() {
+      const frameClock = Minigames.createFrameClock();
+
+      function loop(now) {
+        const f = frameClock(now); // 1 = un frame a 60 Hz
         if (stopped || timeLeft <= 0) return;
 
-        if (Math.random() < 0.08 && bubbles.length < 7) {
+        if (Math.random() < 0.08 * f && bubbles.length < 7) {
           const isGolden = Math.random() < 0.3;
           bubbles.push({
             x: Math.random() * 250 + 25,

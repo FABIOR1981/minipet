@@ -73,6 +73,12 @@ const PetState = {
   },
 
   sleep() {
+    if (!this.isSleeping && this.energy >= 100) {
+      this.showDialogue(this.getDialogue('rested', 'No tengo sueño ahora.'));
+      return;
+    }
+    // Alterna dormir/despertar. La energía se recupera de a poco en
+    // tick() mientras duerme, y se despierta sola al llegar a 100.
     this.isSleeping = !this.isSleeping;
     
     // Si se duerme, quita la animación de caminar de inmediato
@@ -80,7 +86,6 @@ const PetState = {
     if (petEl) petEl.classList.remove('walking');
 
     if (this.isSleeping) {
-      this.energy = 100;
       AudioEffects.playTone(300, 'sine', 0.3);
     }
     this.saveData();
@@ -197,7 +202,7 @@ const PetState = {
   },
 
   saveData() {
-    localStorage.setItem('virtualPetData', JSON.stringify({
+    const datos = JSON.stringify({
       coins: this.coins,
       happiness: this.happiness,
       hunger: this.hunger,
@@ -212,13 +217,24 @@ const PetState = {
       equippedAccessory: this.equippedAccessory,
       equippedBackground: this.equippedBackground,
       looks: this.looks
-    }));
+    });
+    try {
+      localStorage.setItem('virtualPetData', datos);
+    } catch (e) {
+      // Sin almacenamiento disponible (modo privado, cuota llena): se sigue jugando sin guardar
+    }
   },
 
   loadData() {
-    const saved = localStorage.getItem('virtualPetData');
-    if (saved) {
-      const data = JSON.parse(saved);
+    // Si el guardado está dañado o no se puede leer, se arranca con los
+    // valores por defecto en vez de dejar el juego sin iniciar.
+    let data = null;
+    try {
+      data = JSON.parse(localStorage.getItem('virtualPetData'));
+    } catch (e) {
+      console.warn('No se pudo leer la partida guardada; se usan los valores iniciales.', e);
+    }
+    if (data && typeof data === 'object') {
       this.coins = data.coins ?? 100;
       this.happiness = data.happiness ?? 100;
       this.hunger = data.hunger ?? 100;
@@ -230,10 +246,10 @@ const PetState = {
       this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));
       this.glitterEnabled = this.glitterIntensity > 0;
       this.isSick = data.isSick ?? false;
-      this.inventory = data.inventory || ['bow_tie', 'bg_living'];
+      this.inventory = Array.isArray(data.inventory) ? data.inventory : ['bow_tie', 'bg_living'];
       this.equippedAccessory = data.equippedAccessory || null;
       this.equippedBackground = data.equippedBackground || 'bg_living';
-      this.looks = data.looks || [];
+      this.looks = Array.isArray(data.looks) ? data.looks : [];
     }
   }
 };

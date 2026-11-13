@@ -23,6 +23,7 @@ Object.assign(Minigames, {
       let currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
       let score = 0;
       let gameOver = false;
+      let stopped = false; // Salida forzada: las monedas ya las cobra forceExitIfActive()
 
       // Teclado
       const keys = {};
@@ -48,11 +49,15 @@ Object.assign(Minigames, {
         window.removeEventListener('keyup', handleKeyUp);
         canvas.removeEventListener('touchstart', handleTouch);
         canvas.removeEventListener('touchmove', handleTouch);
-        gameOver = true;
+        stopped = true;
         return score;
       };
 
-      function loop() {
+      const frameClock = Minigames.createFrameClock();
+
+      function loop(now) {
+        const f = frameClock(now); // 1 = un frame a 60 Hz
+        if (stopped) return;
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
           window.removeEventListener('keyup', handleKeyUp);
@@ -63,10 +68,10 @@ Object.assign(Minigames, {
           return;
         }
 
-        if (keys['ArrowLeft'] && basketX > 5) basketX -= 6;
-        if (keys['ArrowRight'] && basketX < 235) basketX += 6;
+        if (keys['ArrowLeft']) basketX = Math.max(0, basketX - 6 * f);
+        if (keys['ArrowRight']) basketX = Math.min(240, basketX + 6 * f);
 
-        itemY += 3.8;
+        itemY += 3.8 * f;
 
         if (itemY >= 260 && itemX >= basketX - 10 && itemX <= basketX + 60) {
           score += 5;

@@ -40,7 +40,9 @@ Object.assign(Minigames, {
         const mouseX = (clientX - rect.left) * scale.x;
         const mouseY = (clientY - rect.top) * scale.y;
 
-        balloons.forEach((b, index) => {
+        // Recorrido hacia atrás: quitar un globo no saltea al siguiente
+        for (let index = balloons.length - 1; index >= 0; index--) {
+          const b = balloons[index];
           const dist = Math.hypot(b.x - mouseX, b.y - mouseY);
           if (dist < b.radius + 10) { // Margen extra para dedos en pantalla táctil
             score += 5;
@@ -48,7 +50,7 @@ Object.assign(Minigames, {
             AudioEffects.playTone(900, 'triangle', 0.08);
             balloons.splice(index, 1);
           }
-        });
+        }
       };
 
       canvas.addEventListener('touchstart', handlePop, { passive: false });
@@ -63,10 +65,13 @@ Object.assign(Minigames, {
         return score;
       };
 
-      function loop() {
+      const frameClock = Minigames.createFrameClock();
+
+      function loop(now) {
+        const f = frameClock(now); // 1 = un frame a 60 Hz
         if (stopped || timeLeft <= 0) return;
 
-        if (Math.random() < 0.05 && balloons.length < 6) {
+        if (Math.random() < 0.05 * f && balloons.length < 6) {
           balloons.push({
             x: Math.random() * 260 + 20,
             y: 320,
@@ -79,14 +84,15 @@ Object.assign(Minigames, {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        balloons.forEach((b, index) => {
-          b.y -= b.speed;
+        for (let index = balloons.length - 1; index >= 0; index--) {
+          const b = balloons[index];
+          b.y -= b.speed * f;
 
           ctx.font = `${b.radius * 2}px sans-serif`;
           ctx.fillText('🎈', b.x, b.y);
 
           if (b.y < -20) balloons.splice(index, 1);
-        });
+        }
 
         requestAnimationFrame(loop);
       }
