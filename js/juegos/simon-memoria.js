@@ -100,7 +100,7 @@ Object.assign(Minigames, {
       this.clearSimonTimers();
       const reward = this.simonScore * 10;
       const isRecord = Minigames.saveBestScore('simon', this.simonScore);
-      Minigames.showResult('¡Buena memoria!', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
+      Minigames.showResult('¡Casi! ¿Otra ronda?', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
       return;
     }
 
