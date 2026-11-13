@@ -148,12 +148,14 @@ const Store = {
           const chip = document.createElement('div');
           chip.className = 'look-chip';
           chip.innerHTML = `
-            <span class="look-chip-name">${look.name}</span>
+            <span class="look-chip-name"></span>
             <div class="look-chip-actions">
               <button onclick="PetState.applyLook('${look.id}'); Store.renderAccessories();" title="Aplicar look">✨</button>
               <button onclick="PetState.deleteLook('${look.id}'); Store.renderAccessories();" title="Borrar look">🗑️</button>
             </div>
           `;
+          // textContent: el nombre lo escribe el usuario y no debe interpretarse como HTML
+          chip.querySelector('.look-chip-name').textContent = look.name;
           looksList.appendChild(chip);
         });
       }

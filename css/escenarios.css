@@ -62,6 +62,38 @@
 /* 17. Guarida Volcánica */
 .room.bg_volcano { background-color: #5a1a1a; background-image: url('../img/escenarios/volcan.svg'); }
 
+/* Primer plano: objetos que quedan por delante de la mascota (plantas,
+   juguetes, rocas). Es una segunda ilustración transparente, del mismo
+   tamaño y con el mismo anclaje que el fondo, en img/escenarios/frente/.
+   No recibe toques, así que la mascota se puede acariciar igual.
+   Pista de Baile y Estación Espacial no tienen primer plano. */
+.room::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.room.bg_living::after { background-image: url('../img/escenarios/frente/sala.svg'); }
+.room.bg_bedroom::after { background-image: url('../img/escenarios/frente/dormitorio.svg'); }
+.room.bg_playroom::after { background-image: url('../img/escenarios/frente/juegos.svg'); }
+.room.bg_park::after { background-image: url('../img/escenarios/frente/parque.svg'); }
+.room.bg_beach::after { background-image: url('../img/escenarios/frente/playa.svg'); }
+.room.bg_forest::after { background-image: url('../img/escenarios/frente/bosque.svg'); }
+.room.bg_mountain::after { background-image: url('../img/escenarios/frente/montana.svg'); }
+.room.bg_camping::after { background-image: url('../img/escenarios/frente/campamento.svg'); }
+.room.bg_desert::after { background-image: url('../img/escenarios/frente/desierto.svg'); }
+.room.bg_kitchen::after { background-image: url('../img/escenarios/frente/cocina.svg'); }
+.room.bg_bathroom::after { background-image: url('../img/escenarios/frente/bano.svg'); }
+.room.bg_dojo::after { background-image: url('../img/escenarios/frente/dojo.svg'); }
+.room.bg_castle::after { background-image: url('../img/escenarios/frente/castillo.svg'); }
+.room.bg_underwater::after { background-image: url('../img/escenarios/frente/submarino.svg'); }
+.room.bg_volcano::after { background-image: url('../img/escenarios/frente/volcan.svg'); }
+
 /* =========================================================
    SISTEMA DE PARTÍCULAS DINÁMICAS
    ========================================================= */

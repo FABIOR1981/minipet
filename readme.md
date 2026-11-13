@@ -6,15 +6,18 @@ Mascota virtual estilo Tamagotchi, 100% web, instalable como **PWA**. Cuidá a t
 
 El manual de usuario está en [documentacion-central](https://github.com/FABIOR1981/documentacion-central/tree/main/minipet/documentacion) ([PDF](https://github.com/FABIOR1981/documentacion-central/blob/main/minipet/documentacion/MANUAL_USUARIO.pdf)). También se puede consultar desde la bitácora de proyectos.
 
+El contexto técnico detallado (para quien vaya a tocar el código) está en [`desarrollo/CONTEXTO-PROYECTO.md`](desarrollo/CONTEXTO-PROYECTO.md).
+
 ## ✨ Funcionalidades
 
-- **Estado en vivo**: monedas 🪙, felicidad ❤️, hambre 🍕 y energía ⚡, que decaen con el tiempo (`tick()` cada 8s).
+- **Estado en vivo**: monedas 🪙, felicidad ❤️, hambre 🍕 y energía ⚡, que decaen con el tiempo (`tick()` cada 8s). Una partida nueva arranca con 500 monedas.
 - **Mascota animada**: rostro kawaii modular (feliz, con hambre, enferma, cansada, aburrida, durmiendo) y frases aleatorias cargadas desde `data/dialogues.json`.
-- **La mascota se mueve sola** por la habitación cada 6s (si no está durmiendo ni enferma).
-- **Acciones**: Comer 🍗, Medicina 🏥 (cura si está enferma) y Dormir 😴 (recupera energía al 100%).
-- **Armario**: 22 accesorios equipables (sombreros, orejas, lentes, alas, etc.) + selector de color de piel.
-- **Tienda**: 17 escenarios/fondos temáticos (living, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas.
-- **6 minijuegos** para ganar monedas: Atrapa Dulces, Explotar Globos, Torre de Postres, Simón Memoria, Runner Mágico y Burbujas Mágicas — todos con soporte táctil y de teclado.
+- **La mascota camina sola** por todo el piso del escenario cada 5s (si no está durmiendo ni enferma). Se achica al ir hacia el fondo, tiene sombra apoyada en el piso y pasa por detrás de los objetos del primer plano.
+- **Acciones**: Comer 🍗, Medicina 🏥 (cura si está enferma) y Dormir 😴 (recupera energía de a poco y se despierta sola al llegar a 100).
+- **Mi Pet**: color de piel, tamaño, forma y brillantina.
+- **Accesorios**: 21 accesorios equipables (sombreros, orejas, lentes, alas, etc.) y looks guardados (hasta 6).
+- **Escenarios**: 17 escenarios ilustrados (sala, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas, con partículas ambientales propias.
+- **6 minijuegos** para ganar monedas: Atrapa Dulces, Explotar Globos, Torre de Postres, Simón Memoria, Runner Mágico y Burbujas Mágicas — con soporte táctil y de teclado, y mejor puntaje guardado por juego.
 - **Efectos de sonido** generados con Web Audio API (sin archivos de audio externos).
 - **PWA instalable**: `manifest.json` + `sw.js` con estrategia *network-first* y caché offline; avisa al usuario cuando hay una versión nueva disponible.
 - **Persistencia local**: todo el progreso se guarda en `localStorage`.
@@ -23,20 +26,41 @@ El manual de usuario está en [documentacion-central](https://github.com/FABIOR1
 
 ```
 minipet/
-├── index.html              # Estructura principal de la app
-├── manifest.json            # Metadatos PWA (ícono, colores, modo standalone)
-├── sw.js                    # Service Worker (caché offline, versión de caché)
+├── index.html                 # Estructura principal de la app
+├── manifest.json              # Metadatos PWA (ícono, colores, modo standalone)
+├── sw.js                      # Service Worker (caché offline, versión de caché)
+├── netlify.toml               # Build y cabeceras para Netlify
 ├── data/
-│   └── dialogues.json       # Frases de la mascota por estado de ánimo
+│   └── dialogues.json         # Frases de la mascota por estado de ánimo
 ├── css/
-│   └── styles.css           # Estilos, animaciones y fondos de escenarios
+│   ├── base.css               # Layout general, barras, modal, tienda
+│   ├── escenarios.css         # Los 17 escenarios, su primer plano y las partículas
+│   ├── mascota.css            # Mascota, formas, accesorios, sombra y animaciones
+│   └── juegos.css             # Minijuegos: HUD, conteo y pantalla de resultado
 ├── js/
-│   ├── pet.js                # Estado del juego (PetState): stats, guardado, UI
-│   ├── store.js               # Catálogo de accesorios/fondos, tienda y armario
-│   ├── minigames.js           # Los 6 minijuegos
-│   └── app.js                 # Sonidos (AudioEffects), init y registro del SW
-└── img/
-    └── accessories/          # Iconos SVG de los accesorios equipables
+│   ├── app.js                 # Sonidos (AudioEffects), inicio, navegación y registro del SW
+│   ├── mascota-estado.js      # PetState: stats, acciones, inventario, looks, guardado
+│   ├── mascota-visual.js      # PetState: dibujo, cara, diálogos, paseo y profundidad
+│   ├── particulas.js          # Partículas ambientales por escenario
+│   ├── catalogo.js            # Datos: accesorios, escenarios, formas y ajustes
+│   ├── tienda.js              # Store: tienda, Accesorios, Escenario y Mi Pet
+│   └── juegos/
+│       ├── juegos-base.js     # Minigames: menú, conteo, resultado, récords, HUD
+│       ├── atrapa-dulces.js
+│       ├── explota-globos.js
+│       ├── torre-postres.js
+│       ├── simon-memoria.js
+│       ├── runner-magico.js
+│       └── burbujas-magicas.js
+├── img/
+│   ├── accessories/           # SVG de los accesorios equipables
+│   └── escenarios/            # Ilustración SVG de cada escenario
+│       └── frente/            # Objetos que van por delante de la mascota
+├── herramientas/
+│   └── construir.js           # Build: copia a publicar/ solo lo que usa el navegador
+├── desarrollo/                # Contexto técnico y páginas de prueba (no se publican)
+└── documentacion/
+    └── LEEME.md               # Enlace a documentacion-central
 ```
 
 ## ▶️ Cómo correrlo
@@ -51,8 +75,13 @@ python3 -m http.server
 
 Luego abrir la URL en el navegador. En móvil, se puede "Agregar a pantalla de inicio" para instalarla como PWA.
 
+## 🚀 Publicación
+
+Netlify ejecuta `node herramientas/construir.js`, que copia a `publicar/` únicamente `index.html`, `manifest.json`, `sw.js`, `css/`, `js/`, `data/` e `img/`. Las carpetas `desarrollo/`, `documentacion/` y `herramientas/` no llegan al sitio publicado.
+
 ## 🔧 Notas técnicas
 
-- Al agregar un accesorio nuevo hay que sumarlo en tres lugares: el `.svg` en `img/accessories/`, la entrada en `Store.items` (`js/store.js`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`) para que quede disponible offline.
-- Al agregar un fondo/escenario nuevo hay que sumarlo en cuatro lugares: la ilustración `.svg` (400x480, piso desde y=280) en `img/escenarios/`, la regla `.room.bg_<id>` en `css/escenarios.css`, la entrada en `Catalogo.items` (`js/catalogo.js`, categoría `bg`, con su `preview`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`).
+- Al agregar un accesorio nuevo hay que sumarlo en tres lugares: el `.svg` en `img/accessories/`, la entrada en `Catalogo.items` y su ajuste en `Catalogo.accessoryFits` (`js/catalogo.js`), y la ruta en `ASSETS_TO_CACHE` (`sw.js`) para que quede disponible offline.
+- Al agregar un escenario nuevo hay que sumarlo en cuatro lugares: la ilustración `.svg` (400x480, piso desde y=280) en `img/escenarios/`, la regla `.room.bg_<id>` en `css/escenarios.css`, la entrada en `Catalogo.items` (`js/catalogo.js`, categoría `bg`, con su `preview`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`). Si lleva objetos por delante de la mascota, van en un segundo `.svg` transparente en `img/escenarios/frente/`, con su regla `.room.bg_<id>::after` y su ruta en el caché.
+- Los objetos del primer plano deben apoyarse en el borde inferior de la ilustración, para quedar siempre más cerca que la mascota.
 - Cada vez que se publica una versión nueva, conviene subir `CACHE_VERSION` en `sw.js` para forzar la actualización en los dispositivos de los usuarios.

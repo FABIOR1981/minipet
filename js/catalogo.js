@@ -47,7 +47,7 @@ const Catalogo = {
     { id: 'fairy_wings', name: 'Alas de Hada', price: 75, image: 'img/accessories/fairy_wings.svg', type: 'neck', category: 'acc' },
 
     // Para "Dojo Ninja"
-    { id: 'ninja_band', name: 'Vanda Ninja', price: 50, image: 'img/accessories/ninja_band.svg', type: 'head', category: 'acc' },
+    { id: 'ninja_band', name: 'Banda Ninja', price: 50, image: 'img/accessories/ninja_band.svg', type: 'head', category: 'acc' },
 
     // Para "Estación Espacial"
     { id: 'space_helmet', name: 'Casco Espacial', price: 90, image: 'img/accessories/space_helmet.svg', type: 'head', category: 'acc' },
