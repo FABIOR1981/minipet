@@ -43,18 +43,18 @@ const Catalogo = {
     // Para "Parque Mágico" / "Bosque Encantado" / "Castillo Real"
     { id: 'flower_pink', name: 'Flor Primavera', price: 18, image: 'img/accessories/flower_pink.svg', type: 'head', category: 'acc' },
     { id: 'wizard_hat', name: 'Gorro de Mago', price: 60, image: 'img/accessories/wizard_hat.svg', type: 'head', category: 'acc' },
-    { id: 'magic_wand', name: 'Varita Mágica', price: 60, image: 'img/accessories/magic_wand.svg', type: 'neck', category: 'acc' },
-    { id: 'fairy_wings', name: 'Alas de Hada', price: 75, image: 'img/accessories/fairy_wings.svg', type: 'neck', category: 'acc' },
+    { id: 'magic_wand', name: 'Varita Mágica', price: 60, image: 'img/accessories/magic_wand.svg', type: 'hand', category: 'acc' },
+    { id: 'fairy_wings', name: 'Alas de Hada', price: 75, image: 'img/accessories/fairy_wings.svg', type: 'back', category: 'acc' },
 
     // Para "Dojo Ninja"
-    { id: 'ninja_band', name: 'Banda Ninja', price: 50, image: 'img/accessories/ninja_band.svg', type: 'head', category: 'acc' },
+    { id: 'ninja_band', name: 'Banda Ninja', price: 50, image: 'img/accessories/ninja_band.svg', type: 'forehead', category: 'acc' },
 
     // Para "Estación Espacial"
-    { id: 'space_helmet', name: 'Casco Espacial', price: 90, image: 'img/accessories/space_helmet.svg', type: 'head', category: 'acc' },
+    { id: 'space_helmet', name: 'Casco Espacial', price: 90, image: 'img/accessories/space_helmet.svg', type: 'full', category: 'acc' },
 
     // Para "Montaña Nevada" / "Campamento Nocturno"
     { id: 'winter_beanie', name: 'Gorro de Lana', price: 30, image: 'img/accessories/winter_beanie.svg', type: 'head', category: 'acc' },
-    { id: 'winter_scarf', name: 'Bufanda Calientita', price: 25, image: 'img/accessories/winter_scarf.svg', type: 'neck', category: 'acc' },
+    { id: 'winter_scarf', name: 'Bufanda Calientita', price: 25, image: 'img/accessories/winter_scarf.svg', type: 'wrap', category: 'acc' },
 
     // Para "Baño de Burbujas"
     { id: 'shower_cap', name: 'Gorro de Baño', price: 20, image: 'img/accessories/shower_cap.svg', type: 'head', category: 'acc' },
@@ -115,20 +115,20 @@ const Catalogo = {
     chef_hat: { scale: 1.25, y: -4 },
     wizard_hat: { scale: 1.25, y: -5 },
     pirate_hat: { scale: 1.2, y: -3 },
-    space_helmet: { scale: 1.2, y: -2 },
+    space_helmet: { scale: 1, y: 0 },
     winter_beanie: { scale: 1.2, y: -3 },
     shower_cap: { scale: 1.2, y: -2 },
     flower_pink: { scale: 1.1, y: 0 },
-    headphones: { scale: 1.15, y: 0 },
+    headphones: { scale: 1, y: 0 },
     cat_ears: { scale: 1.1, y: -2 },
     bunny_ears: { scale: 1.15, y: -3 },
     glasses_cool: { scale: 1.15, y: 1, x: 0 },
     star_glasses: { scale: 1.15, y: 1, x: 0 },
-    snorkel_mask: { scale: 1.2, y: 1 },
+    snorkel_mask: { scale: 1, y: 0, x: 7 },
     bow_tie: { scale: 1.25, y: -2 },
-    magic_wand: { scale: 1.1, y: -4, x: 3, rotate: -8 },
-    fairy_wings: { scale: 1.2, y: -3, x: 0 },
-    ninja_band: { scale: 1.15, y: 0 },
-    winter_scarf: { scale: 1.25, y: -3 }
+    magic_wand: { scale: 1, y: 0, x: 0, rotate: 8 },
+    fairy_wings: { scale: 1, y: 0, x: 0 },
+    ninja_band: { scale: 1, y: 0 },
+    winter_scarf: { scale: 1, y: 0 }
   }
 };

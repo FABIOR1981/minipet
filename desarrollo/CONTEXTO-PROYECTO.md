@@ -181,6 +181,15 @@ Cada accesorio recibe una clase de posición:
 - `pos-eyes`
 - `pos-ears`
 - `pos-neck`
+- `pos-forehead`
+- `pos-wrap`
+- `pos-hand`
+- `pos-back`
+- `pos-full`
+
+Cada forma de mascota declara en `css/mascota.css` sus medidas (`--body-w`, `--body-h`, `--eye-y`, `--band-w`, `--wrap-w`, `--full-scale`). Las posiciones nuevas y el moño se calculan a partir de esas medidas, así un mismo accesorio calza en las cinco formas sin ajustes por separado. Si se agrega una forma, hay que darle esos valores.
+
+El tamaño (chico, mediano, grande) escala la mascota entera con el accesorio incluido, así que no cambia el calce.
 
 También recibe una clase individual como `item-hat_crown`.
 
@@ -406,14 +415,21 @@ El campo `type` debe ser uno de los anclajes existentes:
 - `head`: sombreros, coronas, flores y accesorios superiores.
 - `eyes`: gafas y visores.
 - `ears`: orejas y auriculares.
-- `neck`: moños, bufandas, varitas y alas.
+- `neck`: moños, debajo de la boca.
+- `forehead`: vinchas y bandas, entre la coronilla y los ojos; se ajustan al ancho de la cabeza.
+- `wrap`: bufandas, alrededor de la parte baja del cuerpo.
+- `hand`: varitas y objetos que sostiene, al costado derecho.
+- `back`: alas; la imagen es más ancha que el cuerpo y asoma por los dos costados. Como no puede dibujarse detrás del cuerpo, el SVG debe dejar libre el centro.
+- `full`: cascos y burbujas que envuelven toda la mascota; conviene que sean translúcidos para que se vea la cara.
+
+Los SVG de `back`, `full` y los auriculares llevan `preserveAspectRatio="none"` porque se estiran al tamaño de cada forma.
 
 Pasos:
 
 1. Crear el SVG o imagen dentro de `img/accessories/`.
 2. Añadir el artículo a `Catalogo.items` con `category: 'acc'`.
 3. Añadirlo a `Catalogo.accessoryFits` en `js/catalogo.js` para definir `scale`, `x`, `y` y, si hace falta, `rotate`.
-4. Probarlo con Círculo, Mochi y Dumpling.
+4. Probarlo en las cinco formas. En Dumpling, lo que va en la cabeza (`head`, `ears`, `full`) oculta los pliegues de arriba.
 5. Probarlo en Chico, Mediano y Grande.
 6. Si una forma necesita una excepción, añadir una regla específica en `css/mascota.css` sin romper el ajuste individual.
 7. Añadir el recurso a `ASSETS_TO_CACHE` en `sw.js` si debe funcionar offline.
@@ -449,7 +465,7 @@ El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inv
 - Abrir `Mi Pet` y cambiar color, forma y tamaño.
 - Confirmar que los cambios persisten al recargar.
 - Probar brillantina en `0`, `50` y `100`.
-- Abrir Accesorios y probar cabeza, ojos, orejas y cuello.
+- Abrir Accesorios y probar al menos uno de cada posición (cabeza, ojos, orejas, cuello, frente, bufanda, mano, espalda y envolvente) en más de una forma.
 - Probar accesorios con Círculo, Mochi y Dumpling.
 - Abrir Escenario y cambiar fondos; revisar ilustración, primer plano y partículas.
 - Salir de un minijuego a mitad de partida y confirmar que las monedas se cobran una sola vez.

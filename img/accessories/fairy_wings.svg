@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <path d="M 50 50 C 20 20 10 40 20 60 C 35 65 45 55 50 50 Z" fill="#f48fb1" opacity="0.75"/>
-  <path d="M 50 50 C 80 20 90 40 80 60 C 65 65 55 55 50 50 Z" fill="#f48fb1" opacity="0.75"/>
-  <path d="M 50 55 C 25 60 20 75 30 85 C 40 85 45 70 50 55 Z" fill="#ce93d8" opacity="0.75"/>
-  <path d="M 50 55 C 75 60 80 75 70 85 C 60 85 55 70 50 55 Z" fill="#ce93d8" opacity="0.75"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 120" preserveAspectRatio="none">
+  <!-- El cuerpo ocupa el centro (x de 45 a 165): las alas asoman por los costados -->
+  <g id="ala">
+    <path d="M 58 58 C 42 18 14 0 6 22 C 0 46 26 62 58 62 Z" fill="#f8bbd0" fill-opacity="0.9" stroke="#f06292" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M 58 64 C 34 64 14 78 20 98 C 28 116 50 98 58 70 Z" fill="#e1bee7" fill-opacity="0.9" stroke="#ba68c8" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M 52 58 Q 30 40 14 26 M 52 68 Q 36 82 27 97" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="20" cy="40" r="2.5" fill="#ffffff" opacity="0.9"/>
+    <circle cx="30" cy="88" r="2" fill="#ffffff" opacity="0.9"/>
+  </g>
+  <use href="#ala" transform="translate(210 0) scale(-1 1)"/>
 </svg>
