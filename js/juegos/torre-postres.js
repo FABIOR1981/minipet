@@ -31,7 +31,7 @@ Object.assign(Minigames, {
         if (Math.abs(diff) > prev.width) {
           gameOver = true;
           const isRecord = Minigames.saveBestScore('cake', score);
-          Minigames.showResult('¡Qué torre tan alta!', '🍰', score, () => Minigames.startCakeGame(), isRecord);
+          Minigames.showResult('¡Casi! ¿Otra torre?', '🍰', score, () => Minigames.startCakeGame(), isRecord);
           return;
         }
 
