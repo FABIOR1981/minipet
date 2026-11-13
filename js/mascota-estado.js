@@ -53,10 +53,10 @@ const PetState = {
     } catch (e) {
       this.dialogues = {
         happy: ['❤️ ¡Me encanta estar contigo!', '✨ ¡Hoy es un día genial!', '🌸 ¡Eres mi persona favorita!'],
-        hungry: ['🍕 ¡Tengo hambre! ¡Comida rica!', '🍗 Mmm... ¿Hay algo para picar?'],
-        sick: ['🥺 Me siento mal... ¿Me das medicina?', '🤒 Me dolió la pancita...'],
-        tired: ['😴 Tengo sueño... ¡A dormir!', '💤 Mis ojitos se cierran...'],
-        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Estoy aburrida! Vamos a jugar.'],
+        hungry: ['🍕 ¡Es hora de comer algo rico!', '🍗 Mmm... ¿Hay algo para picar?'],
+        sick: ['🥺 ¿Me das una medicina para sentirme mejor?', '💊 ¡Es hora de mi medicina!'],
+        tired: ['😴 ¡Es hora de dormir!', '💤 ¡Una siesta me vendría genial!'],
+        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Tengo ganas de jugar! ¿Vamos?'],
         sleeping: ['💤 Zzz... Descansando...', '🌙 Zzz... Soñando con caramelos...']
       };
     }
@@ -65,7 +65,7 @@ const PetState = {
   feed() {
     if (this.isSleeping) return;
     if (this.hunger >= 100) {
-      this.showDialogue(this.getDialogue('full', 'No preciso comer ahora.'));
+      this.showDialogue(this.getDialogue('full', '¡Gracias! Ya tengo la pancita llena.'));
       return;
     }
     const before = this.hunger;
@@ -79,7 +79,7 @@ const PetState = {
 
   heal() {
     if (!this.isSick) {
-      this.showDialogue(this.getDialogue('healthy', 'No preciso un doctor ahora.'));
+      this.showDialogue(this.getDialogue('healthy', '¡Me siento de maravilla!'));
       return;
     }
     this.isSick = false;
@@ -94,7 +94,7 @@ const PetState = {
 
   sleep() {
     if (!this.isSleeping && this.energy >= 100) {
-      this.showDialogue(this.getDialogue('rested', 'No tengo sueño ahora.'));
+      this.showDialogue(this.getDialogue('rested', '¡Estoy con toda la energía!'));
       return;
     }
     // Alterna dormir/despertar. La energía se recupera de a poco en

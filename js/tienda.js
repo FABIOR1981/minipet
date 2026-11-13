@@ -142,7 +142,7 @@ const Store = {
     if (includeLooks) {
       const looksList = content.querySelector('#looks-list');
       if (!PetState.looks || PetState.looks.length === 0) {
-        looksList.innerHTML = `<span style="font-size:0.72rem; color:#999;">Todavía no guardaste ningún look</span>`;
+        looksList.innerHTML = `<span style="font-size:0.72rem; color:#999;">¡Guarda aquí tu primer look!</span>`;
       } else {
         PetState.looks.forEach(look => {
           const chip = document.createElement('div');
@@ -214,7 +214,7 @@ const Store = {
       PetState.updateUI();
       this.renderStore(this.storeCategory);
     } else if (item && PetState.coins < item.price) {
-      alert('¡No tienes suficientes monedas!');
+      alert(`¡Te faltan ${item.price - PetState.coins} 🪙 para este! Juega un minijuego y lo consigues.`);
     }
   }
 };

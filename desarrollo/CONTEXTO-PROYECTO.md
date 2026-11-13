@@ -233,9 +233,11 @@ Los mensajes de comida y medicina se muestran en el globo `#pet-thought`, no med
 
 Mensajes actuales:
 
-- `No preciso comer ahora.`
-- `No preciso un doctor ahora.`
-- `No tengo sueño ahora.` (al tocar Dormir con la energía en 100)
+- `¡Gracias! Ya tengo la pancita llena.`
+- `¡Me siento de maravilla!`
+- `¡Estoy con toda la energía!` (al tocar Dormir con la energía en 100)
+
+Criterio de redacción: todas las frases van en clave positiva. La mascota no se queja ni dice lo que le falta o le duele; propone lo que quiere hacer ("¡Es hora de comer algo rico!" en vez de "Tengo hambre"). Lo mismo vale para los títulos de resultado de los minijuegos y los avisos de la tienda. Evitar adjetivos con género para la mascota.
 
 Si el JSON no carga, `js/mascota-estado.js` tiene frases de respaldo para que el juego siga funcionando.
 
