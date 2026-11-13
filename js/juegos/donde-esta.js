@@ -8,14 +8,16 @@ Object.assign(Minigames, {
     this.showCountdown(() => {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('hide');
-      const COLORS = ['#ff80ab', '#80cbc4', '#b388ff'];
+      // Las tres cajas son idénticas: si tuvieran colores distintos alcanzaría
+      // con recordar el color y no haría falta seguirlas con la vista.
+      const CUPS = [0, 1, 2];
 
       content.innerHTML = `
         <h3 class="game-title" style="text-align:center;">🎁 ¿Dónde Está?</h3>
         ${Minigames.renderHUD('🎁', best)}
         <div class="hide-stage" id="hide-stage">
-          ${COLORS.map((c, i) => `
-            <button class="hide-cup" data-cup="${i}" aria-label="Caja ${i + 1}" style="--cup:${c};">
+          ${CUPS.map(i => `
+            <button class="hide-cup" data-cup="${i}" aria-label="Caja">
               <span class="hide-pet"></span>
               <span class="hide-cover"></span>
             </button>`).join('')}
