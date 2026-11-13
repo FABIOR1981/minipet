@@ -61,50 +61,50 @@ const Catalogo = {
 
     // -----------------------------------------------------------------
     // ESCENARIOS / FONDOS (Categoría 'bg')
-    // El campo `preview` reproduce el gradiente real de css/escenarios.css
-    // para mostrar una miniatura fiel en vez de un emoji genérico.
+    // El campo `preview` muestra en la tienda una miniatura de la misma
+    // ilustración SVG que usa css/escenarios.css para el escenario.
     // -----------------------------------------------------------------
     // Básicos
     { id: 'bg_living', name: 'Sala de Estar', price: 0, image: '🛋️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 72%, #d7ccc8 72%, #a1887f 100%), linear-gradient(180deg, #ffe0b2 0%, #fff3e0 72%);' },
+      preview: 'background: #ffe9cf url(img/escenarios/sala.svg) center 42% / cover;' },
     { id: 'bg_bedroom', name: 'Dormitorio', price: 40, image: '🛏️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 72%, #b388ff 72%, #7c4dff 100%), radial-gradient(circle at 80% 20%, #fff 2px, transparent 3px), radial-gradient(circle at 20% 35%, #fff 2px, transparent 3px), linear-gradient(180deg, #311b92 0%, #512da8 72%);' },
+      preview: 'background: #3a2c80 url(img/escenarios/dormitorio.svg) center 42% / cover;' },
     { id: 'bg_playroom', name: 'Sala de Juegos', price: 60, image: '🧸', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #80deea 70%, #4dd0e1 100%), radial-gradient(#ff80ab 15%, transparent 16%), radial-gradient(#ffd54f 15%, transparent 16%), #f3e5f5; background-size: 100% 100%, 20px 20px, 20px 20px, 100% 100%; background-position: 0 0, 0 0, 10px 10px, 0 0;' },
+      preview: 'background: #ffeebb url(img/escenarios/juegos.svg) center 42% / cover;' },
     { id: 'bg_park', name: 'Parque Mágico', price: 80, image: '🌳', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 68%, #aed581 68%, #7cb342 100%), linear-gradient(180deg, #81d4fa 0%, #e1f5fe 68%);' },
+      preview: 'background: #9be0ff url(img/escenarios/parque.svg) center 42% / cover;' },
     { id: 'bg_beach', name: 'Playa Tropical', price: 50, image: '🏖️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 68%, #ffe082 68%, #ffd54f 100%), linear-gradient(180deg, #80deea 0%, #26c6da 50%, #00acc1 68%);' },
+      preview: 'background: #8fdcf0 url(img/escenarios/playa.svg) center 42% / cover;' },
 
     // Naturaleza y Exteriores
     { id: 'bg_forest', name: 'Bosque Encantado', price: 90, image: '🌲', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 65%, #33691e 65%, #1b5e20 100%), linear-gradient(180deg, #aed581 0%, #558b2f 65%);' },
+      preview: 'background: #1f6b57 url(img/escenarios/bosque.svg) center 42% / cover;' },
     { id: 'bg_mountain', name: 'Montaña Nevada', price: 100, image: '🏔️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #cfd8dc 70%, #90a4ae 100%), linear-gradient(180deg, #e0f7fa 0%, #80deea 70%);' },
+      preview: 'background: #cfe8f8 url(img/escenarios/montana.svg) center 42% / cover;' },
     { id: 'bg_camping', name: 'Campamento Nocturno', price: 120, image: '⛺', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 72%, #2e7d32 72%, #1b5e20 100%), radial-gradient(circle at 75% 20%, #fff9c4 3px, transparent 4px), radial-gradient(circle at 25% 15%, #fff9c4 2px, transparent 3px), linear-gradient(180deg, #0d1b2a 0%, #1b263b 72%);' },
+      preview: 'background: #1b2658 url(img/escenarios/campamento.svg) center 42% / cover;' },
     { id: 'bg_desert', name: 'Oasis del Desierto', price: 110, image: '🏜️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 68%, #f57c00 68%, #e65100 100%), linear-gradient(180deg, #ffe0b2 0%, #ffcc80 68%);' },
+      preview: 'background: #f9c583 url(img/escenarios/desierto.svg) center 42% / cover;' },
 
     // Interiores y Temáticos
     { id: 'bg_kitchen', name: 'Cocina del Chef', price: 45, image: '🍳', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #d7ccc8 70%, #8d6e63 100%), linear-gradient(180deg, #fff3e0 0%, #ffe0b2 70%);' },
+      preview: 'background: #fff0da url(img/escenarios/cocina.svg) center 42% / cover;' },
     { id: 'bg_bathroom', name: 'Baño de Burbujas', price: 35, image: '🛁', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #b2ebf2 70%, #4dd0e1 100%), linear-gradient(180deg, #e0f7fa 0%, #80deea 70%);' },
+      preview: 'background: #dff8f7 url(img/escenarios/bano.svg) center 42% / cover;' },
     { id: 'bg_dojo', name: 'Dojo Ninja', price: 130, image: '⛩️', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #8d6e63 70%, #4e342e 100%), linear-gradient(180deg, #efebe9 0%, #d7ccc8 70%);' },
+      preview: 'background: #ffd9c4 url(img/escenarios/dojo.svg) center 42% / cover;' },
     { id: 'bg_disco', name: 'Pista de Baile', price: 150, image: '🪩', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #311b92 70%, #1a237e 100%), linear-gradient(135deg, #4a148c 0%, #880e4f 50%, #311b92 100%);' },
+      preview: 'background: #2a0f52 url(img/escenarios/disco.svg) center 42% / cover;' },
 
     // Fantásticos y Especiales
     { id: 'bg_space', name: 'Estación Espacial', price: 200, image: '🚀', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 75%, #263238 75%, #102027 100%), radial-gradient(circle at 50% 30%, #37474f 0%, #000000 100%);' },
+      preview: 'background: #27335a url(img/escenarios/espacio.svg) center 42% / cover;' },
     { id: 'bg_castle', name: 'Castillo Real', price: 250, image: '🏰', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #9c27b0 70%, #4a148c 100%), linear-gradient(180deg, #f3e5f5 0%, #ce93d8 70%);' },
+      preview: 'background: #bcaadc url(img/escenarios/castillo.svg) center 42% / cover;' },
     { id: 'bg_underwater', name: 'Mundo Submarino', price: 180, image: '🪸', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #004d40 70%, #00251a 100%), linear-gradient(180deg, #00838f 0%, #006064 70%);' },
+      preview: 'background: #0a6f9f url(img/escenarios/submarino.svg) center 42% / cover;' },
     { id: 'bg_volcano', name: 'Guarida Volcánica', price: 300, image: '🌋', type: 'bg', category: 'bg',
-      preview: 'background: linear-gradient(to bottom, transparent 70%, #3e2723 70%, #1b0000 100%), linear-gradient(180deg, #bf360c 0%, #dd2c00 70%);' }
+      preview: 'background: #5a1a1a url(img/escenarios/volcan.svg) center 42% / cover;' }
   ],
 
   // Escala/posición/rotación de cada accesorio equipado sobre la mascota

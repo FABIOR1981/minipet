@@ -54,5 +54,5 @@ Luego abrir la URL en el navegador. En móvil, se puede "Agregar a pantalla de i
 ## 🔧 Notas técnicas
 
 - Al agregar un accesorio nuevo hay que sumarlo en tres lugares: el `.svg` en `img/accessories/`, la entrada en `Store.items` (`js/store.js`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`) para que quede disponible offline.
-- Al agregar un fondo/escenario nuevo: la entrada en `Store.items` (categoría `bg`) y el estilo `.room.bg_<id>` en `css/styles.css`.
+- Al agregar un fondo/escenario nuevo hay que sumarlo en cuatro lugares: la ilustración `.svg` (400x480, piso desde y=280) en `img/escenarios/`, la regla `.room.bg_<id>` en `css/escenarios.css`, la entrada en `Catalogo.items` (`js/catalogo.js`, categoría `bg`, con su `preview`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`).
 - Cada vez que se publica una versión nueva, conviene subir `CACHE_VERSION` en `sw.js` para forzar la actualización en los dispositivos de los usuarios.
