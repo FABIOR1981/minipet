@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.4.1'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.5.0'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -43,7 +43,24 @@ const ASSETS_TO_CACHE = [
   './img/accessories/space_helmet.svg',
   './img/accessories/winter_beanie.svg',
   './img/accessories/winter_scarf.svg',
-  './img/accessories/shower_cap.svg'
+  './img/accessories/shower_cap.svg',
+  './img/escenarios/sala.svg',
+  './img/escenarios/dormitorio.svg',
+  './img/escenarios/juegos.svg',
+  './img/escenarios/parque.svg',
+  './img/escenarios/playa.svg',
+  './img/escenarios/bosque.svg',
+  './img/escenarios/montana.svg',
+  './img/escenarios/campamento.svg',
+  './img/escenarios/desierto.svg',
+  './img/escenarios/cocina.svg',
+  './img/escenarios/bano.svg',
+  './img/escenarios/dojo.svg',
+  './img/escenarios/disco.svg',
+  './img/escenarios/espacio.svg',
+  './img/escenarios/castillo.svg',
+  './img/escenarios/submarino.svg',
+  './img/escenarios/volcan.svg'
 ];
 
 // Instalación del Service Worker
