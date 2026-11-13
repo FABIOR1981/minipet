@@ -1,13 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 70">
-  <!-- Diadema superior -->
-  <path d="M 15 45 A 55 55 0 0 1 125 45" fill="none" stroke="#ba68c8" stroke-width="8" stroke-linecap="round"/>
-  <!-- Orejitas de gato en la diadema -->
-  <polygon points="30,18 42,3 48,22" fill="#e1bee7" stroke="#ba68c8" stroke-width="2"/>
-  <polygon points="110,18 98,3 92,22" fill="#e1bee7" stroke="#ba68c8" stroke-width="2"/>
-  <!-- Auricular Izquierdo -->
-  <rect x="5" y="32" width="22" height="32" rx="10" fill="#ab47bc" stroke="#7b1fa2" stroke-width="2"/>
-  <rect x="15" y="38" width="8" height="20" rx="4" fill="#ea80fc"/>
-  <!-- Auricular Derecho -->
-  <rect x="113" y="32" width="22" height="32" rx="10" fill="#ab47bc" stroke="#7b1fa2" stroke-width="2"/>
-  <rect x="117" y="38" width="8" height="20" rx="4" fill="#ea80fc"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100" preserveAspectRatio="none">
+  <!-- Vincha: pasa por arriba de la cabeza, de auricular a auricular -->
+  <path d="M 15 62 A 60 48 0 0 1 135 62" fill="none" stroke="#ba68c8" stroke-width="8" stroke-linecap="round"/>
+  <!-- Orejitas de gato en la vincha -->
+  <polygon points="36,24 45,4 58,17" fill="#e1bee7" stroke="#ba68c8" stroke-width="2" stroke-linejoin="round"/>
+  <polygon points="114,24 105,4 92,17" fill="#e1bee7" stroke="#ba68c8" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Auriculares: quedan a los costados, a la altura de los ojos -->
+  <rect x="2" y="44" width="26" height="44" rx="12" fill="#ab47bc" stroke="#7b1fa2" stroke-width="2"/>
+  <rect x="14" y="52" width="9" height="28" rx="4.5" fill="#ea80fc"/>
+  <rect x="122" y="44" width="26" height="44" rx="12" fill="#ab47bc" stroke="#7b1fa2" stroke-width="2"/>
+  <rect x="127" y="52" width="9" height="28" rx="4.5" fill="#ea80fc"/>
 </svg>
