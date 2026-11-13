@@ -226,3 +226,203 @@
 @media (prefers-reduced-motion: reduce) {
   .mini-pet, .mini-pet .pet-sprite { animation: none !important; }
 }
+
+/* =========================================================
+   MENÚ DE MINIJUEGOS (10 juegos): tarjetas compactas, sin tope
+   de alto propio; se desplaza con el modal.
+   ========================================================= */
+.grid-container.games-grid { max-height: none; overflow: visible; gap: 8px; }
+.games-grid .item-card { padding: 7px 6px; gap: 2px; }
+.games-grid .item-card > span:first-child { font-size: 1.7rem !important; margin-bottom: 0 !important; }
+
+/* Textos comunes de los juegos */
+.game-hint { font-size: 0.8rem; text-align: center; color: #666; }
+.game-status { margin: 6px 0; text-align: center; font-weight: bold; color: #7e57c2; }
+
+/* =========================================================
+   PAREJAS
+   ========================================================= */
+.pairs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 300px;
+  margin: 10px auto 8px;
+}
+
+.pair-card {
+  aspect-ratio: 5 / 6;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  perspective: 500px;
+  touch-action: manipulation;
+}
+
+.pair-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;
+  transform-style: preserve-3d;
+}
+
+.pair-card.open .pair-inner { transform: rotateY(180deg); }
+
+.pair-back, .pair-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.pair-back {
+  background: linear-gradient(135deg, #ce93d8, #b388ff);
+  border: 2px solid #9575cd;
+  box-shadow: 0 3px 0 #7e57c2;
+  font-size: 1.3rem;
+}
+
+.pair-front {
+  background: #fffdf7;
+  border: 2px solid #ffd54f;
+  box-shadow: 0 3px 0 #ffca28;
+  transform: rotateY(180deg);
+}
+
+.pair-front img { width: 78%; height: 78%; object-fit: contain; }
+
+.pair-card.matched .pair-front {
+  background: #e8f5e9;
+  border-color: #81c784;
+  box-shadow: 0 3px 0 #66bb6a;
+  animation: pairFound 0.45s ease;
+}
+
+@keyframes pairFound {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.12; }
+}
+
+/* =========================================================
+   ¿DÓNDE ESTÁ?
+   ========================================================= */
+.hide-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 190px;
+  margin: 14px auto 6px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff3e0 0%, #fce4ec 62%, #f3d9e6 62%, #f8e6ef 100%);
+  border: 3px solid #f8bbd0;
+  overflow: hidden;
+}
+
+.hide-cup {
+  position: absolute;
+  bottom: 14px;
+  width: 28.333%;
+  height: 112px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: left 0.4s ease-in-out;
+}
+
+.hide-pet {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  translate: -50% 0;
+}
+
+/* La caja: cuerpo de color con moño; se levanta para mostrar qué hay */
+.hide-cover {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 0;
+  height: 72px;
+  border-radius: 10px 10px 8px 8px;
+  background:
+    linear-gradient(90deg, transparent 42%, rgba(255, 255, 255, 0.75) 42% 58%, transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0 24%, transparent 24%),
+    var(--cup);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.12), 0 4px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.35s ease;
+}
+
+.hide-cover::before {
+  content: '🎀';
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  translate: -50% 0;
+  font-size: 1.5rem;
+}
+
+.hide-cup.open .hide-cover { transform: translateY(-80px) rotate(-7deg); }
+
+/* =========================================================
+   VESTIRLA IGUAL
+   ========================================================= */
+.dress-area { display: flex; flex-direction: column; align-items: center; }
+
+.dress-show {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 18px;
+  min-height: 118px;
+  padding-top: 26px; /* lugar para los sombreros */
+}
+
+.dress-timer {
+  width: 70%;
+  height: 8px;
+  margin-top: 14px;
+  border-radius: 6px;
+  background: #ede7f6;
+  overflow: hidden;
+}
+
+.dress-timer i {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #ff80ab, #b388ff);
+  transform-origin: left center;
+  animation: dressTimer linear forwards;
+}
+
+@keyframes dressTimer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+.dress-row { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+
+.dress-option {
+  width: 56px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e1bee7;
+  border-radius: 14px;
+  background: #fdf8ff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.dress-option.selected { border-color: #ff4081; background: #fff0f6; box-shadow: 0 0 0 2px #ff80ab; }
+.dress-option img { width: 38px; height: 38px; object-fit: contain; pointer-events: none; }
+.dress-swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #d1c4e9; pointer-events: none; }
+.dress-ready { margin-top: 12px; padding: 8px 26px; }
+.dress-ready:disabled { opacity: 0.45; cursor: default; }

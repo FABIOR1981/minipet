@@ -17,9 +17,52 @@
 // css/juegos.css.
 // =========================================================
 Object.assign(Minigames, {
-  // Devuelve { el, setSize, cheer, oops, nod, party, run }.
+  // Cambia el aspecto de una copia: { color, shape, accessory }.
+  // Solo toca lo que venga en `look`; accessory: null la deja sin accesorio.
+  applyLook(sprite, look) {
+    if (look.color) {
+      sprite.style.backgroundColor = look.color;
+      sprite.style.color = look.color;
+    }
+    if (look.shape) {
+      sprite.className = sprite.className.replace(/\bshape-\S+/g, '').trim();
+      sprite.classList.add(look.shape);
+    }
+    if ('accessory' in look) {
+      const accessoryEl = sprite.querySelector('.accessory');
+      if (!accessoryEl) return;
+      accessoryEl.className = 'accessory';
+      accessoryEl.innerHTML = '';
+      const item = look.accessory && Catalogo.items.find(i => i.id === look.accessory);
+      if (item) {
+        accessoryEl.innerHTML = `<img src="${item.image}" alt="">`;
+        accessoryEl.classList.add(`pos-${item.type}`, `item-${item.id}`);
+        const fit = Catalogo.accessoryFits?.[item.id];
+        if (fit) {
+          const img = accessoryEl.querySelector('img');
+          img.style.setProperty('--accessory-scale', fit.scale);
+          img.style.setProperty('--accessory-y', `${fit.y}px`);
+          img.style.setProperty('--accessory-x', `${fit.x || 0}px`);
+          img.style.setProperty('--accessory-rotate', `${fit.rotate || 0}deg`);
+        }
+      }
+    }
+  },
+
+  // Mezcla una lista (copia) al azar
+  shuffle(list) {
+    const copy = [...list];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  },
+
+  // Devuelve { el, setSize, setLook, cheer, oops, nod, party, run }.
   // `size` es el alto/ancho en píxeles que ocupa en pantalla.
-  createMiniPet(size = 56) {
+  // `look` (opcional) le da un aspecto distinto al de la mascota real.
+  createMiniPet(size = 56, look = null) {
     const source = document.getElementById('pet');
     const wrap = document.createElement('div');
     wrap.className = 'mini-pet';
@@ -48,6 +91,7 @@ Object.assign(Minigames, {
       sprite = document.createElement('div');
       sprite.className = 'pet-sprite shape-circle';
     }
+    if (look) this.applyLook(sprite, look);
     wrap.appendChild(sprite);
 
     const mouth = sprite.querySelector('.mouth');
@@ -70,6 +114,7 @@ Object.assign(Minigames, {
         // La mascota real mide 120 px; se escala hasta el tamaño pedido
         sprite.style.setProperty('--pet-scale', (px / 120).toFixed(4));
       },
+      setLook(newLook) { Minigames.applyLook(sprite, newLook); },
       cheer() { react('cheer', 450); },   // saltito de alegría
       nod() { react('nod', 300); },       // cabeceo al ritmo
       oops() {                            // sorpresa

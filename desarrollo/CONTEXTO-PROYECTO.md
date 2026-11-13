@@ -42,7 +42,7 @@ La mascota puede:
 - `manifest.json`: configuración PWA.
 - `netlify.toml` y `herramientas/construir.js`: build y publicación.
 
-Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, `juegos/mascota-mini.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
+Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, `juegos/mascota-mini.js`, los diez minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
 
 ## Navegación actual
 
@@ -335,7 +335,24 @@ Object.assign(Minigames, {
     - **Espectadora:** armar el encabezado con `renderHeader(título, renderHUD(...))`, llamar a `mountSpectator()` después de escribir el HTML, y hacerla reaccionar con `spectate('cheer')` al acertar, `spectate('oops')` al fallar o `spectate('nod')` para marcar el ritmo.
     - **Protagonista:** envolver el canvas en `<div class="game-stage">`, crear `const pet = Minigames.createActor(canvas, tamaño)` y ubicarla en cada frame con `pet.place(x, y)`, donde `(x, y)` son los pies en unidades del canvas. Llamar a `pet.destroy()` al terminar y en `exitHandler`.
 
-La mascota en miniatura es una copia de `#pet` hecha con `createMiniPet()`: toma color, forma, cara, brillantina y accesorio en el momento de crearla, sin ids, y siempre con cara contenta. El conteo regresivo y la pantalla de resultado ya la muestran solos.
+La mascota en miniatura es una copia de `#pet` hecha con `createMiniPet(tamaño, look)`: toma color, forma, cara, brillantina y accesorio en el momento de crearla, sin ids, y siempre con cara contenta. El segundo parámetro es opcional y le da otro aspecto (`{ color, shape, accessory }`); lo usa Vestirla Igual para mostrar looks que no son el de la mascota real.
+
+Juegos actuales y cuánto pagan:
+
+| Juego | Archivo | Tipo | Monedas |
+|---|---|---|---|
+| Atrapa Dulces | `atrapa-dulces.js` | canvas, protagonista | 5 por dulce |
+| Explotar Globos | `explota-globos.js` | canvas, 20 s | 5 por globo |
+| Torre de Postres | `torre-postres.js` | canvas | 10 por capa |
+| Simón Memoria | `simon-memoria.js` | botones | 10 por ronda |
+| Runner Mágico | `runner-magico.js` | canvas, protagonista | 10 por obstáculo |
+| Burbujas Mágicas | `burbujas-magicas.js` | canvas, 15 s | 5 o 15 por burbuja |
+| Parejas | `parejas.js` | cartas, sin tiempo | 60 sin errores, 3 menos por intento extra, mínimo 20 |
+| ¿Dónde Está? | `donde-esta.js` | tres cajas | 10 por ronda |
+| Vestirla Igual | `vestir-igual.js` | botones | 10 por look |
+| Lluvia de Comida | `lluvia-comida.js` | canvas, protagonista, 3 vidas | 5 por comida |
+
+Los juegos que no usan canvas (Parejas, ¿Dónde Está?, Vestirla Igual) guardan sus `setTimeout` en una lista y los cancelan en `exitHandler`, para que no sigan corriendo sobre una pantalla que ya no existe. El conteo regresivo y la pantalla de resultado ya la muestran solos.
 
 Los estilos propios del juego, si los necesita, van en `css/juegos.css`.
 
