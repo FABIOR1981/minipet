@@ -181,7 +181,8 @@ const Minigames = {
   // =========================================================
   // MEJOR PUNTAJE POR JUEGO (persistido en localStorage)
   // =========================================================
-  BEST_SCORES_KEY: 'minipetBestScores',
+  // El modo prueba guarda sus récords aparte, igual que su partida
+  BEST_SCORES_KEY: PetState.testMode ? 'minipetBestScoresPrueba' : 'minipetBestScores',
 
   getBestScore(gameId) {
     try {

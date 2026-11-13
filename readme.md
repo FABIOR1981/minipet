@@ -77,6 +77,14 @@ python3 -m http.server
 
 Luego abrir la URL en el navegador. En móvil, se puede "Agregar a pantalla de inicio" para instalarla como PWA.
 
+## 🧪 Modo prueba
+
+Agregando `?prueba` a la dirección (por ejemplo `https://minipetkw.netlify.app/?prueba`) el juego abre en modo prueba: usa una partida aparte, que no toca la partida real, y siempre arranca con 99.999 monedas para poder comprar y probar todo sin jugar antes. Se reconoce por el cartel "🧪 Modo prueba" en la esquina de la habitación.
+
+- La partida de prueba se guarda por separado y se conserva entre visitas.
+- `?prueba=reiniciar` la borra y empieza de cero.
+- Sin el parámetro, el juego funciona como siempre.
+
 ## 🚀 Publicación
 
 Netlify ejecuta `node herramientas/construir.js`, que copia a `publicar/` únicamente `index.html`, `manifest.json`, `sw.js`, `css/`, `js/`, `data/` e `img/`. Las carpetas `desarrollo/`, `documentacion/` y `herramientas/` no llegan al sitio publicado.

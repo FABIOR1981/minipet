@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.7.0'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.7.1'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -122,7 +122,8 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => {
         // Si no hay conexión (offline), devuelve desde la caché
-        return caches.match(event.request);
+        // ignoreSearch: la página abierta con ?prueba también sale de la caché
+        return caches.match(event.request, { ignoreSearch: true });
       })
   );
 });

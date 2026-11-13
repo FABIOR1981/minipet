@@ -253,6 +253,10 @@ No eliminar campos existentes al modificar `saveData()` o `loadData()`. Si el gu
 
 Los mejores puntajes de los minijuegos se guardan aparte, en la clave `minipetBestScores`.
 
+### Modo prueba
+
+Con `?prueba` en la URL, `PetState.testMode` queda en `true`: la partida se guarda en `virtualPetDataPrueba`, los récords en `minipetBestScoresPrueba`, y al cargar se garantizan `PetState.TEST_COINS` (99.999) monedas. `?prueba=reiniciar` borra esas dos claves antes de cargar. La partida real no se lee ni se escribe en este modo. Todo acceso a `localStorage` debe pasar por `PetState.STORAGE_KEY` y `Minigames.BEST_SCORES_KEY` para respetar la separación.
+
 ## Service Worker
 
 `sw.js` usa Network First y una caché versionada.
