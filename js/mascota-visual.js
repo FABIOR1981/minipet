@@ -41,13 +41,40 @@ Object.assign(PetState, {
   // en pantalla y dejar que la mascota camine por todo él.
   SCENE: { width: 400, height: 480, floor: 200 },
 
+  // Cuánto se achica la mascota al llegar al fondo del piso (horizonte).
+  // Adelante mide 1; en el medio, un valor intermedio.
+  FAR_DEPTH: 0.72,
+
+  // Punto del piso donde está parada: x = centro, t = 0 (fondo) a 1 (adelante).
+  // Se guarda como proporción para que siga valiendo si cambia el tamaño
+  // de la pantalla o de la mascota.
+  walkPos: null,
+
+  moveRandomly() {
+    const petEl = document.getElementById('pet');
+    if (!petEl) return;
+
+    this.walkPos = { x: Math.random(), t: Math.random() };
+    petEl.classList.add('walking');
+    this.applyWalkPosition();
+
+    setTimeout(() => {
+      petEl.classList.remove('walking');
+    }, 2500);
+  },
+
+  // Coloca la mascota y su sombra en el punto guardado en walkPos.
   // Zona caminable: todo el ancho de la habitación y todo el piso del
-  // escenario (desde el horizonte hasta el borde de abajo). Las medidas
-  // se toman sobre el tamaño visible de la mascota, que depende de --pet-scale.
-  getWalkArea(petEl, roomEl) {
+  // escenario, desde el horizonte hasta el borde de abajo. Cuanto más al
+  // fondo, más chica se ve (--pet-depth).
+  applyWalkPosition() {
+    const petEl = document.getElementById('pet');
+    const roomEl = document.getElementById('pet-room');
+    const shadowEl = document.getElementById('pet-shadow');
+    if (!petEl || !roomEl || !this.walkPos) return;
+
     const roomW = roomEl.clientWidth;
     const roomH = roomEl.clientHeight;
-    const scale = parseFloat(getComputedStyle(petEl).getPropertyValue('--pet-scale')) || 1;
     const halfW = petEl.offsetWidth / 2;
     const halfH = petEl.offsetHeight / 2;
     const margin = 6;
@@ -57,35 +84,32 @@ Object.assign(PetState, {
     const bgScale = Math.max(roomW / this.SCENE.width, roomH / this.SCENE.height);
     const horizon = roomH - this.SCENE.floor * bgScale;
 
-    // left/top son los de la caja sin escalar; se corrige por la escala visual
-    const minX = margin - halfW * (1 - scale);
-    const maxX = roomW - margin - halfW * (1 + scale);
-    // Los pies van desde un poco debajo del horizonte hasta el borde inferior
-    const minFeet = Math.min(horizon + 14, roomH - margin);
+    const depth = this.FAR_DEPTH + (1 - this.FAR_DEPTH) * this.walkPos.t;
+    const baseScale = parseFloat(getComputedStyle(petEl).getPropertyValue('--pet-scale')) || 1;
+    const scale = baseScale * depth; // tamaño visible
+
+    // Altura de los pies: de un poco debajo del horizonte al borde inferior,
+    // sin dejar que la cabeza se salga por arriba en pantallas muy bajas
     const maxFeet = roomH - margin;
-    const feetToTop = halfH * (1 + scale);
-    const minY = Math.max(margin - halfH * (1 - scale), minFeet - feetToTop);
-    const maxY = Math.max(minY, maxFeet - feetToTop);
+    const minFeet = Math.min(maxFeet, Math.max(horizon + 12, margin + 2 * halfH * scale));
+    const feetY = minFeet + (maxFeet - minFeet) * this.walkPos.t;
 
-    return { minX, maxX: Math.max(minX, maxX), minY, maxY };
-  },
+    // Centro horizontal, dejando entrar a la mascota entera
+    const minCenter = margin + halfW * scale;
+    const maxCenter = Math.max(minCenter, roomW - margin - halfW * scale);
+    const centerX = minCenter + (maxCenter - minCenter) * this.walkPos.x;
 
-  moveRandomly() {
-    const petEl = document.getElementById('pet');
-    const roomEl = document.getElementById('pet-room');
-    if (!petEl || !roomEl) return;
+    // left/top son los de la caja sin escalar (la escala se aplica desde el centro)
+    petEl.style.left = `${Math.round(centerX - halfW)}px`;
+    petEl.style.top = `${Math.round(feetY - halfH * (1 + scale))}px`;
+    petEl.style.setProperty('--pet-depth', depth.toFixed(3));
 
-    const area = this.getWalkArea(petEl, roomEl);
-    const targetX = Math.round(area.minX + Math.random() * (area.maxX - area.minX));
-    const targetY = Math.round(area.minY + Math.random() * (area.maxY - area.minY));
-
-    petEl.classList.add('walking');
-    petEl.style.left = `${targetX}px`;
-    petEl.style.top = `${targetY}px`;
-
-    setTimeout(() => {
-      petEl.classList.remove('walking');
-    }, 2500);
+    if (shadowEl) {
+      shadowEl.style.left = `${Math.round(centerX)}px`;
+      shadowEl.style.top = `${Math.round(feetY - 1)}px`;
+      shadowEl.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+      shadowEl.classList.add('visible');
+    }
   },
 
   updateUI() {
@@ -142,6 +166,9 @@ Object.assign(PetState, {
     } else {
       accessoryEl.innerHTML = '';
     }
+
+    // Si cambió el tamaño o la forma, la mantiene apoyada en el mismo punto del piso
+    this.applyWalkPosition();
 
     this.updateFaceAndThought();
   },

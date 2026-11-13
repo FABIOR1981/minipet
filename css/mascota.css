@@ -7,22 +7,52 @@
 /* =========================================================
    SPRITE DE LA MASCOTA Y MOVIMIENTO AUTÓNOMO
    ========================================================= */
+/* Profundidad: 1 = adelante (tamaño normal), menor = más al fondo.
+   Registrada como número para que el cambio de tamaño se anime
+   junto con el desplazamiento al caminar. */
+@property --pet-depth {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
 .pet-sprite {
   width: 120px;
   height: 120px;
   --pet-scale: 1;
+  --pet-depth: 1;
   border-radius: 50%;
   position: absolute;
   cursor: pointer;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   background-image: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 45%);
-  transform: scale(var(--pet-scale));
-  transition: left 2.5s ease-in-out, top 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+  transform: scale(calc(var(--pet-scale) * var(--pet-depth)));
+  transition: left 2.5s ease-in-out, top 2.5s ease-in-out, --pet-depth 2.5s ease-in-out, transform 0.2s ease, background-color 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
   z-index: 4;
 }
 
+/* Sombra apoyada en el piso, bajo los pies. Es hermana de la mascota
+   (no hija) para que no la recorten las formas con clip-path ni salte
+   con ella; mascota-visual.js la mueve y la escala a la par. */
+.pet-shadow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 116px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(20, 10, 40, 0.45) 0%, rgba(20, 10, 40, 0.26) 50%, rgba(20, 10, 40, 0) 72%);
+  transform: translate(-50%, -50%) scale(1);
+  transition: left 2.5s ease-in-out, top 2.5s ease-in-out, transform 2.5s ease-in-out, opacity 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.pet-shadow.visible { opacity: 1; }
+
 .pet-sprite:active {
-  transform: scale(calc(var(--pet-scale) * 0.95));
+  transform: scale(calc(var(--pet-scale) * var(--pet-depth) * 0.95));
 }
 
 .pet-glitter {
@@ -319,8 +349,8 @@
 }
 
 @keyframes walkWiggle {
-  0% { transform: scale(var(--pet-scale)) translateY(0) rotate(-2deg); }
-  100% { transform: scale(var(--pet-scale)) translateY(-6px) rotate(2deg); }
+  0% { transform: scale(calc(var(--pet-scale) * var(--pet-depth))) translateY(0) rotate(-2deg); }
+  100% { transform: scale(calc(var(--pet-scale) * var(--pet-depth))) translateY(-6px) rotate(2deg); }
 }
 
 .happy-jump {
@@ -328,8 +358,8 @@
 }
 
 @keyframes jump {
-  0%, 100% { transform: scale(var(--pet-scale)) translateY(0); }
-  50% { transform: scale(var(--pet-scale)) translateY(-25px); }
+  0%, 100% { transform: scale(calc(var(--pet-scale) * var(--pet-depth))) translateY(0); }
+  50% { transform: scale(calc(var(--pet-scale) * var(--pet-depth))) translateY(-25px); }
 }
 
 .kawaii-face {
