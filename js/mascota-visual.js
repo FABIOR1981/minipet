@@ -36,20 +36,52 @@ Object.assign(PetState, {
     }, 5000);
   },
 
+  // Medidas de las ilustraciones de img/escenarios/ (400x480, con el piso
+  // ocupando los 200 px de abajo). Sirven para saber dónde está el piso
+  // en pantalla y dejar que la mascota camine por todo él.
+  SCENE: { width: 400, height: 480, floor: 200 },
+
+  // Zona caminable: todo el ancho de la habitación y todo el piso del
+  // escenario (desde el horizonte hasta el borde de abajo). Las medidas
+  // se toman sobre el tamaño visible de la mascota, que depende de --pet-scale.
+  getWalkArea(petEl, roomEl) {
+    const roomW = roomEl.clientWidth;
+    const roomH = roomEl.clientHeight;
+    const scale = parseFloat(getComputedStyle(petEl).getPropertyValue('--pet-scale')) || 1;
+    const halfW = petEl.offsetWidth / 2;
+    const halfH = petEl.offsetHeight / 2;
+    const margin = 6;
+
+    // El fondo usa background-size: cover anclado abajo, así que el piso
+    // mide SCENE.floor por el factor de escala de la imagen.
+    const bgScale = Math.max(roomW / this.SCENE.width, roomH / this.SCENE.height);
+    const horizon = roomH - this.SCENE.floor * bgScale;
+
+    // left/top son los de la caja sin escalar; se corrige por la escala visual
+    const minX = margin - halfW * (1 - scale);
+    const maxX = roomW - margin - halfW * (1 + scale);
+    // Los pies van desde un poco debajo del horizonte hasta el borde inferior
+    const minFeet = Math.min(horizon + 14, roomH - margin);
+    const maxFeet = roomH - margin;
+    const feetToTop = halfH * (1 + scale);
+    const minY = Math.max(margin - halfH * (1 - scale), minFeet - feetToTop);
+    const maxY = Math.max(minY, maxFeet - feetToTop);
+
+    return { minX, maxX: Math.max(minX, maxX), minY, maxY };
+  },
+
   moveRandomly() {
     const petEl = document.getElementById('pet');
     const roomEl = document.getElementById('pet-room');
     if (!petEl || !roomEl) return;
 
-    const roomWidth = roomEl.clientWidth;
-    const petWidth = petEl.offsetWidth;
-    const minX = 20;
-    const maxX = Math.max(minX, roomWidth - petWidth - 20);
-
-    const targetX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+    const area = this.getWalkArea(petEl, roomEl);
+    const targetX = Math.round(area.minX + Math.random() * (area.maxX - area.minX));
+    const targetY = Math.round(area.minY + Math.random() * (area.maxY - area.minY));
 
     petEl.classList.add('walking');
     petEl.style.left = `${targetX}px`;
+    petEl.style.top = `${targetY}px`;
 
     setTimeout(() => {
       petEl.classList.remove('walking');
