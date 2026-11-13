@@ -3,42 +3,42 @@
     "✨ ¡Hoy es un día genial!",
     "🎶 ¡La la la!",
     "⭐ ¡Gracias por cuidarme tanto!",
-    "🌈 ¡Tu eres divertido!",
-    "🐥 ¡Me siento lleno de energía y alegría!",
+    "🌈 ¡Qué divertido es estar contigo!",
+    "🐥 ¡Tengo mucha energía y alegría!",
     "🍭 ¡Eres el mejor compañero del mundo!",
     "🥳 ¡Hoy va a ser un día increíble!",
     "❤️ ¡Mi corazoncito brilla cuando jugamos!"
   ],
   "hungry": [
-    "🍕 ¡Tengo hambre! ¡Comida rica!",
+    "🍕 ¡Es hora de comer algo rico!",
     "🍗 Mmm... ¿Hay algo para picar?",
-    "🧁 ¡Mi pancita está rugiendo!",
-    "🍎 ¡Un bocadito por favor!",
+    "🧁 ¡Mi pancita pide un bocadito!",
+    "🍎 ¡Un bocadito, por favor!",
     "🍔 ¿Es la hora del almuerzo?",
     "🍓 ¡Se me antoja algo dulce!",
-    "🥨 ¡Tengo un huequito en la pancita!",
+    "🥨 ¡Qué bien me vendría un snack!",
     "🥞 ¿Me invitas un postrecito?"
   ],
   "sick": [
-    "🥺 Me siento mal... ¿Me das medicina?",
-    "🤒 Me dolió la pancita...",
-    "💊 Necesito un remedio por favor...",
-    "💧 No me siento muy bien hoy...",
+    "🥺 ¿Me das una medicina para sentirme mejor?",
+    "🤒 ¡Con un remedio vuelvo a jugar!",
+    "💊 ¡Es hora de mi medicina!",
+    "💧 Un poquito de cuidado y me recupero enseguida.",
     "🩹 ¿Me pones un curita y me das un abrazo?",
-    "🌡️ Tengo un poquito de fiebre...",
-    "🧸 Necesito mimos para recuperarme..."
+    "🌡️ ¡Una medicina y a brincar otra vez!",
+    "🧸 ¡Tus mimos me hacen sentir mejor!"
   ],
   "tired": [
-    "😴 Tengo sueño... ¡A dormir!",
-    "💤 Mis ojitos se cierran...",
+    "😴 ¡Es hora de dormir!",
+    "💤 ¡Una siesta me vendría genial!",
     "🌙 ¿Podemos tomar una siesta?",
-    "🥱 Qué cansancio... a descansar.",
+    "🥱 ¡A descansar para jugar más después!",
     "🧸 ¿Me acuestas en mi camita?",
-    "🌌 Ya no puedo tener los ojos abiertos..."
+    "🌌 ¡Quiero soñar cosas lindas!"
   ],
   "bored": [
     "🎮 ¿Jugamos un minijuego?",
-    "🎈 ¡Me aburro! Vamos a jugar.",
+    "🎈 ¡Tengo ganas de jugar! ¿Vamos?",
     "🪙 ¡Quiero ganar monedas para la tienda!",
     "🎲 ¡Se me ocurre una gran idea! ¿Jugamos?",
     "🎯 ¡Demuestra tus habilidades en un juego!",
@@ -47,13 +47,13 @@
   "sleeping": [
     "💤 Zzz... Descansando...",
     "🌙 Zzz... Soñando con caramelos...",
-    "🐑 Zzz... Contando obejitas...",
+    "🐑 Zzz... Contando ovejitas...",
     "☁️ Zzz... Durmiendo en una nube esponjosa...",
     "💤 Zzz... Mmm... pastelitos..."
   ],
   "alerts": {
-    "full": "No preciso comer ahora.",
-    "healthy": "No preciso un doctor ahora.",
-    "rested": "No tengo sueño ahora."
+    "full": "¡Gracias! Ya tengo la pancita llena.",
+    "healthy": "¡Me siento de maravilla!",
+    "rested": "¡Estoy con toda la energía!"
   }
 }
