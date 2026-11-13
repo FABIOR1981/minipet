@@ -2,7 +2,7 @@
 
 ## Resumen
 
-`minipet` es una mascota virtual hecha con Vanilla JavaScript, HTML y CSS. No usa React, TypeScript ni un sistema de build. Es una PWA sencilla que puede ejecutarse como sitio estático y publicarse en Netlify.
+`minipet` es una mascota virtual hecha con Vanilla JavaScript, HTML y CSS. No usa React, TypeScript ni dependencias. Es una PWA sencilla que se ejecuta como sitio estático y se publica en Netlify; el único paso de build es `herramientas/construir.js`, que copia a `publicar/` los archivos que usa el navegador.
 
 La mascota puede:
 
@@ -20,16 +20,27 @@ La mascota puede:
 
 ## Archivos principales
 
-- `index.html`: estructura principal, mascota, navegación inferior y modal.
-- `css/styles.css`: layout, mascota, formas, animaciones, accesorios, modal y escenarios CSS.
-- `js/app.js`: inicialización de sonidos, Service Worker y navegación entre modales.
-- `js/pet.js`: estado principal `PetState`, necesidades, movimiento, persistencia y actualización visual.
-- `js/store.js`: tienda, accesorios, escenarios, looks y modal `Mi Pet`.
-- `js/minigames.js`: minijuegos y monedas.
-- `js/particulas.js`: partículas de los escenarios.
+- `index.html`: estructura principal, mascota, sombra, navegación inferior y modal.
+- `css/base.css`: layout general, barra superior, navegación, modal y tarjetas de la tienda.
+- `css/escenarios.css`: los 17 escenarios (`.room.bg_*`), su primer plano (`.room::after`) y las animaciones de partículas.
+- `css/mascota.css`: mascota, formas, tamaños, brillantina, accesorios, sombra y animaciones.
+- `css/juegos.css`: HUD, conteo regresivo y pantalla de resultado de los minijuegos.
+- `js/app.js`: sonidos (`AudioEffects`), inicio, registro del Service Worker y navegación entre modales (`switchTab`, `closeModal`).
+- `js/mascota-estado.js`: objeto `PetState` con stats, acciones (comer, dormir, medicina), inventario, looks, persistencia y `tick()`.
+- `js/mascota-visual.js`: agrega a `PetState` el dibujo (`updateUI`), la cara, los diálogos, el paseo y la profundidad.
+- `js/catalogo.js`: objeto `Catalogo`, solo datos: `items` (accesorios y escenarios), `shapes` y `accessoryFits`.
+- `js/tienda.js`: objeto `Store`, que dibuja la Tienda, Accesorios, Escenario y Mi Pet.
+- `js/particulas.js`: objeto `Particles`, partículas ambientales por escenario.
+- `js/juegos/juegos-base.js`: objeto `Minigames` con menú, conteo, resultado, récords, HUD y reloj de frames.
+- `js/juegos/*.js`: un archivo por minijuego; cada uno agrega su método a `Minigames`.
+- `img/accessories/`: SVG de los accesorios.
+- `img/escenarios/`: ilustración SVG de cada escenario; `img/escenarios/frente/` tiene los objetos que van por delante de la mascota.
 - `data/dialogues.json`: frases de la mascota y mensajes hablados.
 - `sw.js`: Service Worker y caché PWA.
 - `manifest.json`: configuración PWA.
+- `netlify.toml` y `herramientas/construir.js`: build y publicación.
+
+Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
 
 ## Navegación actual
 
@@ -127,12 +138,13 @@ La Tienda tiene pestañas:
 La mascota principal es:
 
 ```html
+<div id="pet-shadow" class="pet-shadow"></div>
 <div id="pet" class="pet-sprite">
 ```
 
-La cara, el accesorio y la capa de brillantina están dentro de ese elemento.
+La cara, el accesorio y la capa de brillantina están dentro de `#pet`. La sombra es un elemento hermano, no hijo, para que no la recorten las formas ni salte con la mascota.
 
-El movimiento autónomo se implementa en `PetState.startWandering()` y `moveRandomly()`:
+El movimiento autónomo se implementa en `PetState.startWandering()`, `moveRandomly()` y `applyWalkPosition()` (`js/mascota-visual.js`):
 
 - Hay un primer movimiento al iniciar.
 - Luego intenta moverse cada 5 segundos.
@@ -140,7 +152,13 @@ El movimiento autónomo se implementa en `PetState.startWandering()` y `moveRand
 - No se mueve cuando `isSick` es `true`.
 - Esta condición debe conservarse.
 
-Las animaciones `walking` y `happy-jump` deben conservar la variable `--pet-scale` para no romper el tamaño elegido.
+Zona caminable: todo el ancho de la habitación y todo el piso del escenario, desde el horizonte hasta el borde inferior. La posición se guarda en `PetState.walkPos` como proporciones (`x` de 0 a 1, `t` de 0 = fondo a 1 = adelante), y `applyWalkPosition()` las convierte a píxeles según el tamaño real de la habitación. `PetState.SCENE` tiene las medidas de las ilustraciones (400x480, piso de 200) para saber dónde está el horizonte.
+
+Profundidad: al ir al fondo la mascota se achica hasta `PetState.FAR_DEPTH` (0.72). Ese factor va en la propiedad CSS `scale` del elemento, separada de `transform`, que sigue usando `--pet-scale` para el tamaño elegido. No mezclar las dos: las animaciones `walking` y `happy-jump` escriben `transform` y deben conservar `--pet-scale`.
+
+La duración del traslado sale de la variable `--walk-time` de `#pet-room`: 2.5 s durante un paseo y 0.2 s cuando solo se reacomoda (cambio de tamaño, forma o pantalla).
+
+Capas dentro de `#pet-room`, de atrás hacia adelante: fondo del escenario, partículas (`z-index: 2`), sombra (3), mascota (4) y primer plano del escenario (5, no recibe toques).
 
 ## Accesorios: sistema de ajuste
 
@@ -155,7 +173,7 @@ Cada accesorio recibe una clase de posición:
 
 También recibe una clase individual como `item-hat_crown`.
 
-`Store.accessoryFits` permite ajustar cada accesorio con:
+`Catalogo.accessoryFits` permite ajustar cada accesorio con:
 
 - `scale`
 - `x`
@@ -207,8 +225,9 @@ Mensajes actuales:
 
 - `No preciso comer ahora.`
 - `No preciso un doctor ahora.`
+- `No tengo sueño ahora.` (al tocar Dormir con la energía en 100)
 
-Si el JSON no carga, `pet.js` tiene frases de respaldo para que el juego siga funcionando.
+Si el JSON no carga, `js/mascota-estado.js` tiene frases de respaldo para que el juego siga funcionando.
 
 ## Persistencia
 
@@ -220,17 +239,19 @@ virtualPetData
 
 Incluye monedas, estadísticas, color, forma, tamaño, brillantina, enfermedad, inventario, accesorio equipado, escenario equipado y looks.
 
-No eliminar campos existentes al modificar `saveData()` o `loadData()`.
+No eliminar campos existentes al modificar `saveData()` o `loadData()`. Si el guardado está dañado o no se puede leer, `loadData()` arranca con los valores iniciales (500 monedas).
+
+Los mejores puntajes de los minijuegos se guardan aparte, en la clave `minipetBestScores`.
 
 ## Service Worker
 
 `sw.js` usa Network First y una caché versionada.
 
-La versión actual es `v2.0.3`.
+La versión vigente es el valor de `CACHE_VERSION` al inicio de `sw.js`; no se repite acá para que no quede desactualizada.
 
-Si se modifican archivos principales de la aplicación, subir la versión de `CACHE_VERSION` para forzar la actualización en dispositivos que tengan la PWA instalada.
+Si se modifican archivos de la aplicación, subir `CACHE_VERSION` para forzar la actualización en dispositivos que tengan la PWA instalada.
 
-Los archivos de desarrollo no deben entrar en la caché de producción.
+Todo archivo nuevo que deba funcionar sin conexión (JS, CSS, SVG) se agrega a `ASSETS_TO_CACHE`. Los archivos de desarrollo no deben entrar en la caché de producción.
 
 ## Carpeta de desarrollo
 
@@ -238,19 +259,13 @@ Los archivos de pruebas y demos están en:
 
 `desarrollo/`
 
-Actualmente contiene documentación y demos visuales, como:
+Actualmente contiene:
 
-- `prueba-accesorios.md`
-- `prueba-accesorios.csv`
-- `prueba-accesorios-visual.html`
-- `escenarios-demo.html`
+- `prueba-accesorios-visual.html`: página para revisar cómo calza cada accesorio.
+- `escenarios-demo_3.html`: demo histórica de escenarios (ver más abajo).
 - Este documento de contexto.
 
-La carpeta está excluida del deploy mediante `.netlifyignore`:
-
-```text
-desarrollo/
-```
+La carpeta no se publica: el build (`herramientas/construir.js`) copia a `publicar/` solo `index.html`, `manifest.json`, `sw.js`, `css/`, `js/`, `data/` e `img/`.
 
 Si se mueven archivos dentro de esta carpeta, revisar las rutas relativas de imágenes. Desde un HTML dentro de `desarrollo/`, las imágenes del proyecto se referencian normalmente como:
 
@@ -260,28 +275,27 @@ Si se mueven archivos dentro de esta carpeta, revisar las rutas relativas de im�
 
 ## Demo de escenarios
 
-`desarrollo/escenarios-demo.html` es una demo visual independiente. No representa todavía los escenarios reales de la aplicación.
+`desarrollo/escenarios-demo_3.html` es una demo visual independiente que se usó para explorar la dirección de los escenarios. Muestra, por cada uno, el fondo anterior y dos alternativas en CSS.
 
-Cada tarjeta muestra:
-
-- `Antes`: referencia simple del escenario actual.
-- `Propuesta`: versión visual mejorada.
-
-La demo contiene los 17 escenarios actuales y sirve para aprobar la dirección visual antes de modificar `styles.css` o añadir recursos reales.
-
-El Dojo Ninja se usa como referencia de calidad visual y tiene:
-
-- Piso de madera.
-- Torii construido por capas.
-- Monte Fuji con cima nevada.
-- Sol rojo.
-- Mascota separada de los elementos importantes.
+Quedó como referencia histórica: los escenarios reales de la aplicación son las ilustraciones SVG de `img/escenarios/` y no salen de esta demo.
 
 ## Cómo agregar un minijuego
 
-Los minijuegos se gestionan desde `js/minigames.js`. Para agregar uno nuevo:
+Cada minijuego vive en su propio archivo dentro de `js/juegos/` y agrega su método al objeto `Minigames` (definido en `js/juegos/juegos-base.js`). Para agregar uno nuevo:
 
-1. Añadir una tarjeta dentro de `renderMenu()` con un icono, nombre y llamada a un método nuevo:
+1. Crear `js/juegos/nuevo-juego.js` con:
+
+```js
+Object.assign(Minigames, {
+	startNewGame() {
+		this.showCountdown(() => {
+			// armar el HTML del juego y arrancar
+		});
+	}
+});
+```
+
+2. Añadir una tarjeta dentro de `renderMenu()` (`juegos-base.js`) con un icono, nombre y la llamada al método nuevo:
 
 ```html
 <div class="item-card" onclick="Minigames.startNewGame()" style="cursor:pointer;">
@@ -291,19 +305,21 @@ Los minijuegos se gestionan desde `js/minigames.js`. Para agregar uno nuevo:
 </div>
 ```
 
-2. Crear `startNewGame()` dentro del objeto `Minigames`.
-3. Usar `showCountdown()` si el juego necesita cuenta regresiva.
-4. Marcar `inProgress = true` cuando comience.
-5. Registrar `exitHandler` para limpiar timers, listeners y devolver monedas si el usuario cierra el modal.
-6. Usar `renderHUD()` para mostrar puntuación, récord y tiempo.
-7. Guardar récords con `getBestScore()` y `saveBestScore()` usando un identificador único.
-8. Terminar con `showResult()` para entregar monedas y ofrecer volver a jugar o volver al menú.
+3. Cargar el archivo en `index.html`, después de `juegos-base.js` y antes de `app.js`.
+4. Agregarlo a `ASSETS_TO_CACHE` en `sw.js`.
+5. Usar `showCountdown()` para la cuenta regresiva: ya evita que un doble toque arranque dos partidas.
+6. Marcar `inProgress = true` cuando comience.
+7. Registrar `exitHandler` para limpiar timers y listeners y devolver las monedas ganadas si el usuario cierra el modal. El bucle del juego debe cortar sin llamar a `showResult()` cuando la salida fue forzada (ver la variable `stopped` en `atrapa-dulces.js`), o las monedas se cobran dos veces.
+8. Si el juego se dibuja en un canvas con `requestAnimationFrame`, multiplicar los movimientos por el factor de `Minigames.createFrameClock()` para que vaya a la misma velocidad en pantallas de 60 y 120 Hz.
+9. Usar `renderHUD()` para mostrar puntuación, récord y tiempo, y `getCanvasScale()` para convertir toques a coordenadas del canvas.
+10. Guardar récords con `getBestScore()` y `saveBestScore()` usando un identificador único.
+11. Terminar con `showResult()` para entregar monedas y ofrecer volver a jugar o volver al menú.
 
-Normalmente no hace falta tocar `index.html`: el menú se genera desde `minigames.js`. Solo agregar CSS si el juego necesita estilos propios en `styles.css` y actualizar `sw.js` si se incorporan imágenes o sonidos.
+Los estilos propios del juego, si los necesita, van en `css/juegos.css`.
 
 ## Cómo agregar un escenario
 
-Los escenarios se registran como objetos en `Store.items`, dentro de `js/store.js`:
+Los escenarios se registran como objetos en `Catalogo.items`, dentro de `js/catalogo.js`:
 
 ```js
 {
@@ -313,25 +329,26 @@ Los escenarios se registran como objetos en `Store.items`, dentro de `js/store.j
 	image: '🌿',
 	type: 'bg',
 	category: 'bg',
-	preview: 'background: ...;'
+	preview: 'background: #cfe url(img/escenarios/nuevo.svg) center 42% / cover;'
 }
 ```
 
 Pasos:
 
-1. Crear una clase CSS con el mismo identificador, por ejemplo `.room.bg_new_scene`, en `css/styles.css`.
-2. Definir fondo, suelo, capas y objetos del ambiente mediante pseudo-elementos o elementos auxiliares.
-3. Mantener a la mascota como protagonista y no taparla con los objetos principales.
-4. Si necesita partículas, agregar el caso correspondiente en `js/particulas.js`.
-5. Verificar que `renderScenery()` lo muestre automáticamente: filtra los artículos con `category: 'bg'`.
-6. Añadir la imagen o recurso a `ASSETS_TO_CACHE` en `sw.js` si el escenario usa archivos externos.
-7. Incrementar `CACHE_VERSION` cuando se modifique la aplicación publicada.
+1. Dibujar la ilustración en `img/escenarios/nuevo.svg`, de 400x480, con el piso ocupando los 200 px de abajo (el horizonte en `y=280`). Esa altura es la que usa la mascota para caminar; si cambia, hay que cambiar `PetState.SCENE`.
+2. Dejar libre la franja superior central: ahí se superpone el globo de diálogo, y en pantallas bajas se recorta parte de arriba.
+3. Añadir en `css/escenarios.css` la regla `.room.bg_new_scene` con el color de respaldo y la imagen.
+4. Si lleva objetos por delante de la mascota, dibujarlos en un segundo SVG transparente del mismo tamaño en `img/escenarios/frente/nuevo.svg` y añadir la regla `.room.bg_new_scene::after`. Esos objetos deben apoyarse en el borde inferior, para quedar siempre más cerca que la mascota, y conviene que ocupen solo las esquinas.
+5. Si necesita partículas, agregar su entrada en `Particles.CONFIG` (`js/particulas.js`). Pocas, chicas y sin repetir lo que ya está dibujado.
+6. Verificar que `renderScenery()` lo muestre automáticamente: filtra los artículos con `category: 'bg'`.
+7. Añadir los SVG a `ASSETS_TO_CACHE` en `sw.js`.
+8. Incrementar `CACHE_VERSION`.
 
 La clase del escenario debe coincidir con el valor usado por `PetState.equippedBackground`, porque `updateUI()` aplica esa clase al elemento `#pet-room`.
 
 ## Cómo agregar un accesorio
 
-Los accesorios se registran en `Store.items` dentro de `js/store.js`:
+Los accesorios se registran en `Catalogo.items` dentro de `js/catalogo.js`:
 
 ```js
 {
@@ -354,11 +371,11 @@ El campo `type` debe ser uno de los anclajes existentes:
 Pasos:
 
 1. Crear el SVG o imagen dentro de `img/accessories/`.
-2. Añadir el artículo a `Store.items` con `category: 'acc'`.
-3. Añadirlo a `Store.accessoryFits` en `js/store.js` para definir `scale`, `x`, `y` y, si hace falta, `rotate`.
+2. Añadir el artículo a `Catalogo.items` con `category: 'acc'`.
+3. Añadirlo a `Catalogo.accessoryFits` en `js/catalogo.js` para definir `scale`, `x`, `y` y, si hace falta, `rotate`.
 4. Probarlo con Círculo, Mochi y Dumpling.
 5. Probarlo en Chico, Mediano y Grande.
-6. Si una forma necesita una excepción, añadir una regla específica en `styles.css` sin romper el ajuste individual.
+6. Si una forma necesita una excepción, añadir una regla específica en `css/mascota.css` sin romper el ajuste individual.
 7. Añadir el recurso a `ASSETS_TO_CACHE` en `sw.js` si debe funcionar offline.
 
 Ejemplo de ajuste:
@@ -379,13 +396,13 @@ El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inv
 1. Leer este documento antes de explorar todos los archivos.
 2. No modificar la aplicación principal si la petición es solo sobre la demo.
 3. No eliminar cambios existentes sin confirmar.
-4. Mantener las API públicas actuales de `PetState` y `Store`.
+4. Mantener las API públicas actuales de `PetState`, `Store`, `Catalogo` y `Minigames`.
 5. Preferir patrones ya existentes en el proyecto.
-6. Validar `pet.js`, `store.js`, `app.js`, `styles.css` e `index.html` después de editar.
+6. Validar los archivos de `js/` y `css/` que se tocaron e `index.html` después de editar.
 7. Si se cambia la aplicación principal, probar persistencia, navegación, movimiento y selección visual.
 8. Si se cambia `sw.js`, incrementar `CACHE_VERSION`.
 9. Mantener la condición de que la mascota no se mueva dormida o enferma.
-10. Mantener la carpeta `desarrollo/` fuera del deploy de Netlify.
+10. Mantener la carpeta `desarrollo/` fuera del deploy de Netlify: no agregarla a la lista de `herramientas/construir.js`.
 
 ## Validación manual recomendada
 
@@ -394,8 +411,9 @@ El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inv
 - Probar brillantina en `0`, `50` y `100`.
 - Abrir Accesorios y probar cabeza, ojos, orejas y cuello.
 - Probar accesorios con Círculo, Mochi y Dumpling.
-- Abrir Escenario y cambiar fondos.
-- Confirmar que la mascota se mueve cuando está activa.
+- Abrir Escenario y cambiar fondos; revisar ilustración, primer plano y partículas.
+- Salir de un minijuego a mitad de partida y confirmar que las monedas se cobran una sola vez.
+- Confirmar que la mascota camina por todo el piso, se achica al ir al fondo y pasa por detrás de los objetos del primer plano.
 - Confirmar que no se mueve dormida ni enferma.
 - Abrir Tienda y cambiar entre Todos, Accesorios y Escenarios.
 - Comprobar que los botones no ocultan contenido en móvil.

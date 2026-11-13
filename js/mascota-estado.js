@@ -7,7 +7,7 @@
 // métodos de renderizado y movimiento vía Object.assign.
 // =========================================================
 const PetState = {
-  coins: 500,
+  coins: 500, // Monedas iniciales de una partida nueva
   happiness: 100,
   hunger: 100,
   energy: 100,
@@ -235,7 +235,7 @@ const PetState = {
       console.warn('No se pudo leer la partida guardada; se usan los valores iniciales.', e);
     }
     if (data && typeof data === 'object') {
-      this.coins = data.coins ?? 100;
+      this.coins = data.coins ?? this.coins;
       this.happiness = data.happiness ?? 100;
       this.hunger = data.hunger ?? 100;
       this.energy = data.energy ?? 100;

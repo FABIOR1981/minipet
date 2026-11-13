@@ -1,33 +1,44 @@
 // =========================================================
 // PARTÍCULAS AMBIENTALES POR ESCENARIO (CSS puro + spawn en JS)
 // Usa el contenedor #bg-particles y las animaciones .fall-slow,
-// .float-up y .twinkle ya definidas en css/escenarios.css.
+// .float-up y .twinkle definidas en css/escenarios.css.
 //
-// Para sumar partículas a un fondo nuevo, alcanza con agregar
-// una entrada en CONFIG con su modo y sus emojis.
+// Los escenarios son ilustraciones completas, así que las partículas
+// solo suman movimiento: pocas, chicas y sin repetir lo que ya está
+// dibujado (el sol, los peces, la fogata...).
+//
+// Cada entrada de CONFIG admite:
+//   mode      'twinkle' (titilan en su lugar), 'fall-slow' (caen)
+//             o 'float-up' (suben)
+//   emojis    lista de emojis posibles
+//   count     cantidad en pantalla
+//   interval  ms entre tandas (solo fall-slow y float-up)
+//   area      [desde, hasta] en % de alto donde aparecen (solo twinkle);
+//             sirve para dejarlas en el cielo o la pared
+//   size      multiplicador de tamaño (1 por defecto)
 // =========================================================
 const Particles = {
   CONFIG: {
-    // --- Bloque 4 parte 1 ---
-    bg_space:      { mode: 'twinkle',   emojis: ['⭐', '☄️'], count: 12 },
-    bg_underwater: { mode: 'float-up',  emojis: ['🫧', '💧', '🐟'], count: 9, interval: 1800 }, // 🐟 Pequeños peces subiendo
-    bg_beach:      { mode: 'twinkle',   emojis: ['☀️', '🐚'], count: 8 },
-    bg_forest:     { mode: 'fall-slow', emojis: ['🍃', '🍂', '🦋'], count: 8, interval: 2200 }, // 🦋 Mariposas cayendo/volando suavemente
+    // Interiores
+    bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 5, area: [8, 50] },
+    bg_bedroom:    { mode: 'twinkle',   emojis: ['✨', '⭐'], count: 6, area: [8, 45] },
+    bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 3, interval: 3200 },
+    bg_kitchen:    { mode: 'twinkle',   emojis: ['✨'],       count: 4, area: [10, 45] },
+    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧'],       count: 6, interval: 2000 },
+    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸'],       count: 7, interval: 2200 },
+    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶'], count: 9, area: [8, 55] },
+    bg_space:      { mode: 'twinkle',   emojis: ['✨'],       count: 5, area: [10, 45] },
+    bg_castle:     { mode: 'twinkle',   emojis: ['✨'],       count: 6, area: [8, 50] },
 
-    // --- Bloque 4 parte 2 ---
-    bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 9 },
-    bg_bedroom:    { mode: 'twinkle',   emojis: ['⭐', '💤'], count: 9 },
-    bg_playroom:   { mode: 'float-up',  emojis: ['🎈'],       count: 8, interval: 2000 },
-    bg_park:       { mode: 'fall-slow', emojis: ['🍃', '🌸'], count: 8, interval: 2200 },
+    // Exteriores
+    bg_park:       { mode: 'fall-slow', emojis: ['🌸', '🍃'], count: 6, interval: 2400 },
+    bg_beach:      { mode: 'twinkle',   emojis: ['✨'],       count: 5, area: [44, 58] }, // brillos sobre el mar
+    bg_forest:     { mode: 'fall-slow', emojis: ['🍃'],       count: 5, interval: 2600 },
     bg_mountain:   { mode: 'fall-slow', emojis: ['❄️'],       count: 12, interval: 1400 },
-    bg_camping:    { mode: 'twinkle',   emojis: ['⭐', '🔥', '🦉'], count: 10 }, // 🦉 Búhos y brasas de la fogata
-    bg_desert:     { mode: 'twinkle',   emojis: ['☀️', '💨'], count: 8 },
-    bg_kitchen:    { mode: 'float-up',  emojis: ['♨️', '🧂', '🧁'], count: 6, interval: 2200 }, // 🧂 Especias y vapor subiendo
-    bg_bathroom:   { mode: 'float-up',  emojis: ['🫧', '💧', '🦆'], count: 9, interval: 1600 }, // 🦆 Patitos de hule flotando entre burbujas
-    bg_dojo:       { mode: 'fall-slow', emojis: ['🌸', '🍃', '☯️'], count: 8, interval: 2200 }, // ☯️ Equilibrio y pétalos de cerezo
-    bg_disco:      { mode: 'twinkle',   emojis: ['✨', '🎶', '🪩'], count: 12 }, // 🎶 Música y destellos de la bola de espejos
-    bg_castle:     { mode: 'float-up',  emojis: ['✨', '👑', '🧚', '🪄'], count: 8, interval: 2400 },
-    bg_volcano:    { mode: 'float-up',  emojis: ['🔥', '🌋', '💥'],       count: 8, interval: 2000 }
+    bg_camping:    { mode: 'twinkle',   emojis: ['✨'],       count: 6, area: [5, 40] },
+    bg_desert:     { mode: 'twinkle',   emojis: ['✨'],       count: 4, area: [8, 40] },
+    bg_underwater: { mode: 'float-up',  emojis: ['🫧'],       count: 8, interval: 1800 },
+    bg_volcano:    { mode: 'float-up',  emojis: ['🔥'],       count: 4, interval: 2400, size: 0.6 } // brasas
   },
 
   _current: null,
@@ -55,7 +66,7 @@ const Particles = {
     if (config.mode === 'twinkle') {
       // Partículas fijas que titilan en su lugar (estrellas, brillos)
       for (let i = 0; i < config.count; i++) {
-        this.spawnTwinkle(container, config.emojis);
+        this.spawnTwinkle(container, config);
       }
     } else {
       // Ráfaga inicial para no esperar al primer intervalo
@@ -74,13 +85,16 @@ const Particles = {
     }
   },
 
-  spawnTwinkle(container, emojis) {
+  spawnTwinkle(container, config) {
+    const emojis = config.emojis;
+    const [from, to] = config.area || [5, 70];
+    const size = config.size || 1;
     const el = document.createElement('span');
     el.className = 'particle twinkle';
     el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
     el.style.left = `${Math.random() * 88 + 4}%`;
-    el.style.top = `${Math.random() * 65 + 5}%`;
-    el.style.fontSize = `${(Math.random() * 0.6 + 0.7).toFixed(2)}rem`;
+    el.style.top = `${(from + Math.random() * (to - from)).toFixed(1)}%`;
+    el.style.fontSize = `${((Math.random() * 0.4 + 0.6) * size).toFixed(2)}rem`;
     el.style.animationDuration = `${(Math.random() * 1.6 + 1.4).toFixed(2)}s`;
     el.style.animationDelay = `${(Math.random() * 2).toFixed(2)}s`;
     container.appendChild(el);
@@ -92,7 +106,7 @@ const Particles = {
     el.className = `particle ${config.mode}`;
     el.innerText = emoji;
     el.style.left = `${Math.random() * 86 + 4}%`;
-    el.style.fontSize = `${(Math.random() * 0.5 + 0.9).toFixed(2)}rem`;
+    el.style.fontSize = `${((Math.random() * 0.4 + 0.8) * (config.size || 1)).toFixed(2)}rem`;
     const duration = Math.random() * 2.5 + 4.5;
     el.style.animationDuration = `${duration.toFixed(2)}s`;
     container.appendChild(el);

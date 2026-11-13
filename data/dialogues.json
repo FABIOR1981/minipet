@@ -53,6 +53,7 @@
   ],
   "alerts": {
     "full": "No preciso comer ahora.",
-    "healthy": "No preciso un doctor ahora."
+    "healthy": "No preciso un doctor ahora.",
+    "rested": "No tengo sueño ahora."
   }
 }
