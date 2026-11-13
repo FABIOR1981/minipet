@@ -33,6 +33,7 @@ La mascota puede:
 - `js/particulas.js`: objeto `Particles`, partículas ambientales por escenario.
 - `js/ambiente.js`: objeto `Ambiente`, detalles animados de cada escenario (luces, nubes, humo, fuego).
 - `js/juegos/juegos-base.js`: objeto `Minigames` con menú, conteo, resultado, récords, HUD y reloj de frames.
+- `js/juegos/mascota-mini.js`: copia en miniatura de la mascota para usar dentro de los juegos.
 - `js/juegos/*.js`: un archivo por minijuego; cada uno agrega su método a `Minigames`.
 - `img/accessories/`: SVG de los accesorios.
 - `img/escenarios/`: ilustración SVG de cada escenario; `img/escenarios/frente/` tiene los objetos que van por delante de la mascota e `img/escenarios/fx/` los sprites del ambiente animado.
@@ -41,7 +42,7 @@ La mascota puede:
 - `manifest.json`: configuración PWA.
 - `netlify.toml` y `herramientas/construir.js`: build y publicación.
 
-Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
+Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, `juegos/mascota-mini.js`, los seis minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
 
 ## Navegación actual
 
@@ -330,6 +331,11 @@ Object.assign(Minigames, {
 9. Usar `renderHUD()` para mostrar puntuación, récord y tiempo, y `getCanvasScale()` para convertir toques a coordenadas del canvas.
 10. Guardar récords con `getBestScore()` y `saveBestScore()` usando un identificador único.
 11. Terminar con `showResult()` para entregar monedas y ofrecer volver a jugar o volver al menú.
+12. Integrar a la mascota (`js/juegos/mascota-mini.js`), de una de dos formas:
+    - **Espectadora:** armar el encabezado con `renderHeader(título, renderHUD(...))`, llamar a `mountSpectator()` después de escribir el HTML, y hacerla reaccionar con `spectate('cheer')` al acertar, `spectate('oops')` al fallar o `spectate('nod')` para marcar el ritmo.
+    - **Protagonista:** envolver el canvas en `<div class="game-stage">`, crear `const pet = Minigames.createActor(canvas, tamaño)` y ubicarla en cada frame con `pet.place(x, y)`, donde `(x, y)` son los pies en unidades del canvas. Llamar a `pet.destroy()` al terminar y en `exitHandler`.
+
+La mascota en miniatura es una copia de `#pet` hecha con `createMiniPet()`: toma color, forma, cara, brillantina y accesorio en el momento de crearla, sin ids, y siempre con cara contenta. El conteo regresivo y la pantalla de resultado ya la muestran solos.
 
 Los estilos propios del juego, si los necesita, van en `css/juegos.css`.
 

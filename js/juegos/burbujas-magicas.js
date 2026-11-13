@@ -8,12 +8,12 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('bubble');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">✨ Burbujas Mágicas</h3>
-        ${Minigames.renderHUD('✨', best, 15)}
+        ${Minigames.renderHeader('✨ Burbujas Mágicas', Minigames.renderHUD('✨', best, 15))}
         <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #80cbc4; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca las burbujas para atraparlas</p>
       `;
 
+      Minigames.mountSpectator();
       const canvas = document.getElementById('bubbleCanvas');
       const ctx = canvas.getContext('2d');
       let bubbles = [];
@@ -47,6 +47,7 @@ Object.assign(Minigames, {
             score += b.isGolden ? 15 : 5;
             Minigames.updateHudScore(score);
             AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
+            Minigames.spectate('cheer');
             bubbles.splice(i, 1);
           }
         }

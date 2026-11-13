@@ -8,12 +8,12 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('cake');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">🍰 Torre de Postres</h3>
-        ${Minigames.renderHUD('🍰', best)}
+        ${Minigames.renderHeader('🍰 Torre de Postres', Minigames.renderHUD('🍰', best))}
         <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla para apilar el pastel</p>
       `;
 
+      Minigames.mountSpectator();
       const canvas = document.getElementById('cakeCanvas');
       const ctx = canvas.getContext('2d');
       let layers = [{ x: 100, width: 100, y: 270 }];
@@ -38,6 +38,7 @@ Object.assign(Minigames, {
         score += 10;
         Minigames.updateHudScore(score);
         AudioEffects.playTone(700, 'sine', 0.1);
+        Minigames.spectate('cheer');
         const newWidth = prev.width - Math.abs(diff);
         const newX = diff > 0 ? currentX : prev.x;
 

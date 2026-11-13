@@ -102,10 +102,16 @@ const Minigames = {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:260px;">
+        <div id="countdown-pet" class="countdown-pet"></div>
         <div id="countdown-num" class="kawaii-countdown">3</div>
         <p id="countdown-sub" style="font-weight:bold; color:#ab47bc; margin-top:10px;">¡Prepárate! ✨</p>
       </div>
     `;
+
+    // La mascota hace la cuenta: un saltito por número
+    const countPet = this.createMiniPet(76);
+    document.getElementById('countdown-pet').appendChild(countPet.el);
+    countPet.cheer();
 
     let count = 3;
     AudioEffects.playTone(523, 'sine', 0.15);
@@ -119,6 +125,8 @@ const Minigames = {
         this.cancelCountdown();
         return;
       }
+
+      if (count >= 0) countPet.cheer();
 
       if (count > 0) {
         numEl.innerText = count;
@@ -148,7 +156,10 @@ const Minigames = {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <div class="result-screen">
-        <div class="result-emoji">${emoji}</div>
+        <div class="result-pet-row">
+          <div id="result-pet" class="result-pet"></div>
+          <div class="result-emoji">${emoji}</div>
+        </div>
         <h2 class="result-title">${title}</h2>
         ${isRecord ? '<div class="result-record">🏆 ¡Nuevo récord!</div>' : ''}
         <div class="result-coins-box">
@@ -161,6 +172,11 @@ const Minigames = {
         </div>
       </div>
     `;
+
+    // La mascota festeja el resultado
+    const resultPet = this.createMiniPet(88);
+    resultPet.party();
+    document.getElementById('result-pet').appendChild(resultPet.el);
 
     PetState.addCoins(score);
 
