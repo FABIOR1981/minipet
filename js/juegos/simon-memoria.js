@@ -24,8 +24,7 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('simon');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">🎯 Simón Memoria</h3>
-        ${Minigames.renderHUD('🧠', best)}
+        ${Minigames.renderHeader('🎯 Simón Memoria', Minigames.renderHUD('🧠', best))}
         <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">¡Memoriza la secuencia!</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
           <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
@@ -34,6 +33,8 @@ Object.assign(Minigames, {
           <button id="simon-3" onclick="Minigames.simonClick(3)" style="height:75px; background:#ffe082; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #ffb300; touch-action:manipulation;"></button>
         </div>
       `;
+
+      Minigames.mountSpectator();
 
       this.simonSequence = [];
       this.userSequence = [];
@@ -83,6 +84,7 @@ Object.assign(Minigames, {
     if (!btn) return;
     const freqs = [350, 450, 550, 650];
     AudioEffects.playTone(freqs[index], 'sine', 0.15);
+    Minigames.spectate('nod'); // cabecea al ritmo de la secuencia
     btn.style.opacity = '0.3';
     setTimeout(() => btn.style.opacity = '1', 350);
   },
@@ -108,6 +110,7 @@ Object.assign(Minigames, {
       this.simonAcceptingInput = false;
       this.simonScore++;
       Minigames.updateHudScore(this.simonScore);
+      Minigames.spectate('cheer');
       const roundTimeout = setTimeout(() => this.nextSimonRound(), 1000);
       this.simonTimers.push(roundTimeout);
     }

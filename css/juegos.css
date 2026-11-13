@@ -1,7 +1,7 @@
 /* =========================================================
    JUEGOS.CSS — Conteo regresivo, HUD (marcador/mejor puntaje/
-   tiempo) y pantalla de resultado, compartidos por los 6
-   minijuegos.
+   tiempo), pantalla de resultado y la mascota en miniatura,
+   compartidos por los 6 minijuegos.
    ========================================================= */
 
 /* =========================================================
@@ -126,4 +126,103 @@
   0% { transform: scale(0.3); opacity: 0; }
   70% { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
+}
+/* =========================================================
+   LA MASCOTA EN LOS MINIJUEGOS (js/juegos/mascota-mini.js)
+   .mini-pet envuelve una copia de la mascota real y reserva
+   --mini-size de lado; la copia se escala con --pet-scale.
+   Las reacciones animan el envoltorio, no la copia.
+   ========================================================= */
+.mini-pet {
+  position: relative;
+  width: var(--mini-size, 56px);
+  height: var(--mini-size, 56px);
+  flex: none;
+  pointer-events: none;
+}
+
+.mini-pet .pet-sprite {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  scale: 1;
+  transition: none;
+  animation: none;
+  cursor: default;
+  box-shadow: none;
+}
+
+.mini-pet.cheer { animation: miniCheer 0.45s ease-out; }
+.mini-pet.oops { animation: miniOops 0.55s ease-in-out; }
+.mini-pet.nod { animation: miniNod 0.3s ease-in-out; }
+.mini-pet.party { animation: miniParty 0.75s ease-in-out infinite; }
+.mini-pet.run .pet-sprite { animation: walkWiggle 0.22s infinite alternate ease-in-out; }
+
+@keyframes miniCheer {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(calc(var(--mini-size) * -0.28)) scale(1.06); }
+}
+@keyframes miniOops {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-4px) rotate(-6deg); }
+  50% { transform: translateX(4px) rotate(6deg); }
+  80% { transform: translateX(-2px) rotate(-3deg); }
+}
+@keyframes miniNod {
+  0%, 100% { transform: scale(1, 1); }
+  50% { transform: scale(1.06, 0.92) translateY(3%); }
+}
+@keyframes miniParty {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(calc(var(--mini-size) * -0.16)) rotate(4deg); }
+}
+
+/* Protagonista: el canvas y la mascota comparten este marco */
+.game-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 6px auto;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.stage-actor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Espectadora: a la izquierda del título y el marcador */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spectator-slot {
+  width: 54px;
+  height: 54px;
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.game-title { color: #ab47bc; margin-bottom: 2px; }
+.game-header .game-hud { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+
+/* Conteo regresivo y resultado */
+.countdown-pet { height: 84px; display: flex; align-items: flex-end; margin-bottom: 6px; }
+
+.result-pet-row { display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
+.result-pet { height: 96px; display: flex; align-items: flex-end; }
+.result-pet-row .result-emoji { font-size: 1.8rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-pet, .mini-pet .pet-sprite { animation: none !important; }
 }

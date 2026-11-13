@@ -17,7 +17,7 @@ El contexto técnico detallado (para quien vaya a tocar el código) está en [`d
 - **Mi Pet**: color de piel, tamaño, forma y brillantina.
 - **Accesorios**: 21 accesorios equipables (sombreros, orejas, lentes, alas, etc.) y looks guardados (hasta 6).
 - **Escenarios**: 17 escenarios ilustrados (sala, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas, con partículas ambientales y detalles animados propios (fuego, nubes, luces, luciérnagas).
-- **6 minijuegos** para ganar monedas: Atrapa Dulces, Explotar Globos, Torre de Postres, Simón Memoria, Runner Mágico y Burbujas Mágicas — con soporte táctil y de teclado, y mejor puntaje guardado por juego.
+- **6 minijuegos** para ganar monedas: Atrapa Dulces, Explotar Globos, Torre de Postres, Simón Memoria, Runner Mágico y Burbujas Mágicas — con soporte táctil y de teclado, y mejor puntaje guardado por juego. Tu mascota participa en todos: es la protagonista en Runner y Atrapa Dulces, mira y reacciona en los demás, hace la cuenta regresiva y festeja el resultado.
 - **Efectos de sonido** generados con Web Audio API (sin archivos de audio externos).
 - **PWA instalable**: `manifest.json` + `sw.js` con estrategia *network-first* y caché offline; avisa al usuario cuando hay una versión nueva disponible.
 - **Persistencia local**: todo el progreso se guarda en `localStorage`.
@@ -47,6 +47,7 @@ minipet/
 │   ├── tienda.js              # Store: tienda, Accesorios, Escenario y Mi Pet
 │   └── juegos/
 │       ├── juegos-base.js     # Minigames: menú, conteo, resultado, récords, HUD
+│       ├── mascota-mini.js    # La mascota dentro de los juegos (protagonista y espectadora)
 │       ├── atrapa-dulces.js
 │       ├── explota-globos.js
 │       ├── torre-postres.js

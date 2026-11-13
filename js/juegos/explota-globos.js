@@ -8,12 +8,12 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('pop');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">🌸 Explotar Globos</h3>
-        ${Minigames.renderHUD('🎈', best, 20)}
+        ${Minigames.renderHeader('🌸 Explotar Globos', Minigames.renderHUD('🎈', best, 20))}
         <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
         <p style="font-size:0.8rem; text-align:center; color:#666;">¡Toca los globos antes de que suban!</p>
       `;
 
+      Minigames.mountSpectator();
       const canvas = document.getElementById('popCanvas');
       const ctx = canvas.getContext('2d');
       let balloons = [];
@@ -48,6 +48,7 @@ Object.assign(Minigames, {
             score += 5;
             Minigames.updateHudScore(score);
             AudioEffects.playTone(900, 'triangle', 0.08);
+            Minigames.spectate('cheer');
             balloons.splice(index, 1);
           }
         }
@@ -91,7 +92,10 @@ Object.assign(Minigames, {
           ctx.font = `${b.radius * 2}px sans-serif`;
           ctx.fillText('🎈', b.x, b.y);
 
-          if (b.y < -20) balloons.splice(index, 1);
+          if (b.y < -20) {
+            balloons.splice(index, 1);
+            Minigames.spectate('oops'); // se escapó un globo
+          }
         }
 
         requestAnimationFrame(loop);

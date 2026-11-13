@@ -1,6 +1,7 @@
 // =========================================================
-// ATRAPA-DULCES.JS — Agarrar con una cesta los dulces que caen
-// antes de que toquen el piso. Soporte de teclado y táctil.
+// ATRAPA-DULCES.JS — La mascota corre de lado a lado y atrapa
+// los dulces que caen antes de que toquen el piso. Soporte de
+// teclado y táctil.
 // =========================================================
 Object.assign(Minigames, {
   startCatchGame() {
@@ -10,7 +11,9 @@ Object.assign(Minigames, {
       content.innerHTML = `
         <h3 style="color:#ab47bc; margin-bottom:2px;">🎈 Atrapa Dulces</h3>
         ${Minigames.renderHUD('🍬', best)}
-        <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ce93d8; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
+        <div class="game-stage">
+          <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; display:block; border:3px solid #ce93d8; touch-action:none; width:100%; height:auto; aspect-ratio:1/1;"></canvas>
+        </div>
         <p style="font-size:0.8rem; text-align:center; color:#666;">Arrastra el dedo o usa ⬅️ ➡️ para moverte</p>
       `;
 
@@ -24,6 +27,13 @@ Object.assign(Minigames, {
       let score = 0;
       let gameOver = false;
       let stopped = false; // Salida forzada: las monedas ya las cobra forceExitIfActive()
+
+      // La mascota es quien atrapa. basketX sigue siendo el borde izquierdo de
+      // la zona de atrape (60 de ancho), así la dificultad no cambia.
+      const PET_SIZE = 58;
+      const GROUND = 296;
+      const pet = Minigames.createActor(canvas, PET_SIZE);
+      pet.place(basketX + 30, GROUND);
 
       // Teclado
       const keys = {};
@@ -50,6 +60,7 @@ Object.assign(Minigames, {
         canvas.removeEventListener('touchstart', handleTouch);
         canvas.removeEventListener('touchmove', handleTouch);
         stopped = true;
+        pet.destroy();
         return score;
       };
 
@@ -63,6 +74,7 @@ Object.assign(Minigames, {
           window.removeEventListener('keyup', handleKeyUp);
           canvas.removeEventListener('touchstart', handleTouch);
           canvas.removeEventListener('touchmove', handleTouch);
+          pet.destroy();
           const isRecord = Minigames.saveBestScore('catch', score);
           Minigames.showResult('¡Juego terminado!', '🎈', score, () => Minigames.startCatchGame(), isRecord);
           return;
@@ -77,6 +89,7 @@ Object.assign(Minigames, {
           score += 5;
           Minigames.updateHudScore(score);
           AudioEffects.playTone(800, 'sine', 0.05);
+          pet.cheer();
           itemY = 0;
           itemX = Math.random() * 250 + 10;
           currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
@@ -88,9 +101,12 @@ Object.assign(Minigames, {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // Cesta
-        ctx.font = '38px sans-serif';
-        ctx.fillText('🧺', basketX + 30, 285);
+        // Sombra de la mascota en el piso
+        ctx.fillStyle = 'rgba(74, 20, 140, 0.16)';
+        ctx.beginPath();
+        ctx.ellipse(basketX + 30, GROUND - 2, 24, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        pet.place(basketX + 30, GROUND);
 
         // Dulce cayendo
         ctx.font = '26px sans-serif';
