@@ -3,8 +3,24 @@
 // colores que se enciende, una ronda más larga cada vez.
 // =========================================================
 Object.assign(Minigames, {
+  // Timers pendientes (reproducción de la secuencia y pausa entre rondas).
+  // Se cancelan al salir o al perder para que no sigan corriendo sobre
+  // una pantalla que ya no existe.
+  simonTimers: [],
+  // Solo se aceptan toques cuando terminó de mostrarse la secuencia
+  simonAcceptingInput: false,
+
+  clearSimonTimers() {
+    this.simonTimers.forEach(id => {
+      clearInterval(id);
+      clearTimeout(id);
+    });
+    this.simonTimers = [];
+  },
+
   startSimonGame() {
     this.showCountdown(() => {
+      this.clearSimonTimers();
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('simon');
       content.innerHTML = `
@@ -22,27 +38,44 @@ Object.assign(Minigames, {
       this.simonSequence = [];
       this.userSequence = [];
       this.simonScore = 0;
-      this.nextSimonRound();
+      this.simonAcceptingInput = false;
 
       Minigames.inProgress = true;
-      Minigames.exitHandler = () => Minigames.simonScore * 10;
+      Minigames.exitHandler = () => {
+        Minigames.clearSimonTimers();
+        Minigames.simonAcceptingInput = false;
+        return Minigames.simonScore * 10;
+      };
+
+      this.nextSimonRound();
     });
   },
 
   nextSimonRound() {
+    const statusEl = document.getElementById('simon-status');
+    if (!statusEl) return; // El jugador ya salió del juego
+
+    this.simonAcceptingInput = false;
     this.userSequence = [];
     this.simonSequence.push(Math.floor(Math.random() * 4));
-    document.getElementById('simon-status').innerText = `Ronda ${this.simonSequence.length} ✨`;
-    
+    statusEl.innerText = `Ronda ${this.simonSequence.length} ✨`;
+
     let i = 0;
     const interval = setInterval(() => {
-      if (i >= this.simonSequence.length) {
-        clearInterval(interval);
-        return;
-      }
       this.flashSimonButton(this.simonSequence[i]);
       i++;
+      if (i >= this.simonSequence.length) {
+        clearInterval(interval);
+        // Habilita los toques recién cuando se apagó el último botón
+        const turnTimeout = setTimeout(() => {
+          this.simonAcceptingInput = true;
+          const el = document.getElementById('simon-status');
+          if (el) el.innerText = '¡Tu turno! 👆';
+        }, 400);
+        this.simonTimers.push(turnTimeout);
+      }
     }, 700);
+    this.simonTimers.push(interval);
   },
 
   flashSimonButton(index) {
@@ -55,11 +88,16 @@ Object.assign(Minigames, {
   },
 
   simonClick(index) {
+    // Ignora toques mientras se muestra la secuencia o entre rondas
+    if (!this.simonAcceptingInput) return;
+
     this.flashSimonButton(index);
     this.userSequence.push(index);
 
     const currentIndex = this.userSequence.length - 1;
     if (this.userSequence[currentIndex] !== this.simonSequence[currentIndex]) {
+      this.simonAcceptingInput = false;
+      this.clearSimonTimers();
       const reward = this.simonScore * 10;
       const isRecord = Minigames.saveBestScore('simon', this.simonScore);
       Minigames.showResult('¡Te equivocaste!', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
@@ -67,9 +105,11 @@ Object.assign(Minigames, {
     }
 
     if (this.userSequence.length === this.simonSequence.length) {
+      this.simonAcceptingInput = false;
       this.simonScore++;
       Minigames.updateHudScore(this.simonScore);
-      setTimeout(() => this.nextSimonRound(), 1000);
+      const roundTimeout = setTimeout(() => this.nextSimonRound(), 1000);
+      this.simonTimers.push(roundTimeout);
     }
   },
 });

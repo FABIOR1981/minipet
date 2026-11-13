@@ -64,15 +64,25 @@ Object.assign(Minigames, {
         return score;
       };
 
-      function loop() {
+      const frameClock = Minigames.createFrameClock();
+
+      function loop(now) {
+        const f = frameClock(now); // 1 = un frame a 60 Hz
         if (gameOver) {
           window.removeEventListener('keydown', handleSpace);
           return;
         }
 
-        currentX += currentSpeed;
         const prevWidth = layers[layers.length - 1].width;
-        if (currentX > 300 - prevWidth || currentX < 0) currentSpeed *= -1;
+        const maxX = 300 - prevWidth;
+        currentX += currentSpeed * f;
+        if (currentX > maxX) {
+          currentX = maxX;
+          currentSpeed = -Math.abs(currentSpeed);
+        } else if (currentX < 0) {
+          currentX = 0;
+          currentSpeed = Math.abs(currentSpeed);
+        }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
