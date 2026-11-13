@@ -6,7 +6,17 @@
 // mascota-visual.js agrega a este mismo objeto PetState los
 // métodos de renderizado y movimiento vía Object.assign.
 // =========================================================
+// Modo prueba: abrir el juego con ?prueba en la URL (por ejemplo
+// https://minipetkw.netlify.app/?prueba). Usa una partida aparte, que no
+// toca la partida real, y siempre arranca con monedas de sobra para poder
+// comprar y probar todo. Con ?prueba=reiniciar esa partida empieza de cero.
+const PARAMETRO_PRUEBA = new URLSearchParams(window.location.search).get('prueba');
+
 const PetState = {
+  testMode: PARAMETRO_PRUEBA !== null,
+  TEST_COINS: 99999,
+  STORAGE_KEY: PARAMETRO_PRUEBA !== null ? 'virtualPetDataPrueba' : 'virtualPetData',
+
   coins: 500, // Monedas iniciales de una partida nueva
   happiness: 100,
   hunger: 100,
@@ -26,6 +36,10 @@ const PetState = {
 
   async init() {
     this.loadData();
+    if (this.testMode) {
+      const badge = document.getElementById('test-badge');
+      if (badge) badge.hidden = false;
+    }
     await this.loadDialogues();
     this.updateUI();
     setInterval(() => this.tick(), 8000);
@@ -225,7 +239,7 @@ const PetState = {
       looks: this.looks
     });
     try {
-      localStorage.setItem('virtualPetData', datos);
+      localStorage.setItem(this.STORAGE_KEY, datos);
     } catch (e) {
       // Sin almacenamiento disponible (modo privado, cuota llena): se sigue jugando sin guardar
     }
@@ -236,7 +250,11 @@ const PetState = {
     // valores por defecto en vez de dejar el juego sin iniciar.
     let data = null;
     try {
-      data = JSON.parse(localStorage.getItem('virtualPetData'));
+      if (PARAMETRO_PRUEBA === 'reiniciar') {
+        localStorage.removeItem(this.STORAGE_KEY);
+        localStorage.removeItem('minipetBestScoresPrueba');
+      }
+      data = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
     } catch (e) {
       console.warn('No se pudo leer la partida guardada; se usan los valores iniciales.', e);
     }
@@ -257,5 +275,8 @@ const PetState = {
       this.equippedBackground = data.equippedBackground || 'bg_living';
       this.looks = Array.isArray(data.looks) ? data.looks : [];
     }
+
+    // En modo prueba siempre hay monedas de sobra
+    if (this.testMode) this.coins = Math.max(this.coins, this.TEST_COINS);
   }
 };
