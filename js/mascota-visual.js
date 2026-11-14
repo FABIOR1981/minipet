@@ -8,9 +8,14 @@
 // =========================================================
 Object.assign(PetState, {
   getRandomPhrase(category) {
-    const list = this.dialogues[category] || ['❤️ ¡Hola!'];
+    let list = this.dialogues[category] || ['❤️ ¡Hola!'];
+    // Las frases con {nombre} solo se usan si la mascota tiene nombre
+    if (!this.petName) {
+      const withoutName = list.filter(phrase => !phrase.includes('{nombre}'));
+      if (withoutName.length) list = withoutName;
+    }
     const index = Math.floor(Math.random() * list.length);
-    return list[index];
+    return list[index].replace(/\{nombre\}/g, this.petName);
   },
 
   getDialogue(key, fallback) {
@@ -213,6 +218,10 @@ Object.assign(PetState, {
     const extraProp = document.getElementById('extra-prop');
     
     if (!face || !thought) return;
+
+    // Etiqueta con el nombre sobre el globo de diálogo (si tiene nombre)
+    if (this.petName) thought.dataset.name = this.petName;
+    else delete thought.dataset.name;
 
     // Rasgos elegidos en Mi Pet: ojos y mejillas por clase, boca por texto
     face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks}`;

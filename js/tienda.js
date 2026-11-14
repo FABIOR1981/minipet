@@ -60,9 +60,7 @@ const Store = {
           <div style="margin: 8px 0; text-align:center;">
             <p class="wardrobe-label">Color de Piel:</p>
             <div class="color-picker">
-              <button class="color-option ${PetState.petColor === '#ff80ab' ? 'selected' : ''}" onclick="PetState.setColor('#ff80ab'); Store.renderMyPet();" aria-label="Color rosa" style="background:#ff80ab;"></button>
-              <button class="color-option ${PetState.petColor === '#b388ff' ? 'selected' : ''}" onclick="PetState.setColor('#b388ff'); Store.renderMyPet();" aria-label="Color violeta" style="background:#b388ff;"></button>
-              <button class="color-option ${PetState.petColor === '#80cbc4' ? 'selected' : ''}" onclick="PetState.setColor('#80cbc4'); Store.renderMyPet();" aria-label="Color turquesa" style="background:#80cbc4;"></button>
+              ${Catalogo.colors.map(c => `<button class="color-option ${PetState.petColor === c.hex ? 'selected' : ''}" onclick="PetState.setColor('${c.hex}'); Store.renderMyPet();" aria-label="Color ${c.name}" style="background:${c.hex};"></button>`).join('')}
             </div>
           </div>
           <div style="margin: 8px 0; text-align:center;">
@@ -129,6 +127,9 @@ const Store = {
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">🐾 Mi Pet</h2>
       <div id="mypet-preview" class="mypet-preview"></div>
+      <label class="mypet-name">Nombre
+        <input id="mypet-name" type="text" maxlength="14" placeholder="Luna" autocomplete="off">
+      </label>
       <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
@@ -139,6 +140,12 @@ const Store = {
       btn.onclick = () => { this.myPetTab = btn.dataset.tab; this.renderMyPet(); };
     });
     this.refreshPetPreview();
+
+    // El nombre se guarda mientras se escribe, sin redibujar la ventana
+    const nameInput = content.querySelector('#mypet-name');
+    nameInput.value = PetState.petName;
+    nameInput.oninput = () => PetState.setName(nameInput.value);
+
     if (tab === 'cuerpo') this.bindPetCustomization(content);
     else this.bindTraits(content);
   },

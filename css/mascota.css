@@ -97,7 +97,7 @@
 
 .wardrobe-top-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 8px;
   align-items: start;
 }
@@ -144,8 +144,11 @@
 
 .color-picker {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  max-width: 190px; /* cinco por fila */
+  margin: 0 auto;
 }
 
 .color-option {

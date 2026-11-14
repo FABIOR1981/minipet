@@ -88,6 +88,9 @@ const Vestidor = {
     const looksList = document.getElementById('vestidor-looks-list');
     if (!strip || !looksList) return;
 
+    const title = document.getElementById('vestidor-title');
+    if (title) title.textContent = PetState.petName ? `🪞 Vestidor de ${PetState.petName}` : '🪞 Vestidor';
+
     const owned = PetState.inventory
       .map(id => Catalogo.items.find(i => i.id === id))
       .filter(item => item && item.category === 'acc');
