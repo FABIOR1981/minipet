@@ -699,3 +699,88 @@
 @media (prefers-reduced-motion: reduce) {
   #pet:not(.walking), .eye { animation: none; }
 }
+
+/* =========================================================
+   RASGOS DE LA CARA (Mi Pet > Rasgos)
+   La cara lleva una clase por rasgo: .eyes-<id> y .cheeks-<id>
+   (ids de Catalogo.traits). La boca es texto. Los rasgos por
+   defecto (round / round) no necesitan reglas.
+   ========================================================= */
+
+/* --- Ojos --- */
+.kawaii-face.eyes-sparkle .eye { width: 17px; height: 18px; }
+.kawaii-face.eyes-sparkle .sparkle { font-size: 10px; top: -3px; right: 0; }
+.kawaii-face.eyes-sparkle .eye::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.kawaii-face.eyes-happy .eye {
+  width: 16px;
+  height: 9px;
+  background: none;
+  border: 3px solid #333;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+.kawaii-face.eyes-happy .sparkle { display: none; }
+
+.kawaii-face.eyes-lashes .eye::before,
+.kawaii-face.eyes-lashes .eye::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: #333;
+}
+.kawaii-face.eyes-lashes .eye.left::before { left: -5px; transform: rotate(35deg); }
+.kawaii-face.eyes-lashes .eye.left::after { left: -6px; top: 2px; transform: rotate(12deg); }
+.kawaii-face.eyes-lashes .eye.right::before { right: -5px; transform: rotate(-35deg); }
+.kawaii-face.eyes-lashes .eye.right::after { right: -6px; top: 2px; transform: rotate(-12deg); }
+
+.kawaii-face.eyes-button .eye { width: 9px; height: 9px; margin: 2px 3px 3px; }
+.kawaii-face.eyes-button .sparkle { display: none; }
+
+/* Los estados de ánimo mandan sobre el rasgo elegido */
+.kawaii-face.sick .eye {
+  width: 14px;
+  height: 4px;
+  border: none;
+  border-radius: 2px;
+  background: #333;
+}
+.kawaii-face.sleeping .eye { width: 14px !important; border: none !important; }
+.kawaii-face.sick .eye::before, .kawaii-face.sick .eye::after,
+.kawaii-face.sleeping .eye::before, .kawaii-face.sleeping .eye::after { display: none; }
+
+/* --- Mejillas --- */
+.kawaii-face.cheeks-big .cheek { width: 19px; height: 12px; opacity: 0.45; }
+.kawaii-face.cheeks-big .cheeks { gap: 34px; }
+.kawaii-face.cheeks-none .cheek { opacity: 0; }
+
+.kawaii-face.cheeks-hearts .cheek,
+.kawaii-face.cheeks-stars .cheek {
+  background: none;
+  opacity: 0.6;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4081;
+  font-size: 11px;
+  line-height: 1;
+}
+/* Un poco más abajo, para que no pisen los ojos */
+.kawaii-face.cheeks-hearts .cheeks,
+.kawaii-face.cheeks-stars .cheeks { top: 53%; }
+.kawaii-face.cheeks-hearts .cheek::before { content: '♥'; }
+.kawaii-face.cheeks-stars .cheek::before { content: '★'; color: #ffb300; }
+.kawaii-face.cheeks-stars .cheek { opacity: 0.8; }

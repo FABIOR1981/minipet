@@ -306,3 +306,49 @@ body {
   pointer-events: none;
   z-index: 8;
 }
+
+/* =========================================================
+   MI PET: vista previa y opciones de rasgos
+   ========================================================= */
+.mypet-preview {
+  flex: none;
+  height: 112px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 14px; /* lugar para sombreros */
+}
+
+.trait-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 10px; }
+
+.trait-option {
+  width: 60px;
+  padding: 4px 2px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border: 2px solid #e1bee7;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.trait-option.selected { border-color: #ff4081; background: #fff0f6; box-shadow: 0 0 0 2px #ff80ab; }
+.trait-name { font-size: 0.66rem; font-weight: bold; color: #4a148c; line-height: 1.1; }
+
+/* Ventanita que muestra la cara ampliada con el rasgo de esa opción */
+.trait-zoom {
+  position: relative;
+  width: 50px;
+  height: 34px;
+  overflow: hidden;
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+.trait-zoom .mini-pet { position: absolute; left: 50%; translate: -50% 0; }
+.trait-zoom-eyes .mini-pet { top: -32px; }
+.trait-zoom-cheeks .mini-pet { top: -38px; }
+.trait-zoom-mouth .mini-pet { top: -46px; }

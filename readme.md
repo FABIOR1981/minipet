@@ -14,7 +14,7 @@ El contexto técnico detallado (para quien vaya a tocar el código) está en [`d
 - **Mascota animada**: rostro kawaii modular (feliz, con hambre, enferma, cansada, aburrida, durmiendo) y frases aleatorias cargadas desde `data/dialogues.json`. En reposo respira y parpadea, y al caminar mira hacia donde va.
 - **La mascota camina sola** por todo el piso del escenario cada 5s (si no está durmiendo ni enferma). Se achica al ir hacia el fondo, tiene sombra apoyada en el piso y pasa por detrás de los objetos del primer plano.
 - **Acciones**: Comer 🍗, Medicina 🏥 (cura si está enferma) y Dormir 😴 (recupera energía de a poco y se despierta sola al llegar a 100). Cada una se ve: la mascota mastica un bocado, sale un cartelito con lo que ganó y al dormir se hace de noche en la habitación.
-- **Mi Pet**: color de piel, tamaño, forma y brillantina.
+- **Mi Pet**: la identidad de la mascota, con vista previa. Pestaña Cuerpo (color de piel, tamaño, forma y brillantina) y pestaña Rasgos (cinco estilos de ojos, de boca y de mejillas). Todo es gratis.
 - **Armario**: un vestidor con ropero y espejo adonde la mascota va a probarse sus accesorios (21 en total: sombreros, orejas, lentes, alas, etc.). Se ven puestos al instante, en ella y en su reflejo, y se pueden guardar hasta 6 looks.
 - **Escenarios**: 17 escenarios ilustrados (sala, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas, con partículas ambientales y detalles animados propios (fuego, nubes, luces, luciérnagas).
 - **10 minijuegos** para ganar monedas, con soporte táctil y mejor puntaje guardado por juego:

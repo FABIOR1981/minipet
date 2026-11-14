@@ -114,16 +114,78 @@ const Store = {
       glitterIntensityValue.value = `${event.target.value}%`;
       glitterIntensityValue.textContent = `${event.target.value}%`;
       PetState.setGlitterIntensity(event.target.value);
+      this.refreshPetPreview();
     };
   },
 
+  // Mi Pet tiene dos pestañas: Cuerpo (color, tamaño, forma, brillantina)
+  // y Rasgos (ojos, boca, mejillas). Arriba va siempre una vista previa,
+  // porque la ventana tapa a la mascota.
+  myPetTab: 'cuerpo',
+
   renderMyPet() {
     const content = document.getElementById('modal-content');
+    const tab = this.myPetTab;
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">🐾 Mi Pet</h2>
-      ${this.renderPetCustomization()}
+      <div id="mypet-preview" class="mypet-preview"></div>
+      <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
+        <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
+        <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
+      </div>
+      ${tab === 'cuerpo' ? this.renderPetCustomization() : this.renderTraits()}
     `;
-    this.bindPetCustomization(content);
+    content.querySelectorAll('.store-tab').forEach(btn => {
+      btn.onclick = () => { this.myPetTab = btn.dataset.tab; this.renderMyPet(); };
+    });
+    this.refreshPetPreview();
+    if (tab === 'cuerpo') this.bindPetCustomization(content);
+    else this.bindTraits(content);
+  },
+
+  // Vista previa: una copia de la mascota tal como está ahora
+  refreshPetPreview() {
+    const box = document.getElementById('mypet-preview');
+    if (!box) return;
+    box.innerHTML = '';
+    const preview = Minigames.createMiniPet(92);
+    box.appendChild(preview.el);
+    return preview;
+  },
+
+  renderTraits() {
+    return `
+      <section class="pet-customization-panel" aria-label="Rasgos de Mi Pet">
+        <p class="wardrobe-label">Ojos:</p>
+        <div class="trait-row" data-kind="eyes"></div>
+        <p class="wardrobe-label">Boca:</p>
+        <div class="trait-row" data-kind="mouth"></div>
+        <p class="wardrobe-label">Mejillas:</p>
+        <div class="trait-row" data-kind="cheeks"></div>
+      </section>
+    `;
+  },
+
+  bindTraits(content) {
+    const current = { eyes: PetState.petEyes, mouth: PetState.petMouth, cheeks: PetState.petCheeks };
+    content.querySelectorAll('.trait-row').forEach(row => {
+      const kind = row.dataset.kind;
+      Catalogo.traits[kind].forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = `trait-option ${current[kind] === option.id ? 'selected' : ''}`;
+        btn.setAttribute('aria-label', option.name);
+        // Cada opción muestra la cara de la mascota, ampliada, con ese rasgo
+        const zoom = document.createElement('span');
+        zoom.className = `trait-zoom trait-zoom-${kind}`;
+        zoom.appendChild(Minigames.createMiniPet(104, { [kind]: option.id, accessory: null }).el);
+        const label = document.createElement('span');
+        label.className = 'trait-name';
+        label.textContent = option.name;
+        btn.append(zoom, label);
+        btn.onclick = () => { PetState.setTrait(kind, option.id); this.renderMyPet(); };
+        row.appendChild(btn);
+      });
+    });
   },
 
   renderCollection(title, category, rerender) {
