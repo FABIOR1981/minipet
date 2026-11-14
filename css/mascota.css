@@ -531,12 +531,19 @@
   height: 52px;
 }
 
-/* Alas (espalda): más anchas que el cuerpo, asoman por los dos costados.
-   La imagen se estira al tamaño de cada forma. */
+/* Alas (espalda): van realmente DETRÁS del cuerpo. Un hijo no puede
+   pintarse detrás del fondo de su padre de forma normal, así que la
+   mascota pasa a ser un contexto 3D (.with-back, lo pone el JS solo cuando
+   hay algo en la espalda) y el accesorio se aleja un píxel en Z.
+   La imagen es más ancha que el cuerpo y se estira al tamaño de cada forma. */
+.pet-sprite.with-back { transform-style: preserve-3d; }
+
+.accessory.pos-back { transform: translateZ(-1px); }
+
 .accessory.pos-back img {
-  top: calc(var(--body-h) * -0.1 + var(--accessory-y, 0px));
-  width: calc(var(--body-w) * 1.75);
-  height: calc(var(--body-h) * 1.1);
+  top: calc(var(--body-h) * -0.2 + var(--accessory-y, 0px));
+  width: calc(var(--body-w) * 1.7);
+  height: calc(var(--body-h) * 1.2);
   object-fit: fill;
 }
 

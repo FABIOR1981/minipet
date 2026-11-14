@@ -33,10 +33,12 @@ Object.assign(Minigames, {
       if (!accessoryEl) return;
       accessoryEl.className = 'accessory';
       accessoryEl.innerHTML = '';
+      sprite.classList.remove('with-back');
       const item = look.accessory && Catalogo.items.find(i => i.id === look.accessory);
       if (item) {
         accessoryEl.innerHTML = `<img src="${item.image}" alt="">`;
         accessoryEl.classList.add(`pos-${item.type}`, `item-${item.id}`);
+        if (item.type === 'back') sprite.classList.add('with-back');
         const fit = Catalogo.accessoryFits?.[item.id];
         if (fit) {
           const img = accessoryEl.querySelector('img');
@@ -78,7 +80,7 @@ Object.assign(Minigames, {
       sprite.querySelectorAll('.heart-particle, .food-bite').forEach(node => node.remove());
       // Conserva solo la forma; fuera tamaño, caminata, saltos y mirada
       sprite.className = sprite.className.split(/\s+/)
-        .filter(c => c === 'pet-sprite' || c.startsWith('shape-')).join(' ');
+        .filter(c => c === 'pet-sprite' || c === 'with-back' || c.startsWith('shape-')).join(' ');
       sprite.style.left = '';
       sprite.style.top = '';
       sprite.style.scale = '';

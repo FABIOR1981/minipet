@@ -419,7 +419,7 @@ El campo `type` debe ser uno de los anclajes existentes:
 - `forehead`: vinchas y bandas, entre la coronilla y los ojos; se ajustan al ancho de la cabeza.
 - `wrap`: bufandas, alrededor de la parte baja del cuerpo.
 - `hand`: varitas y objetos que sostiene, al costado derecho.
-- `back`: alas; la imagen es más ancha que el cuerpo y asoma por los dos costados. Como no puede dibujarse detrás del cuerpo, el SVG debe dejar libre el centro.
+- `back`: alas; se dibujan detrás del cuerpo. Un hijo no puede pintarse detrás del fondo de su padre, así que cuando hay un accesorio `back` el JS agrega la clase `with-back` a la mascota, que la convierte en contexto 3D (`transform-style: preserve-3d`), y el accesorio se aleja con `translateZ(-1px)`. El SVG se dibuja completo, con las alas unidas en el centro. No poner `overflow`, `filter`, `opacity` ni `clip-path` en `.pet-sprite.with-back`: anulan el contexto 3D y las alas pasarían adelante.
 - `full`: cascos y burbujas que envuelven toda la mascota; conviene que sean translúcidos para que se vea la cara.
 
 Los SVG de `back`, `full` y los auriculares llevan `preserveAspectRatio="none"` porque se estiran al tamaño de cada forma.
