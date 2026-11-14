@@ -108,6 +108,41 @@ const Catalogo = {
   ],
 
   // Escala/posición/rotación de cada accesorio equipado sobre la mascota
+  // Rasgos de la cara, elegibles en Mi Pet > Rasgos. Son parte de la
+  // identidad de la mascota: todos gratis y ninguno vale más que otro.
+  // El primero de cada lista es el que trae por defecto.
+  // Los ojos y las mejillas se dibujan con CSS (.eyes-<id>, .cheeks-<id> en
+  // css/mascota.css); la boca es el texto indicado en `text`.
+  traits: {
+    eyes: [
+      { id: 'round', name: 'Redondos' },
+      { id: 'sparkle', name: 'Brillantes' },
+      { id: 'happy', name: 'Sonrientes' },
+      { id: 'lashes', name: 'Pestañas' },
+      { id: 'button', name: 'Botón' }
+    ],
+    mouth: [
+      { id: 'cat', name: 'Gatito', text: ':3' },
+      { id: 'smile', name: 'Sonrisa', text: '◡' },
+      { id: 'w', name: 'Risueña', text: 'w' },
+      { id: 'tongue', name: 'Lengüita', text: ':P' },
+      { id: 'omega', name: 'Mimosa', text: 'ω' }
+    ],
+    cheeks: [
+      { id: 'round', name: 'Rosadas' },
+      { id: 'hearts', name: 'Corazones' },
+      { id: 'stars', name: 'Estrellas' },
+      { id: 'big', name: 'Grandes' },
+      { id: 'none', name: 'Sin rubor' }
+    ]
+  },
+
+  // Texto de la boca para un id (o el de por defecto si no existe)
+  mouthText(id) {
+    const mouth = this.traits.mouth.find(m => m.id === id) || this.traits.mouth[0];
+    return mouth.text;
+  },
+
   accessoryFits: {
     hat_crown: { scale: 1.25, y: -4 },
     party_hat: { scale: 1.2, y: -4 },

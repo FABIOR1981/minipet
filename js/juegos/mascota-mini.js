@@ -17,9 +17,19 @@
 // css/juegos.css.
 // =========================================================
 Object.assign(Minigames, {
-  // Cambia el aspecto de una copia: { color, shape, accessory }.
+  // Cambia el aspecto de una copia: { color, shape, accessory, eyes, mouth, cheeks }.
   // Solo toca lo que venga en `look`; accessory: null la deja sin accesorio.
   applyLook(sprite, look) {
+    const face = sprite.querySelector('.kawaii-face');
+    if (face) {
+      ['eyes', 'cheeks'].forEach(kind => {
+        if (!look[kind]) return;
+        face.className = face.className.replace(new RegExp(`\\b${kind}-\\S+`, 'g'), '').trim();
+        face.classList.add(`${kind}-${look[kind]}`);
+      });
+      const mouthEl = face.querySelector('.mouth');
+      if (look.mouth && mouthEl) mouthEl.innerText = Catalogo.mouthText(look.mouth);
+    }
     if (look.color) {
       sprite.style.backgroundColor = look.color;
       sprite.style.color = look.color;
@@ -86,7 +96,11 @@ Object.assign(Minigames, {
       sprite.style.scale = '';
       // En los juegos siempre está contenta
       const face = sprite.querySelector('.kawaii-face');
-      if (face) face.className = 'kawaii-face happy';
+      if (face) {
+        // Conserva los rasgos (ojos, mejillas) y descarta el estado de ánimo
+        const traits = face.className.split(/\s+/).filter(c => c.startsWith('eyes-') || c.startsWith('cheeks-'));
+        face.className = ['kawaii-face', 'happy', ...traits].join(' ');
+      }
       const prop = sprite.querySelector('.extra-prop');
       if (prop) prop.innerText = '';
     } else {
@@ -97,7 +111,7 @@ Object.assign(Minigames, {
     wrap.appendChild(sprite);
 
     const mouth = sprite.querySelector('.mouth');
-    const normalMouth = mouth ? mouth.innerText : '';
+    let normalMouth = mouth ? mouth.innerText : '';
     let mouthTimer = null;
 
     // Reinicia y lanza una animación corta (clase que se quita sola)
@@ -122,6 +136,7 @@ Object.assign(Minigames, {
       oops() {                            // sorpresa
         react('oops', 550);
         if (mouth) {
+          if (mouth.innerText !== 'o') normalMouth = mouth.innerText; // puede haber cambiado con setLook
           mouth.innerText = 'o';
           clearTimeout(mouthTimer);
           mouthTimer = setTimeout(() => { mouth.innerText = normalMouth; }, 700);

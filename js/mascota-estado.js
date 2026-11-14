@@ -22,6 +22,10 @@ const PetState = {
   hunger: 100,
   energy: 100,
   petColor: '#ff80ab',
+  // Rasgos de la cara (ids de Catalogo.traits)
+  petEyes: 'round',
+  petMouth: 'cat',
+  petCheeks: 'round',
   petShape: 'shape-circle',
   petSize: 'medium',
   glitterEnabled: false,
@@ -114,6 +118,16 @@ const PetState = {
 
   setColor(color) {
     this.petColor = color;
+    this.saveData();
+    this.updateUI();
+  },
+
+  // Cambia un rasgo de la cara: kind es 'eyes', 'mouth' o 'cheeks'
+  setTrait(kind, id) {
+    const field = { eyes: 'petEyes', mouth: 'petMouth', cheeks: 'petCheeks' }[kind];
+    if (!field || !Catalogo.traits[kind].some(option => option.id === id)) return;
+    this[field] = id;
+    AudioEffects.playTone(700, 'sine', 0.1);
     this.saveData();
     this.updateUI();
   },
@@ -228,6 +242,9 @@ const PetState = {
       hunger: this.hunger,
       energy: this.energy,
       petColor: this.petColor,
+      petEyes: this.petEyes,
+      petMouth: this.petMouth,
+      petCheeks: this.petCheeks,
       petShape: this.petShape,
       petSize: this.petSize,
       glitterEnabled: this.glitterEnabled,
@@ -264,6 +281,9 @@ const PetState = {
       this.hunger = data.hunger ?? 100;
       this.energy = data.energy ?? 100;
       this.petColor = data.petColor || '#ff80ab';
+      this.petEyes = data.petEyes || 'round';
+      this.petMouth = data.petMouth || 'cat';
+      this.petCheeks = data.petCheeks || 'round';
       this.petShape = data.petShape || 'shape-circle';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);

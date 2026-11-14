@@ -75,12 +75,26 @@ Esta separación es deliberada y hay que mantenerla: los rasgos de la cara no va
 
 `Mi Pet` abre `Store.renderMyPet()` desde `switchTab('my-pet')`.
 
-Contiene únicamente:
+Arriba muestra siempre una vista previa de la mascota (`#mypet-preview`, una copia hecha con `createMiniPet`), porque la ventana la tapa. Debajo tiene dos pestañas (`Store.myPetTab`):
+
+**Cuerpo**
 
 - Color de piel.
 - Tamaño.
 - Forma.
 - Control de `Brillantina`.
+
+**Rasgos**
+
+- Ojos, boca y mejillas, cinco opciones de cada uno.
+- Las opciones están en `Catalogo.traits`; la primera de cada lista es la de por defecto.
+- Se guardan en `PetState.petEyes`, `petMouth` y `petCheeks` y se cambian con `PetState.setTrait(kind, id)`.
+- Ojos y mejillas se dibujan con CSS: `updateFaceAndThought()` pone en `#kawaii-face` las clases `eyes-<id>` y `cheeks-<id>` (reglas en `css/mascota.css`). La boca es texto (`Catalogo.mouthText`).
+- Los estados de ánimo mandan sobre el rasgo: dormida o enferma, los ojos se ven como rayitas sea cual sea el estilo elegido.
+- Cada botón muestra la cara ampliada con ese rasgo (`.trait-zoom`), usando `createMiniPet(tamaño, { eyes | mouth | cheeks })`.
+- Para agregar un rasgo: sumarlo a `Catalogo.traits` y, si es de ojos o mejillas, escribir su regla CSS.
+
+Los rasgos son identidad, no ropa: son todos gratis, ninguno vale más que otro, no van en el vestidor y no se venden en la tienda.
 
 El control de brillantina es una barra de 0 a 100:
 

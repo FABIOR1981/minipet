@@ -214,7 +214,10 @@ Object.assign(PetState, {
     
     if (!face || !thought) return;
 
-    face.className = 'kawaii-face';
+    // Rasgos elegidos en Mi Pet: ojos y mejillas por clase, boca por texto
+    face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks}`;
+    const mouthEl = face.querySelector('.mouth');
+    if (mouthEl) mouthEl.innerText = Catalogo.mouthText(this.petMouth);
     extraProp.innerText = '';
 
     if (this.isSleeping) {
