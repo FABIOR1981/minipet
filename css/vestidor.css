@@ -1,0 +1,131 @@
+/* =========================================================
+   VESTIDOR.CSS — El armario (js/vestidor.js): panel que reemplaza
+   a la botonera mientras la mascota está en el vestidor, y el
+   reflejo en el espejo.
+   ========================================================= */
+
+/* La ilustración del vestidor: sin primer plano, para no tapar a la mascota */
+.room.bg_vestidor { background-color: #f6e6ff; background-image: url('../img/escenarios/vestidor.svg'); }
+
+/* Mientras está en el vestidor, el panel ocupa el lugar de la botonera */
+#app-container.en-vestidor .bottom-nav { display: none; }
+
+.vestidor-panel {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px 10px;
+  background: #fdf8ff;
+  border-top: 2px solid #f0e6ff;
+  z-index: 5;
+}
+
+.vestidor-panel[hidden] { display: none; }
+
+.vestidor-head { display: flex; align-items: center; justify-content: space-between; }
+.vestidor-title { font-size: 0.95rem; font-weight: 800; color: #6a1b9a; }
+
+.vestidor-done {
+  border: none;
+  border-radius: 12px;
+  padding: 7px 16px;
+  background: #ff80ab;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Tira de accesorios: se desliza de lado */
+.vestidor-strip {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 3px 2px 7px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vestidor-strip::-webkit-scrollbar { height: 4px; }
+.vestidor-strip::-webkit-scrollbar-thumb { background: #ce93d8; border-radius: 4px; }
+
+.vestidor-item {
+  flex: none;
+  width: 68px;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px 2px;
+  border: 2px solid #e1bee7;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  scroll-snap-align: start;
+  touch-action: manipulation;
+}
+
+.vestidor-item img { width: 36px; height: 36px; object-fit: contain; pointer-events: none; }
+.vestidor-item-emoji { font-size: 1.6rem; line-height: 36px; pointer-events: none; }
+
+.vestidor-item-name {
+  font-size: 0.66rem;
+  line-height: 1.1;
+  font-weight: bold;
+  color: #4a148c;
+  text-align: center;
+  pointer-events: none;
+}
+
+.vestidor-item.selected { border-color: #ff4081; background: #fff0f6; box-shadow: 0 0 0 2px #ff80ab; }
+.vestidor-item.vestidor-more { border-style: dashed; background: #fdf8ff; }
+
+/* Looks guardados */
+.vestidor-looks { display: flex; align-items: center; gap: 6px; }
+
+#vestidor-looks-list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+#vestidor-looks-list .look-chip { flex: none; }
+
+.vestidor-save {
+  flex: none;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #7e57c2;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+/* Reflejo: la copia de la mascota dentro del óvalo del espejo. Vive en
+   #scene-fx, así que se ubica y escala igual que la ilustración. */
+.fx-mirror {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.fx-mirror .mini-pet { margin-bottom: 16px; transform: scaleX(-1); opacity: 0.92; }
+
+/* Brillo del vidrio, por encima del reflejo */
+.fx-mirror::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55) 30%, transparent 40%, transparent 55%, rgba(255, 255, 255, 0.3) 62%, transparent 70%);
+  pointer-events: none;
+}

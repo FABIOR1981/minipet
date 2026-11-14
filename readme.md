@@ -15,7 +15,7 @@ El contexto técnico detallado (para quien vaya a tocar el código) está en [`d
 - **La mascota camina sola** por todo el piso del escenario cada 5s (si no está durmiendo ni enferma). Se achica al ir hacia el fondo, tiene sombra apoyada en el piso y pasa por detrás de los objetos del primer plano.
 - **Acciones**: Comer 🍗, Medicina 🏥 (cura si está enferma) y Dormir 😴 (recupera energía de a poco y se despierta sola al llegar a 100). Cada una se ve: la mascota mastica un bocado, sale un cartelito con lo que ganó y al dormir se hace de noche en la habitación.
 - **Mi Pet**: color de piel, tamaño, forma y brillantina.
-- **Accesorios**: 21 accesorios equipables (sombreros, orejas, lentes, alas, etc.) y looks guardados (hasta 6).
+- **Armario**: un vestidor con ropero y espejo adonde la mascota va a probarse sus accesorios (21 en total: sombreros, orejas, lentes, alas, etc.). Se ven puestos al instante, en ella y en su reflejo, y se pueden guardar hasta 6 looks.
 - **Escenarios**: 17 escenarios ilustrados (sala, playa, espacio, castillo, volcán, dojo, disco, etc.), cada uno comprable con monedas, con partículas ambientales y detalles animados propios (fuego, nubes, luces, luciérnagas).
 - **10 minijuegos** para ganar monedas, con soporte táctil y mejor puntaje guardado por juego:
   - De reflejos: Atrapa Dulces, Explotar Globos, Burbujas Mágicas, Runner Mágico, Torre de Postres y Lluvia de Comida (atrapar la comida y esquivar lo que no se come).
@@ -39,7 +39,8 @@ minipet/
 │   ├── base.css               # Layout general, barras, modal, tienda
 │   ├── escenarios.css         # Los 17 escenarios, su primer plano y las partículas
 │   ├── mascota.css            # Mascota, formas, accesorios, sombra y animaciones
-│   └── juegos.css             # Minijuegos: HUD, conteo, resultado y juegos sin canvas
+│   ├── juegos.css             # Minijuegos: HUD, conteo, resultado y juegos sin canvas
+│   └── vestidor.css           # Panel del vestidor y reflejo en el espejo
 ├── js/
 │   ├── app.js                 # Sonidos (AudioEffects), inicio, navegación y registro del SW
 │   ├── mascota-estado.js      # PetState: stats, acciones, inventario, looks, guardado
@@ -47,7 +48,8 @@ minipet/
 │   ├── particulas.js          # Partículas ambientales por escenario
 │   ├── ambiente.js            # Detalles animados de cada escenario (luces, nubes, fuego)
 │   ├── catalogo.js            # Datos: accesorios, escenarios, formas y ajustes
-│   ├── tienda.js              # Store: tienda, Accesorios, Escenario y Mi Pet
+│   ├── tienda.js              # Store: tienda, Escenario y Mi Pet
+│   ├── vestidor.js            # Vestidor: el armario donde se prueba accesorios
 │   └── juegos/
 │       ├── juegos-base.js     # Minigames: menú, conteo, resultado, récords, HUD
 │       ├── mascota-mini.js    # La mascota dentro de los juegos (protagonista y espectadora)

@@ -1,6 +1,6 @@
 // =========================================================
-// TIENDA.JS — Renderizado de la tienda, el armario (Accesorios/
-// Escenario) y el panel "Mi Pet" (color, tamaño, forma,
+// TIENDA.JS — Renderizado de la tienda, la ventana Escenario
+// y el panel "Mi Pet" (color, tamaño, forma,
 // brillantina). Usa los datos de Catalogo (catalogo.js) y el
 // estado de PetState — no define datos propios.
 // =========================================================
@@ -126,40 +126,13 @@ const Store = {
     this.bindPetCustomization(content);
   },
 
-  renderCollection(title, category, includeLooks, rerender) {
+  renderCollection(title, category, rerender) {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       <h2 style="text-align:center; color:#6a1b9a;">${title}</h2>
-      ${includeLooks ? `<div style="margin: 4px 0 8px; text-align:center;">
-        <p style="font-size:0.8rem; color:#666; margin-bottom:4px; font-weight:bold;">⭐ Mis Looks:</p>
-        <div id="looks-list" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:8px;"></div>
-        <button onclick="Store.saveCurrentLook()" class="card-btn" style="width:auto; padding:6px 16px; background:#7e57c2;">💾 Guardar look actual</button>
-      </div>` : ''}
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div class="grid-container"></div>
     `;
-
-    if (includeLooks) {
-      const looksList = content.querySelector('#looks-list');
-      if (!PetState.looks || PetState.looks.length === 0) {
-        looksList.innerHTML = `<span style="font-size:0.72rem; color:#999;">¡Guarda aquí tu primer look!</span>`;
-      } else {
-        PetState.looks.forEach(look => {
-          const chip = document.createElement('div');
-          chip.className = 'look-chip';
-          chip.innerHTML = `
-            <span class="look-chip-name"></span>
-            <div class="look-chip-actions">
-              <button onclick="PetState.applyLook('${look.id}'); Store.renderAccessories();" title="Aplicar look">✨</button>
-              <button onclick="PetState.deleteLook('${look.id}'); Store.renderAccessories();" title="Borrar look">🗑️</button>
-            </div>
-          `;
-          // textContent: el nombre lo escribe el usuario y no debe interpretarse como HTML
-          chip.querySelector('.look-chip-name').textContent = look.name;
-          looksList.appendChild(chip);
-        });
-      }
-    }
 
     const container = content.querySelector('.grid-container');
 
@@ -189,20 +162,10 @@ const Store = {
     });
   },
 
-  renderAccessories() {
-    this.renderCollection('🎒 Accesorios', 'acc', true, () => this.renderAccessories());
-  },
-
   renderScenery() {
-    this.renderCollection('🏡 Escenario', 'bg', false, () => this.renderScenery());
+    this.renderCollection('🏡 Escenario', 'bg', () => this.renderScenery());
   },
 
-  saveCurrentLook() {
-    const name = prompt('Nombre para este look:', `Look ${(PetState.looks ? PetState.looks.length : 0) + 1}`);
-    if (name === null) return; // El usuario canceló
-    PetState.saveLook(name.trim());
-    this.renderAccessories();
-  },
 
   buyItem(itemId) {
     const item = Catalogo.items.find(i => i.id === itemId);

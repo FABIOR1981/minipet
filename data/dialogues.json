@@ -55,5 +55,48 @@
     "full": "¡Gracias! Ya tengo la pancita llena.",
     "healthy": "¡Me siento de maravilla!",
     "rested": "¡Estoy con toda la energía!"
+  },
+  "dressup": {
+    "welcome": [
+      "🪞 ¡Me encanta jugar a disfrazarme!",
+      "✨ ¿Qué me pongo hoy?",
+      "🎭 ¡Hora de probar cosas divertidas!"
+    ],
+    "wear": [
+      "🎭 ¡Qué divertido!",
+      "✨ ¡Me gusta cómo se siente!",
+      "🎉 ¡A jugar con esto puesto!"
+    ],
+    "none": [
+      "😊 ¡Así también estoy genial!",
+      "🌈 ¡Así, tal cual, a jugar!"
+    ],
+    "saved": [
+      "📸 ¡Look guardado!",
+      "⭐ ¡Lo guardamos para otro día!"
+    ],
+    "items": {
+      "hat_crown": "👑 ¡Hoy juego a la realeza!",
+      "party_hat": "🥳 ¡Que empiece la fiesta!",
+      "ribbon_pink": "🎀 ¡Un lazo para salir a jugar!",
+      "bow_tie": "🎀 ¡Con moño y todo!",
+      "headphones": "🎧 ¡A escuchar mi canción favorita!",
+      "cat_ears": "🐱 ¡Miau! Hoy juego a ser gatito.",
+      "bunny_ears": "🐰 ¡A saltar como conejo!",
+      "glasses_cool": "💗 ¡Veo todo con corazones!",
+      "star_glasses": "🌟 ¡Veo estrellas por todos lados!",
+      "pirate_hat": "🏴‍☠️ ¡Al abordaje! Hoy voy de pirata.",
+      "snorkel_mask": "🤿 ¡A explorar el fondo del mar!",
+      "chef_hat": "🍳 ¡Hoy cocino yo!",
+      "flower_pink": "🌸 ¡Llegó la primavera!",
+      "wizard_hat": "🪄 ¡Abracadabra!",
+      "magic_wand": "✨ ¡Un poco de magia por aquí!",
+      "fairy_wings": "🧚 ¡A volar bien alto!",
+      "ninja_band": "🥷 ¡Sigilo ninja activado!",
+      "space_helmet": "🚀 ¡Rumbo a las estrellas!",
+      "winter_beanie": "❄️ ¡A jugar en la nieve!",
+      "winter_scarf": "🧣 ¡Qué abrigo tan suave!",
+      "shower_cap": "🫧 ¡Hora de las burbujas!"
+    }
   }
 }

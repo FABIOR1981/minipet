@@ -70,13 +70,13 @@ function registerServiceWorker() {
 
 function switchTab(tab) {
   Minigames.forceExitIfActive();
+  // Abrir cualquier ventana saca a la mascota del vestidor
+  if (typeof Vestidor !== 'undefined') Vestidor.close();
   const modal = document.getElementById('modal-screen');
   modal.classList.remove('hidden');
   
   if (tab === 'store') {
     Store.renderStore();
-  } else if (tab === 'accessories') {
-    Store.renderAccessories();
   } else if (tab === 'scenery') {
     Store.renderScenery();
   } else if (tab === 'my-pet') {
