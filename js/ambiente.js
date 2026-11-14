@@ -22,6 +22,7 @@
 //   wave     y
 //   blink    x, y, w, h, c, delay
 //   sparkle  x, y, size, c, d, delay
+//   mirror   x, y, w, h  (óvalo donde js/vestidor.js dibuja el reflejo)
 // =========================================================
 const Ambiente = {
   SCENE: { width: 400, height: 480 },
@@ -122,6 +123,18 @@ const Ambiente = {
       { t: 'fish', y: 70, s: 0.8, d: 30 },
       { t: 'fish', y: 220, s: 0.6, d: 40, delay: -18, rev: true },
       { t: 'glow', x: 326, y: 330, r: 62, c: 'rgba(255, 226, 122, 0.7)', d: 2.2 }
+    ],
+    // El vestidor (js/vestidor.js) no es un escenario comprable
+    bg_vestidor: [
+      { t: 'mirror', x: 274, y: 96, w: 92, h: 152 },
+      { t: 'dot', x: 28, y: 36, r: 5, c: '#ffd166', d: 1.6 },
+      { t: 'dot', x: 72, y: 46, r: 5, c: '#ff9fb5', d: 2.1, delay: 0.4 },
+      { t: 'dot', x: 118, y: 50, r: 5, c: '#8fe0ff', d: 1.8, delay: 0.9 },
+      { t: 'dot', x: 164, y: 46, r: 5, c: '#ffd166', d: 2.2, delay: 0.2 },
+      { t: 'dot', x: 238, y: 42, r: 5, c: '#ff9fb5', d: 1.7, delay: 0.7 },
+      { t: 'dot', x: 286, y: 42, r: 5, c: '#8fe0ff', d: 2, delay: 1.1 },
+      { t: 'dot', x: 332, y: 37, r: 5, c: '#ffd166', d: 1.9, delay: 0.5 },
+      { t: 'dot', x: 376, y: 30, r: 5, c: '#ff9fb5', d: 2.3 }
     ],
     bg_volcano: [
       { t: 'glow', x: 200, y: 120, r: 150, c: 'rgba(255, 179, 71, 0.6)', d: 2.4, min: 0.35 },
@@ -225,6 +238,10 @@ const Ambiente = {
         break;
       case 'blink':
         box(item.x, item.y, item.w, item.h);
+        break;
+      case 'mirror':
+        box(item.x, item.y, item.w, item.h);
+        el.id = 'vestidor-espejo';
         break;
       case 'sparkle':
         box(item.x - item.size / 2, item.y - item.size / 2, item.size, item.size);

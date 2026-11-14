@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.10.2'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.11.0'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -8,6 +8,7 @@ const ASSETS_TO_CACHE = [
   './css/escenarios.css',
   './css/mascota.css',
   './css/juegos.css',
+  './css/vestidor.css',
   './js/app.js',
   './js/mascota-estado.js',
   './js/mascota-visual.js',
@@ -15,6 +16,7 @@ const ASSETS_TO_CACHE = [
   './js/ambiente.js',
   './js/catalogo.js',
   './js/tienda.js',
+  './js/vestidor.js',
   './js/juegos/juegos-base.js',
   './js/juegos/mascota-mini.js',
   './js/juegos/atrapa-dulces.js',
@@ -67,6 +69,7 @@ const ASSETS_TO_CACHE = [
   './img/escenarios/castillo.svg',
   './img/escenarios/submarino.svg',
   './img/escenarios/volcan.svg',
+  './img/escenarios/vestidor.svg',
   './img/escenarios/frente/sala.svg',
   './img/escenarios/frente/dormitorio.svg',
   './img/escenarios/frente/juegos.svg',

@@ -29,7 +29,8 @@ La mascota puede:
 - `js/mascota-estado.js`: objeto `PetState` con stats, acciones (comer, dormir, medicina), inventario, looks, persistencia y `tick()`.
 - `js/mascota-visual.js`: agrega a `PetState` el dibujo (`updateUI`), la cara, los diálogos, el paseo y la profundidad.
 - `js/catalogo.js`: objeto `Catalogo`, solo datos: `items` (accesorios y escenarios), `shapes` y `accessoryFits`.
-- `js/tienda.js`: objeto `Store`, que dibuja la Tienda, Accesorios, Escenario y Mi Pet.
+- `js/tienda.js`: objeto `Store`, que dibuja la Tienda, Escenario y Mi Pet.
+- `js/vestidor.js`: objeto `Vestidor`, el armario donde la mascota se prueba accesorios.
 - `js/particulas.js`: objeto `Particles`, partículas ambientales por escenario.
 - `js/ambiente.js`: objeto `Ambiente`, detalles animados de cada escenario (luces, nubes, humo, fuego).
 - `js/juegos/juegos-base.js`: objeto `Minigames` con menú, conteo, resultado, récords, HUD y reloj de frames.
@@ -58,11 +59,17 @@ Primera fila:
 Segunda fila:
 
 - Mi Pet
-- Accesorios
+- Armario
 - Escenario
 - Tienda
 
-No debe volver a aparecer un botón llamado `Armario`. La personalización se dividió en `Mi Pet`, `Accesorios` y `Escenario`.
+La personalización se divide por lo que significa cada cosa:
+
+- `Mi Pet` es "así soy yo": la identidad de la mascota (color, forma, tamaño, brillantina y rasgos). Todo es gratis y ninguna opción vale más que otra.
+- `Armario` es "qué me pongo hoy": el vestidor, con accesorios y looks guardados.
+- `Escenario` es dónde está.
+
+Esta separación es deliberada y hay que mantenerla: los rasgos de la cara no van en el vestidor ni se venden en la tienda, para que cambiar de aspecto sea jugar a disfrazarse y no "arreglarse". (Una versión anterior de este documento prohibía un botón `Armario`; se refería a la vieja ventana que mezclaba accesorios y escenarios, que ya no existe.)
 
 ## Modal Mi Pet
 
@@ -103,17 +110,18 @@ Hay otras formas CSS comentadas o preparadas, pero no todas están activas en el
 
 ## Accesorios y escenarios
 
-La antigua vista Armario fue eliminada.
+### Armario (vestidor)
 
-### Accesorios
+El botón `Armario` no abre una ventana: lleva a la mascota al vestidor (`js/vestidor.js`, objeto `Vestidor`; estilos en `css/vestidor.css`).
 
-`Store.renderAccessories()` muestra solo artículos con:
+- `Vestidor.open()` pone `PetState.inVestidor = true`. Con esa bandera, `updateUI()` muestra la ilustración `bg_vestidor` en lugar del escenario equipado y la mascota deja de pasear.
+- La botonera se oculta (clase `en-vestidor` en `#app-container`) y en su lugar aparece `#vestidor-panel`, con una tira deslizable de los accesorios comprados (`category: 'acc'`), la opción "Sin nada", un acceso a la tienda y los looks guardados.
+- Como no hay ventana encima, cada accesorio se ve puesto al instante. La mascota festeja con un saltito y una frase.
+- El espejo refleja a la mascota: `Ambiente.CONFIG.bg_vestidor` declara un elemento `mirror` y `Vestidor.refreshMirror()` le pone una copia dada vuelta (`createMiniPet`). `updateUI()` lo llama cada vez que cambia el aspecto.
+- `Vestidor.close()` (botón "Listo") vuelve a la habitación. Abrir cualquier ventana con `switchTab()` también lo cierra. Si la mascota duerme, no entra.
+- `bg_vestidor` no es un artículo del catálogo: no se compra ni se equipa.
 
-```js
-category: 'acc'
-```
-
-Incluye accesorios de cabeza, ojos, orejas y cuello/cuerpo. También conserva la gestión de Looks guardados.
+Las frases están en `data/dialogues.json`, clave `dressup` (`welcome`, `wear`, `none`, `saved` e `items`, con una frase propia por accesorio). Criterio: festejan el juego ("¡Hoy voy de pirata!") y nunca comparan ni opinan sobre el aspecto ("ahora sí estoy linda"). Sin nada puesto también está contenta.
 
 ### Escenario
 
@@ -445,7 +453,7 @@ new_accessory: {
 }
 ```
 
-El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inventario y se equipa mediante `PetState.equipItem()`.
+El accesorio aparece automáticamente en la tira del vestidor cuando pertenece al inventario y se equipa mediante `PetState.equipItem()`. Conviene sumarle su frase en `dressup.items` de `data/dialogues.json`.
 
 ## Reglas de trabajo para otra IA
 
@@ -465,7 +473,7 @@ El accesorio se muestra automáticamente en `Accesorios` cuando pertenece al inv
 - Abrir `Mi Pet` y cambiar color, forma y tamaño.
 - Confirmar que los cambios persisten al recargar.
 - Probar brillantina en `0`, `50` y `100`.
-- Abrir Accesorios y probar al menos uno de cada posición (cabeza, ojos, orejas, cuello, frente, bufanda, mano, espalda y envolvente) en más de una forma.
+- Abrir Armario y probar al menos uno de cada posición (cabeza, ojos, orejas, cuello, frente, bufanda, mano, espalda y envolvente) en más de una forma.
 - Probar accesorios con Círculo, Mochi y Dumpling.
 - Abrir Escenario y cambiar fondos; revisar ilustración, primer plano y partículas.
 - Salir de un minijuego a mitad de partida y confirmar que las monedas se cobran una sola vez.

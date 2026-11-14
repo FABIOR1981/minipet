@@ -30,7 +30,8 @@ Object.assign(PetState, {
     this.moveRandomly();
     this.wanderingTimer = setInterval(() => {
       // Solo se mueve si NO está durmiendo ni enferma
-      if (!this.isSleeping && !this.isSick) {
+      // ...ni mientras está en el vestidor, frente al espejo
+      if (!this.isSleeping && !this.isSick && !this.inVestidor) {
         this.moveRandomly();
       }
     }, 5000);
@@ -124,6 +125,8 @@ Object.assign(PetState, {
   },
 
   updateUI() {
+    // En el vestidor se muestra su ilustración en lugar del escenario equipado
+    const sceneId = this.inVestidor ? 'bg_vestidor' : this.equippedBackground;
     const stats = { coin: this.coins, happy: this.happiness, hunger: this.hunger, energy: this.energy };
     Object.keys(stats).forEach(key => {
       const el = document.getElementById(`${key}-count`);
@@ -157,16 +160,16 @@ Object.assign(PetState, {
 
     const roomEl = document.getElementById('pet-room');
     if (roomEl) {
-      roomEl.className = `room ${this.equippedBackground}`;
+      roomEl.className = `room ${sceneId}`;
       // Al dormir se hace de noche en la habitación
       roomEl.classList.toggle('sleeping', this.isSleeping);
     }
 
     if (typeof Particles !== 'undefined') {
-      Particles.render(this.equippedBackground);
+      Particles.render(sceneId);
     }
     if (typeof Ambiente !== 'undefined') {
-      Ambiente.render(this.equippedBackground);
+      Ambiente.render(sceneId);
     }
 
     const accessoryEl = document.getElementById('pet-accessory');
@@ -199,6 +202,9 @@ Object.assign(PetState, {
     this.applyWalkPosition();
 
     this.updateFaceAndThought();
+
+    // En el vestidor, el espejo refleja el aspecto recién actualizado
+    if (this.inVestidor && typeof Vestidor !== 'undefined') Vestidor.refreshMirror();
   },
 
   updateFaceAndThought() {
