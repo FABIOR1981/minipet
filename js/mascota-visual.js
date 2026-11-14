@@ -32,7 +32,14 @@ Object.assign(PetState, {
 
   startWandering() {
     clearInterval(this.wanderingTimer);
-    this.moveRandomly();
+    if (!this.walkPos) {
+      // Primera ubicación al cargar: aparece ya en su lugar, sin recorrido.
+      // (Si se animara, la sombra viajaría desde el centro de la habitación.)
+      this.walkPos = { x: Math.random(), t: Math.random() };
+      this.applyWalkPosition('instant');
+    } else {
+      this.moveRandomly();
+    }
     this.wanderingTimer = setInterval(() => {
       // Solo se mueve si NO está durmiendo ni enferma
       // ...ni mientras está en el vestidor, frente al espejo
@@ -82,13 +89,15 @@ Object.assign(PetState, {
   // escenario, desde el horizonte hasta el borde de abajo. Cuanto más al
   // fondo, más chica se ve. Con walking = true el traslado dura lo que el
   // paseo; si no (cambio de tamaño, forma o pantalla) se acomoda enseguida.
+  // walking: true = paseo (2.5 s), 'instant' = sin animación, false = 0.2 s
   applyWalkPosition(walking = false) {
     const petEl = document.getElementById('pet');
     const roomEl = document.getElementById('pet-room');
     const shadowEl = document.getElementById('pet-shadow');
     if (!petEl || !roomEl || !this.walkPos) return;
 
-    roomEl.style.setProperty('--walk-time', walking ? '2.5s' : '0.2s');
+    const walkTime = walking === 'instant' ? '0s' : (walking ? '2.5s' : '0.2s');
+    roomEl.style.setProperty('--walk-time', walkTime);
 
     const roomW = roomEl.clientWidth;
     const roomH = roomEl.clientHeight;
