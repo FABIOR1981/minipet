@@ -213,7 +213,7 @@
   justify-content: center;
 }
 
-.game-title { color: #ab47bc; margin-bottom: 2px; }
+.game-title { color: #ab47bc; margin-bottom: 2px; text-align: center; }
 .game-header .game-hud { justify-content: flex-start; margin-left: 0; margin-right: 0; }
 
 /* Conteo regresivo y resultado */
@@ -231,7 +231,7 @@
    MENÚ DE MINIJUEGOS (10 juegos): tarjetas compactas, sin tope
    de alto propio; se desplaza con el modal.
    ========================================================= */
-.grid-container.games-grid { max-height: none; overflow: visible; gap: 8px; }
+.grid-container.games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); flex: none; min-height: 0; overflow: visible; gap: 8px; }
 .games-grid .item-card { padding: 7px 6px; gap: 2px; }
 .games-grid .item-card > span:first-child { font-size: 1.7rem !important; margin-bottom: 0 !important; }
 
@@ -246,6 +246,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
+  width: 100%;
   max-width: 300px;
   margin: 10px auto 8px;
 }

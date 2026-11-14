@@ -9,7 +9,7 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('catch');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">🎈 Atrapa Dulces</h3>
+        <h3 class="game-title">🎈 Atrapa Dulces</h3>
         ${Minigames.renderHUD('🍬', best)}
         <div class="game-stage">
           <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; display:block; border:3px solid #ce93d8; touch-action:none; width:100%; height:auto; aspect-ratio:1/1;"></canvas>
