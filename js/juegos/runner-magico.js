@@ -9,7 +9,7 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('runner');
       content.innerHTML = `
-        <h3 style="color:#ab47bc; margin-bottom:2px;">🦄 Runner Mágico</h3>
+        <h3 class="game-title">🦄 Runner Mágico</h3>
         ${Minigames.renderHUD('🦄', best)}
         <div class="game-stage">
           <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; display:block; border:3px solid #ffd54f; touch-action:none; width:100%; height:auto; aspect-ratio:300/280;"></canvas>
