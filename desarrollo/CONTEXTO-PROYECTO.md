@@ -77,7 +77,7 @@ Esta separación es deliberada y hay que mantenerla: los rasgos de la cara no va
 
 Arriba muestra siempre una vista previa de la mascota (`#mypet-preview`, una copia hecha con `createMiniPet`), porque la ventana la tapa. Debajo tiene dos pestañas (`Store.myPetTab`):
 
-Entre la vista previa y las pestañas está el campo **Nombre** (hasta 14 caracteres, opcional). Se guarda en `PetState.petName` con `setName()` mientras se escribe. Con nombre, aparece una etiqueta sobre el globo de diálogo (`data-name` en `#pet-thought`), en el título del vestidor y en las frases de `dialogues.json` que contienen `{nombre}`; sin nombre, esas frases no se usan. El nombre lo escribe el usuario: mostrarlo siempre como texto (`textContent`, `dataset`), nunca con `innerHTML`.
+Entre la vista previa y las pestañas está el campo **Nombre** (hasta 14 caracteres, opcional). Se guarda en `PetState.petName` con `setName()` mientras se escribe. Con nombre, aparece una etiqueta sobre el globo de diálogo (`data-name` en `#pet-thought`), del color de piel de la mascota (`--name-color`) y con texto violeta oscuro, en el título del vestidor y en las frases de `dialogues.json` que contienen `{nombre}`; sin nombre, esas frases no se usan. El nombre lo escribe el usuario: mostrarlo siempre como texto (`textContent`, `dataset`), nunca con `innerHTML`.
 
 **Cuerpo**
 

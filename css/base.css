@@ -386,8 +386,11 @@ body {
   left: 12px;
   padding: 1px 9px;
   border-radius: 9px;
-  background: #ff80ab;
-  color: #fff;
+  /* Toma el color de piel de la mascota (--name-color lo pone el JS); el
+     texto va en violeta oscuro para leerse también sobre crema o amarillo */
+  background: var(--name-color, #e1bee7);
+  border: 1.5px solid rgba(74, 20, 140, 0.25);
+  color: #4a148c;
   font-size: 0.66rem;
   font-weight: 800;
   line-height: 1.5;
