@@ -7,7 +7,9 @@
     "🐥 ¡Tengo mucha energía y alegría!",
     "🍭 ¡Eres el mejor compañero del mundo!",
     "🥳 ¡Hoy va a ser un día increíble!",
-    "❤️ ¡Mi corazoncito brilla cuando jugamos!"
+    "❤️ ¡Mi corazoncito brilla cuando jugamos!",
+    "🐾 ¡Soy {nombre} y hoy quiero jugar!",
+    "💖 ¡{nombre} te quiere mucho!"
   ],
   "hungry": [
     "🍕 ¡Es hora de comer algo rico!",
@@ -42,7 +44,8 @@
     "🪙 ¡Quiero ganar monedas para la tienda!",
     "🎲 ¡Se me ocurre una gran idea! ¿Jugamos?",
     "🎯 ¡Demuestra tus habilidades en un juego!",
-    "🎨 ¡Hagamos algo divertido juntos!"
+    "🎨 ¡Hagamos algo divertido juntos!",
+    "🎮 ¡{nombre} quiere jugar contigo!"
   ],
   "sleeping": [
     "💤 Zzz... Descansando...",

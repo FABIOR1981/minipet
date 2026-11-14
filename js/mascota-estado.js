@@ -21,6 +21,7 @@ const PetState = {
   happiness: 100,
   hunger: 100,
   energy: 100,
+  petName: '', // Nombre que le pone el usuario (puede quedar vacío)
   petColor: '#ff80ab',
   // Rasgos de la cara (ids de Catalogo.traits)
   petEyes: 'round',
@@ -118,6 +119,13 @@ const PetState = {
 
   setColor(color) {
     this.petColor = color;
+    this.saveData();
+    this.updateUI();
+  },
+
+  // Nombre de la mascota: hasta 14 caracteres; vacío = sin nombre
+  setName(name) {
+    this.petName = String(name || '').trim().slice(0, 14);
     this.saveData();
     this.updateUI();
   },
@@ -241,6 +249,7 @@ const PetState = {
       happiness: this.happiness,
       hunger: this.hunger,
       energy: this.energy,
+      petName: this.petName,
       petColor: this.petColor,
       petEyes: this.petEyes,
       petMouth: this.petMouth,
@@ -280,6 +289,7 @@ const PetState = {
       this.happiness = data.happiness ?? 100;
       this.hunger = data.hunger ?? 100;
       this.energy = data.energy ?? 100;
+      this.petName = typeof data.petName === 'string' ? data.petName.slice(0, 14) : '';
       this.petColor = data.petColor || '#ff80ab';
       this.petEyes = data.petEyes || 'round';
       this.petMouth = data.petMouth || 'cat';

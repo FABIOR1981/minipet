@@ -352,3 +352,44 @@ body {
 .trait-zoom-eyes .mini-pet { top: -32px; }
 .trait-zoom-cheeks .mini-pet { top: -38px; }
 .trait-zoom-mouth .mini-pet { top: -46px; }
+
+/* Nombre de la mascota: campo en Mi Pet y etiqueta sobre el globo de diálogo */
+.mypet-name {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0 2px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #6a1b9a;
+}
+
+.mypet-name input {
+  width: 150px;
+  padding: 6px 10px;
+  border: 2px solid #e1bee7;
+  border-radius: 12px;
+  font: inherit;
+  color: #4a148c;
+  text-align: center;
+  background: #fff;
+}
+
+.mypet-name input:focus { outline: none; border-color: #ff80ab; }
+
+.thought-bubble[data-name]::before {
+  content: attr(data-name);
+  position: absolute;
+  top: -11px;
+  left: 12px;
+  padding: 1px 9px;
+  border-radius: 9px;
+  background: #ff80ab;
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.5;
+  white-space: nowrap;
+}

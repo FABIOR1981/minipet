@@ -108,6 +108,20 @@ const Catalogo = {
   ],
 
   // Escala/posición/rotación de cada accesorio equipado sobre la mascota
+  // Colores de piel elegibles en Mi Pet > Cuerpo. Todos gratis.
+  colors: [
+    { hex: '#ff80ab', name: 'rosa' },
+    { hex: '#b388ff', name: 'violeta' },
+    { hex: '#80cbc4', name: 'turquesa' },
+    { hex: '#81d4fa', name: 'celeste' },
+    { hex: '#a5d6a7', name: 'verde' },
+    { hex: '#ffe082', name: 'amarillo' },
+    { hex: '#ffab91', name: 'durazno' },
+    { hex: '#bcaaa4', name: 'chocolate' },
+    { hex: '#cfd8dc', name: 'gris' },
+    { hex: '#fff3e0', name: 'crema' }
+  ],
+
   // Rasgos de la cara, elegibles en Mi Pet > Rasgos. Son parte de la
   // identidad de la mascota: todos gratis y ninguno vale más que otro.
   // El primero de cada lista es el que trae por defecto.
