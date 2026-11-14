@@ -222,6 +222,7 @@ Object.assign(PetState, {
     // Etiqueta con el nombre sobre el globo de diálogo (si tiene nombre)
     if (this.petName) thought.dataset.name = this.petName;
     else delete thought.dataset.name;
+    thought.style.setProperty('--name-color', this.petColor);
 
     // Rasgos elegidos en Mi Pet: ojos y mejillas por clase, boca por texto
     face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks}`;
