@@ -172,6 +172,7 @@ Object.assign(PetState, {
     const accessoryEl = document.getElementById('pet-accessory');
     accessoryEl.className = 'accessory';
     accessoryEl.style.cssText = '';
+    petEl.classList.remove('with-back');
 
     if (this.equippedAccessory) {
       const item = Catalogo.items.find(i => i.id === this.equippedAccessory);
@@ -179,6 +180,8 @@ Object.assign(PetState, {
         accessoryEl.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
         accessoryEl.classList.add(`pos-${item.type}`);
         accessoryEl.classList.add(`item-${item.id}`);
+        // Lo que va en la espalda se dibuja detrás del cuerpo (ver css/mascota.css)
+        if (item.type === 'back') petEl.classList.add('with-back');
         const fit = Catalogo.accessoryFits?.[item.id];
         if (fit) {
           const accessoryImg = accessoryEl.querySelector('img');
