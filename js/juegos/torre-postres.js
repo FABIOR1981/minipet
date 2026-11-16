@@ -10,7 +10,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         ${Minigames.renderHeader('🍰 Torre de Postres', Minigames.renderHUD('🍰', best))}
         <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
-        <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla para apilar el pastel</p>
+        <p class="game-hint">Toca la pantalla para apilar el pastel</p>
       `;
 
       Minigames.mountSpectator();

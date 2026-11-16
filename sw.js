@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.16.0'; // Change version here to force reload on users' devices
+const CACHE_VERSION = 'v2.17.0'; // Change version here to force reload on users' devices
 const CACHE_NAME = `minipet-cache-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -11,6 +11,7 @@ const ASSETS_TO_CACHE = [
   './css/vestidor.css',
   './js/app.js',
   './js/iconos.js',
+  './js/avisos.js',
   './js/mascota-estado.js',
   './js/mascota-visual.js',
   './js/particulas.js',

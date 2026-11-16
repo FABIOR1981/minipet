@@ -438,3 +438,14 @@
 .dress-swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #d1c4e9; pointer-events: none; }
 .dress-ready { margin-top: 12px; padding: 8px 26px; }
 .dress-ready:disabled { opacity: 0.45; cursor: default; }
+
+
+/* Iconos propios en el marcador y texto de ayuda de cada juego */
+.hud-chip { display: inline-flex; align-items: center; gap: 4px; }
+.hud-chip .ico { width: 13px; height: 13px; }
+.hud-best .ico { color: #7e57c2; }
+.hud-timer .ico { color: #ef5350; }
+#hud-lives { gap: 2px; }
+#hud-lives .ico { color: #ec407a; }
+#hud-lives .ico.vida-perdida { color: #f3c9d6; }
+.game-hint { margin-top: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; color: #8e7aa8; }

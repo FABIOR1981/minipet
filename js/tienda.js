@@ -55,16 +55,15 @@ const Store = {
   renderPetCustomization() {
     return `
       <section class="pet-customization-panel" aria-label="Personalizar Mi Pet">
-        <h3>Mi Pet</h3>
         <div class="wardrobe-top-row">
           <div style="margin: 8px 0; text-align:center;">
-            <p class="wardrobe-label">Color de Piel:</p>
+            <p class="wardrobe-label">Color</p>
             <div class="color-picker">
               ${Catalogo.colors.map(c => `<button class="color-option ${PetState.petColor === c.hex ? 'selected' : ''}" onclick="PetState.setColor('${c.hex}'); Store.renderMyPet();" aria-label="Color ${c.name}" style="background:${c.hex};"></button>`).join('')}
             </div>
           </div>
           <div style="margin: 8px 0; text-align:center;">
-            <p class="wardrobe-label">Tamaño:</p>
+            <p class="wardrobe-label">Tamaño</p>
             <div id="size-picker" class="size-picker">
               <button class="card-btn size-option ${PetState.petSize === 'small' ? 'equipped' : ''}" data-size="small" aria-label="Tamaño chico">
                 <span class="size-preview"><span class="pet-sprite shape-squircle" style="transform:scale(0.6);"></span></span>
@@ -79,11 +78,11 @@ const Store = {
           </div>
         </div>
         <div style="margin: 4px 0 8px; text-align:center;">
-          <p class="wardrobe-label">Forma:</p>
+          <p class="wardrobe-label">Forma</p>
           <div id="shape-picker" class="shape-picker"></div>
         </div>
         <div class="glitter-intensity">
-          <label for="glitter-intensity">✨ Brillantina: <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
+          <label for="glitter-intensity">Brillantina <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
           <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}">
         </div>
       </section>
@@ -97,7 +96,13 @@ const Store = {
       const btn = document.createElement('button');
       btn.className = `card-btn shape-option ${isSelected ? 'selected' : ''}`;
       btn.setAttribute('aria-label', `Forma ${shape.name}`);
-      btn.innerHTML = `${shape.emoji}<br>${shape.name}`;
+      // Muestra la forma de verdad: una copia chiquita de la mascota
+      const muestra = document.createElement('span');
+      muestra.className = 'shape-muestra';
+      muestra.appendChild(Minigames.createMiniPet(34, { shape: shape.id, accessory: null }).el);
+      const nombre = document.createElement('span');
+      nombre.textContent = shape.name;
+      btn.append(muestra, nombre);
       btn.onclick = () => { PetState.setShape(shape.id); Store.renderMyPet(); };
       shapePicker.appendChild(btn);
     });
@@ -163,11 +168,11 @@ const Store = {
   renderTraits() {
     return `
       <section class="pet-customization-panel" aria-label="Rasgos de Mi Pet">
-        <p class="wardrobe-label">Ojos:</p>
+        <p class="wardrobe-label">Ojos</p>
         <div class="trait-row" data-kind="eyes"></div>
-        <p class="wardrobe-label">Boca:</p>
+        <p class="wardrobe-label">Boca</p>
         <div class="trait-row" data-kind="mouth"></div>
-        <p class="wardrobe-label">Mejillas:</p>
+        <p class="wardrobe-label">Mejillas</p>
         <div class="trait-row" data-kind="cheeks"></div>
       </section>
     `;
@@ -246,7 +251,10 @@ const Store = {
       PetState.updateUI();
       this.renderStore(this.storeCategory);
     } else if (item && PetState.coins < item.price) {
-      alert(`Te faltan ${item.price - PetState.coins} monedas para este. Juega un minijuego para conseguirlas.`);
+      const faltan = item.price - PetState.coins;
+      Avisos.confirmar(`Te ${faltan === 1 ? 'falta 1 moneda' : `faltan ${faltan} monedas`} para ${item.name}. Puedes conseguirlas en los minijuegos.`, {
+        titulo: 'Todavía no alcanza', icono: 'moneda', tinte: 'tienda', aceptar: 'Ir a jugar'
+      }).then(ok => { if (ok) switchTab('minigames'); });
     }
   }
 };

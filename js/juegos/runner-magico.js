@@ -14,7 +14,7 @@ Object.assign(Minigames, {
         <div class="game-stage">
           <canvas id="runnerCanvas" width="300" height="280" style="background:linear-gradient(180deg, #fff9c4 0%, #f3e5f5 100%); border-radius:16px; display:block; border:3px solid #ffd54f; touch-action:none; width:100%; height:auto; aspect-ratio:300/280;"></canvas>
         </div>
-        <p style="font-size:0.8rem; text-align:center; color:#666;">Toca la pantalla o Espacio para saltar</p>
+        <p class="game-hint">Toca la pantalla o Espacio para saltar</p>
       `;
 
       const canvas = document.getElementById('runnerCanvas');

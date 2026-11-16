@@ -10,7 +10,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         ${Minigames.renderHeader('✨ Burbujas Mágicas', Minigames.renderHUD('✨', best, 15))}
         <canvas id="bubbleCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e0f2f1 0%, #e8eaf6 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #80cbc4; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
-        <p style="font-size:0.8rem; text-align:center; color:#666;">Toca las burbujas para atraparlas</p>
+        <p class="game-hint">Toca las burbujas para atraparlas</p>
       `;
 
       Minigames.mountSpectator();

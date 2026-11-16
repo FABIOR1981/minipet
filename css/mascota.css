@@ -861,3 +861,62 @@
 @media (prefers-reduced-motion: reduce) {
   .kawaii-face .sparkle, .kawaii-face .cheek, .kawaii-face .mouth { animation: none; }
 }
+
+
+/* =========================================================
+   MI PET: pantalla menos "formulario"
+   ========================================================= */
+.pet-customization-panel {
+  border: 1px solid #efe3fa;
+  border-radius: 18px;
+  padding: 10px 10px 6px;
+  background: #ffffff;
+}
+.wardrobe-label { color: #6a1b9a; font-size: 0.78rem; }
+
+/* Formas: cada opción muestra la mascota con esa forma */
+.shape-picker { grid-template-columns: repeat(5, 1fr); max-width: none; gap: 5px; }
+.shape-picker .shape-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px 5px;
+  background: #fdf8ff;
+  border: 2px solid #efe3fa;
+  border-radius: 14px;
+  box-shadow: none;
+  font-size: 0.62rem;
+}
+.shape-muestra { height: 36px; display: flex; align-items: flex-end; justify-content: center; pointer-events: none; }
+.shape-option.selected { outline: none; border-color: #ff80ab; background: #fff0f6; }
+.size-picker .size-option { box-shadow: none; }
+
+/* Brillantina: control deslizante con el estilo del juego */
+.glitter-intensity { margin: 4px 6px 8px; font-size: 0.74rem; }
+.glitter-intensity input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  border-radius: 6px;
+  background: #f1e6ff;
+}
+.glitter-intensity input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ff80ab;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 0 #f0609a;
+  cursor: pointer;
+}
+.glitter-intensity input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff80ab;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 0 #f0609a;
+  cursor: pointer;
+}

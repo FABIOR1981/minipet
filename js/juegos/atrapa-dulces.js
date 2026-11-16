@@ -14,7 +14,7 @@ Object.assign(Minigames, {
         <div class="game-stage">
           <canvas id="gameCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e1f5fe 0%, #f3e5f5 100%); border-radius:16px; display:block; border:3px solid #ce93d8; touch-action:none; width:100%; height:auto; aspect-ratio:1/1;"></canvas>
         </div>
-        <p style="font-size:0.8rem; text-align:center; color:#666;">Arrastra el dedo o usa ⬅️ ➡️ para moverte</p>
+        <p class="game-hint">Arrastra el dedo o usa ⬅️ ➡️ para moverte</p>
       `;
 
       const canvas = document.getElementById('gameCanvas');

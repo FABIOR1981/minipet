@@ -16,9 +16,9 @@ Object.assign(Minigames, {
 
       const hud = `
         <div class="game-hud">
-          <span class="hud-chip">🃏 <span id="pairs-found">0</span>/${PAIRS}</span>
+          <span class="hud-chip">🃏 <span><span id="pairs-found">0</span>/${PAIRS}</span></span>
           <span class="hud-chip hud-timer">👆 <span id="pairs-moves">0</span></span>
-          <span class="hud-chip hud-best">⭐ <span id="hud-best">${best}</span></span>
+          <span class="hud-chip hud-best">${ico('trofeo')}<span id="hud-best">${best}</span></span>
         </div>`;
 
       content.innerHTML = `

@@ -284,9 +284,10 @@ body {
 
 .store-tab {
   flex: 1;
-  padding: 6px 4px;
-  border: 1px solid #d1c4e9;
-  border-radius: 10px;
+  padding: 7px 4px;
+  border: 1px solid #e6d8f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 0 #e6d8f5;
   background: #fff;
   color: #6a1b9a;
   font-size: 0.72rem;
@@ -296,7 +297,8 @@ body {
 
 .store-tab.active {
   background: #ff80ab;
-  border-color: #ff4081;
+  border-color: #ff80ab;
+  box-shadow: 0 2px 0 #f0609a;
   color: #fff;
 }
 
@@ -353,11 +355,18 @@ body {
 .look-chip-actions { display: flex; gap: 2px; }
 .look-chip-actions button {
   border: none;
-  background: transparent;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.85rem;
-  padding: 0 2px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.look-chip-actions .ico { width: 13px; height: 13px; }
+.look-usar { background: #e4f6e5; color: #58b860; }
+.look-borrar { background: #ffe6ed; color: #f0527c; }
 
 .card-btn {
   width: 100%;
@@ -490,4 +499,66 @@ body {
   font-weight: 800;
   line-height: 1.5;
   white-space: nowrap;
+}
+
+
+/* =========================================================
+   AVISOS PROPIOS (js/avisos.js): reemplazan a los del navegador
+   ========================================================= */
+.aviso-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(74, 20, 140, 0.35);
+}
+.aviso-caja {
+  width: 100%;
+  max-width: 290px;
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 6px 0 #dcc8f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  animation: avisoEntra 0.2s ease-out;
+}
+.aviso-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 17px;
+  background: var(--bg);
+  color: var(--c);
+}
+.aviso-ico .ico { width: 30px; height: 30px; }
+.aviso-titulo { color: #6a1b9a; font-size: 1.05rem; }
+.aviso-texto { color: #5e4b78; font-size: 0.85rem; font-weight: 600; line-height: 1.35; }
+.aviso-campo {
+  width: 100%;
+  padding: 9px 12px;
+  border: 2px solid #e1bee7;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+}
+.aviso-campo:focus { outline: none; border-color: #ff80ab; }
+.aviso-botones { display: flex; gap: 8px; width: 100%; margin-top: 4px; }
+.aviso-botones .card-btn { padding: 9px 0; font-size: 0.82rem; }
+.aviso-principal { background: #ff4081; }
+.aviso-secundario { background: #f1e6ff; color: #6a1b9a; }
+
+@keyframes avisoEntra {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

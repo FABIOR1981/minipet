@@ -17,7 +17,7 @@ Object.assign(Minigames, {
         </div>
         <p class="game-hint">Atrapa la comida 🍎 y esquiva lo que no se come 🧦</p>
       `;
-      document.querySelector('.game-hud').insertAdjacentHTML('beforeend', '<span class="hud-chip hud-timer" id="hud-lives">❤️❤️❤️</span>');
+      document.querySelector('.game-hud').insertAdjacentHTML('beforeend', `<span class="hud-chip hud-timer" id="hud-lives">${ico('felicidad').repeat(3)}</span>`);
 
       const canvas = document.getElementById('foodCanvas');
       const ctx = canvas.getContext('2d');
@@ -133,7 +133,7 @@ Object.assign(Minigames, {
               pet.cheer();
             } else {
               lives--;
-              document.getElementById('hud-lives').innerText = '❤️'.repeat(lives) + '🤍'.repeat(3 - lives);
+              document.getElementById('hud-lives').innerHTML = ico('felicidad').repeat(lives) + ico('felicidad', 'vida-perdida').repeat(3 - lives);
               AudioEffects.playTone(260, 'sine', 0.15);
               pet.oops();
               if (lives <= 0) gameOver = true;

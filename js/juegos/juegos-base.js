@@ -251,8 +251,8 @@ const Minigames = {
     return `
       <div class="game-hud">
         <span class="hud-chip">${icon} <span id="hud-score">0</span></span>
-        <span class="hud-chip hud-best">⭐ <span id="hud-best">${best}</span></span>
-        ${timeLeft !== undefined ? `<span class="hud-chip hud-timer">⏰ <span id="hud-timer">${timeLeft}</span>s</span>` : ''}
+        <span class="hud-chip hud-best">${ico('trofeo')}<span id="hud-best">${best}</span></span>
+        ${timeLeft !== undefined ? `<span class="hud-chip hud-timer">${ico('reloj')}<span><span id="hud-timer">${timeLeft}</span>s</span></span>` : ''}
       </div>
     `;
   },

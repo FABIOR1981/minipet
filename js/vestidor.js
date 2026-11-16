@@ -130,8 +130,8 @@ const Vestidor = {
       chip.innerHTML = `
         <span class="look-chip-name"></span>
         <div class="look-chip-actions">
-          <button data-action="apply" title="Usar este look" aria-label="Usar este look">✨</button>
-          <button data-action="delete" title="Borrar look" aria-label="Borrar look">🗑️</button>
+          <button data-action="apply" class="look-usar" title="Usar este look" aria-label="Usar este look">${ico('listo')}</button>
+          <button data-action="delete" class="look-borrar" title="Borrar look" aria-label="Borrar look">${ico('borrar')}</button>
         </div>
       `;
       // textContent: el nombre lo escribe el usuario y no debe interpretarse como HTML
@@ -181,11 +181,14 @@ const Vestidor = {
   },
 
   saveLook() {
-    const name = prompt('Nombre para este look:', `Look ${(PetState.looks ? PetState.looks.length : 0) + 1}`);
-    if (name === null) return; // El usuario canceló
-    PetState.saveLook(name.trim());
-    this.render();
-    PetState.showDialogue(this.phrase('saved'));
+    Avisos.pedirTexto('Nombre para este look', {
+      valor: `Look ${(PetState.looks ? PetState.looks.length : 0) + 1}`, maximo: 16, icono: 'guardar', tinte: 'armario'
+    }).then(name => {
+      if (name === null) return; // El usuario canceló
+      PetState.saveLook(name.trim());
+      this.render();
+      PetState.showDialogue(this.phrase('saved'));
+    });
   },
 
   // Reflejo en el espejo: una copia de la mascota, dada vuelta.

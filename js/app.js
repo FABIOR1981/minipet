@@ -58,9 +58,9 @@ function registerServiceWorker() {
         newWorker.addEventListener('statechange', () => {
           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
             // Notificar al usuario que hay una actualización lista
-            if (confirm('Hay una nueva versión del juego. ¿Quieres actualizarla ahora?')) {
-              window.location.reload();
-            }
+            Avisos.confirmar('¿Quieres actualizarla ahora?', {
+              titulo: 'Hay una versión nueva', icono: 'repetir', tinte: 'escenario', aceptar: 'Actualizar'
+            }).then(ok => { if (ok) window.location.reload(); });
           }
         });
       });
