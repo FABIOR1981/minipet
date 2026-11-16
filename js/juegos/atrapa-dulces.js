@@ -112,7 +112,7 @@ Object.assign(Minigames, {
         ctx.font = '26px sans-serif';
         // Color opaco: los emojis heredan la transparencia del fillStyle (venía el de la sombra)
         ctx.fillStyle = '#000';
-        ctx.fillText(currentCandy, itemX, itemY);
+        Dibujos.dibujar(ctx, currentCandy, itemX, itemY);
 
         requestAnimationFrame(loop);
       }

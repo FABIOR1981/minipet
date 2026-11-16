@@ -562,3 +562,13 @@ body {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* Dibujos que reemplazan a los emojis (js/dibujos.js): ocupan lo mismo que una letra */
+img.dibujo {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.22em;
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+}

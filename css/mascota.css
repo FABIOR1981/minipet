@@ -934,3 +934,12 @@
 
 .float-text { display: inline-flex; align-items: center; gap: 4px; }
 .float-text .ico { width: 13px; height: 13px; color: #ec407a; }
+
+/* Lentes sobre los ojos (antes quedaban apoyados más arriba). Los
+   cristales son semitransparentes para que los ojos se sigan viendo. */
+.accessory.pos-eyes.item-glasses_cool img,
+.accessory.pos-eyes.item-star_glasses img { --accessory-top: 37px; }
+.pet-sprite.shape-mochi .accessory.pos-eyes.item-glasses_cool img,
+.pet-sprite.shape-mochi .accessory.pos-eyes.item-star_glasses img,
+.pet-sprite.shape-dumpling .accessory.pos-eyes.item-glasses_cool img,
+.pet-sprite.shape-dumpling .accessory.pos-eyes.item-star_glasses img { --accessory-top: 25px; }

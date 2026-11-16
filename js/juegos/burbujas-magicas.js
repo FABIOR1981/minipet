@@ -87,7 +87,7 @@ Object.assign(Minigames, {
 
         bubbles.forEach(b => {
           ctx.font = `${b.r * 2}px sans-serif`;
-          ctx.fillText(b.isGolden ? '🌟' : '🫧', b.x, b.y);
+          Dibujos.dibujar(ctx, b.isGolden ? '🌟' : '🫧', b.x, b.y);
         });
 
         requestAnimationFrame(loop);

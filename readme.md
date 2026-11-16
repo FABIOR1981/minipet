@@ -106,3 +106,11 @@ Netlify ejecuta `node herramientas/construir.js`, que copia a `publicar/` única
 - Los detalles animados de un escenario se declaran en `Ambiente.CONFIG` (`js/ambiente.js`), usando las mismas coordenadas que la ilustración.
 - Los objetos del primer plano deben apoyarse en el borde inferior de la ilustración, para quedar siempre más cerca que la mascota.
 - Cada vez que se publica una versión nueva, conviene subir `CACHE_VERSION` en `sw.js` para forzar la actualización en los dispositivos de los usuarios.
+
+## 🎨 Dibujos en lugar de emojis
+
+Cada marca de teléfono dibuja los emojis a su manera, así que el juego no los muestra tal cual: `js/dibujos.js` los cambia en pantalla por las imágenes de `img/dibujos/`, para que se vea igual en todos lados. El código sigue escribiendo emojis como siempre; si uno no está en la lista de `js/dibujos.js`, queda como emoji común.
+
+- Para sumar un dibujo: copiar el `.svg` a `img/dibujos/`, agregarlo al `mapa` de `js/dibujos.js` y a la lista de `sw.js`.
+- Los juegos que pintan en canvas usan `Dibujos.dibujar(ctx, emoji, x, y)` en vez de `ctx.fillText()`.
+- Las imágenes son Fluent Emoji de Microsoft, con licencia MIT (ver `img/dibujos/LICENCIA.txt`).

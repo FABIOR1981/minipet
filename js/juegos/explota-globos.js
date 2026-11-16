@@ -90,7 +90,7 @@ Object.assign(Minigames, {
           b.y -= b.speed * f;
 
           ctx.font = `${b.radius * 2}px sans-serif`;
-          ctx.fillText('🎈', b.x, b.y);
+          Dibujos.dibujar(ctx, '🎈', b.x, b.y);
 
           if (b.y < -20) {
             balloons.splice(index, 1);

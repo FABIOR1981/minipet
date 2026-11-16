@@ -27,7 +27,7 @@ Object.assign(Minigames, {
           ${deck.map((item, i) => `
             <button class="pair-card" data-index="${i}" aria-label="Carta ${i + 1}">
               <span class="pair-inner">
-                <span class="pair-back">🐾</span>
+                <span class="pair-back">${ico('mipet')}</span>
                 <span class="pair-front"><img src="${item.image}" alt="${item.name}"></span>
               </span>
             </button>`).join('')}

@@ -146,7 +146,7 @@ Object.assign(Minigames, {
             items.splice(i, 1); // lo que cae al piso no resta
             continue;
           }
-          ctx.fillText(item.emoji, item.x, item.y);
+          Dibujos.dibujar(ctx, item.emoji, item.x, item.y);
         }
 
         requestAnimationFrame(loop);
