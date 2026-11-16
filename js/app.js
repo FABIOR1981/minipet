@@ -58,7 +58,7 @@ function registerServiceWorker() {
         newWorker.addEventListener('statechange', () => {
           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
             // Notificar al usuario que hay una actualización lista
-            if (confirm('✨ ¡Hay una nueva versión del juego disponible! ¿Quieres actualizar ahora?')) {
+            if (confirm('Hay una nueva versión del juego. ¿Quieres actualizarla ahora?')) {
               window.location.reload();
             }
           }

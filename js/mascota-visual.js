@@ -8,7 +8,7 @@
 // =========================================================
 Object.assign(PetState, {
   getRandomPhrase(category) {
-    let list = this.dialogues[category] || ['❤️ ¡Hola!'];
+    let list = this.dialogues[category] || ['❤️ Hola'];
     // Las frases con {nombre} solo se usan si la mascota tiene nombre
     if (!this.petName) {
       const withoutName = list.filter(phrase => !phrase.includes('{nombre}'));

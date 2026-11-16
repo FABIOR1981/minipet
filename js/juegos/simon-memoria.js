@@ -25,7 +25,7 @@ Object.assign(Minigames, {
       const best = Minigames.getBestScore('simon');
       content.innerHTML = `
         ${Minigames.renderHeader('🎯 Simón Memoria', Minigames.renderHUD('🧠', best))}
-        <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">¡Memoriza la secuencia!</p>
+        <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">Memoriza la secuencia.</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
           <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
           <button id="simon-1" onclick="Minigames.simonClick(1)" style="height:75px; background:#80deea; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #00acc1; touch-action:manipulation;"></button>
@@ -71,7 +71,7 @@ Object.assign(Minigames, {
         const turnTimeout = setTimeout(() => {
           this.simonAcceptingInput = true;
           const el = document.getElementById('simon-status');
-          if (el) el.innerText = '¡Tu turno! 👆';
+          if (el) el.innerText = 'Tu turno 👆';
         }, 400);
         this.simonTimers.push(turnTimeout);
       }
@@ -102,7 +102,7 @@ Object.assign(Minigames, {
       this.clearSimonTimers();
       const reward = this.simonScore * 10;
       const isRecord = Minigames.saveBestScore('simon', this.simonScore);
-      Minigames.showResult('¡Casi! ¿Otra ronda?', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
+      Minigames.showResult('Se rompió la secuencia. ¿Otra ronda?', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
       return;
     }
 

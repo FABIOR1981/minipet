@@ -27,7 +27,7 @@ Object.assign(Minigames, {
         if (timeLeft <= 0) {
           clearInterval(timer);
           const isRecord = Minigames.saveBestScore('bubble', score);
-          Minigames.showResult('¡Tiempo!', '✨', score, () => Minigames.startBubbleGame(), isRecord);
+          Minigames.showResult('Se acabó el tiempo', '✨', score, () => Minigames.startBubbleGame(), isRecord);
         }
       }, 1000);
 

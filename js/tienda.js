@@ -246,7 +246,7 @@ const Store = {
       PetState.updateUI();
       this.renderStore(this.storeCategory);
     } else if (item && PetState.coins < item.price) {
-      alert(`¡Te faltan ${item.price - PetState.coins} 🪙 para este! Juega un minijuego y lo consigues.`);
+      alert(`Te faltan ${item.price - PetState.coins} 🪙 para este. Juega un minijuego para conseguirlas.`);
     }
   }
 };

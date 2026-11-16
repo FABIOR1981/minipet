@@ -35,7 +35,7 @@ Object.assign(Minigames, {
 
         // --- Fase 1: mirar el look ---
         area.innerHTML = `
-          <p class="game-status">¡Mira bien el look!</p>
+          <p class="game-status">Mira bien el look.</p>
           <div class="dress-show" id="dress-show"></div>
           <div class="dress-timer"><i style="animation-duration:${viewMs}ms;"></i></div>
         `;
@@ -102,7 +102,7 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(880, 'triangle', 0.12);
             preview.cheer();
-            document.getElementById('dress-status').innerText = '¡Igualita! 🎉';
+            document.getElementById('dress-status').innerText = 'Igualita. 🎉';
             later(startRound, 1100);
           } else {
             // Muestra el look correcto al lado del armado
@@ -113,7 +113,7 @@ Object.assign(Minigames, {
             answer.cheer();
             later(() => {
               const isRecord = Minigames.saveBestScore('dress', score);
-              Minigames.showResult('¡Casi! ¿Otro look?', '👗', score, () => Minigames.startDressGame(), isRecord);
+              Minigames.showResult('No era igual. ¿Otro intento?', '👗', score, () => Minigames.startDressGame(), isRecord);
             }, 2000);
           }
         };

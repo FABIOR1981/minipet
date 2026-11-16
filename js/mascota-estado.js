@@ -57,11 +57,11 @@ const PetState = {
       this.dialogues = await response.json();
     } catch (e) {
       this.dialogues = {
-        happy: ['❤️ ¡Me encanta estar contigo!', '✨ ¡Hoy es un día genial!', '🌸 ¡Eres mi persona favorita!'],
-        hungry: ['🍕 ¡Es hora de comer algo rico!', '🍗 Mmm... ¿Hay algo para picar?'],
-        sick: ['🥺 ¿Me das una medicina para sentirme mejor?', '💊 ¡Es hora de mi medicina!'],
-        tired: ['😴 ¡Es hora de dormir!', '💤 ¡Una siesta me vendría genial!'],
-        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 ¡Tengo ganas de jugar! ¿Vamos?'],
+        happy: ['❤️ Me gusta estar contigo.', '✨ Hoy me siento muy bien.', '🌸 Eres mi persona favorita.'],
+        hungry: ['🍕 Es hora de comer algo rico.', '🍗 Mmm... ¿hay algo para picar?'],
+        sick: ['🥺 ¿Me das una medicina para sentirme mejor?', '💊 Es hora de mi medicina.'],
+        tired: ['😴 Es hora de dormir.', '💤 Una siesta me vendría bien.'],
+        bored: ['🎮 ¿Jugamos un minijuego?', '🎈 Tengo ganas de jugar. ¿Vamos?'],
         sleeping: ['💤 Zzz... Descansando...', '🌙 Zzz... Soñando con caramelos...']
       };
     }
@@ -70,7 +70,7 @@ const PetState = {
   feed() {
     if (this.isSleeping) return;
     if (this.hunger >= 100) {
-      this.showDialogue(this.getDialogue('full', '¡Gracias! Ya tengo la pancita llena.'));
+      this.showDialogue(this.getDialogue('full', 'Gracias, ya tengo la pancita llena.'));
       return;
     }
     const before = this.hunger;
@@ -84,7 +84,7 @@ const PetState = {
 
   heal() {
     if (!this.isSick) {
-      this.showDialogue(this.getDialogue('healthy', '¡Me siento de maravilla!'));
+      this.showDialogue(this.getDialogue('healthy', 'Me siento muy bien.'));
       return;
     }
     this.isSick = false;
@@ -94,12 +94,12 @@ const PetState = {
     this.saveData();
     this.updateUI();
     this.burst(['💚', '✨', '💊', '✨']);
-    this.floatText(this.happiness > before ? `+${this.happiness - before} ❤️` : '¡Curada! 💚');
+    this.floatText(this.happiness > before ? `+${this.happiness - before} ❤️` : 'Curada 💚');
   },
 
   sleep() {
     if (!this.isSleeping && this.energy >= 100) {
-      this.showDialogue(this.getDialogue('rested', '¡Estoy con toda la energía!'));
+      this.showDialogue(this.getDialogue('rested', 'Tengo toda la energía.'));
       return;
     }
     // Alterna dormir/despertar. La energía se recupera de a poco en

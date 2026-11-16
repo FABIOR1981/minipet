@@ -76,7 +76,7 @@ Object.assign(Minigames, {
           canvas.removeEventListener('touchmove', handleTouch);
           pet.destroy();
           const isRecord = Minigames.saveBestScore('catch', score);
-          Minigames.showResult('¡Juego terminado!', '🎈', score, () => Minigames.startCatchGame(), isRecord);
+          Minigames.showResult('Fin del juego', '🎈', score, () => Minigames.startCatchGame(), isRecord);
           return;
         }
 

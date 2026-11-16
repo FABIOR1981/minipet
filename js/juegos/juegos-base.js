@@ -59,7 +59,7 @@ const Minigames = {
   content.innerHTML = `
     <h2 style="text-align:center; color:#6a1b9a; margin-bottom:4px;">🎮 Minijuegos</h2>
     <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
-      ¡Gana monedas y haz feliz a tu mascota!
+      Gana monedas y haz feliz a tu mascota.
     </p>
     <div class="grid-container games-grid">
       <div class="item-card" onclick="Minigames.startCatchGame()" style="cursor:pointer;">
@@ -157,7 +157,7 @@ const Minigames = {
       } else if (count === 0) {
         numEl.innerText = '¡A JUGAR! 🌸';
         numEl.style.fontSize = '2rem';
-        subEl.innerText = '✨ ¡Diviértete! ✨';
+        subEl.innerText = '✨ Diviértete ✨';
         AudioEffects.playTone(880, 'triangle', 0.3);
       } else {
         this.cancelCountdown();

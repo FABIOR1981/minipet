@@ -81,7 +81,7 @@ Object.assign(Minigames, {
         if (gameOver) {
           cleanup();
           const isRecord = Minigames.saveBestScore('food', score);
-          Minigames.showResult('¡Buen provecho!', '🍎', score, () => Minigames.startFoodGame(), isRecord);
+          Minigames.showResult('Buen provecho.', '🍎', score, () => Minigames.startFoodGame(), isRecord);
           return;
         }
 

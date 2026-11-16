@@ -18,10 +18,10 @@
 const Vestidor = {
   // Frases de respaldo, por si no carga dialogues.json
   FALLBACK: {
-    welcome: ['🪞 ¡Me encanta jugar a disfrazarme!', '✨ ¿Qué me pongo hoy?'],
-    wear: ['🎭 ¡Qué divertido!', '✨ ¡Me gusta cómo se siente!'],
-    none: ['😊 ¡Así también estoy genial!'],
-    saved: ['📸 ¡Look guardado!'],
+    welcome: ['🪞 Me gusta disfrazarme.', '✨ ¿Qué me pongo hoy?'],
+    wear: ['🎭 Qué divertido.', '✨ Me gusta cómo se siente.'],
+    none: ['😊 Así también estoy bien.'],
+    saved: ['📸 Look guardado.'],
     items: {}
   },
 

@@ -49,7 +49,7 @@ Object.assign(Minigames, {
       const finish = () => {
         const coins = reward();
         const isRecord = Minigames.saveBestScore('pairs', coins);
-        Minigames.showResult('¡Encontraste todas!', '🃏', coins, () => Minigames.startPairsGame(), isRecord);
+        Minigames.showResult('Encontraste todas.', '🃏', coins, () => Minigames.startPairsGame(), isRecord);
       };
 
       const onClick = (e) => {

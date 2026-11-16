@@ -22,7 +22,7 @@ Object.assign(Minigames, {
               <span class="hide-cover"></span>
             </button>`).join('')}
         </div>
-        <p id="hide-status" class="game-status">¡Mira dónde se esconde!</p>
+        <p id="hide-status" class="game-status">Mira dónde se esconde.</p>
       `;
 
       const stage = document.getElementById('hide-stage');
@@ -62,7 +62,7 @@ Object.assign(Minigames, {
         cups.forEach(cup => cup.classList.remove('open'));
         petCup = Math.floor(Math.random() * 3);
         cups[petCup].querySelector('.hide-pet').appendChild(pet.el);
-        setStatus('¡Mira dónde se esconde!');
+        setStatus('Mira dónde se esconde.');
 
         // Muestra la caja con la mascota, la tapa y mezcla
         later(() => { cups[petCup].classList.add('open'); pet.cheer(); }, 250);
@@ -91,15 +91,15 @@ Object.assign(Minigames, {
           Minigames.updateHudScore(score);
           AudioEffects.playTone(880, 'triangle', 0.12);
           pet.cheer();
-          setStatus('¡La encontraste! 🎉');
+          setStatus('La encontraste. 🎉');
           later(startRound, 1100);
         } else {
           AudioEffects.playTone(300, 'sine', 0.15);
-          setStatus('¡Estaba aquí!');
+          setStatus('Estaba aquí.');
           later(() => { cups[petCup].classList.add('open'); pet.cheer(); }, 350);
           later(() => {
             const isRecord = Minigames.saveBestScore('hide', score);
-            Minigames.showResult('¡Casi! ¿Otra vez?', '🎁', score, () => Minigames.startHideGame(), isRecord);
+            Minigames.showResult('Esta vez no. ¿Otra vez?', '🎁', score, () => Minigames.startHideGame(), isRecord);
           }, 1700);
         }
       };

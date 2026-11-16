@@ -10,7 +10,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         ${Minigames.renderHeader('🌸 Explotar Globos', Minigames.renderHUD('🎈', best, 20))}
         <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
-        <p style="font-size:0.8rem; text-align:center; color:#666;">¡Toca los globos antes de que suban!</p>
+        <p style="font-size:0.8rem; text-align:center; color:#666;">Toca los globos antes de que suban.</p>
       `;
 
       Minigames.mountSpectator();
@@ -27,7 +27,7 @@ Object.assign(Minigames, {
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
           const isRecord = Minigames.saveBestScore('pop', score);
-          Minigames.showResult('¡Tiempo!', '🌸', score, () => Minigames.startPopGame(), isRecord);
+          Minigames.showResult('Se acabó el tiempo', '🌸', score, () => Minigames.startPopGame(), isRecord);
         }
       }, 1000);
 

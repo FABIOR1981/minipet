@@ -1,105 +1,105 @@
 {
   "happy": [
-    "✨ ¡Hoy es un día genial!",
-    "🎶 ¡La la la!",
-    "⭐ ¡Gracias por cuidarme tanto!",
-    "🌈 ¡Qué divertido es estar contigo!",
-    "🐥 ¡Tengo mucha energía y alegría!",
-    "🍭 ¡Eres el mejor compañero del mundo!",
-    "🥳 ¡Hoy va a ser un día increíble!",
-    "❤️ ¡Mi corazoncito brilla cuando jugamos!",
-    "🐾 ¡Soy {nombre} y hoy quiero jugar!",
-    "💖 ¡{nombre} te quiere mucho!"
+    "✨ Hoy me siento muy bien.",
+    "🎶 La la la, qué lindo día.",
+    "⭐ Gracias por cuidarme tanto.",
+    "🌈 Me divierte estar contigo.",
+    "🐥 Tengo mucha energía hoy.",
+    "🍭 Eres mi compañero favorito.",
+    "🥳 Hoy promete ser un buen día.",
+    "❤️ Me siento contenta cuando jugamos.",
+    "🐾 Soy {nombre} y hoy tengo ganas de jugar.",
+    "💖 {nombre} te quiere mucho."
   ],
   "hungry": [
-    "🍕 ¡Es hora de comer algo rico!",
-    "🍗 Mmm... ¿Hay algo para picar?",
-    "🧁 ¡Mi pancita pide un bocadito!",
-    "🍎 ¡Un bocadito, por favor!",
-    "🍔 ¿Es la hora del almuerzo?",
-    "🍓 ¡Se me antoja algo dulce!",
-    "🥨 ¡Qué bien me vendría un snack!",
+    "🍕 Es hora de comer algo rico.",
+    "🍗 Mmm... ¿hay algo para picar?",
+    "🧁 Mi pancita pide un bocadito.",
+    "🍎 ¿Me das un bocadito?",
+    "🍔 ¿Ya es hora de almorzar?",
+    "🍓 Se me antoja algo dulce.",
+    "🥨 Un snack me vendría bien.",
     "🥞 ¿Me invitas un postrecito?"
   ],
   "sick": [
     "🥺 ¿Me das una medicina para sentirme mejor?",
-    "🤒 ¡Con un remedio vuelvo a jugar!",
-    "💊 ¡Es hora de mi medicina!",
-    "💧 Un poquito de cuidado y me recupero enseguida.",
-    "🩹 ¿Me pones un curita y me das un abrazo?",
-    "🌡️ ¡Una medicina y a brincar otra vez!",
-    "🧸 ¡Tus mimos me hacen sentir mejor!"
+    "🤒 Con un remedio vuelvo a jugar.",
+    "💊 Es hora de mi medicina.",
+    "💧 Con un poco de cuidado me recupero pronto.",
+    "🩹 ¿Me pones una curita y me das un abrazo?",
+    "🌡️ Una medicina y vuelvo a moverme.",
+    "🧸 Tus mimos me ayudan mucho."
   ],
   "tired": [
-    "😴 ¡Es hora de dormir!",
-    "💤 ¡Una siesta me vendría genial!",
+    "😴 Es hora de dormir.",
+    "💤 Una siesta me vendría bien.",
     "🌙 ¿Podemos tomar una siesta?",
-    "🥱 ¡A descansar para jugar más después!",
+    "🥱 Voy a descansar para jugar después.",
     "🧸 ¿Me acuestas en mi camita?",
-    "🌌 ¡Quiero soñar cosas lindas!"
+    "🌌 Quiero soñar cosas lindas."
   ],
   "bored": [
     "🎮 ¿Jugamos un minijuego?",
-    "🎈 ¡Tengo ganas de jugar! ¿Vamos?",
-    "🪙 ¡Quiero ganar monedas para la tienda!",
-    "🎲 ¡Se me ocurre una gran idea! ¿Jugamos?",
-    "🎯 ¡Demuestra tus habilidades en un juego!",
-    "🎨 ¡Hagamos algo divertido juntos!",
-    "🎮 ¡{nombre} quiere jugar contigo!"
+    "🎈 Tengo ganas de jugar. ¿Vamos?",
+    "🪙 Quiero juntar monedas para la tienda.",
+    "🎲 Se me ocurre una idea. ¿Jugamos?",
+    "🎯 ¿Te animas a un desafío?",
+    "🎨 Hagamos algo divertido juntos.",
+    "🎮 {nombre} quiere jugar contigo."
   ],
   "sleeping": [
-    "💤 Zzz... Descansando...",
-    "🌙 Zzz... Soñando con caramelos...",
-    "🐑 Zzz... Contando ovejitas...",
-    "☁️ Zzz... Durmiendo en una nube esponjosa...",
-    "💤 Zzz... Mmm... pastelitos..."
+    "💤 Zzz... descansando...",
+    "🌙 Zzz... soñando con caramelos...",
+    "🐑 Zzz... contando ovejitas...",
+    "☁️ Zzz... durmiendo en una nube esponjosa...",
+    "💤 Zzz... mmm... pastelitos..."
   ],
   "alerts": {
-    "full": "¡Gracias! Ya tengo la pancita llena.",
-    "healthy": "¡Me siento de maravilla!",
-    "rested": "¡Estoy con toda la energía!"
+    "full": "Gracias, ya tengo la pancita llena.",
+    "healthy": "Me siento muy bien.",
+    "rested": "Tengo toda la energía."
   },
   "dressup": {
     "welcome": [
-      "🪞 ¡Me encanta jugar a disfrazarme!",
+      "🪞 Me gusta disfrazarme.",
       "✨ ¿Qué me pongo hoy?",
-      "🎭 ¡Hora de probar cosas divertidas!"
+      "🎭 Probemos cosas divertidas."
     ],
     "wear": [
-      "🎭 ¡Qué divertido!",
-      "✨ ¡Me gusta cómo se siente!",
-      "🎉 ¡A jugar con esto puesto!"
+      "🎭 Qué divertido.",
+      "✨ Me gusta cómo se siente.",
+      "🎉 Voy a jugar con esto puesto."
     ],
     "none": [
-      "😊 ¡Así también estoy genial!",
-      "🌈 ¡Así, tal cual, a jugar!"
+      "😊 Así también estoy bien.",
+      "🌈 Así, tal cual, a jugar."
     ],
     "saved": [
-      "📸 ¡Look guardado!",
-      "⭐ ¡Lo guardamos para otro día!"
+      "📸 Look guardado.",
+      "⭐ Lo guardamos para otro día."
     ],
     "items": {
-      "hat_crown": "👑 ¡Hoy juego a la realeza!",
-      "party_hat": "🥳 ¡Que empiece la fiesta!",
-      "ribbon_pink": "🎀 ¡Un lazo para salir a jugar!",
-      "bow_tie": "🎀 ¡Con moño y todo!",
-      "headphones": "🎧 ¡A escuchar mi canción favorita!",
-      "cat_ears": "🐱 ¡Miau! Hoy juego a ser gatito.",
-      "bunny_ears": "🐰 ¡A saltar como conejo!",
-      "glasses_cool": "💗 ¡Veo todo con corazones!",
-      "star_glasses": "🌟 ¡Veo estrellas por todos lados!",
-      "pirate_hat": "🏴‍☠️ ¡Al abordaje! Hoy voy de pirata.",
-      "snorkel_mask": "🤿 ¡A explorar el fondo del mar!",
-      "chef_hat": "🍳 ¡Hoy cocino yo!",
-      "flower_pink": "🌸 ¡Llegó la primavera!",
-      "wizard_hat": "🪄 ¡Abracadabra!",
-      "magic_wand": "✨ ¡Un poco de magia por aquí!",
-      "fairy_wings": "🧚 ¡A volar bien alto!",
-      "ninja_band": "🥷 ¡Sigilo ninja activado!",
-      "space_helmet": "🚀 ¡Rumbo a las estrellas!",
-      "winter_beanie": "❄️ ¡A jugar en la nieve!",
-      "winter_scarf": "🧣 ¡Qué abrigo tan suave!",
-      "shower_cap": "🫧 ¡Hora de las burbujas!"
+      "hat_crown": "👑 Hoy juego a la realeza.",
+      "party_hat": "🥳 Que empiece la fiesta.",
+      "ribbon_pink": "🎀 Un lazo para salir a jugar.",
+      "bow_tie": "🎀 Con moño y todo.",
+      "headphones": "🎧 Voy a escuchar mi canción favorita.",
+      "cat_ears": "🐱 Miau. Hoy juego a ser gatito.",
+      "bunny_ears": "🐰 A saltar como conejo.",
+      "glasses_cool": "💗 Veo todo con corazones.",
+      "star_glasses": "🌟 Veo estrellas por todos lados.",
+      "pirate_hat": "🏴‍☠️ Al abordaje. Hoy voy de pirata.",
+      "snorkel_mask": "🤿 A explorar el fondo del mar.",
+      "chef_hat": "🍳 Hoy cocino yo.",
+      "flower_pink": "🌸 Llegó la primavera.",
+      "wizard_hat": "🪄 Abracadabra.",
+      "magic_wand": "✨ Un poco de magia por aquí.",
+      "fairy_wings": "🧚 A volar bien alto.",
+      "ninja_band": "🥷 Sigilo ninja activado.",
+      "space_helmet": "🚀 Rumbo a las estrellas.",
+      "winter_beanie": "❄️ A jugar en la nieve.",
+      "winter_scarf": "🧣 Qué abrigo tan suave.",
+      "shower_cap": "🫧 Hora de las burbujas."
     }
   }
 }
