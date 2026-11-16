@@ -82,16 +82,13 @@ body {
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  fill: currentColor;
+  stroke: none;
 }
-.ico-hambre { color: #ff8a65; }
+.ico-hambre { color: #ff8a50; }
 .ico-felicidad { color: #ec407a; }
 .ico-energia { color: #f9a825; }
-.ico-moneda { color: #f5a623; }
+.ico-moneda { color: #ffb300; }
 
 .thought-bubble {
   position: absolute;
@@ -128,42 +125,56 @@ body {
 }
 
 .bottom-nav button {
+  --c: #7e57c2;   /* color del icono */
+  --bg: #ede7f6;  /* fondo de la pastilla del icono */
   background: #ffffff;
   border: 1px solid #efe3fa;
-  border-radius: 16px;
-  padding: 9px 4px 8px;
+  border-radius: 18px;
+  padding: 7px 4px 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
-  color: #7e57c2;
   box-shadow: 0 3px 0 #ecdcf7;
-  transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .bottom-nav button:active {
   transform: translateY(2px);
   box-shadow: 0 1px 0 #ecdcf7;
-  background: #f8f1fd;
 }
+.bottom-nav button:active .btn-icon { transform: scale(0.9); }
+
+/* Cada botón con su color */
+.bottom-nav button.nav-comer     { --c: #ff8a50; --bg: #fff0e3; }
+.bottom-nav button.nav-medicina  { --c: #f0527c; --bg: #ffe6ed; }
+.bottom-nav button.nav-dormir    { --c: #7986f0; --bg: #e8eaff; }
+.bottom-nav button.nav-juegos    { --c: #a66bea; --bg: #f1e6ff; }
+.bottom-nav button.nav-mipet     { --c: #f06aa6; --bg: #ffe6f1; }
+.bottom-nav button.nav-armario   { --c: #26b6c6; --bg: #dff6f8; }
+.bottom-nav button.nav-escenario { --c: #58b860; --bg: #e4f6e5; }
+.bottom-nav button.nav-tienda    { --c: #f5a100; --bg: #fff3d6; }
 
 .btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--c);
+  transition: transform 0.1s;
 }
 .btn-icon .ico {
-  width: 24px;
-  height: 24px;
-  stroke-width: 1.8;
+  width: 26px;
+  height: 26px;
 }
 .btn-text {
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.1px;
-  color: #5e35b1;
+  color: #4a148c;
 }
 
 .modal {
@@ -334,8 +345,8 @@ body {
 /* Cartel del modo prueba (?prueba en la URL) */
 .test-badge {
   position: absolute;
-  left: 8px;
-  top: 8px;
+  right: 8px;
+  bottom: 8px;
   padding: 3px 9px;
   border-radius: 10px;
   background: rgba(74, 20, 140, 0.85);
