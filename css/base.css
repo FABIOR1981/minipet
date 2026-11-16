@@ -189,7 +189,7 @@ body {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(255, 255, 255, 0.96);
+  background: #fdf8ff;  /* opaco: la habitación ya no se transparenta detrás */
   z-index: 20;
   padding: 20px 14px;
   display: flex;
@@ -362,15 +362,17 @@ body {
 .card-btn {
   width: 100%;
   padding: 6px 0;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   background: #b388ff;
   color: white;
   font-weight: bold;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 3px 0 rgba(74, 20, 140, 0.22);
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.1s;
 }
+.card-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 rgba(74, 20, 140, 0.22); }
 
 .card-btn:active { transform: scale(0.96); }
 .card-btn.owned { background: #ccc; cursor: default; }
