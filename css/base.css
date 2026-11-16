@@ -62,16 +62,36 @@ body {
 
 .stat-box {
   background: #ffffff;
-  padding: 6px 4px;
-  text-align: center;
+  padding: 7px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   white-space: nowrap;
-  border-radius: 12px;
-  font-size: 0.82rem;
-  font-weight: bold;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: #4a148c;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  border: 1px solid #e1bee7;
+  box-shadow: 0 2px 0 #ecdcf7;
+  border: 1px solid #efe3fa;
 }
+
+/* Iconos SVG de la interfaz */
+.ico {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ico-hambre { color: #ff8a65; }
+.ico-felicidad { color: #ec407a; }
+.ico-energia { color: #f9a825; }
+.ico-moneda { color: #f5a623; }
 
 .thought-bubble {
   position: absolute;
@@ -109,23 +129,42 @@ body {
 
 .bottom-nav button {
   background: #ffffff;
-  border: 2px solid #e1bee7;
-  border-radius: 14px;
-  padding: 8px 4px;
+  border: 1px solid #efe3fa;
+  border-radius: 16px;
+  padding: 9px 4px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 3px;
   cursor: pointer;
-  transition: transform 0.1s, background-color 0.2s;
+  color: #7e57c2;
+  box-shadow: 0 3px 0 #ecdcf7;
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
 }
 
 .bottom-nav button:active {
-  transform: scale(0.95);
-  background: #f3e5f5;
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #ecdcf7;
+  background: #f8f1fd;
 }
 
-.btn-icon { font-size: 1.2rem; }
-.btn-text { font-size: 0.72rem; font-weight: bold; color: #4a148c; margin-top: 2px; }
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+}
+.btn-icon .ico {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+.btn-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  color: #5e35b1;
+}
 
 .modal {
   position: absolute;

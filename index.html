@@ -14,6 +14,22 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
 
+  <!-- Iconos SVG propios (trazo, currentColor) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-comer" viewBox="0 0 24 24"><path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7.5c0-1.5 1.2-2 2-2.5M13 7.5c0-1.5 1.2-2 2-2.5"/></symbol>
+    <symbol id="i-medicina" viewBox="0 0 24 24"><path d="M9.5 3h5v6.5H21v5h-6.5V21h-5v-6.5H3v-5h6.5z"/></symbol>
+    <symbol id="i-dormir" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-juegos" viewBox="0 0 24 24"><path d="M7 8h10a5 5 0 0 1 4.6 7 2.5 2.5 0 0 1-4.4.3L15.6 14H8.4l-1.8 1.3A2.5 2.5 0 0 1 2.4 15 5 5 0 0 1 7 8z"/><path d="M7 10.5v3M5.5 12h3"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17.5" cy="13" r=".6"/></symbol>
+    <symbol id="i-mipet" viewBox="0 0 24 24"><circle cx="12" cy="15.5" r="4.5"/><circle cx="6" cy="10" r="2"/><circle cx="9.5" cy="5.5" r="2"/><circle cx="14.5" cy="5.5" r="2"/><circle cx="18" cy="10" r="2"/></symbol>
+    <symbol id="i-armario" viewBox="0 0 24 24"><ellipse cx="12" cy="10" rx="6" ry="7.5"/><path d="M12 17.5V22M8.5 22h7"/></symbol>
+    <symbol id="i-escenario" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7V20h-17z"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-tienda" viewBox="0 0 24 24"><rect x="4.5" y="8" width="15" height="12.5" rx="2.5"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+    <symbol id="i-hambre" viewBox="0 0 24 24"><path d="M3 11h18a9 9 0 0 1-18 0z"/></symbol>
+    <symbol id="i-felicidad" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.5-7.5-10A4 4 0 0 1 12 7.5 4 4 0 0 1 19.5 10c0 5.5-7.5 10-7.5 10z"/></symbol>
+    <symbol id="i-energia" viewBox="0 0 24 24"><path d="M13 2.5 4.5 14H11l-1 7.5 8.5-11.5H12.5z"/></symbol>
+    <symbol id="i-moneda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M14.5 9.5c-.4-.9-1.3-1.3-2.5-1.3-1.5 0-2.5.7-2.5 1.8 0 2.5 5 1.3 5 3.8 0 1.1-1 1.9-2.5 1.9-1.2 0-2.2-.5-2.6-1.4"/></symbol>
+  </svg>
+
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/escenarios.css">
   <link rel="stylesheet" href="css/mascota.css">
@@ -27,10 +43,10 @@
       <!-- Mismo orden y mismas columnas que la primera fila de botones:
            hambre sobre Comer, felicidad sobre Medicina, energía sobre Dormir
            y monedas sobre Juegos -->
-      <div class="stat-box">🍕 <span id="hunger-count">100</span>%</div>
-      <div class="stat-box">❤️ <span id="happy-count">100</span>%</div>
-      <div class="stat-box">⚡ <span id="energy-count">100</span>%</div>
-      <div class="stat-box">🪙 <span id="coin-count">500</span></div>
+      <div class="stat-box"><svg class="ico ico-hambre" aria-hidden="true"><use href="#i-hambre"/></svg><span id="hunger-count">100</span>%</div>
+      <div class="stat-box"><svg class="ico ico-felicidad" aria-hidden="true"><use href="#i-felicidad"/></svg><span id="happy-count">100</span>%</div>
+      <div class="stat-box"><svg class="ico ico-energia" aria-hidden="true"><use href="#i-energia"/></svg><span id="energy-count">100</span>%</div>
+      <div class="stat-box"><svg class="ico ico-moneda" aria-hidden="true"><use href="#i-moneda"/></svg><span id="coin-count">500</span></div>
     </header>
 
     <!-- Globo de Pensamiento -->
@@ -71,35 +87,35 @@
     <!-- Menú Inferior en Rejilla 4x2 -->
     <nav class="bottom-nav">
       <button onclick="PetState.feed()">
-        <span class="btn-icon">🍗</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-comer"/></svg></span>
         <span class="btn-text">Comer</span>
       </button>
       <button onclick="PetState.heal()">
-        <span class="btn-icon">🏥</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-medicina"/></svg></span>
         <span class="btn-text">Medicina</span>
       </button>
       <button onclick="PetState.sleep()">
-        <span class="btn-icon">😴</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-dormir"/></svg></span>
         <span class="btn-text">Dormir</span>
       </button>
       <button onclick="switchTab('minigames')">
-        <span class="btn-icon">🎮</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-juegos"/></svg></span>
         <span class="btn-text">Juegos</span>
       </button>
       <button onclick="switchTab('my-pet')">
-        <span class="btn-icon">🐾</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-mipet"/></svg></span>
         <span class="btn-text">Mi Pet</span>
       </button>
       <button onclick="Vestidor.open()">
-        <span class="btn-icon">🪞</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-armario"/></svg></span>
         <span class="btn-text">Armario</span>
       </button>
       <button onclick="switchTab('scenery')">
-        <span class="btn-icon">🏡</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-escenario"/></svg></span>
         <span class="btn-text">Escenario</span>
       </button>
       <button onclick="switchTab('store')">
-        <span class="btn-icon">🛍️</span>
+        <span class="btn-icon"><svg class="ico " aria-hidden="true"><use href="#i-tienda"/></svg></span>
         <span class="btn-text">Tienda</span>
       </button>
     </nav>
