@@ -147,14 +147,22 @@ body {
 .bottom-nav button:active .btn-icon { transform: scale(0.9); }
 
 /* Cada botón con su color */
-.bottom-nav button.nav-comer     { --c: #ff8a50; --bg: #fff0e3; }
-.bottom-nav button.nav-medicina  { --c: #f0527c; --bg: #ffe6ed; }
-.bottom-nav button.nav-dormir    { --c: #7986f0; --bg: #e8eaff; }
-.bottom-nav button.nav-juegos    { --c: #a66bea; --bg: #f1e6ff; }
-.bottom-nav button.nav-mipet     { --c: #f06aa6; --bg: #ffe6f1; }
-.bottom-nav button.nav-armario   { --c: #26b6c6; --bg: #dff6f8; }
-.bottom-nav button.nav-escenario { --c: #58b860; --bg: #e4f6e5; }
-.bottom-nav button.nav-tienda    { --c: #f5a100; --bg: #fff3d6; }
+.bottom-nav button.nav-comer,
+.tinte-comer     { --c: #ff8a50; --bg: #fff0e3; }
+.bottom-nav button.nav-medicina,
+.tinte-medicina  { --c: #f0527c; --bg: #ffe6ed; }
+.bottom-nav button.nav-dormir,
+.tinte-dormir    { --c: #7986f0; --bg: #e8eaff; }
+.bottom-nav button.nav-juegos,
+.tinte-juegos    { --c: #a66bea; --bg: #f1e6ff; }
+.bottom-nav button.nav-mipet,
+.tinte-mipet     { --c: #f06aa6; --bg: #ffe6f1; }
+.bottom-nav button.nav-armario,
+.tinte-armario   { --c: #26b6c6; --bg: #dff6f8; }
+.bottom-nav button.nav-escenario,
+.tinte-escenario { --c: #58b860; --bg: #e4f6e5; }
+.bottom-nav button.nav-tienda,
+.tinte-tienda    { --c: #f5a100; --bg: #fff3d6; }
 
 .btn-icon {
   display: flex;
@@ -199,12 +207,46 @@ body {
   background: #ff80ab;
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 12px;
+  padding: 6px 13px;
+  border-radius: 14px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  box-shadow: 0 3px 0 #f0609a;
 }
+.close-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #f0609a; }
+
+/* Botones y rótulos con icono al lado del texto */
+.con-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.con-ico .ico { width: 1.1em; height: 1.1em; }
+.card-btn.con-ico { display: flex; }
+.ico-armario { color: #26b6c6; }
+
+/* Título de cada pantalla: icono en su pastilla + texto */
+.titulo-pantalla {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #6a1b9a;
+  margin-bottom: 2px;
+}
+.titulo-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--c);
+}
+.titulo-ico .ico { width: 22px; height: 22px; }
 
 /* El contenido del modal es una columna, para que la grilla de artículos
    pueda estirarse hasta el borde inferior */
@@ -273,7 +315,8 @@ body {
 
 .card-icon { width: 45px; height: 45px; object-fit: contain; }
 .card-title { font-size: 0.74rem; line-height: 1.15; font-weight: bold; color: #4a148c; text-align: center; }
-.card-price { font-size: 0.75rem; font-weight: 600; color: #7b1fa2; }
+.card-price { display: inline-flex; align-items: center; gap: 3px; font-size: 0.75rem; font-weight: 700; color: #7b1fa2; }
+.card-price .ico { width: 14px; height: 14px; }
 
 /* Mini-preview real del escenario en la card de la tienda/armario */
 .bg-preview {

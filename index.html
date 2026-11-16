@@ -28,6 +28,11 @@
     <symbol id="i-felicidad" viewBox="0 0 24 24"><path d="M12 21s-9-5.500-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.500-9 12-9 12z"/></symbol>
     <symbol id="i-energia" viewBox="0 0 24 24"><path d="M13.500 2 4 13.500h6.500L9.500 22 20 10h-6.800z"/></symbol>
     <symbol id="i-moneda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6.200" fill="none" stroke="#fff" stroke-width="1.6" opacity=".85"/></symbol>
+    <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"/></symbol>
+    <symbol id="i-listo" viewBox="0 0 24 24"><path d="M4.500 12.500l5 5L19.500 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"/></symbol>
+    <symbol id="i-guardar" viewBox="0 0 24 24"><path d="M6 4.500A2.500 2.500 0 0 1 8.500 2h7A2.500 2.500 0 0 1 18 4.500v16a1 1 0 0 1-1.600.8L12 18l-4.400 3.300A1 1 0 0 1 6 20.500z"/></symbol>
+    <symbol id="i-repetir" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.200-5.100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8"/><path d="M20 2.500V8h-5.500z"/></symbol>
+    <symbol id="i-trofeo" viewBox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0z"/><path d="M7 5H4a3 3 0 0 0 3.500 4M17 5h3a3 3 0 0 1-3.500 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/><path d="M11 13.500h2V18h-2z"/><rect x="7.500" y="18" width="9" height="3" rx="1"/></symbol>
   </svg>
 
   <link rel="stylesheet" href="css/base.css">
@@ -123,23 +128,24 @@
     <!-- Panel del vestidor: reemplaza a la botonera mientras la mascota se prueba cosas -->
     <section id="vestidor-panel" class="vestidor-panel" hidden>
       <div class="vestidor-head">
-        <span id="vestidor-title" class="vestidor-title">🪞 Vestidor</span>
-        <button class="vestidor-done" onclick="Vestidor.close()">✔ Listo</button>
+        <span class="vestidor-title con-ico"><svg class="ico ico-armario" aria-hidden="true"><use href="#i-armario"/></svg><span id="vestidor-title">Vestidor</span></span>
+        <button class="vestidor-done con-ico" onclick="Vestidor.close()"><svg class="ico" aria-hidden="true"><use href="#i-listo"/></svg>Listo</button>
       </div>
       <div id="vestidor-strip" class="vestidor-strip"></div>
       <div class="vestidor-looks">
         <div id="vestidor-looks-list"></div>
-        <button class="vestidor-save" onclick="Vestidor.saveLook()">💾 Guardar look</button>
+        <button class="vestidor-save con-ico" onclick="Vestidor.saveLook()"><svg class="ico" aria-hidden="true"><use href="#i-guardar"/></svg>Guardar look</button>
       </div>
     </section>
 
     <!-- Modales -->
     <section id="modal-screen" class="modal hidden">
-      <button class="close-btn" onclick="closeModal()">❌ Cerrar</button>
+      <button class="close-btn con-ico" onclick="closeModal()"><svg class="ico" aria-hidden="true"><use href="#i-cerrar"/></svg>Cerrar</button>
       <div id="modal-content"></div>
     </section>
   </div>
 
+  <script src="js/iconos.js"></script>
   <script src="js/mascota-estado.js"></script>
   <script src="js/mascota-visual.js"></script>
   <script src="js/particulas.js"></script>

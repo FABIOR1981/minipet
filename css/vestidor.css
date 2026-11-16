@@ -129,3 +129,7 @@
   background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55) 30%, transparent 40%, transparent 55%, rgba(255, 255, 255, 0.3) 62%, transparent 70%);
   pointer-events: none;
 }
+
+/* Icono de "Más en la tienda" en la tira del vestidor */
+.vestidor-item-emoji.tinte-tienda { color: var(--c); display: flex; justify-content: center; }
+.vestidor-item-emoji.tinte-tienda .ico { width: 26px; height: 26px; }

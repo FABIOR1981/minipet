@@ -57,58 +57,58 @@ const Minigames = {
  renderMenu() {
   const content = document.getElementById('modal-content');
   content.innerHTML = `
-    <h2 style="text-align:center; color:#6a1b9a; margin-bottom:4px;">🎮 Minijuegos</h2>
+    ${tituloPantalla('juegos', 'Minijuegos')}
     <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
       Gana monedas y haz feliz a tu mascota.
     </p>
     <div class="grid-container games-grid">
       <div class="item-card" onclick="Minigames.startCatchGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🎈</span>
+        <span class="game-emoji tinte-medicina">🎈</span>
         <span class="card-title">Atrapa Dulces</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startPopGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🌸</span>
+        <span class="game-emoji tinte-mipet">🌸</span>
         <span class="card-title">Explotar Globos</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startCakeGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🍰</span>
+        <span class="game-emoji tinte-comer">🍰</span>
         <span class="card-title">Torre de Postres</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startSimonGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🧠</span>
+        <span class="game-emoji tinte-juegos">🧠</span>
         <span class="card-title">Simón Memoria</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startRunnerGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🦄</span>
+        <span class="game-emoji tinte-dormir">🦄</span>
         <span class="card-title">Runner Mágico</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startBubbleGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">✨</span>
+        <span class="game-emoji tinte-armario">✨</span>
         <span class="card-title">Burbujas Mágicas</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startPairsGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🃏</span>
+        <span class="game-emoji tinte-tienda">🃏</span>
         <span class="card-title">Parejas</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startHideGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🎁</span>
+        <span class="game-emoji tinte-escenario">🎁</span>
         <span class="card-title">¿Dónde Está?</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startDressGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">👗</span>
+        <span class="game-emoji tinte-mipet">👗</span>
         <span class="card-title">Vestirla Igual</span>
         <button class="card-btn">Jugar</button>
       </div>
       <div class="item-card" onclick="Minigames.startFoodGame()" style="cursor:pointer;">
-        <span style="font-size:2rem; margin-bottom:4px;">🍎</span>
+        <span class="game-emoji tinte-medicina">🍎</span>
         <span class="card-title">Lluvia de Comida</span>
         <button class="card-btn">Jugar</button>
       </div>
@@ -181,14 +181,14 @@ const Minigames = {
           <div class="result-emoji">${emoji}</div>
         </div>
         <h2 class="result-title">${title}</h2>
-        ${isRecord ? '<div class="result-record">🏆 ¡Nuevo récord!</div>' : ''}
+        ${isRecord ? `<div class="result-record con-ico">${ico('trofeo')}¡Nuevo récord!</div>` : ''}
         <div class="result-coins-box">
-          <span>🪙</span>
+          ${ico('moneda', 'ico-moneda')}
           <span id="result-coin-num">0</span>
         </div>
         <div class="result-actions">
-          <button class="card-btn result-btn-again" id="result-again">🔁 Jugar de nuevo</button>
-          <button class="card-btn result-btn-menu" id="result-menu">🎮 Menú</button>
+          <button class="card-btn con-ico result-btn-again" id="result-again">${ico('repetir')}Jugar de nuevo</button>
+          <button class="card-btn con-ico result-btn-menu" id="result-menu">${ico('juegos')}Menú</button>
         </div>
       </div>
     `;

@@ -89,7 +89,7 @@ const Vestidor = {
     if (!strip || !looksList) return;
 
     const title = document.getElementById('vestidor-title');
-    if (title) title.textContent = PetState.petName ? `🪞 Vestidor de ${PetState.petName}` : '🪞 Vestidor';
+    if (title) title.textContent = PetState.petName ? `Vestidor de ${PetState.petName}` : 'Vestidor';
 
     const owned = PetState.inventory
       .map(id => Catalogo.items.find(i => i.id === id))
@@ -107,7 +107,7 @@ const Vestidor = {
           <span class="vestidor-item-name">${item.name}</span>
         </button>`).join('')}
       <button class="vestidor-item vestidor-more" data-id="tienda">
-        <span class="vestidor-item-emoji">🛍️</span>
+        <span class="vestidor-item-emoji tinte-tienda">${ico('tienda')}</span>
         <span class="vestidor-item-name">Más en la tienda</span>
       </button>
     `;

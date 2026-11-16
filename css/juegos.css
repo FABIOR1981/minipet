@@ -233,7 +233,18 @@
    ========================================================= */
 .grid-container.games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); flex: none; min-height: 0; overflow: visible; gap: 8px; }
 .games-grid .item-card { padding: 7px 6px; gap: 2px; }
-.games-grid .item-card > span:first-child { font-size: 1.7rem !important; margin-bottom: 0 !important; }
+.game-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.result-coins-box .ico { width: 1.3em; height: 1.3em; }
 
 /* Textos comunes de los juegos */
 .game-hint { font-size: 0.8rem; text-align: center; color: #666; }

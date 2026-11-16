@@ -20,7 +20,7 @@ const Store = {
     this.storeCategory = category;
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2 style="text-align:center; color:#6a1b9a;">🛍️ Tienda de Objetos</h2>
+      ${tituloPantalla('tienda', 'Tienda')}
       <div class="store-tabs" role="tablist" aria-label="Categorías de la tienda">
         <button class="store-tab ${category === 'all' ? 'active' : ''}" data-category="all">Todos</button>
         <button class="store-tab ${category === 'acc' ? 'active' : ''}" data-category="acc">Accesorios</button>
@@ -43,7 +43,7 @@ const Store = {
       card.innerHTML = `
         ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
-        <span class="card-price">${item.price === 0 ? 'Gratis' : '🪙 ' + item.price}</span>
+        <span class="card-price">${item.price === 0 ? 'Gratis' : ico('moneda', 'ico-moneda') + item.price}</span>
         <button onclick="Store.buyItem('${item.id}')" ${isOwned ? 'disabled' : ''} class="card-btn ${isOwned ? 'owned' : ''}">
           ${isOwned ? 'Comprado' : 'Comprar'}
         </button>
@@ -125,7 +125,7 @@ const Store = {
     const content = document.getElementById('modal-content');
     const tab = this.myPetTab;
     content.innerHTML = `
-      <h2 style="text-align:center; color:#6a1b9a;">🐾 Mi Pet</h2>
+      ${tituloPantalla('mipet', 'Mi Pet')}
       <div id="mypet-preview" class="mypet-preview"></div>
       <label class="mypet-name">Nombre
         <input id="mypet-name" type="text" maxlength="14" placeholder="Luna" autocomplete="off">
@@ -198,7 +198,7 @@ const Store = {
   renderCollection(title, category, rerender) {
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-      <h2 style="text-align:center; color:#6a1b9a;">${title}</h2>
+      ${title}
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
       <div class="grid-container"></div>
     `;
@@ -219,8 +219,8 @@ const Store = {
       card.innerHTML = `
         ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
-        <button class="card-btn ${isEquipped ? 'equipped' : ''}">
-          ${isEquipped ? '✨ Usando' : 'Poner'}
+        <button class="card-btn con-ico ${isEquipped ? 'equipped' : ''}">
+          ${isEquipped ? ico('listo') + 'Usando' : 'Poner'}
         </button>
       `;
       card.querySelector('.card-btn').onclick = () => {
@@ -232,7 +232,7 @@ const Store = {
   },
 
   renderScenery() {
-    this.renderCollection('🏡 Escenario', 'bg', () => this.renderScenery());
+    this.renderCollection(tituloPantalla('escenario', 'Escenario'), 'bg', () => this.renderScenery());
   },
 
 
@@ -246,7 +246,7 @@ const Store = {
       PetState.updateUI();
       this.renderStore(this.storeCategory);
     } else if (item && PetState.coins < item.price) {
-      alert(`Te faltan ${item.price - PetState.coins} 🪙 para este. Juega un minijuego para conseguirlas.`);
+      alert(`Te faltan ${item.price - PetState.coins} monedas para este. Juega un minijuego para conseguirlas.`);
     }
   }
 };
