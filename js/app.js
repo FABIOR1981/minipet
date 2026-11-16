@@ -68,6 +68,14 @@ function registerServiceWorker() {
   }
 }
 
+// Las tarjetas tocables (role="button") también responden a Enter y Espacio
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.item-card.tocable')) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
 function switchTab(tab) {
   Minigames.forceExitIfActive();
   // Abrir cualquier ventana saca a la mascota del vestidor

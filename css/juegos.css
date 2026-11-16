@@ -450,3 +450,8 @@
 #hud-lives .ico.vida-perdida { color: #f3c9d6; }
 .game-hint { margin-top: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; color: #8e7aa8; }
 .pair-back .ico { width: 26px; height: 26px; color: #ffffff; opacity: 0.9; }
+
+/* Menú de minijuegos sin botón "Jugar": se toca la tarjeta */
+.games-grid .item-card { padding: 10px 6px 9px; gap: 5px; }
+.games-grid .game-emoji { width: 46px; height: 46px; border-radius: 16px; font-size: 1.6rem; }
+.games-grid .card-title { font-size: 0.8rem; }

@@ -572,3 +572,46 @@ img.dibujo {
   pointer-events: none;
   user-select: none;
 }
+
+/* =========================================================
+   TARJETAS TOCABLES: sin botón propio. Se toca la tarjeta y,
+   como en el vestidor, la elegida queda marcada.
+   ========================================================= */
+.item-card { position: relative; }
+.item-card.tocable {
+  cursor: pointer;
+  background: #ffffff;
+  border-color: #efe3fa;
+  box-shadow: 0 3px 0 #e6d3f3;
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.2s;
+}
+.item-card.tocable:active { transform: translateY(2px); box-shadow: 0 1px 0 #e6d3f3; }
+.item-card.tocable:focus-visible { outline: 2px solid #b388ff; outline-offset: 2px; }
+.item-card.selected {
+  border-color: #ff80ab;
+  background: #fff0f6;
+  box-shadow: 0 3px 0 #f7b3cd;
+  cursor: default;
+}
+.card-check {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ff4081;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-check .ico { width: 11px; height: 11px; }
+/* Lo que ya se compró: apagado y con su marca */
+.item-card.tuyo { background: #f7f3fb; border-color: #ece4f4; box-shadow: none; }
+.item-card.tuyo .card-icon, .item-card.tuyo .bg-preview { opacity: 0.55; }
+.item-card.tuyo .card-title { color: #8e7aa8; }
+.card-estado { display: inline-flex; align-items: center; gap: 3px; font-size: 0.72rem; font-weight: 800; color: #58b860; }
+.card-estado .ico { width: 12px; height: 12px; }
+.grid-container { padding-top: 10px; padding-right: 8px; }

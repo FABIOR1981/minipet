@@ -62,55 +62,45 @@ const Minigames = {
       Gana monedas y haz feliz a tu mascota.
     </p>
     <div class="grid-container games-grid">
-      <div class="item-card" onclick="Minigames.startCatchGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCatchGame()">
         <span class="game-emoji tinte-medicina">🎈</span>
         <span class="card-title">Atrapa Dulces</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startPopGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPopGame()">
         <span class="game-emoji tinte-mipet">🌸</span>
         <span class="card-title">Explotar Globos</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startCakeGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCakeGame()">
         <span class="game-emoji tinte-comer">🍰</span>
         <span class="card-title">Torre de Postres</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startSimonGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startSimonGame()">
         <span class="game-emoji tinte-juegos">🧠</span>
         <span class="card-title">Simón Memoria</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startRunnerGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startRunnerGame()">
         <span class="game-emoji tinte-dormir">🦄</span>
         <span class="card-title">Runner Mágico</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startBubbleGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startBubbleGame()">
         <span class="game-emoji tinte-armario">✨</span>
         <span class="card-title">Burbujas Mágicas</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startPairsGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPairsGame()">
         <span class="game-emoji tinte-tienda">🃏</span>
         <span class="card-title">Parejas</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startHideGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startHideGame()">
         <span class="game-emoji tinte-escenario">🎁</span>
         <span class="card-title">¿Dónde Está?</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startDressGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startDressGame()">
         <span class="game-emoji tinte-mipet">👗</span>
         <span class="card-title">Vestirla Igual</span>
-        <button class="card-btn">Jugar</button>
       </div>
-      <div class="item-card" onclick="Minigames.startFoodGame()" style="cursor:pointer;">
+      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startFoodGame()">
         <span class="game-emoji tinte-medicina">🍎</span>
         <span class="card-title">Lluvia de Comida</span>
-        <button class="card-btn">Jugar</button>
       </div>
     </div>
   `;

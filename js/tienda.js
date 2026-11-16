@@ -37,17 +37,22 @@ const Store = {
     
     Catalogo.items.filter(item => category === 'all' || item.category === category).forEach(item => {
       const isOwned = PetState.inventory.includes(item.id);
+      // Sin botón: se toca la tarjeta. Lo que ya es tuyo queda marcado.
       const card = document.createElement('div');
-      card.className = 'item-card';
-
+      card.className = `item-card ${isOwned ? 'tuyo' : 'tocable'}`;
       card.innerHTML = `
         ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
-        <span class="card-price">${item.price === 0 ? 'Gratis' : ico('moneda', 'ico-moneda') + item.price}</span>
-        <button onclick="Store.buyItem('${item.id}')" ${isOwned ? 'disabled' : ''} class="card-btn ${isOwned ? 'owned' : ''}">
-          ${isOwned ? 'Comprado' : 'Comprar'}
-        </button>
+        ${isOwned
+          ? `<span class="card-estado">${ico('listo')}Tuyo</span>`
+          : `<span class="card-price">${item.price === 0 ? 'Gratis' : ico('moneda', 'ico-moneda') + item.price}</span>`}
       `;
+      if (!isOwned) {
+        card.setAttribute('role', 'button');
+        card.tabIndex = 0;
+        card.setAttribute('aria-label', `Comprar ${item.name}`);
+        card.onclick = () => this.tocarItem(item.id);
+      }
       container.appendChild(card);
     });
   },
@@ -219,16 +224,18 @@ const Store = {
         : PetState.equippedAccessory === item.id;
 
       const card = document.createElement('div');
-      card.className = 'item-card';
-
+      // Como en el vestidor: se toca la tarjeta y la elegida queda marcada
+      card.className = `item-card tocable ${isEquipped ? 'selected' : ''}`;
+      card.setAttribute('role', 'button');
+      card.tabIndex = 0;
+      card.setAttribute('aria-pressed', isEquipped ? 'true' : 'false');
       card.innerHTML = `
         ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
-        <button class="card-btn con-ico ${isEquipped ? 'equipped' : ''}">
-          ${isEquipped ? ico('listo') + 'Usando' : 'Poner'}
-        </button>
+        ${isEquipped ? `<span class="card-check">${ico('listo')}</span>` : ''}
       `;
-      card.querySelector('.card-btn').onclick = () => {
+      card.onclick = () => {
+        if (isEquipped) return;
         PetState.equipItem(item.id);
         rerender();
       };
@@ -240,6 +247,17 @@ const Store = {
     this.renderCollection(tituloPantalla('escenario', 'Escenario'), 'bg', () => this.renderScenery());
   },
 
+
+  // Toque en una tarjeta de la tienda: pide confirmación antes de gastar,
+  // porque ahora toda la tarjeta es tocable y se puede tocar sin querer.
+  tocarItem(itemId) {
+    const item = Catalogo.items.find(i => i.id === itemId);
+    if (!item || PetState.inventory.includes(itemId)) return;
+    if (item.price === 0 || PetState.coins < item.price) { this.buyItem(itemId); return; }
+    Avisos.confirmar(`Cuesta ${item.price === 1 ? '1 moneda' : `${item.price} monedas`}.`, {
+      titulo: `¿Comprar ${item.name}?`, icono: 'tienda', tinte: 'tienda', aceptar: 'Comprar'
+    }).then(ok => { if (ok) this.buyItem(itemId); });
+  },
 
   buyItem(itemId) {
     const item = Catalogo.items.find(i => i.id === itemId);
