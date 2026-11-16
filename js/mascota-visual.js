@@ -264,7 +264,7 @@ Object.assign(PetState, {
   },
 
   // Cartelito que sube desde la mascota: "+30 🍕", "+20 ❤️"
-  floatText(text) {
+  floatText(text, icono) {
     const petEl = document.getElementById('pet');
     const roomEl = document.getElementById('pet-room');
     if (!petEl || !roomEl) return;
@@ -273,6 +273,7 @@ Object.assign(PetState, {
     const el = document.createElement('div');
     el.className = 'float-text';
     el.textContent = text;
+    if (icono) el.insertAdjacentHTML('beforeend', ico(icono));
     el.style.left = `${Math.round(pet.left - room.left + pet.width / 2)}px`;
     el.style.top = `${Math.round(Math.max(4, pet.top - room.top - 22))}px`;
     roomEl.appendChild(el);

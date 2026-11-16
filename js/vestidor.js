@@ -98,7 +98,7 @@ const Vestidor = {
 
     strip.innerHTML = `
       <button class="vestidor-item ${current ? '' : 'selected'}" data-id="">
-        <span class="vestidor-item-emoji">😊</span>
+        <span class="vestidor-item-emoji sin-nada"></span>
         <span class="vestidor-item-name">Sin nada</span>
       </button>
       ${owned.map(item => `
@@ -111,6 +111,9 @@ const Vestidor = {
         <span class="vestidor-item-name">Más en la tienda</span>
       </button>
     `;
+    // "Sin nada" muestra a la mascota tal cual, sin accesorio
+    const sinNada = strip.querySelector('.sin-nada');
+    if (sinNada) sinNada.appendChild(Minigames.createMiniPet(34, { accessory: null }).el);
     strip.onclick = (e) => {
       const btn = e.target.closest('.vestidor-item');
       if (!btn) return;

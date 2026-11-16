@@ -79,7 +79,7 @@ const PetState = {
     this.saveData();
     this.updateUI();
     this.showEating();
-    this.floatText(`+${this.hunger - before} 🍕`);
+    this.floatText(`+${this.hunger - before}`, 'hambre');
   },
 
   heal() {
@@ -94,7 +94,7 @@ const PetState = {
     this.saveData();
     this.updateUI();
     this.burst(['💚', '✨', '💊', '✨']);
-    this.floatText(this.happiness > before ? `+${this.happiness - before} ❤️` : 'Curada 💚');
+    this.floatText(this.happiness > before ? `+${this.happiness - before}` : 'Curada', 'felicidad');
   },
 
   sleep() {

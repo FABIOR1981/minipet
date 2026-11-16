@@ -188,7 +188,7 @@ const Minigames = {
         </div>
         <div class="result-actions">
           <button class="card-btn con-ico result-btn-again" id="result-again">${ico('repetir')}Jugar de nuevo</button>
-          <button class="card-btn con-ico result-btn-menu" id="result-menu">${ico('juegos')}Menú</button>
+          <button class="card-btn con-ico result-btn-menu" id="result-menu">${ico('menu')}Menú</button>
         </div>
       </div>
     `;

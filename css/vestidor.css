@@ -133,3 +133,4 @@
 /* Icono de "Más en la tienda" en la tira del vestidor */
 .vestidor-item-emoji.tinte-tienda { color: var(--c); display: flex; justify-content: center; }
 .vestidor-item-emoji.tinte-tienda .ico { width: 26px; height: 26px; }
+.vestidor-item-emoji.sin-nada { display: flex; align-items: flex-end; justify-content: center; height: 36px; }

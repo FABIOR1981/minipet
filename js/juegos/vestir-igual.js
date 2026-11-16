@@ -65,7 +65,7 @@ Object.assign(Minigames, {
           <div class="dress-row" data-kind="accessory">
             ${accessoryOptions.map(a => `<button class="dress-option" data-value="${a}" aria-label="Accesorio"><img src="${Catalogo.items.find(i => i.id === a).image}" alt=""></button>`).join('')}
           </div>
-          <button class="card-btn dress-ready" id="dress-ready" disabled>¡Lista! ✔</button>
+          <button class="card-btn con-ico dress-ready" id="dress-ready" disabled>${ico('listo')}Lista</button>
         `;
 
         const preview = Minigames.createMiniPet(84, NEUTRAL);

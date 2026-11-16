@@ -837,14 +837,25 @@
 .kawaii-face.tired .eyebrow { opacity: 0.7; translate: 0 5px; }
 
 /* Aburrida: cejas rectas y mirada un poco caída */
-.kawaii-face.bored .eye { clip-path: inset(22% -8px -4px -8px); }
-.kawaii-face.bored .sparkle { display: none; }
+/* (la mirada va y viene, para que no se confunda con la cansada) */
+.kawaii-face.bored .eyes { animation: miraLados 4.5s ease-in-out infinite; }
 .kawaii-face.bored .eyebrow { opacity: 0.75; translate: 0 3px; }
 
 /* Enferma: mejillas apagadas */
 .kawaii-face.sick .cheek { filter: saturate(0.4); }
 .kawaii-face.sick .sparkle { display: none; }
 
+/* Ojos "sonrientes" (arcos): los párpados no se recortan, quedan las cejas */
+.kawaii-face.eyes-happy.tired .eye { clip-path: none; }
+
+/* Con lentes puestos, las cejas quedarían encima del marco: se ocultan */
+.pet-sprite:has(.accessory.pos-eyes) .eyebrow { opacity: 0; }
+
+@keyframes miraLados {
+  0%, 20%, 100% { translate: 0 0; }
+  35%, 55% { translate: -4px 0; }
+  70%, 90% { translate: 4px 0; }
+}
 @keyframes brilloOjo {
   0%, 100% { opacity: 1; scale: 1; }
   50% { opacity: 0.55; scale: 0.7; }
@@ -859,7 +870,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kawaii-face .sparkle, .kawaii-face .cheek, .kawaii-face .mouth { animation: none; }
+  .kawaii-face .sparkle, .kawaii-face .cheek, .kawaii-face .mouth, .kawaii-face .eyes { animation: none; }
 }
 
 
@@ -920,3 +931,6 @@
   box-shadow: 0 2px 0 #f0609a;
   cursor: pointer;
 }
+
+.float-text { display: inline-flex; align-items: center; gap: 4px; }
+.float-text .ico { width: 13px; height: 13px; color: #ec407a; }
