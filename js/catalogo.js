@@ -4,7 +4,7 @@
 // posición de cada accesorio sobre la mascota (accessoryFits).
 // Sin lógica de UI ni acceso al DOM — solo datos.
 // =========================================================
-const Catalogo = {
+export const Catalogo = {
   // Las formas de mascota disponibles (elegibles en Mi Pet)
   shapes: [
     { id: 'shape-circle',   name: 'Círculo',   emoji: '⚪' },

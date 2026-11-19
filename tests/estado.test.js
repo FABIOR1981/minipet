@@ -1,42 +1,35 @@
 // Pruebas de PetState (js/mascota-estado.js): guardado, migraciones y acciones.
-// Se ejecuta con `npm test`, sin dependencias: node:test + vm.
-const { test } = require('node:test');
-const assert = require('node:assert/strict');
-const fs = require('fs');
-const path = require('path');
-const vm = require('vm');
+// Se ejecutan con `npm test`, sin dependencias (node:test).
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
 
-const ARCHIVO = path.join(__dirname, '..', 'js', 'mascota-estado.js');
+// El módulo lee window, localStorage y document al cargarse: se simulan antes de importarlo
+const almacen = new Map();
+globalThis.window = { location: { search: '' } };
+globalThis.localStorage = {
+  getItem: (k) => (almacen.has(k) ? almacen.get(k) : null),
+  setItem: (k, v) => almacen.set(k, String(v)),
+  removeItem: (k) => almacen.delete(k),
+};
+globalThis.document = {
+  body: null,
+  addEventListener() {},
+  getElementById: () => null,
+  createTreeWalker: () => ({ nextNode: () => null }),
+};
+
+const { PetState } = await import('../js/mascota-estado.js');
 const CLAVE = 'virtualPetData';
 
-// Carga mascota-estado.js en un entorno aislado con un localStorage de mentira.
+// Deja a PetState en valores iniciales y carga el guardado indicado
 function cargarPetState(guardadoInicial) {
-  const almacen = new Map();
+  almacen.clear();
   if (guardadoInicial !== undefined) almacen.set(CLAVE, guardadoInicial);
-
-  const contexto = {
-    window: { location: { search: '' } },
-    localStorage: {
-      getItem: (k) => (almacen.has(k) ? almacen.get(k) : null),
-      setItem: (k, v) => almacen.set(k, String(v)),
-      removeItem: (k) => almacen.delete(k),
-    },
-    URLSearchParams,
-    console,
-    document: { getElementById: () => null },
-    AudioEffects: { playEat() {}, playTone() {}, playHeal() {} },
-  };
-  vm.createContext(contexto);
-  vm.runInContext(fs.readFileSync(ARCHIVO, 'utf8'), contexto);
-  const PetState = vm.runInContext('PetState', contexto);
-
-  // Lo que dibuja mascota-visual.js no se carga acá: se reemplaza por no-ops
   Object.assign(PetState, {
-    updateUI() {},
-    showDialogue() {},
-    showEating() {},
-    floatText() {},
-    burst() {},
+    coins: 500, happiness: 100, hunger: 100, energy: 100, petName: '',
+    isSick: false, isSleeping: false, guardadoBloqueado: false,
+    // Lo que dibuja mascota-visual.js no se carga acá: se reemplaza por no-ops
+    updateUI() {}, showDialogue() {}, showEating() {}, floatText() {}, burst() {},
     getDialogue: (_clave, fallback) => fallback,
   });
   // Lo mismo que hace init() al arrancar, sin el resto de la app

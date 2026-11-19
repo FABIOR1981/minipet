@@ -1,3 +1,6 @@
+import { Dibujos } from '../dibujos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // ATRAPA-DULCES.JS — La mascota corre de lado a lado y atrapa
 // los dulces que caen antes de que toquen el piso. Soporte de

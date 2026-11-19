@@ -1,3 +1,5 @@
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // TORRE-POSTRES.JS — Apilar capas de pastel tocando en el
 // momento justo; si la capa cae mal apilada, se acaba el juego.

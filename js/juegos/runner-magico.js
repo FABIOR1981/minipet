@@ -1,3 +1,6 @@
+import { Dibujos } from '../dibujos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // RUNNER-MAGICO.JS — La mascota corre y salta los hongos que
 // se acercan; cada uno esquivado suma monedas. Soporte de

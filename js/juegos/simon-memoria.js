@@ -1,3 +1,5 @@
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // SIMON-MEMORIA.JS — Memorizar y repetir la secuencia de
 // colores que se enciende, una ronda más larga cada vez.
@@ -27,12 +29,16 @@ Object.assign(Minigames, {
         ${Minigames.renderHeader('🎯 Simón Memoria', Minigames.renderHUD('🧠', best))}
         <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">Memoriza la secuencia.</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
-          <button id="simon-0" onclick="Minigames.simonClick(0)" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
-          <button id="simon-1" onclick="Minigames.simonClick(1)" style="height:75px; background:#80deea; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #00acc1; touch-action:manipulation;"></button>
-          <button id="simon-2" onclick="Minigames.simonClick(2)" style="height:75px; background:#b388ff; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #673ab7; touch-action:manipulation;"></button>
-          <button id="simon-3" onclick="Minigames.simonClick(3)" style="height:75px; background:#ffe082; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #ffb300; touch-action:manipulation;"></button>
+          <button id="simon-0" data-simon="0" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
+          <button id="simon-1" data-simon="1" style="height:75px; background:#80deea; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #00acc1; touch-action:manipulation;"></button>
+          <button id="simon-2" data-simon="2" style="height:75px; background:#b388ff; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #673ab7; touch-action:manipulation;"></button>
+          <button id="simon-3" data-simon="3" style="height:75px; background:#ffe082; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #ffb300; touch-action:manipulation;"></button>
         </div>
       `;
+
+      content.querySelectorAll('[data-simon]').forEach((b) => {
+        b.onclick = () => Minigames.simonClick(Number(b.dataset.simon));
+      });
 
       Minigames.mountSpectator();
 

@@ -1,10 +1,17 @@
+import { Avisos } from './avisos.js';
+import { Catalogo } from './catalogo.js';
+import { ico, tituloPantalla } from './iconos.js';
+import { Minigames } from './juegos/juegos-base.js';
+import { PetState } from './mascota-estado.js';
+import { switchTab } from './navegacion.js';
+import { AudioEffects } from './sonidos.js';
 // =========================================================
 // TIENDA.JS — Renderizado de la tienda, la ventana Escenario
 // y el panel "Mi Pet" (color, tamaño, forma,
 // brillantina). Usa los datos de Catalogo (catalogo.js) y el
 // estado de PetState — no define datos propios.
 // =========================================================
-const Store = {
+export const Store = {
   storeCategory: 'all',
 
   // Ícono de la card: mini-preview del gradiente real para fondos,

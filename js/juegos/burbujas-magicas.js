@@ -1,3 +1,6 @@
+import { Dibujos } from '../dibujos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // BURBUJAS-MAGICAS.JS — Tocar burbujas antes de que se vayan;
 // las doradas valen más puntos. Juego a contrarreloj (15s).

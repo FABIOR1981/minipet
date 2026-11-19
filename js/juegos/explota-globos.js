@@ -1,3 +1,6 @@
+import { Dibujos } from '../dibujos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // EXPLOTA-GLOBOS.JS — Tocar los globos antes de que suban y
 // se escapen de la pantalla. Juego a contrarreloj (20s).

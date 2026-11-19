@@ -1,3 +1,4 @@
+import { ico } from './iconos.js';
 // =========================================================
 // AVISOS.JS — Ventanitas propias del juego, en lugar de los
 // alert() / confirm() / prompt() del navegador.
@@ -8,7 +9,7 @@
 //
 // Los estilos (.aviso-*) están en css/base.css.
 // =========================================================
-const Avisos = {
+export const Avisos = {
   // opciones: { titulo, texto, icono, tinte, campo: { valor, maximo }, botones: [{ texto, valor, principal }] }
   mostrar(opciones) {
     return new Promise(resolve => {

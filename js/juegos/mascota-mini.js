@@ -1,3 +1,5 @@
+import { Catalogo } from '../catalogo.js';
+import { Minigames } from './juegos-base.js';
 // =========================================================
 // MASCOTA-MINI.JS — La mascota dentro de los minijuegos.
 //

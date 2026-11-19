@@ -17,7 +17,7 @@
 //             sirve para dejarlas en el cielo o la pared
 //   size      multiplicador de tamaño (1 por defecto)
 // =========================================================
-const Particles = {
+export const Particles = {
   CONFIG: {
     // Interiores
     bg_living:     { mode: 'twinkle',   emojis: ['✨'],       count: 5, area: [8, 50] },

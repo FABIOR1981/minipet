@@ -25,7 +25,9 @@ La mascota puede:
 - `css/escenarios.css`: los 17 escenarios (`.room.bg_*`), su primer plano (`.room::after`) y las animaciones de partículas.
 - `css/mascota.css`: mascota, formas, tamaños, brillantina, accesorios, sombra y animaciones.
 - `css/juegos.css`: HUD, conteo regresivo y pantalla de resultado de los minijuegos.
-- `js/app.js`: sonidos (`AudioEffects`), inicio, registro del Service Worker y navegación entre modales (`switchTab`, `closeModal`).
+- `js/app.js`: entrada de la app, acciones de la botonera (`data-action`) y registro del Service Worker.
+- `js/sonidos.js`: sonidos (`AudioEffects`).
+- `js/navegacion.js`: navegación entre modales (`switchTab`, `closeModal`).
 - `js/mascota-estado.js`: objeto `PetState` con stats, acciones (comer, dormir, medicina), inventario, looks, persistencia y `tick()`.
 - `js/mascota-visual.js`: agrega a `PetState` el dibujo (`updateUI`), la cara, los diálogos, el paseo y la profundidad.
 - `js/catalogo.js`: objeto `Catalogo`, solo datos: `items` (accesorios y escenarios), `shapes` y `accessoryFits`.
@@ -43,7 +45,7 @@ La mascota puede:
 - `manifest.json`: configuración PWA.
 - `netlify.toml` y `herramientas/construir.js`: build y publicación.
 
-Orden de carga de los scripts en `index.html`: `mascota-estado.js`, `mascota-visual.js`, `particulas.js`, `ambiente.js`, `catalogo.js`, `tienda.js`, `juegos/juegos-base.js`, `juegos/mascota-mini.js`, los diez minijuegos y por último `app.js`. `mascota-visual.js` y los minijuegos usan `Object.assign` sobre objetos ya definidos, así que el orden importa.
+Los archivos de `js/` son módulos ES: cada uno importa lo que usa (`import { ... } from`), y `index.html` carga solo `js/app.js`. `mascota-visual.js` y los minijuegos agregan métodos a objetos importados con `Object.assign`, así que se importan (desde `app.js`) para que se ejecuten.
 
 ## Navegación actual
 

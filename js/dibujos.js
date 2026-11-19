@@ -14,7 +14,7 @@
 // Los dibujos son Fluent Emoji de Microsoft (licencia MIT, ver
 // img/dibujos/LICENCIA.txt).
 // =========================================================
-const Dibujos = {
+export const Dibujos = {
   CARPETA: 'img/dibujos/',
 
   // emoji → nombre del archivo (sin .svg)

@@ -1,3 +1,5 @@
+import { Catalogo } from './catalogo.js';
+import { AudioEffects } from './sonidos.js';
 // =========================================================
 // MASCOTA-ESTADO.JS — Datos de la mascota (stats, inventario,
 // looks, diálogos) y todo lo que los modifica: acciones (comer,
@@ -10,20 +12,20 @@
 // https://minipetkw.netlify.app/?prueba). Usa una partida aparte, que no
 // toca la partida real, y siempre arranca con monedas de sobra para poder
 // comprar y probar todo. Con ?prueba=reiniciar esa partida empieza de cero.
-const PARAMETRO_PRUEBA = new URLSearchParams(window.location.search).get('prueba');
+export const PARAMETRO_PRUEBA = new URLSearchParams(window.location.search).get('prueba');
 
 // Versión del formato de guardado (localStorage). Si cambia la estructura de
 // los datos, se sube este número y se agrega una migración en MIGRACIONES:
 // cada una pasa un guardado de la versión N a la N+1.
-const VERSION_GUARDADO = 1;
-const MIGRACIONES = {
+export const VERSION_GUARDADO = 1;
+export const MIGRACIONES = {
   // 0 -> 1: los guardados anteriores no tenían el campo `version`. Los datos son los mismos.
   0: (datos) => datos,
 };
 
 // Devuelve los datos listos para la versión actual, o null si el guardado es
 // de una versión más nueva (no se sabe leerlo y no se debe pisar).
-function migrarGuardado(datos) {
+export function migrarGuardado(datos) {
   let version = Number.isInteger(datos.version) ? datos.version : 0;
   if (version > VERSION_GUARDADO) return null;
   let actual = datos;
@@ -34,7 +36,7 @@ function migrarGuardado(datos) {
   return actual;
 }
 
-const PetState = {
+export const PetState = {
   testMode: PARAMETRO_PRUEBA !== null,
   TEST_COINS: 99999,
   STORAGE_KEY: PARAMETRO_PRUEBA !== null ? 'virtualPetDataPrueba' : 'virtualPetData',

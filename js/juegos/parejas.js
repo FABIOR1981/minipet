@@ -1,3 +1,7 @@
+import { Catalogo } from '../catalogo.js';
+import { ico } from '../iconos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // PAREJAS.JS — Memotest: dar vuelta las cartas de a dos y
 // encontrar los pares. Las cartas muestran accesorios del

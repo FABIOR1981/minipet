@@ -24,7 +24,7 @@
 //   sparkle  x, y, size, c, d, delay
 //   mirror   x, y, w, h  (óvalo donde js/vestidor.js dibuja el reflejo)
 // =========================================================
-const Ambiente = {
+export const Ambiente = {
   SCENE: { width: 400, height: 480 },
 
   CONFIG: {

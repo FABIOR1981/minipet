@@ -1,3 +1,10 @@
+import { Ambiente } from './ambiente.js';
+import { Catalogo } from './catalogo.js';
+import { ico } from './iconos.js';
+import { PetState } from './mascota-estado.js';
+import { Particles } from './particulas.js';
+import { AudioEffects } from './sonidos.js';
+import { Vestidor } from './vestidor.js';
 // =========================================================
 // MASCOTA-VISUAL.JS — Todo lo que dibuja o mueve a la mascota
 // en pantalla: pintar stats/forma/color/accesorio (updateUI),

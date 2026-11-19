@@ -1,3 +1,7 @@
+import { Catalogo } from '../catalogo.js';
+import { ico } from '../iconos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // VESTIR-IGUAL.JS — Se muestra un look unos segundos (color,
 // forma y accesorio) y hay que armarlo de memoria eligiendo

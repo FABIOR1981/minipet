@@ -1,3 +1,6 @@
+import { ico, tituloPantalla } from '../iconos.js';
+import { PetState } from '../mascota-estado.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // JUEGOS-BASE.JS — Estado y utilidades compartidas por los
 // minijuegos: salida segura (forceExitIfActive), menú principal,
@@ -6,7 +9,7 @@
 // Los demás archivos de js/juegos/ agregan sus métodos a este
 // mismo objeto Minigames vía Object.assign.
 // =========================================================
-const Minigames = {
+export const Minigames = {
   // Estado de un minijuego en curso. Si el usuario cierra el modal o
   // navega a otra pestaña mientras `inProgress` es true, `exitHandler()`
   // se ejecuta para limpiar listeners/timers y devolver las monedas

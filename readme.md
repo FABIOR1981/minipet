@@ -42,7 +42,9 @@ minipet/
 │   ├── juegos.css             # Minijuegos: HUD, conteo, resultado y juegos sin canvas
 │   └── vestidor.css           # Panel del vestidor y reflejo en el espejo
 ├── js/
-│   ├── app.js                 # Sonidos (AudioEffects), inicio, navegación y registro del SW
+│   ├── app.js                 # Entrada de la app (módulo principal), acciones (data-action) y registro del SW
+│   ├── sonidos.js             # Sonidos sintetizados (AudioEffects)
+│   ├── navegacion.js          # Cambio entre ventanas (switchTab, closeModal)
 │   ├── mascota-estado.js      # PetState: stats, acciones, inventario, looks, guardado
 │   ├── mascota-visual.js      # PetState: dibujo, cara, diálogos, paseo y profundidad
 │   ├── particulas.js          # Partículas ambientales por escenario
@@ -74,6 +76,10 @@ minipet/
 └── documentacion/
     └── LEEME.md               # Enlace a documentacion-central
 ```
+
+## 🧩 Módulos
+
+La app usa módulos ES (`import`/`export`). `index.html` carga un único script, `js/app.js`, que importa el resto. Por eso hay que servirla por HTTP (ver abajo); abrir el archivo directo no funciona.
 
 ## 🧪 Pruebas
 

@@ -1,3 +1,12 @@
+import { Ambiente } from './ambiente.js';
+import { Avisos } from './avisos.js';
+import { Catalogo } from './catalogo.js';
+import { ico } from './iconos.js';
+import { Minigames } from './juegos/juegos-base.js';
+import { PetState } from './mascota-estado.js';
+import { closeModal, switchTab } from './navegacion.js';
+import { AudioEffects } from './sonidos.js';
+import { Store } from './tienda.js';
 // =========================================================
 // VESTIDOR.JS — El armario: un lugar aparte adonde la mascota va
 // a probarse accesorios. Reemplaza a la vieja ventana "Accesorios".
@@ -15,7 +24,7 @@
 //
 // Los estilos están en css/vestidor.css.
 // =========================================================
-const Vestidor = {
+export const Vestidor = {
   // Frases de respaldo, por si no carga dialogues.json
   FALLBACK: {
     welcome: ['🪞 Me gusta disfrazarme.', '✨ ¿Qué me pongo hoy?'],

@@ -1,3 +1,5 @@
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // DONDE-ESTA.JS — La mascota se esconde en una de tres cajas,
 // las cajas se mezclan y hay que seguirla con la vista. Cada

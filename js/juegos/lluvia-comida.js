@@ -1,3 +1,7 @@
+import { Dibujos } from '../dibujos.js';
+import { ico } from '../iconos.js';
+import { Minigames } from './juegos-base.js';
+import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // LLUVIA-COMIDA.JS — Cae comida mezclada con cosas que no se
 // comen. La mascota atrapa la comida y esquiva lo demás; tiene

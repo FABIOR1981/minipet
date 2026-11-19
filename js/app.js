@@ -1,48 +1,27 @@
-// Motor Sintetizador de Sonidos
-const AudioEffects = {
-  ctx: null,
-
-  init() {
-    if (!this.ctx) {
-      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-  },
-
-  playTone(freq, type, duration) {
-    try {
-      this.init();
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + duration);
-    } catch (e) {
-      // Ignorar
-    }
-  },
-
-  playEat() {
-    this.playTone(300, 'sine', 0.1);
-    setTimeout(() => this.playTone(450, 'sine', 0.15), 100);
-  },
-
-  playCoin() {
-    this.playTone(987.77, 'sine', 0.08);
-    setTimeout(() => this.playTone(1318.51, 'sine', 0.2), 80);
-  },
-
-  playHeal() {
-    this.playTone(523.25, 'triangle', 0.15);
-    setTimeout(() => this.playTone(659.25, 'triangle', 0.15), 120);
-    setTimeout(() => this.playTone(783.99, 'triangle', 0.2), 240);
-  }
-};
-
+import './ambiente.js';
+import './catalogo.js';
+import './dibujos.js';
+import './iconos.js';
+import './juegos/atrapa-dulces.js';
+import './juegos/burbujas-magicas.js';
+import './juegos/donde-esta.js';
+import './juegos/explota-globos.js';
+import './juegos/juegos-base.js';
+import './juegos/lluvia-comida.js';
+import './juegos/mascota-mini.js';
+import './juegos/parejas.js';
+import './juegos/runner-magico.js';
+import './juegos/simon-memoria.js';
+import './juegos/torre-postres.js';
+import './juegos/vestir-igual.js';
+import './mascota-visual.js';
+import './particulas.js';
+import './sonidos.js';
+import './tienda.js';
+import { Avisos } from './avisos.js';
+import { PetState } from './mascota-estado.js';
+import { closeModal, switchTab } from './navegacion.js';
+import { Vestidor } from './vestidor.js';
 // Inicialización del Juego y Registro del Service Worker PWA
 document.addEventListener('DOMContentLoaded', () => {
   PetState.init();
@@ -76,28 +55,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-function switchTab(tab) {
-  Minigames.forceExitIfActive();
-  // Abrir cualquier ventana saca a la mascota del vestidor
-  if (typeof Vestidor !== 'undefined') Vestidor.close();
-  const modal = document.getElementById('modal-screen');
-  modal.classList.remove('hidden');
-  
-  if (tab === 'store') {
-    Store.renderStore();
-  } else if (tab === 'scenery') {
-    Store.renderScenery();
-  } else if (tab === 'my-pet') {
-    Store.renderMyPet();
-  } else if (tab === 'minigames') {
-    Minigames.renderMenu();
-  }
-}
-
-function closeModal() {
-  Minigames.forceExitIfActive();
-  document.getElementById('modal-screen').classList.add('hidden');
-}
 // Acciones de la botonera y de los botones fijos del HTML. En lugar de un
 // onclick en cada botón, un único listener en el documento lee data-action.
 const ACCIONES = {
