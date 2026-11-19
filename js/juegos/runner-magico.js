@@ -14,7 +14,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         <h3 class="game-title">🦄 Runner Mágico</h3>
         ${Minigames.renderHUD('🦄', best)}
-        <div class="game-stage">
+        <div class="game-stage" style="flex:none; height:auto; min-height:0; aspect-ratio:5 / 6">
           <canvas id="runnerCanvas"></canvas>
         </div>
         <p class="game-hint">Toca la pantalla o Espacio para saltar</p>
