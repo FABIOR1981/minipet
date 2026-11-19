@@ -1088,7 +1088,7 @@ body:has(.species-nube) .pet-shadow {
 /* Personaje del staff que saluda (tienda, minijuegos): avatar y globo */
 .staff-saludo { display: flex; align-items: center; gap: 10px; margin: 6px 4px 10px; }
 .staff-avatar {
-  flex: none; width: 56px; height: 56px; border-radius: 50%;
+  flex: none; width: 72px; height: 72px; border-radius: 50%;
   display: grid; place-items: center;
   background: #fff; box-shadow: 0 4px 0 #e6d8f5;
 }
@@ -1096,12 +1096,10 @@ body:has(.species-nube) .pet-shadow {
   margin: 0; padding: 8px 12px; background: #fff; border-radius: 16px;
   font-size: 0.9rem; font-weight: 700; color: #6a1b9a;
 }
-.staff-avatar svg { width: 52px; height: 52px; display: block; }
 
 /* Estilista en el encabezado del vestidor: dibujo chico, sin la sombra del globo */
 .vestidor-estilista { display: inline-flex; margin-left: 6px; }
 .vestidor-estilista .staff-avatar { width: 40px; height: 40px; box-shadow: none; background: transparent; }
-.vestidor-estilista .staff-avatar svg { width: 40px; height: 40px; }
 
 /* Personajes del elenco (silueta con máscara, igual que Nube; la cara la pone el juego) */
 .pet-sprite.species-gotita {
@@ -1344,3 +1342,10 @@ body:has(.species-nube) .pet-shadow {
 @media (prefers-reduced-motion: reduce) {
   #pet.species-gatito, #pet.species-conejita { animation: none; }
 }
+
+/* Figura del personaje dentro del avatar del staff (reduce la mascota completa) */
+.staff-avatar { overflow: hidden; position: relative; }
+.staff-figura { position: absolute; inset: 0; }
+.staff-figura .pet-sprite { position: absolute; left: 50%; top: 50%; margin: -60px 0 0 -60px; transform: scale(0.44); pointer-events: none; }
+.vestidor-estilista .staff-avatar { width: 40px; height: 40px; }
+.vestidor-estilista .staff-figura .pet-sprite { transform: scale(0.3); }

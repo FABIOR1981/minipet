@@ -6,7 +6,20 @@
 // Sin DOM: solo datos y cálculo (se prueba en tests/).
 // =========================================================
 import { Catalogo } from './catalogo.js';
-import { PersonajesDibujos } from './personajes-dibujos.js';
+
+// Figura del personaje tal como se ve en el juego (misma silueta, color y cara)
+const CARA = `<div class="kawaii-face eyes-round cheeks-round">
+  <div class="eyebrows"><div class="eyebrow left"></div><div class="eyebrow right"></div></div>
+  <div class="eyes"><div class="eye left"></div><div class="eye right"></div></div>
+  <div class="cheeks"><div class="cheek left"></div><div class="cheek right"></div></div>
+  <div class="mouth">:3</div>
+</div>`;
+function figuraHTML(id) {
+  const info = Catalogo.species.find(s => s.id === id);
+  if (!info) return '';
+  return `<span class="staff-figura"><span class="pet-sprite species-${id}" style="color:${info.color || '#ff80ab'}">${CARA}</span></span>`;
+}
+
 export const Staff = {
   // Puestos del staff, en orden. 'preferido' es quien encaja mejor
   puestos: [
@@ -45,7 +58,7 @@ export const Staff = {
   // Solo el dibujo de quien ocupa un puesto (para encabezados)
   avatarHTML(principal, puestoId) {
     const id = this.ocupante(principal, puestoId);
-    return PersonajesDibujos[id] ? `<span class="staff-avatar">${PersonajesDibujos[id]}</span>` : '';
+    return figuraHTML(id) ? `<span class="staff-avatar">${figuraHTML(id)}</span>` : '';
   },
 
   // Globo de saludo de quien ocupa un puesto. En 'frase', {nombre} se cambia por el nombre del personaje
@@ -56,7 +69,7 @@ export const Staff = {
     const texto = frase.replace('{nombre}', info.name);
     return `
       <div class="staff-saludo">
-        <span class="staff-avatar" aria-hidden="true">${PersonajesDibujos[id] || ''}</span>
+        <span class="staff-avatar" aria-hidden="true">${figuraHTML(id)}</span>
         <p class="staff-globo">${texto}</p>
       </div>`;
   },
