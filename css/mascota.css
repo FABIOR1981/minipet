@@ -1031,16 +1031,16 @@
    y la cara subida para quedar centrada en la parte redondeada. */
 .pet-sprite.species-nube {
   width: 128px;
-  height: 120px;
+  height: 106px;
   border-radius: 0;
   clip-path: none;
   background-image: none;
   box-shadow: none;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M28 100 Q14 100 18 84 Q10 68 28 62 Q30 42 50 44 Q56 26 76 34 Q94 26 100 46 Q116 52 110 70 Q118 86 104 100 Z' fill='black'/></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M28 100 Q14 100 18 84 Q10 68 28 62 Q30 42 50 44 Q56 26 76 34 Q94 26 100 46 Q116 52 110 70 Q118 86 104 100 Z' fill='black'/></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black'><circle cx='24' cy='60' r='19'/><circle cx='52' cy='40' r='29'/><circle cx='88' cy='54' r='22'/><rect x='18' y='58' width='92' height='30' rx='15'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black'><circle cx='24' cy='60' r='19'/><circle cx='52' cy='40' r='29'/><circle cx='88' cy='54' r='22'/><rect x='18' y='58' width='92' height='30' rx='15'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
-.pet-sprite.species-nube .kawaii-face { padding-bottom: 0; }
+.pet-sprite.species-nube .kawaii-face { padding-bottom: 0; translate: 0 12px; }
 
 /* Nube flota: sube y baja sin tocar transform (usa la propiedad translate),
    y su sombra en el piso se achica y se aclara mientras está en el aire. */
@@ -1072,4 +1072,4 @@ body:has(.species-nube) .pet-shadow {
 }
 
 /* Tarjetas de Personaje: la nube entra completa en la miniatura */
-.personaje-card .pet-sprite.species-nube { width: 96px; height: 90px; }
+.personaje-card .pet-sprite.species-nube { width: 96px; height: 80px; }
