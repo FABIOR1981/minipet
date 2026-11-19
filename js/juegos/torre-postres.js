@@ -11,14 +11,17 @@ Object.assign(Minigames, {
       const best = Minigames.getBestScore('cake');
       content.innerHTML = `
         ${Minigames.renderHeader('🍰 Torre de Postres', Minigames.renderHUD('🍰', best))}
-        <canvas id="cakeCanvas" width="300" height="300" style="background:#f3e5f5; border-radius:16px; margin:6px auto; display:block; border:3px solid #b388ff; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
+        <div class="game-stage">
+          <canvas id="cakeCanvas"></canvas>
+        </div>
         <p class="game-hint">Toca la pantalla para apilar el pastel</p>
       `;
 
       Minigames.mountSpectator();
       const canvas = document.getElementById('cakeCanvas');
       const ctx = canvas.getContext('2d');
-      let layers = [{ x: 100, width: 100, y: 270 }];
+      const { W, H } = Minigames.prepararLienzo(canvas);
+      let layers = [{ x: 100, width: 100, y: H - 30 }];
       let currentX = 0;
       let currentSpeed = 3;
       let score = 0;
@@ -77,7 +80,7 @@ Object.assign(Minigames, {
         }
 
         const prevWidth = layers[layers.length - 1].width;
-        const maxX = 300 - prevWidth;
+        const maxX = W - prevWidth;
         currentX += currentSpeed * f;
         if (currentX > maxX) {
           currentX = maxX;
@@ -87,7 +90,12 @@ Object.assign(Minigames, {
           currentSpeed = Math.abs(currentSpeed);
         }
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Si la torre sube demasiado, toda la escena baja para seguir viéndola
+        Minigames.paisaje(ctx, W, H, 'torre');
+        const topY = Math.min(...layers.map((l) => l.y));
+        const camY = Math.max(0, H * 0.45 - topY);
+        ctx.save();
+        ctx.translate(0, camY);
 
         layers.forEach((l, i) => {
           ctx.fillStyle = i % 2 === 0 ? '#ff80ab' : '#80cbc4';
@@ -101,6 +109,7 @@ Object.assign(Minigames, {
         ctx.beginPath();
         ctx.roundRect(currentX, currentY, prevWidth, 22, 6);
         ctx.fill();
+        ctx.restore();
 
         requestAnimationFrame(loop);
       }

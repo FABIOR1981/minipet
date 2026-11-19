@@ -12,13 +12,16 @@ Object.assign(Minigames, {
       const best = Minigames.getBestScore('pop');
       content.innerHTML = `
         ${Minigames.renderHeader('🌸 Explotar Globos', Minigames.renderHUD('🎈', best, 20))}
-        <canvas id="popCanvas" width="300" height="300" style="background:linear-gradient(180deg, #fff3e0 0%, #fce4ec 100%); border-radius:16px; margin:6px auto; display:block; border:3px solid #ff80ab; touch-action:none; width:100%; max-width:300px; height:auto; aspect-ratio:1/1;"></canvas>
+        <div class="game-stage">
+          <canvas id="popCanvas"></canvas>
+        </div>
         <p class="game-hint">Toca los globos antes de que suban.</p>
       `;
 
       Minigames.mountSpectator();
       const canvas = document.getElementById('popCanvas');
       const ctx = canvas.getContext('2d');
+      const { W, H } = Minigames.prepararLienzo(canvas);
       let balloons = [];
       let score = 0;
       let timeLeft = 20;
@@ -78,13 +81,13 @@ Object.assign(Minigames, {
         if (Math.random() < 0.05 * f && balloons.length < 6) {
           balloons.push({
             x: Math.random() * 260 + 20,
-            y: 320,
+            y: H + 20,
             radius: 18,
             speed: Math.random() * 1.5 + 1.2
           });
         }
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        Minigames.paisaje(ctx, W, H, 'globos');
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 

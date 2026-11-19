@@ -125,4 +125,5 @@ Cada marca de teléfono dibuja los emojis a su manera, así que el juego no los 
 - Para sumar un dibujo: copiar el `.svg` a `img/dibujos/` y agregarlo al `mapa` de `js/dibujos.js`. El build lo incluye en el caché offline solo.
 - Los íconos de la interfaz (botonera, tienda, menú de minijuegos) son símbolos SVG en `index.html`, con el prefijo `i-`. Los botones se conectan con `data-action` (ver `ACCIONES` en `js/app.js`), no con `onclick`.
 - Los juegos que pintan en canvas usan `Dibujos.dibujar(ctx, emoji, x, y)` en vez de `ctx.fillText()`.
+- Los canvas de los minijuegos llenan su escenario: `Minigames.prepararLienzo(canvas)` ajusta el alto lógico a la pantalla (ancho fijo de 300), y `Minigames.paisaje(ctx, W, H, tema)` dibuja el fondo de cada juego. Los temas están en `PAISAJES` (`js/juegos/juegos-base.js`).
 - Las imágenes son Fluent Emoji de Microsoft, con licencia MIT (ver `img/dibujos/LICENCIA.txt`).

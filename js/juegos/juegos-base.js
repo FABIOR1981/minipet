@@ -9,6 +9,38 @@ import { AudioEffects } from '../sonidos.js';
 // Los demás archivos de js/juegos/ agregan sus métodos a este
 // mismo objeto Minigames vía Object.assign.
 // =========================================================
+// Temas de fondo para los minijuegos de canvas (ver Minigames.paisaje)
+const PAISAJES = {
+  dulces:   { cielo: ['#d9f1ff', '#fbe3ff'], luz: '#fff7c2', nubes: [{ x: 30, y: 0.16, v: 9, s: 1 }, { x: 170, y: 0.30, v: 6, s: 0.8 }, { x: 250, y: 0.10, v: 12, s: 0.6 }], colinaFondo: '#ffd0ec', colinaFrente: '#f4a7d6', suelo: '#c6f2a6', sueloBorde: '#9fdf84', destello: '#ffffff' },
+  globos:   { cielo: ['#ffe5f2', '#fff1d9'], luz: '#fff3b0', nubes: [{ x: 60, y: 0.14, v: 7, s: 1 }, { x: 200, y: 0.34, v: 10, s: 0.7 }], colinaFondo: '#ffc9e0', colinaFrente: '#ffabd0', suelo: '#ffe0b0', sueloBorde: '#f7c77a', destello: '#ffffff' },
+  burbujas: { cielo: ['#d6fbf5', '#e6e9ff'], luz: '#e6fff9', nubes: [{ x: 90, y: 0.12, v: 8, s: 0.9 }, { x: 230, y: 0.28, v: 5, s: 0.7 }], colinaFondo: '#b3e9e4', colinaFrente: '#8fd9d3', suelo: '#bdeee0', sueloBorde: '#8fd9d3', destello: '#ffffff' },
+  pista:    { cielo: ['#fff6c9', '#f7d9ff'], luz: '#fff0a6', nubes: [{ x: 40, y: 0.14, v: 6, s: 1 }, { x: 180, y: 0.22, v: 9, s: 0.8 }], colinaFondo: '#ffd1a6', colinaFrente: '#f6b98a', suelo: '#e8c7f2', sueloBorde: '#ce93d8', destello: '#ffffff' },
+  comida:   { cielo: ['#e6fbe9', '#fff7de'], luz: '#fffbd6', nubes: [{ x: 50, y: 0.16, v: 7, s: 0.9 }, { x: 210, y: 0.30, v: 6, s: 0.8 }], colinaFondo: '#c8efcf', colinaFrente: '#a6e3b5', suelo: '#b7eab0', sueloBorde: '#8fd98a', destello: '#ffffff' },
+  torre:    { cielo: ['#ffe9f4', '#e3f6f3'], luz: '#fff4d1', nubes: [{ x: 70, y: 0.12, v: 5, s: 1 }, { x: 220, y: 0.26, v: 7, s: 0.7 }], colinaFondo: '#ffd3e8', colinaFrente: '#bfe9e0', suelo: '#f8e3a6', sueloBorde: '#f0cf7d', destello: '#ffffff' },
+};
+
+// Nube de tres óvalos
+function dibujarNube(ctx, x, y, s) {
+  ctx.beginPath();
+  ctx.ellipse(x, y, 26 * s, 12 * s, 0, 0, Math.PI * 2);
+  ctx.ellipse(x - 14 * s, y - 6 * s, 13 * s, 11 * s, 0, 0, Math.PI * 2);
+  ctx.ellipse(x + 8 * s, y - 10 * s, 16 * s, 13 * s, 0, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Colina ondulada desde y hasta el piso
+function dibujarColina(ctx, W, y, amplitud, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(0, y);
+  ctx.quadraticCurveTo(W * 0.25, y - amplitud, W * 0.5, y);
+  ctx.quadraticCurveTo(W * 0.75, y + amplitud, W, y);
+  ctx.lineTo(W, y + 60);
+  ctx.lineTo(0, y + 60);
+  ctx.closePath();
+  ctx.fill();
+}
+
 export const Minigames = {
   // Estado de un minijuego en curso. Si el usuario cierra el modal o
   // navega a otra pestaña mientras `inProgress` es true, `exitHandler()`
@@ -262,6 +294,70 @@ export const Minigames = {
   updateHudTimer(t) {
     const el = document.getElementById('hud-timer');
     if (el) el.innerText = t;
+  },
+
+  // Lienzo que ocupa todo el escenario. El ancho lógico queda en 300 (como
+  // antes) y el alto se ajusta a la proporción real de la pantalla, así el
+  // dibujo no se estira. Devuelve { W, H } para que cada juego ubique sus cosas.
+  prepararLienzo(canvas) {
+    const stage = canvas.parentElement;
+    const ancho = stage.clientWidth || 300;
+    const alto = stage.clientHeight || 300;
+    const W = 300;
+    const H = Math.max(260, Math.min(560, Math.round(W * alto / ancho)));
+    canvas.width = W;
+    canvas.height = H;
+    return { W, H };
+  },
+
+  // Fondos de los minijuegos de canvas: cielo con luz, nubes que derivan,
+  // colinas y piso. Se dibuja entero en cada frame (reemplaza al clearRect).
+  paisaje(ctx, W, H, tema) {
+    const T = PAISAJES[tema] || PAISAJES.dulces;
+    const t = performance.now() / 1000;
+
+    const cielo = ctx.createLinearGradient(0, 0, 0, H);
+    cielo.addColorStop(0, T.cielo[0]);
+    cielo.addColorStop(1, T.cielo[1]);
+    ctx.fillStyle = cielo;
+    ctx.fillRect(0, 0, W, H);
+
+    // Luz suave del sol
+    ctx.globalAlpha = 0.55;
+    ctx.fillStyle = T.luz;
+    ctx.beginPath();
+    ctx.arc(W * 0.82, H * 0.13, 30, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Nubes que derivan despacio
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.82)';
+    T.nubes.forEach((n) => {
+      const x = ((n.x + t * n.v) % (W + 120)) - 60;
+      dibujarNube(ctx, x, H * n.y, n.s);
+    });
+
+    // Colinas de fondo y de frente
+    dibujarColina(ctx, W, H - 96, 14, T.colinaFondo);
+    dibujarColina(ctx, W, H - 64, 10, T.colinaFrente);
+
+    // Piso con borde
+    ctx.fillStyle = T.suelo;
+    ctx.fillRect(0, H - 30, W, 30);
+    ctx.fillStyle = T.sueloBorde;
+    ctx.fillRect(0, H - 30, W, 3);
+
+    // Destellos que titilan
+    ctx.fillStyle = T.destello;
+    for (let i = 0; i < 6; i++) {
+      const x = (i * 97 + 23) % W;
+      const y = 20 + ((i * 53) % Math.max(40, H * 0.5));
+      ctx.globalAlpha = 0.35 + 0.35 * Math.sin(t * 2 + i);
+      ctx.beginPath();
+      ctx.arc(x, y, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   },
 
   // Factor de escala entre la resolución lógica del canvas (width/height)

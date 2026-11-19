@@ -28,11 +28,11 @@ Object.assign(Minigames, {
       content.innerHTML = `
         ${Minigames.renderHeader('🎯 Simón Memoria', Minigames.renderHUD('🧠', best))}
         <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">Memoriza la secuencia.</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
-          <button id="simon-0" data-simon="0" style="height:75px; background:#ff80ab; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #f50057; touch-action:manipulation;"></button>
-          <button id="simon-1" data-simon="1" style="height:75px; background:#80deea; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #00acc1; touch-action:manipulation;"></button>
-          <button id="simon-2" data-simon="2" style="height:75px; background:#b388ff; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #673ab7; touch-action:manipulation;"></button>
-          <button id="simon-3" data-simon="3" style="height:75px; background:#ffe082; border:none; border-radius:18px; cursor:pointer; box-shadow:0 4px 0 #ffb300; touch-action:manipulation;"></button>
+        <div class="simon-grid">
+          <button id="simon-0" class="simon-pad" data-simon="0" style="--c:#ff80ab; --d:#f50057;" aria-label="Botón 0"></button>
+          <button id="simon-1" class="simon-pad" data-simon="1" style="--c:#80deea; --d:#00acc1;" aria-label="Botón 1"></button>
+          <button id="simon-2" class="simon-pad" data-simon="2" style="--c:#b388ff; --d:#673ab7;" aria-label="Botón 2"></button>
+          <button id="simon-3" class="simon-pad" data-simon="3" style="--c:#ffe082; --d:#ffb300;" aria-label="Botón 3"></button>
         </div>
       `;
 
@@ -91,8 +91,8 @@ Object.assign(Minigames, {
     const freqs = [350, 450, 550, 650];
     AudioEffects.playTone(freqs[index], 'sine', 0.15);
     Minigames.spectate('nod'); // cabecea al ritmo de la secuencia
-    btn.style.opacity = '0.3';
-    setTimeout(() => btn.style.opacity = '1', 350);
+    btn.classList.add('on');
+    setTimeout(() => btn.classList.remove('on'), 350);
   },
 
   simonClick(index) {

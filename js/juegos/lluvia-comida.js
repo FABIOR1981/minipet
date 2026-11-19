@@ -17,7 +17,7 @@ Object.assign(Minigames, {
         <h3 class="game-title" style="text-align:center;">🍎 Lluvia de Comida</h3>
         ${Minigames.renderHUD('🍎', best)}
         <div class="game-stage">
-          <canvas id="foodCanvas" width="300" height="300" style="background:linear-gradient(180deg, #e8f5e9 0%, #fff8e1 100%); border-radius:16px; display:block; border:3px solid #a5d6a7; touch-action:none; width:100%; height:auto; aspect-ratio:1/1;"></canvas>
+          <canvas id="foodCanvas"></canvas>
         </div>
         <p class="game-hint">Atrapa la comida 🍎 y esquiva lo que no se come 🧦</p>
       `;
@@ -25,10 +25,11 @@ Object.assign(Minigames, {
 
       const canvas = document.getElementById('foodCanvas');
       const ctx = canvas.getContext('2d');
+      const { W, H } = Minigames.prepararLienzo(canvas);
       const FOOD = ['🍎', '🥕', '🍓', '🍌', '🥦', '🍇', '🧀', '🍉'];
       const NOT_FOOD = ['🧦', '👟', '⚽', '🔧', '🧸', '🔑'];
       const PET_SIZE = 58;
-      const GROUND = 296;
+      const GROUND = H - 14;
 
       let petX = 150;
       let items = [];
@@ -109,7 +110,7 @@ Object.assign(Minigames, {
           nextSpawn = Math.max(24, 58 - elapsed / 60 * 0.7);
         }
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        Minigames.paisaje(ctx, W, H, 'comida');
 
         // Sombra de la mascota
         ctx.fillStyle = 'rgba(27, 94, 32, 0.16)';
@@ -129,7 +130,7 @@ Object.assign(Minigames, {
           item.y += item.speed * f;
 
           // La atrapa (o la toca) cuando llega a la altura de la mascota
-          if (item.y >= 250 && item.y <= 288 && Math.abs(item.x - petX) < 30) {
+          if (item.y >= GROUND - 46 && item.y <= GROUND - 8 && Math.abs(item.x - petX) < 30) {
             if (item.good) {
               score += 5;
               Minigames.updateHudScore(score);
@@ -146,7 +147,7 @@ Object.assign(Minigames, {
             continue;
           }
 
-          if (item.y > 320) {
+          if (item.y > H + 16) {
             items.splice(i, 1); // lo que cae al piso no resta
             continue;
           }
