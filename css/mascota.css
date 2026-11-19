@@ -1136,8 +1136,8 @@ body:has(.species-nube) .pet-shadow {
   position: absolute;
   inset: 0;
   background: currentColor;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/></g></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/></g></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/><circle cx='56' cy='24' r='7'/><circle cx='66' cy='20' r='8'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/><circle cx='56' cy='24' r='7'/><circle cx='66' cy='20' r='8'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-gatito {
@@ -1303,3 +1303,24 @@ body:has(.species-nube) .pet-shadow {
 .pet-sprite.species-pollito .cheek { width: 16px; height: 10px; opacity: 0.6; }
 .pet-sprite.species-gatito .eye { width: 12px; height: 15px; }
 .pet-sprite.species-conejita .eye { width: 17px; height: 19px; }
+
+/* Movimiento en reposo de cada personaje (en lugar de la respiración genérica) */
+#pet.species-gotita { animation: gotitaBambolea 2.6s ease-in-out infinite; }
+@keyframes gotitaBambolea {
+  0%, 100% { rotate: 0deg; }
+  50% { rotate: -4deg; }
+}
+#pet.species-pollito { animation: pollitoSalta 1.6s ease-in-out infinite; }
+@keyframes pollitoSalta {
+  0%, 100% { translate: 0 0; }
+  40% { translate: 0 -7px; }
+  60% { translate: 0 -2px; }
+}
+#pet.species-buho { animation: buhoBalancea 3.2s ease-in-out infinite; }
+@keyframes buhoBalancea {
+  0%, 100% { rotate: 0deg; }
+  50% { rotate: 2.5deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #pet.species-gotita, #pet.species-pollito, #pet.species-buho { animation: none; }
+}
