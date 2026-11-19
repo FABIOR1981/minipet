@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <!-- Deshabilita el zoom táctil molesto en móviles -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Sin bloquear el zoom: la accesibilidad pesa más que el zoom accidental -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Mascota</title>
 
   <!-- PWA Meta Tags -->
@@ -37,6 +37,17 @@
     <symbol id="i-toque" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.500"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.200" opacity=".55"/></symbol>
     <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8.500"/><path d="M12 8.500V13l3 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="1.500" width="4" height="2.500" rx="1"/></symbol>
     <symbol id="i-borrar" viewBox="0 0 24 24"><path d="M5.500 7h13l-.9 12.600a1.500 1.500 0 0 1-1.500 1.400H7.900a1.500 1.500 0 0 1-1.500-1.400z"/><path d="M4 7h16M9.500 4h5" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"/></symbol>
+    <!-- Íconos de los minijuegos (reemplazan a los emojis del menú) -->
+    <symbol id="i-juego-atrapa" viewBox="0 0 24 24"><ellipse cx="12" cy="9" rx="6.500" ry="7.500"/><path d="M10.800 16.300h2.400L12 18.500z"/><path d="M12 18.500c-1 1.300 1 2.200 0 3.500" fill="none" stroke="currentColor" stroke-width="1.300" stroke-linecap="round"/></symbol>
+    <symbol id="i-juego-globos" viewBox="0 0 24 24"><circle cx="12" cy="6.500" r="3.500"/><circle cx="7" cy="10.500" r="3.500"/><circle cx="17" cy="10.500" r="3.500"/><circle cx="8.500" cy="15.500" r="3.500"/><circle cx="15.500" cy="15.500" r="3.500"/><circle cx="12" cy="12" r="2.200" fill="#fff"/></symbol>
+    <symbol id="i-juego-torre" viewBox="0 0 24 24"><rect x="3" y="15" width="18" height="5" rx="2"/><rect x="5" y="10" width="14" height="4.500" rx="2"/><rect x="7" y="5.500" width="10" height="4" rx="2"/><circle cx="12" cy="3.500" r="1.800"/></symbol>
+    <symbol id="i-juego-simon" viewBox="0 0 24 24"><rect x="2.500" y="2.500" width="8.500" height="8.500" rx="2.500"/><rect x="13" y="2.500" width="8.500" height="8.500" rx="2.500" opacity=".6"/><rect x="2.500" y="13" width="8.500" height="8.500" rx="2.500" opacity=".6"/><rect x="13" y="13" width="8.500" height="8.500" rx="2.500"/></symbol>
+    <symbol id="i-juego-runner" viewBox="0 0 24 24"><path d="M12 2.500l2.600 6.300 6.400.6-4.900 4.200 1.500 6.300L12 16.700l-5.600 3.200 1.500-6.300-4.900-4.200 6.400-.6z"/></symbol>
+    <symbol id="i-juego-burbujas" viewBox="0 0 24 24"><circle cx="9" cy="14" r="6"/><circle cx="18" cy="6" r="3"/><circle cx="19" cy="17" r="2"/></symbol>
+    <symbol id="i-juego-parejas" viewBox="0 0 24 24"><rect x="2" y="5" width="13" height="17" rx="2.500" opacity=".55"/><rect x="9" y="2" width="13" height="17" rx="2.500"/><path d="M15.500 6.500l1.500 2.800 2.800 1.500-2.800 1.500-1.500 2.800-1.500-2.800-2.800-1.500 2.800-1.500z" fill="#fff"/></symbol>
+    <symbol id="i-juego-donde" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="2"/><rect x="2" y="7" width="20" height="4" rx="1.500"/><rect x="10.800" y="7" width="2.400" height="14" fill="#fff" opacity=".7"/></symbol>
+    <symbol id="i-juego-vestir" viewBox="0 0 24 24"><path d="M9 2.500h6l1 3.500 4.500 2.500-1.500 4.500-2.500-1.200V21h-8V11.800l-2.500 1.200L3.500 8.500 8 6z"/></symbol>
+    <symbol id="i-juego-comida" viewBox="0 0 24 24"><path d="M12 7.500c-2.500-2-7-1.500-8 2.500-1 4 1.500 10 4 11 1.300.5 2.300-.8 4-.8s2.700 1.300 4 .8c2.500-1 5-7 4-11-1-4-5.500-4.500-8-2.500z"/><path d="M12 7c0-2 .5-3.500 2-5" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
   </svg>
 
   <link rel="stylesheet" href="css/base.css">
@@ -66,7 +77,7 @@
       <div id="scene-fx" aria-hidden="true"></div>
       <div id="bg-particles"></div>
       <div id="pet-shadow" class="pet-shadow" aria-hidden="true"></div>
-      <div id="pet" class="pet-sprite" onclick="PetState.petPet()">
+      <div id="pet" class="pet-sprite" data-action="pet">
         <div id="pet-glitter" class="pet-glitter" aria-hidden="true"></div>
         <!-- Accesorio Equipado -->
         <div id="pet-accessory" class="accessory"></div>
@@ -95,35 +106,35 @@
 
     <!-- Menú Inferior en Rejilla 4x2 -->
     <nav class="bottom-nav">
-      <button class="nav-comer" onclick="PetState.feed()">
+      <button class="nav-comer" data-action="comer">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-comer"/></svg></span>
         <span class="btn-text">Comer</span>
       </button>
-      <button class="nav-medicina" onclick="PetState.heal()">
+      <button class="nav-medicina" data-action="medicina">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-medicina"/></svg></span>
         <span class="btn-text">Medicina</span>
       </button>
-      <button class="nav-dormir" onclick="PetState.sleep()">
+      <button class="nav-dormir" data-action="dormir">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-dormir"/></svg></span>
         <span class="btn-text">Dormir</span>
       </button>
-      <button class="nav-juegos" onclick="switchTab('minigames')">
+      <button class="nav-juegos" data-action="juegos">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-juegos"/></svg></span>
         <span class="btn-text">Juegos</span>
       </button>
-      <button class="nav-mipet" onclick="switchTab('my-pet')">
+      <button class="nav-mipet" data-action="mi-pet">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-mipet"/></svg></span>
         <span class="btn-text">Mi Pet</span>
       </button>
-      <button class="nav-armario" onclick="Vestidor.open()">
+      <button class="nav-armario" data-action="armario">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-armario"/></svg></span>
         <span class="btn-text">Armario</span>
       </button>
-      <button class="nav-escenario" onclick="switchTab('scenery')">
+      <button class="nav-escenario" data-action="escenario">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-escenario"/></svg></span>
         <span class="btn-text">Escenario</span>
       </button>
-      <button class="nav-tienda" onclick="switchTab('store')">
+      <button class="nav-tienda" data-action="tienda">
         <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-tienda"/></svg></span>
         <span class="btn-text">Tienda</span>
       </button>
@@ -133,18 +144,18 @@
     <section id="vestidor-panel" class="vestidor-panel" hidden>
       <div class="vestidor-head">
         <span class="vestidor-title con-ico"><svg class="ico ico-armario" aria-hidden="true"><use href="#i-armario"/></svg><span id="vestidor-title">Vestidor</span></span>
-        <button class="vestidor-done con-ico" onclick="Vestidor.close()"><svg class="ico" aria-hidden="true"><use href="#i-listo"/></svg>Listo</button>
+        <button class="vestidor-done con-ico" data-action="vestidor-cerrar"><svg class="ico" aria-hidden="true"><use href="#i-listo"/></svg>Listo</button>
       </div>
       <div id="vestidor-strip" class="vestidor-strip"></div>
       <div class="vestidor-looks">
         <div id="vestidor-looks-list"></div>
-        <button class="vestidor-save con-ico" onclick="Vestidor.saveLook()"><svg class="ico" aria-hidden="true"><use href="#i-guardar"/></svg>Guardar look</button>
+        <button class="vestidor-save con-ico" data-action="vestidor-guardar-look"><svg class="ico" aria-hidden="true"><use href="#i-guardar"/></svg>Guardar look</button>
       </div>
     </section>
 
     <!-- Modales -->
     <section id="modal-screen" class="modal hidden">
-      <button class="close-btn con-ico" onclick="closeModal()"><svg class="ico" aria-hidden="true"><use href="#i-cerrar"/></svg>Cerrar</button>
+      <button class="close-btn con-ico" data-action="cerrar-modal"><svg class="ico" aria-hidden="true"><use href="#i-cerrar"/></svg>Cerrar</button>
       <div id="modal-content"></div>
     </section>
   </div>

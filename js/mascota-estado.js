@@ -12,6 +12,28 @@
 // comprar y probar todo. Con ?prueba=reiniciar esa partida empieza de cero.
 const PARAMETRO_PRUEBA = new URLSearchParams(window.location.search).get('prueba');
 
+// Versión del formato de guardado (localStorage). Si cambia la estructura de
+// los datos, se sube este número y se agrega una migración en MIGRACIONES:
+// cada una pasa un guardado de la versión N a la N+1.
+const VERSION_GUARDADO = 1;
+const MIGRACIONES = {
+  // 0 -> 1: los guardados anteriores no tenían el campo `version`. Los datos son los mismos.
+  0: (datos) => datos,
+};
+
+// Devuelve los datos listos para la versión actual, o null si el guardado es
+// de una versión más nueva (no se sabe leerlo y no se debe pisar).
+function migrarGuardado(datos) {
+  let version = Number.isInteger(datos.version) ? datos.version : 0;
+  if (version > VERSION_GUARDADO) return null;
+  let actual = datos;
+  while (version < VERSION_GUARDADO) {
+    actual = MIGRACIONES[version](actual);
+    version++;
+  }
+  return actual;
+}
+
 const PetState = {
   testMode: PARAMETRO_PRUEBA !== null,
   TEST_COINS: 99999,
@@ -30,6 +52,7 @@ const PetState = {
   petShape: 'shape-circle',
   petSize: 'medium',
   glitterEnabled: false,
+  guardadoBloqueado: false, // true si hay un guardado de una versión más nueva
   glitterIntensity: 0,
   isSick: false,
   isSleeping: false,
@@ -244,7 +267,10 @@ const PetState = {
   },
 
   saveData() {
+    // Un guardado de una versión más nueva no se pisa
+    if (this.guardadoBloqueado) return;
     const datos = JSON.stringify({
+      version: VERSION_GUARDADO,
       coins: this.coins,
       happiness: this.happiness,
       hunger: this.hunger,
@@ -280,7 +306,11 @@ const PetState = {
         localStorage.removeItem(this.STORAGE_KEY);
         localStorage.removeItem('minipetBestScoresPrueba');
       }
-      data = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+      const crudo = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+      if (crudo && typeof crudo === 'object') {
+        data = migrarGuardado(crudo);
+        this.guardadoBloqueado = data === null;
+      }
     } catch (e) {
       console.warn('No se pudo leer la partida guardada; se usan los valores iniciales.', e);
     }

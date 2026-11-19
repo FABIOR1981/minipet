@@ -75,6 +75,10 @@ minipet/
     └── LEEME.md               # Enlace a documentacion-central
 ```
 
+## 🧪 Pruebas
+
+`npm test` corre las pruebas de la lógica de la mascota (guardado, migraciones y acciones) con `node:test`, sin dependencias. Requiere Node 18 o superior.
+
 ## ▶️ Cómo correrlo
 
 Es una app estática: basta con servir la carpeta con cualquier servidor HTTP (necesario para que `fetch('data/dialogues.json')` y el Service Worker funcionen; no se puede abrir `index.html` directo con `file://`).
@@ -97,20 +101,22 @@ Agregando `?prueba` a la dirección (por ejemplo `https://minipetkw.netlify.app/
 
 ## 🚀 Publicación
 
-Netlify ejecuta `node herramientas/construir.js`, que copia a `publicar/` únicamente `index.html`, `manifest.json`, `sw.js`, `css/`, `js/`, `data/` e `img/`. Las carpetas `desarrollo/`, `documentacion/` y `herramientas/` no llegan al sitio publicado.
+Netlify ejecuta `node herramientas/construir.js`, que copia a `publicar/` únicamente `index.html`, `manifest.json`, `sw.js`, `css/`, `js/`, `data/` e `img/`. Las carpetas `desarrollo/`, `documentacion/` y `herramientas/` no llegan al sitio publicado. Además completa `sw.js` con la versión de caché (hash del contenido) y la lista de archivos offline.
 
 ## 🔧 Notas técnicas
 
-- Al agregar un accesorio nuevo hay que sumarlo en tres lugares: el `.svg` en `img/accessories/`, la entrada en `Catalogo.items` y su ajuste en `Catalogo.accessoryFits` (`js/catalogo.js`), y la ruta en `ASSETS_TO_CACHE` (`sw.js`) para que quede disponible offline.
-- Al agregar un escenario nuevo hay que sumarlo en cuatro lugares: la ilustración `.svg` (400x480, piso desde y=280) en `img/escenarios/`, la regla `.room.bg_<id>` en `css/escenarios.css`, la entrada en `Catalogo.items` (`js/catalogo.js`, categoría `bg`, con su `preview`) y la ruta en `ASSETS_TO_CACHE` (`sw.js`). Si lleva objetos por delante de la mascota, van en un segundo `.svg` transparente en `img/escenarios/frente/`, con su regla `.room.bg_<id>::after` y su ruta en el caché.
+- Al agregar un accesorio nuevo hay que sumarlo en dos lugares: el `.svg` en `img/accessories/` y la entrada en `Catalogo.items` con su ajuste en `Catalogo.accessoryFits` (`js/catalogo.js`). Queda disponible offline sola: el build lista todos los archivos publicados.
+- Al agregar un escenario nuevo hay que sumarlo en cuatro lugares: la ilustración `.svg` (400x480, piso desde y=280) en `img/escenarios/`, la regla `.room.bg_<id>` en `css/escenarios.css`, la entrada en `Catalogo.items` (`js/catalogo.js`, categoría `bg`, con su `preview`). Si lleva objetos por delante de la mascota, van en un segundo `.svg` transparente en `img/escenarios/frente/`, con su regla `.room.bg_<id>::after` y su ruta en el caché.
 - Los detalles animados de un escenario se declaran en `Ambiente.CONFIG` (`js/ambiente.js`), usando las mismas coordenadas que la ilustración.
 - Los objetos del primer plano deben apoyarse en el borde inferior de la ilustración, para quedar siempre más cerca que la mascota.
-- Cada vez que se publica una versión nueva, conviene subir `CACHE_VERSION` en `sw.js` para forzar la actualización en los dispositivos de los usuarios.
+- La versión de caché del Service Worker la calcula `herramientas/construir.js` a partir del contenido publicado: cada cambio genera una versión nueva y no hace falta tocar `sw.js` a mano. `sw.js` tiene marcadores (`'__VERSION__'` y `/*__ASSETS__*/[]`) que el build completa.
+- El guardado en `localStorage` tiene un número de versión (`VERSION_GUARDADO` en `js/mascota-estado.js`). Si cambia la estructura de los datos, se sube ese número y se agrega una migración en `MIGRACIONES`.
 
 ## 🎨 Dibujos en lugar de emojis
 
 Cada marca de teléfono dibuja los emojis a su manera, así que el juego no los muestra tal cual: `js/dibujos.js` los cambia en pantalla por las imágenes de `img/dibujos/`, para que se vea igual en todos lados. El código sigue escribiendo emojis como siempre; si uno no está en la lista de `js/dibujos.js`, queda como emoji común.
 
-- Para sumar un dibujo: copiar el `.svg` a `img/dibujos/`, agregarlo al `mapa` de `js/dibujos.js` y a la lista de `sw.js`.
+- Para sumar un dibujo: copiar el `.svg` a `img/dibujos/` y agregarlo al `mapa` de `js/dibujos.js`. El build lo incluye en el caché offline solo.
+- Los íconos de la interfaz (botonera, tienda, menú de minijuegos) son símbolos SVG en `index.html`, con el prefijo `i-`. Los botones se conectan con `data-action` (ver `ACCIONES` en `js/app.js`), no con `onclick`.
 - Los juegos que pintan en canvas usan `Dibujos.dibujar(ctx, emoji, x, y)` en vez de `ctx.fillText()`.
 - Las imágenes son Fluent Emoji de Microsoft, con licencia MIT (ver `img/dibujos/LICENCIA.txt`).

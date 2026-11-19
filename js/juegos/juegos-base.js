@@ -63,43 +63,43 @@ const Minigames = {
     </p>
     <div class="grid-container games-grid">
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCatchGame()">
-        <span class="game-emoji tinte-medicina">🎈</span>
+        <span class="game-emoji tinte-medicina"><svg class="ico" aria-hidden="true"><use href="#i-juego-atrapa"/></svg></span>
         <span class="card-title">Atrapa Dulces</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPopGame()">
-        <span class="game-emoji tinte-mipet">🌸</span>
+        <span class="game-emoji tinte-mipet"><svg class="ico" aria-hidden="true"><use href="#i-juego-globos"/></svg></span>
         <span class="card-title">Explotar Globos</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCakeGame()">
-        <span class="game-emoji tinte-comer">🍰</span>
+        <span class="game-emoji tinte-comer"><svg class="ico" aria-hidden="true"><use href="#i-juego-torre"/></svg></span>
         <span class="card-title">Torre de Postres</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startSimonGame()">
-        <span class="game-emoji tinte-juegos">🧠</span>
+        <span class="game-emoji tinte-juegos"><svg class="ico" aria-hidden="true"><use href="#i-juego-simon"/></svg></span>
         <span class="card-title">Simón Memoria</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startRunnerGame()">
-        <span class="game-emoji tinte-dormir">🦄</span>
+        <span class="game-emoji tinte-dormir"><svg class="ico" aria-hidden="true"><use href="#i-juego-runner"/></svg></span>
         <span class="card-title">Runner Mágico</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startBubbleGame()">
-        <span class="game-emoji tinte-armario">✨</span>
+        <span class="game-emoji tinte-armario"><svg class="ico" aria-hidden="true"><use href="#i-juego-burbujas"/></svg></span>
         <span class="card-title">Burbujas Mágicas</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPairsGame()">
-        <span class="game-emoji tinte-tienda">🃏</span>
+        <span class="game-emoji tinte-tienda"><svg class="ico" aria-hidden="true"><use href="#i-juego-parejas"/></svg></span>
         <span class="card-title">Parejas</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startHideGame()">
-        <span class="game-emoji tinte-escenario">🎁</span>
+        <span class="game-emoji tinte-escenario"><svg class="ico" aria-hidden="true"><use href="#i-juego-donde"/></svg></span>
         <span class="card-title">¿Dónde Está?</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startDressGame()">
-        <span class="game-emoji tinte-mipet">👗</span>
+        <span class="game-emoji tinte-mipet"><svg class="ico" aria-hidden="true"><use href="#i-juego-vestir"/></svg></span>
         <span class="card-title">Vestirla Igual</span>
       </div>
       <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startFoodGame()">
-        <span class="game-emoji tinte-medicina">🍎</span>
+        <span class="game-emoji tinte-medicina"><svg class="ico" aria-hidden="true"><use href="#i-juego-comida"/></svg></span>
         <span class="card-title">Lluvia de Comida</span>
       </div>
     </div>

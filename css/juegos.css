@@ -455,3 +455,7 @@
 .games-grid .item-card { padding: 10px 6px 9px; gap: 5px; }
 .games-grid .game-emoji { width: 46px; height: 46px; border-radius: 16px; font-size: 1.6rem; }
 .games-grid .card-title { font-size: 0.8rem; }
+
+/* Íconos propios de cada minijuego: toman el color del tinte de su tarjeta */
+.game-emoji .ico { width: 1.6rem; height: 1.6rem; color: var(--c); }
+.games-grid .game-emoji .ico { width: 1.9rem; height: 1.9rem; }

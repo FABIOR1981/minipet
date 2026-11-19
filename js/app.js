@@ -98,3 +98,26 @@ function closeModal() {
   Minigames.forceExitIfActive();
   document.getElementById('modal-screen').classList.add('hidden');
 }
+// Acciones de la botonera y de los botones fijos del HTML. En lugar de un
+// onclick en cada botón, un único listener en el documento lee data-action.
+const ACCIONES = {
+  'pet': () => PetState.petPet(),
+  'comer': () => PetState.feed(),
+  'medicina': () => PetState.heal(),
+  'dormir': () => PetState.sleep(),
+  'juegos': () => switchTab('minigames'),
+  'mi-pet': () => switchTab('my-pet'),
+  'armario': () => Vestidor.open(),
+  'escenario': () => switchTab('scenery'),
+  'tienda': () => switchTab('store'),
+  'vestidor-cerrar': () => Vestidor.close(),
+  'vestidor-guardar-look': () => Vestidor.saveLook(),
+  'cerrar-modal': () => closeModal(),
+};
+
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const accion = ACCIONES[el.dataset.action];
+  if (accion) accion();
+});
