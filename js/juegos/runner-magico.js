@@ -96,7 +96,7 @@ Object.assign(Minigames, {
         pet.run(!isJumping); // trota en el piso, se estira en el aire
 
         // Velocidad: sube con el puntaje (hasta un tope)
-        const velocidad = 4.2 + Math.min(2.4, score / 60);
+        const velocidad = 3.0 + Math.min(1.8, score / 80);
         obstacles.forEach((o) => { o.x -= velocidad * f; });
 
         // Un obstáculo nuevo aparece cuando el anterior ya se alejó lo suficiente.
@@ -141,7 +141,7 @@ Object.assign(Minigames, {
         ctx.fillRect(0, GROUND, W, H - GROUND);
         ctx.fillStyle = '#ce93d8';
         ctx.fillRect(0, GROUND, W, 4);
-        groundOffset = (groundOffset + 4.2 * f) % 40;
+        groundOffset = (groundOffset + velocidad * f) % 40;
         ctx.fillStyle = '#d7aee0';
         for (let x = -groundOffset; x < W; x += 40) {
           ctx.fillRect(x, GROUND + 16, 18, 5);
