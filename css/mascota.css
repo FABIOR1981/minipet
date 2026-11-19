@@ -1081,7 +1081,9 @@ body:has(.species-nube) .pet-shadow {
 }
 
 /* Tarjetas de Personaje: la nube entra completa en la miniatura */
-.personaje-card .pet-sprite.species-nube { width: 96px; height: 80px; }
+/* Miniaturas del selector: todas al mismo tamaño y sin tapar el nombre */
+.personaje-card .pet-sprite { transform: scale(0.6); transform-origin: center center; }
+.personaje-card .mini-pet { height: 62px; }
 
 /* Personaje del staff que saluda (tienda, minijuegos): avatar y globo */
 .staff-saludo { display: flex; align-items: center; gap: 10px; margin: 6px 4px 10px; }
@@ -1100,3 +1102,95 @@ body:has(.species-nube) .pet-shadow {
 .vestidor-estilista { display: inline-flex; margin-left: 6px; }
 .vestidor-estilista .staff-avatar { width: 40px; height: 40px; box-shadow: none; background: transparent; }
 .vestidor-estilista .staff-avatar svg { width: 40px; height: 40px; }
+
+/* Personajes del elenco (silueta con máscara, igual que Nube; la cara la pone el juego) */
+.pet-sprite.species-gotita {
+  width: 96px;
+  height: 96px;
+  border-radius: 0;
+  clip-path: none;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none;
+}
+.pet-sprite.species-gotita::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><path d='M60 6 C80 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 40 36 60 6 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><path d='M60 6 C80 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 40 36 60 6 Z'/></g></svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+}
+.pet-sprite.species-pollito {
+  width: 108px;
+  height: 108px;
+  border-radius: 0;
+  clip-path: none;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none;
+}
+.pet-sprite.species-pollito::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='12' cy='72' rx='9' ry='15'/><ellipse cx='108' cy='72' rx='9' ry='15'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='12' cy='72' rx='9' ry='15'/><ellipse cx='108' cy='72' rx='9' ry='15'/></g></svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+}
+.pet-sprite.species-gatito {
+  width: 112px;
+  height: 112px;
+  border-radius: 0;
+  clip-path: none;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none;
+}
+.pet-sprite.species-gatito::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='68' r='44'/><path d='M16 46 L18 6 L50 34 Z'/><path d='M104 46 L102 6 L70 34 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='68' r='44'/><path d='M16 46 L18 6 L50 34 Z'/><path d='M104 46 L102 6 L70 34 Z'/></g></svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+}
+.pet-sprite.species-conejita {
+  width: 100px;
+  height: 116px;
+  border-radius: 0;
+  clip-path: none;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none;
+}
+.pet-sprite.species-conejita::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='74' r='38'/><ellipse cx='44' cy='26' rx='11' ry='28'/><ellipse cx='76' cy='26' rx='11' ry='28'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='74' r='38'/><ellipse cx='44' cy='26' rx='11' ry='28'/><ellipse cx='76' cy='26' rx='11' ry='28'/></g></svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+}
+.pet-sprite.species-buho {
+  width: 116px;
+  height: 116px;
+  border-radius: 0;
+  clip-path: none;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none;
+}
+.pet-sprite.species-buho::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='68' rx='44' ry='46'/><path d='M18 40 L22 4 L48 30 Z'/><path d='M102 40 L98 4 L72 30 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='68' rx='44' ry='46'/><path d='M18 40 L22 4 L48 30 Z'/><path d='M102 40 L98 4 L72 30 Z'/></g></svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+}
