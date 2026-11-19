@@ -1087,10 +1087,11 @@ body:has(.species-nube) .pet-shadow {
 .staff-saludo { display: flex; align-items: center; gap: 10px; margin: 6px 4px 10px; }
 .staff-avatar {
   flex: none; width: 56px; height: 56px; border-radius: 50%;
-  display: grid; place-items: center; font-size: 30px;
+  display: grid; place-items: center;
   background: #fff; box-shadow: 0 4px 0 #e6d8f5;
 }
 .staff-globo {
   margin: 0; padding: 8px 12px; background: #fff; border-radius: 16px;
   font-size: 0.9rem; font-weight: 700; color: #6a1b9a;
 }
+.staff-avatar svg { width: 52px; height: 52px; display: block; }
