@@ -143,16 +143,23 @@ Object.assign(Minigames, {
 
         Minigames.paisaje(ctx, W, H, 'pista');
 
-        // Suelo con marcas que se mueven a la velocidad de los obstáculos
-        ctx.fillStyle = '#e1bee7';
+        // Suelo: degradé con borde superior brillante y marcas que se mueven a la velocidad de los obstáculos
+        const sueloGrad = ctx.createLinearGradient(0, GROUND, 0, H);
+        sueloGrad.addColorStop(0, '#e9d3f2');
+        sueloGrad.addColorStop(1, '#d3a9e6');
+        ctx.fillStyle = sueloGrad;
         ctx.fillRect(0, GROUND, W, H - GROUND);
-        ctx.fillStyle = '#ce93d8';
+        ctx.fillStyle = '#ba68c8';
         ctx.fillRect(0, GROUND, W, 4);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+        ctx.fillRect(0, GROUND + 4, W, 2);
         groundOffset = (groundOffset + velocidad * f) % 40;
-        ctx.fillStyle = '#d7aee0';
+        ctx.fillStyle = 'rgba(156, 39, 176, 0.18)';
         for (let x = -groundOffset; x < W; x += 40) {
-          ctx.fillRect(x, GROUND + 16, 18, 5);
-          ctx.fillRect(x + 20, GROUND + 28, 12, 4);
+          ctx.beginPath();
+          ctx.roundRect(x, GROUND + 16, 18, 5, 3);
+          ctx.roundRect(x + 20, GROUND + 28, 12, 4, 2);
+          ctx.fill();
         }
 
         // Sombra de la mascota: se achica cuando salta
@@ -172,16 +179,38 @@ Object.assign(Minigames, {
         // Color opaco: los emojis heredan la transparencia del fillStyle (venía el de la sombra)
         ctx.fillStyle = '#000';
         obstacles.forEach((o) => {
+          // Sombra en el piso, común a los obstáculos de tierra
+          if (o.tipo !== 'estrella') {
+            ctx.fillStyle = 'rgba(74, 20, 140, 0.16)';
+            ctx.beginPath();
+            ctx.ellipse(o.x + o.w / 2, GROUND + 3, o.w / 2 + 2, 3, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
           if (o.tipo === 'estrella') {
+            // Brillo suave detrás de la estrella
+            ctx.save();
+            ctx.shadowColor = 'rgba(255, 214, 79, 0.9)';
+            ctx.shadowBlur = 14;
             Dibujos.dibujar(ctx, '⭐', o.x + 15, STAND - 45);
+            ctx.restore();
           } else if (o.tipo === 'barra') {
-            // Tramo de piso con rayas, de lado a lado de la barra
-            ctx.fillStyle = '#f48fb1';
+            // Barra de caramelo: degradé, brillo arriba y rayas blancas
+            ctx.save();
+            ctx.shadowColor = 'rgba(74, 20, 140, 0.25)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetY = 3;
+            const barraGrad = ctx.createLinearGradient(0, GROUND - 24, 0, GROUND);
+            barraGrad.addColorStop(0, '#ffb3d1');
+            barraGrad.addColorStop(1, '#ec407a');
+            ctx.fillStyle = barraGrad;
             ctx.beginPath();
             ctx.roundRect(o.x, GROUND - 24, o.w, 24, 8);
             ctx.fill();
+            ctx.restore();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.fillRect(o.x + 6, GROUND - 22, o.w - 12, 3);
             ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            for (let x = o.x + 8; x < o.x + o.w - 8; x += 16) ctx.fillRect(x, GROUND - 20, 6, 16);
+            for (let x = o.x + 8; x < o.x + o.w - 8; x += 16) ctx.fillRect(x, GROUND - 16, 6, 12);
             ctx.font = '28px sans-serif';
             ctx.fillStyle = '#000';
           } else {
