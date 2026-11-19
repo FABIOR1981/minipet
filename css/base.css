@@ -933,3 +933,34 @@ body {
 
 /* Globo de diálogo: más redondo, como en las referencias */
 .thought-bubble { border-radius: 22px; border-color: #b8d8ff; }
+
+/* Relieve más marcado en la barra inferior */
+.bottom-nav button { box-shadow: 0 6px 0 #cdb9ea, 0 10px 16px rgba(123, 31, 162, 0.14); }
+.bottom-nav button:active { box-shadow: 0 2px 0 #cdb9ea; }
+
+/* Cabeceras de pantalla como banda clara */
+.titulo-pantalla {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 6px 18px 6px 8px;
+  box-shadow: 0 3px 10px rgba(123, 31, 162, 0.10);
+  align-self: center;
+}
+
+/* Tienda: sin monedas suficientes, precio en rojo */
+.item-card.sin-monedas .card-price { background: #ffe3e3; color: #b71c1c; }
+
+/* Tienda: las tarjetas entran con un leve desplazamiento escalonado */
+.grid-container .item-card { animation: tarjetaEntra 0.35s ease both; }
+.grid-container .item-card:nth-child(2) { animation-delay: 0.04s; }
+.grid-container .item-card:nth-child(3) { animation-delay: 0.08s; }
+.grid-container .item-card:nth-child(4) { animation-delay: 0.12s; }
+.grid-container .item-card:nth-child(5) { animation-delay: 0.16s; }
+.grid-container .item-card:nth-child(6) { animation-delay: 0.2s; }
+@keyframes tarjetaEntra {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grid-container .item-card { animation: none; }
+}

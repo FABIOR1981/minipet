@@ -49,7 +49,9 @@ export const Store = {
       const isOwned = PetState.inventory.includes(item.id);
       // Sin botón: se toca la tarjeta. Lo que ya es tuyo queda marcado.
       const card = document.createElement('div');
-      card.className = `item-card ${isOwned ? 'tuyo' : 'tocable'}`;
+      // Sin monedas suficientes: se ve el precio en rojo, sin bloquear la tarjeta
+      const sinMonedas = !isOwned && item.price > PetState.coins;
+      card.className = `item-card ${isOwned ? 'tuyo' : 'tocable'} ${sinMonedas ? 'sin-monedas' : ''}`;
       card.innerHTML = `
         ${this.renderIcon(item)}
         <span class="card-title">${item.name}</span>
