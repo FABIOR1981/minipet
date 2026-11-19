@@ -1095,3 +1095,8 @@ body:has(.species-nube) .pet-shadow {
   font-size: 0.9rem; font-weight: 700; color: #6a1b9a;
 }
 .staff-avatar svg { width: 52px; height: 52px; display: block; }
+
+/* Estilista en el encabezado del vestidor: dibujo chico, sin la sombra del globo */
+.vestidor-estilista { display: inline-flex; margin-left: 6px; }
+.vestidor-estilista .staff-avatar { width: 40px; height: 40px; box-shadow: none; background: transparent; }
+.vestidor-estilista .staff-avatar svg { width: 40px; height: 40px; }

@@ -66,6 +66,8 @@ export const Vestidor = {
       Ambiente.fit();
       this.walkTo(0.4, 0.42);
     });
+    const estilista = document.getElementById('vestidor-estilista');
+    if (estilista) estilista.innerHTML = Staff.avatarHTML(PetState.petSpecies, 'vestidor');
     PetState.showDialogue(`¡Probemos looks! Soy ${Staff.nombreDe(PetState.petSpecies, 'vestidor')}, tu estilista.`);
   },
 

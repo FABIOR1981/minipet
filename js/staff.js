@@ -42,6 +42,12 @@ export const Staff = {
     return asignacion;
   },
 
+  // Solo el dibujo de quien ocupa un puesto (para encabezados)
+  avatarHTML(principal, puestoId) {
+    const id = this.ocupante(principal, puestoId);
+    return PersonajesDibujos[id] ? `<span class="staff-avatar">${PersonajesDibujos[id]}</span>` : '';
+  },
+
   // Globo de saludo de quien ocupa un puesto. En 'frase', {nombre} se cambia por el nombre del personaje
   saludoHTML(principal, puestoId, frase) {
     const id = this.ocupante(principal, puestoId);
