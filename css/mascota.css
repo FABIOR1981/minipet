@@ -900,6 +900,16 @@
   box-shadow: none;
   font-size: 0.7rem;
 }
+.shape-picker .shape-option { min-width: 0; }
+.shape-picker .shape-option > span:last-child {
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .shape-muestra { height: 36px; display: flex; align-items: flex-end; justify-content: center; pointer-events: none; }
 .shape-option.selected { outline: none; border-color: #ff80ab; background: #fff0f6; }
 .size-picker .size-option { box-shadow: none; }
