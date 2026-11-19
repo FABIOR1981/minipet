@@ -1324,3 +1324,21 @@ body:has(.species-nube) .pet-shadow {
 @media (prefers-reduced-motion: reduce) {
   #pet.species-gotita, #pet.species-pollito, #pet.species-buho { animation: none; }
 }
+
+/* Gatito: se estira y se acomoda como un gato al sentarse. Conejita: saltitos cortos */
+#pet.species-gatito { animation: gatitoEstira 3.4s ease-in-out infinite; }
+@keyframes gatitoEstira {
+  0%, 100% { rotate: 0deg; scale: 1 1; }
+  30% { rotate: 1.5deg; scale: 1.02 0.98; }
+  60% { rotate: -1.5deg; scale: 0.99 1.01; }
+}
+#pet.species-conejita { animation: conejitaSaltitos 2.2s ease-in-out infinite; }
+@keyframes conejitaSaltitos {
+  0%, 60%, 100% { translate: 0 0; }
+  20% { translate: 0 -5px; }
+  35% { translate: 0 0; }
+  45% { translate: 0 -3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #pet.species-gatito, #pet.species-conejita { animation: none; }
+}
