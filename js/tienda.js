@@ -229,7 +229,7 @@ export const Store = {
         // Cada opción muestra la cara de la mascota, ampliada, con ese rasgo
         const zoom = document.createElement('span');
         zoom.className = `trait-zoom trait-zoom-${kind}`;
-        zoom.appendChild(Minigames.createMiniPet(104, { [kind]: option.id, accessory: null }).el);
+        zoom.appendChild(Minigames.createMiniPet(92, { [kind]: option.id, accessory: null }).el);
         const label = document.createElement('span');
         label.className = 'trait-name';
         label.textContent = option.name;

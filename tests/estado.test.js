@@ -98,3 +98,32 @@ test('dormir alterna entre dormir y despertar', () => {
   PetState.sleep();
   assert.equal(PetState.isSleeping, false);
 });
+
+test('setTrait cambia el rasgo y rechaza ids que no existen', () => {
+  const { PetState } = cargarPetState();
+  PetState.setTrait('eyes', 'sparkle');
+  assert.equal(PetState.petEyes, 'sparkle');
+  PetState.setTrait('eyes', 'no-existe');
+  assert.equal(PetState.petEyes, 'sparkle');
+  PetState.setTrait('nariz', 'round');
+  assert.equal(PetState.petEyes, 'sparkle');
+});
+
+test('heal cura a la mascota enferma y no hace nada si está sana', () => {
+  const { PetState } = cargarPetState();
+  PetState.isSick = true;
+  PetState.heal();
+  assert.equal(PetState.isSick, false);
+  PetState.happiness = 50;
+  PetState.heal();
+  assert.equal(PetState.happiness, 50);
+});
+
+test('con guardado bloqueado, saveData no escribe ni falla sin pantalla', () => {
+  const { PetState, almacen } = cargarPetState(JSON.stringify({ version: 999, coins: 1 }));
+  assert.equal(PetState.guardadoBloqueado, true);
+  const antes = almacen.get(CLAVE);
+  PetState.coins = 777;
+  assert.doesNotThrow(() => PetState.saveData());
+  assert.equal(almacen.get(CLAVE), antes);
+});

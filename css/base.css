@@ -456,14 +456,17 @@ body {
 .trait-zoom {
   position: relative;
   width: 50px;
-  height: 34px;
+  height: 40px;
   overflow: hidden;
   border-radius: 9px;
   pointer-events: none;
 }
 
 .trait-zoom .mini-pet { position: absolute; left: 50%; translate: -50% 0; }
-.trait-zoom-eyes .mini-pet { top: -32px; }
+.trait-zoom-eyes .mini-pet { top: -15px; }
+.trait-zoom-eyes .mouth { visibility: hidden; }
+.trait-zoom-mouth .eyes { visibility: hidden; }
+.trait-zoom-cheeks .eyes { visibility: hidden; }
 .trait-zoom-cheeks .mini-pet { top: -38px; }
 .trait-zoom-mouth .mini-pet { top: -46px; }
 
