@@ -1270,3 +1270,29 @@ body:has(.species-nube) .pet-shadow {
     currentColor;
   filter: none;
 }
+
+/* Detalles propios de cada personaje (una capa extra con ::after, por encima de la cara) */
+.pet-sprite.species-gotita::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle 5px at 38% 46%, rgba(255,255,255,0.95) 98%, transparent);
+}
+.pet-sprite.species-pollito::after {
+  content: ''; position: absolute; left: 50%; top: 53%; transform: translateX(-50%);
+  width: 0; height: 0; pointer-events: none;
+  border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid #ff9800;
+}
+.pet-sprite.species-gatito::after {
+  content: ''; position: absolute; left: 50%; top: 22%; transform: translateX(-50%);
+  width: 30px; height: 9px; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0 6px, rgba(150, 70, 20, 0.45) 6px 8px);
+}
+.pet-sprite.species-conejita::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 4px 13px at 40% 16%, #ffb3d9 98%, transparent),
+    radial-gradient(ellipse 4px 13px at 60% 16%, #ffb3d9 98%, transparent);
+}
+.pet-sprite.species-buho::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 22px 15px at 50% 82%, rgba(255, 243, 224, 0.9) 98%, transparent);
+}
