@@ -854,3 +854,23 @@ button:disabled {
   place-items: center;
   box-shadow: 0 2px 0 #c2185b;
 }
+
+/* Propuesta premium: precio y estado como píldoras, dock inferior flotante */
+.item-card .card-price,
+.item-card .card-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.item-card .card-price { background: #fff3d6; color: #854f0b; }
+.item-card .card-estado { background: #e8f5e9; color: #2e7d32; }
+.bottom-nav {
+  margin: 0 10px 10px;
+  border: 1px solid #efe3fa;
+  border-radius: 22px;
+  box-shadow: 0 6px 16px rgba(123, 31, 162, 0.10);
+}
