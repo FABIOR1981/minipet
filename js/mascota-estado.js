@@ -53,6 +53,8 @@ export const PetState = {
   petMouth: 'cat',
   petCheeks: 'round',
   petShape: 'shape-circle',
+  // Personaje elegido: 'mochi' (bola) o 'nube'. Cambia la silueta, no la forma elegida en Mi Pet
+  petSpecies: 'mochi',
   petSize: 'medium',
   glitterEnabled: false,
   avisoGuardadoMostrado: false,
@@ -302,6 +304,7 @@ export const PetState = {
       petMouth: this.petMouth,
       petCheeks: this.petCheeks,
       petShape: this.petShape,
+      petSpecies: this.petSpecies,
       petSize: this.petSize,
       glitterEnabled: this.glitterEnabled,
       glitterIntensity: this.glitterIntensity,
@@ -346,6 +349,7 @@ export const PetState = {
       this.petMouth = data.petMouth || 'cat';
       this.petCheeks = data.petCheeks || 'round';
       this.petShape = data.petShape || 'shape-circle';
+      this.petSpecies = ['mochi', 'nube'].includes(data.petSpecies) ? data.petSpecies : 'mochi';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);
       this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));
