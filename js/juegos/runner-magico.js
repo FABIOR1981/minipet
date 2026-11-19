@@ -46,7 +46,6 @@ Object.assign(Minigames, {
       let cloudX = 220;
 
       const jump = (e) => {
-        if (e) e.preventDefault();
         // Primer salto desde el piso; el segundo sale desde donde esté la mascota en el aire
         if (saltos < 2) {
           playerVY = saltos === 0 ? -11 : -10;
@@ -56,16 +55,17 @@ Object.assign(Minigames, {
         }
       };
 
-      const handleKeyDown = (e) => { if (e.code === 'Space') jump(); };
+      // Un solo canal de toque: pointerdown cubre mouse, dedo y lápiz (sin click duplicado).
+      // e.repeat evita que mantener Espacio dispare saltos en cada repetición automática.
+      const handleKeyDown = (e) => { if (e.code === 'Space' && !e.repeat) jump(); };
       window.addEventListener('keydown', handleKeyDown);
-      canvas.addEventListener('touchstart', jump, { passive: false });
-      canvas.onclick = jump;
+      canvas.style.touchAction = 'none';
+      canvas.addEventListener('pointerdown', jump);
 
       Minigames.inProgress = true;
       Minigames.exitHandler = () => {
         window.removeEventListener('keydown', handleKeyDown);
-        canvas.removeEventListener('touchstart', jump);
-        canvas.onclick = null;
+        canvas.removeEventListener('pointerdown', jump);
         stopped = true;
         pet.destroy();
         return score;
@@ -78,7 +78,7 @@ Object.assign(Minigames, {
         if (stopped) return;
         if (gameOver) {
           window.removeEventListener('keydown', handleKeyDown);
-          canvas.removeEventListener('touchstart', jump);
+          canvas.removeEventListener('pointerdown', jump);
           pet.destroy();
           const isRecord = Minigames.saveBestScore('runner', score);
           Minigames.showResult('Fin del juego', '🦄', score, () => Minigames.startRunnerGame(), isRecord);
@@ -87,6 +87,11 @@ Object.assign(Minigames, {
 
         playerY += playerVY * f;
         playerVY += 0.65 * f;
+        // Con doble salto la mascota podría salir por arriba del lienzo: se frena en el techo
+        if (playerY < 12) {
+          playerY = 12;
+          playerVY = Math.max(playerVY, 0);
+        }
 
         if (playerY >= STAND) {
           playerY = STAND;
