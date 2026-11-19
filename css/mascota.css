@@ -1034,8 +1034,17 @@
   height: 106px;
   border-radius: 0;
   clip-path: none;
+  /* El color inline (petColor) lo pone updateUI: la silueta lo toma por currentColor */
+  background-color: transparent !important;
   background-image: none;
   box-shadow: none;
+}
+/* La silueta es un pseudo-elemento: así la máscara no recorta la cara ni los accesorios */
+.pet-sprite.species-nube::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black'><circle cx='24' cy='60' r='19'/><circle cx='52' cy='40' r='29'/><circle cx='88' cy='54' r='22'/><rect x='18' y='58' width='92' height='30' rx='15'/></g></svg>") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black'><circle cx='24' cy='60' r='19'/><circle cx='52' cy='40' r='29'/><circle cx='88' cy='54' r='22'/><rect x='18' y='58' width='92' height='30' rx='15'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
