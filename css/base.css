@@ -622,9 +622,9 @@ img.dibujo {
 }
 .card-check .ico { width: 11px; height: 11px; }
 /* Lo que ya se compró: apagado y con su marca */
-.item-card.tuyo { background: #f7f3fb; border-color: #ece4f4; box-shadow: none; }
-.item-card.tuyo .card-icon, .item-card.tuyo .bg-preview { opacity: 0.55; }
-.item-card.tuyo .card-title { color: #8e7aa8; }
+/* Ya comprado: se distingue por el fondo y el chip "Tuyo", sin verse apagado */
+.item-card.tuyo { background: #f6f1fc; border-color: #d9c8ec; box-shadow: 0 2px 0 #e6d6f5; }
+.item-card.tuyo .card-title { color: #4a148c; }
 .card-estado { display: inline-flex; align-items: center; gap: 3px; font-size: 0.72rem; font-weight: 800; color: #58b860; }
 .card-estado .ico { width: 12px; height: 12px; }
 .grid-container { padding-top: 10px; padding-right: 8px; }
@@ -734,10 +734,7 @@ img.dibujo {
   font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 0.4px;
-  background: linear-gradient(90deg, #7b1fa2, #e91e63);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #7b1fa2;
 }
 .brand-heart { font-size: 0.9rem; }
 
