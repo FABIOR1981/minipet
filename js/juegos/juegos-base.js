@@ -1,4 +1,5 @@
 import { ico, tituloPantalla } from '../iconos.js';
+import { Avisos } from '../avisos.js';
 import { PetState } from '../mascota-estado.js';
 import { AudioEffects } from '../sonidos.js';
 // =========================================================
@@ -96,6 +97,9 @@ export const Minigames = {
     <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
       Gana monedas y haz feliz a tu mascota.
     </p>
+    <div style="text-align:center; margin:-4px 0 12px;">
+      <button id="ayuda-juegos" class="ayuda-juegos"><span aria-hidden="true">?</span> ¿Cómo jugar?</button>
+    </div>
     <div class="grid-container games-grid">
       <div class="item-card tocable" role="button" tabindex="0" data-juego="startCatchGame">
         <span class="game-emoji tinte-medicina"><svg class="ico" aria-hidden="true"><use href="#i-juego-atrapa"/></svg></span>
@@ -143,6 +147,12 @@ export const Minigames = {
   content.querySelectorAll('[data-juego]').forEach((card) => {
     card.onclick = () => Minigames[card.dataset.juego]();
   });
+  content.querySelector('#ayuda-juegos').onclick = () => {
+    Avisos.aviso(
+      'Cada minijuego da monedas para la Tienda. En Atrapa Dulces y Lluvia de Comida, arrastrá el dedo o usá las flechas. En el Runner, tocá la pantalla o presioná Espacio para saltar: tocá dos veces para hacer doble salto. En los demás, tocá las cartas, los botones o los dibujos que aparecen.',
+      { titulo: 'Cómo jugar', icono: 'juegos', tinte: 'juegos', aceptar: '¡Entendido!' }
+    );
+  };
 },
 
   // Conteo Regresivo Estilo Kawaii
