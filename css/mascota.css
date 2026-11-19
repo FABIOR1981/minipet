@@ -1011,3 +1011,7 @@
 .pet-customization-panel .glitter-intensity { margin: 4px 6px 2px; }
 .pet-customization-panel .color-picker { gap: 6px; }
 .pet-customization-panel .shape-picker .shape-muestra { height: 30px; }
+
+/* Enlace discreto a la política de privacidad, al pie de Mi Pet */
+.privacidad-enlace { text-align: center; margin: 8px 0 0; font-size: 0.72rem; }
+.privacidad-enlace a { color: #7b1fa2; }

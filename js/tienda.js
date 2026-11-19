@@ -166,6 +166,7 @@ export const Store = {
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
       </div>
       ${tab === 'cuerpo' ? this.renderPetCustomization() : this.renderTraits()}
+      <p class="privacidad-enlace"><a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a></p>
     `;
     content.querySelectorAll('.store-tab').forEach(btn => {
       btn.onclick = () => { this.myPetTab = btn.dataset.tab; this.renderMyPet(); };

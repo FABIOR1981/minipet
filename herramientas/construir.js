@@ -14,7 +14,7 @@ const raiz = path.join(__dirname, '..');
 const salida = path.join(raiz, 'publicar');
 
 // Solo se copia lo que el navegador necesita
-const publicos = ['index.html', 'manifest.json', 'sw.js', 'css', 'js', 'data', 'img'];
+const publicos = ['index.html', 'privacidad.html', 'manifest.json', 'sw.js', 'css', 'js', 'data', 'img'];
 
 fs.rmSync(salida, { recursive: true, force: true });
 fs.mkdirSync(salida);
