@@ -118,7 +118,8 @@ Object.assign(Minigames, {
 
         for (let i = obstacles.length - 1; i >= 0; i--) {
           const o = obstacles[i];
-          if (!o.contado && o.x < 15) {
+          // Se suma cuando el obstáculo ya quedó atrás de la mascota, no mientras la toca
+          if (!o.contado && o.x + o.w < 12) {
             o.contado = true;
             score += 10;
             Minigames.updateHudScore(score);
@@ -132,7 +133,8 @@ Object.assign(Minigames, {
         for (const o of obstacles) {
           const toca = o.x < 48 && o.x + o.w > 12; // se superpone con la zona de la mascota
           if (!toca) continue;
-          const choca = o.tipo === 'estrella' ? playerY < STAND - 45 : playerY > STAND - 30;
+          // Los pies tocan el obstáculo cuando bajan de su borde visible (~22 px sobre el piso)
+          const choca = o.tipo === 'estrella' ? playerY < STAND - 45 : playerY > STAND - 22;
           if (choca) {
             gameOver = true;
             Minigames.sacudir(canvas.parentElement);
