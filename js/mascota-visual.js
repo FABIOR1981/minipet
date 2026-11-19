@@ -44,6 +44,12 @@ Object.assign(PetState, {
       // (Si se animara, la sombra viajaría desde el centro de la habitación.)
       this.walkPos = { x: Math.random(), t: Math.random() };
       this.applyWalkPosition('instant');
+      // Entrada: la mascota llega con un pequeño rebote y después vuelve a respirar
+      const petEl = document.getElementById('pet');
+      if (petEl) {
+        petEl.classList.add('entrando');
+        setTimeout(() => petEl.classList.remove('entrando'), 900);
+      }
     } else {
       this.moveRandomly();
     }
