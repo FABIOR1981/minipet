@@ -744,12 +744,12 @@
   border-radius: 2px;
   background: #333;
 }
-.kawaii-face.eyes-lashes .eye.left::before { left: -5px; transform: rotate(35deg); }
-.kawaii-face.eyes-lashes .eye.left::after { left: -6px; top: 2px; transform: rotate(12deg); }
-.kawaii-face.eyes-lashes .eye.right::before { right: -5px; transform: rotate(-35deg); }
-.kawaii-face.eyes-lashes .eye.right::after { right: -6px; top: 2px; transform: rotate(-12deg); }
+.kawaii-face.eyes-lashes .eye.left::before { left: -4px; transform: rotate(18deg); }
+.kawaii-face.eyes-lashes .eye.left::after { left: -5px; top: 3px; transform: rotate(6deg); }
+.kawaii-face.eyes-lashes .eye.right::before { right: -4px; transform: rotate(-18deg); }
+.kawaii-face.eyes-lashes .eye.right::after { right: -5px; top: 3px; transform: rotate(-6deg); }
 
-.kawaii-face.eyes-button .eye { width: 9px; height: 9px; margin: 2px 3px 3px; }
+.kawaii-face.eyes-button .eye { width: 13px; height: 13px; margin: 2px 3px 3px; }
 .kawaii-face.eyes-button .sparkle { display: none; }
 
 /* Los estados de ánimo mandan sobre el rasgo elegido */
@@ -1136,8 +1136,8 @@ body:has(.species-nube) .pet-shadow {
   position: absolute;
   inset: 0;
   background: currentColor;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='12' cy='72' rx='9' ry='15'/><ellipse cx='108' cy='72' rx='9' ry='15'/></g></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='12' cy='72' rx='9' ry='15'/><ellipse cx='108' cy='72' rx='9' ry='15'/></g></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><circle cx='60' cy='66' r='44'/><ellipse cx='14' cy='80' rx='7' ry='11'/><ellipse cx='106' cy='80' rx='7' ry='11'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-gatito {
@@ -1190,7 +1190,14 @@ body:has(.species-nube) .pet-shadow {
   position: absolute;
   inset: 0;
   background: currentColor;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='68' rx='44' ry='46'/><path d='M18 40 L22 4 L48 30 Z'/><path d='M102 40 L98 4 L72 30 Z'/></g></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='68' rx='44' ry='46'/><path d='M18 40 L22 4 L48 30 Z'/><path d='M102 40 L98 4 L72 30 Z'/></g></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M20 46 L16 18 L42 36 Z'/><path d='M100 46 L104 18 L78 36 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M20 46 L16 18 L42 36 Z'/><path d='M100 46 L104 18 L78 36 Z'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
+
+/* Personajes que ya tienen orejas propias: no se les pone el accesorio de orejas igual */
+.pet-sprite.species-conejita .accessory.item-bunny_ears,
+.pet-sprite.species-gatito .accessory.item-cat_ears { display: none; }
+
+/* Búho: ojos un poco más grandes para que se lea como búho y no como gato */
+.pet-sprite.species-buho .kawaii-face { scale: 1.12; }
