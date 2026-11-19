@@ -54,6 +54,7 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
             Minigames.spectate('cheer');
+            Minigames.celebrar(canvas.parentElement, b.isGolden ? '🌟' : '✨', `+${b.isGolden ? 15 : 5}`);
             bubbles.splice(i, 1);
           }
         }

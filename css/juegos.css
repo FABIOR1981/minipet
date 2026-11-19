@@ -497,3 +497,62 @@
 }
 .simon-pad:active { transform: translateY(4px); box-shadow: 0 4px 0 var(--d); }
 .simon-pad.on { filter: brightness(1.35) saturate(1.1); transform: scale(0.97); }
+
+/* Escenarios con contenido propio (Parejas, ¿Dónde está?, Vestirla, Simón) */
+.game-stage.stage-dom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(180deg, #fdf3ff 0%, #f5e9ff 100%);
+}
+
+/* Feedback de los juegos: chispas, texto que sube y sacudida al fallar */
+.game-stage .juego-chispa,
+.game-stage .juego-texto-sube {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+.game-stage .juego-chispa {
+  font-size: 18px;
+  animation: juegoChispa 0.7s ease-out forwards;
+}
+.game-stage .juego-chispa img { width: 1.1em; height: 1.1em; vertical-align: middle; }
+.game-stage .juego-texto-sube {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #7b1fa2;
+  text-shadow: 0 1px 0 #fff, 0 0 6px rgba(255, 255, 255, 0.9);
+  animation: juegoSube 0.9s ease-out forwards;
+}
+@keyframes juegoChispa {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.15); opacity: 0; }
+}
+@keyframes juegoSube {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+  20% { opacity: 1; transform: translate(-50%, -60%) scale(1.1); }
+  100% { transform: translate(-50%, -150%) scale(1); opacity: 0; }
+}
+.game-stage.sacudir { animation: juegoSacudida 0.35s ease-in-out; }
+@keyframes juegoSacudida {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.hide-stage.game-stage {
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 260px;
+  max-width: none;
+  width: min(100%, 380px);
+  align-self: center;
+  margin: 6px 0;
+  overflow: hidden;
+}

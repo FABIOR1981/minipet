@@ -35,6 +35,7 @@ Object.assign(Minigames, {
 
         if (Math.abs(diff) > prev.width) {
           gameOver = true;
+          Minigames.sacudir(canvas.parentElement);
           const isRecord = Minigames.saveBestScore('cake', score);
           Minigames.showResult('La torre cayó. ¿Otra?', '🍰', score, () => Minigames.startCakeGame(), isRecord);
           return;
@@ -44,6 +45,7 @@ Object.assign(Minigames, {
         Minigames.updateHudScore(score);
         AudioEffects.playTone(700, 'sine', 0.1);
         Minigames.spectate('cheer');
+        Minigames.celebrar(canvas.parentElement, '✨', '+10');
         const newWidth = prev.width - Math.abs(diff);
         const newX = diff > 0 ? currentX : prev.x;
 

@@ -55,6 +55,7 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(900, 'triangle', 0.08);
             Minigames.spectate('cheer');
+            Minigames.celebrar(canvas.parentElement, '✨', '+5');
             balloons.splice(index, 1);
           }
         }

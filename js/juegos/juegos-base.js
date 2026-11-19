@@ -360,6 +360,43 @@ export const Minigames = {
     ctx.globalAlpha = 1;
   },
 
+  // Chispas que salen del centro del escenario al acertar (y un texto que sube).
+  // Se borran solas; el escenario debe tener position relative (.game-stage).
+  celebrar(escenario, emoji = '✨', texto = '') {
+    if (!escenario) return;
+    const cx = escenario.clientWidth / 2;
+    const cy = escenario.clientHeight / 2;
+    for (let i = 0; i < 8; i++) {
+      const chispa = document.createElement('span');
+      chispa.className = 'juego-chispa';
+      chispa.textContent = emoji;
+      const angulo = (i / 8) * Math.PI * 2;
+      chispa.style.left = `${cx}px`;
+      chispa.style.top = `${cy}px`;
+      chispa.style.setProperty('--dx', `${Math.cos(angulo) * 64}px`);
+      chispa.style.setProperty('--dy', `${Math.sin(angulo) * 64}px`);
+      escenario.appendChild(chispa);
+      setTimeout(() => chispa.remove(), 700);
+    }
+    if (texto) {
+      const sube = document.createElement('span');
+      sube.className = 'juego-texto-sube';
+      sube.textContent = texto;
+      sube.style.left = `${cx}px`;
+      sube.style.top = `${cy}px`;
+      escenario.appendChild(sube);
+      setTimeout(() => sube.remove(), 900);
+    }
+  },
+
+  // Sacudida corta del escenario al fallar
+  sacudir(escenario) {
+    if (!escenario) return;
+    escenario.classList.remove('sacudir');
+    void escenario.offsetWidth; // reinicia la animación
+    escenario.classList.add('sacudir');
+  },
+
   // Factor de escala entre la resolución lógica del canvas (width/height)
   // y su tamaño real en pantalla (que ahora es responsive vía CSS).
   // Necesario para que los toques/clics caigan en el punto correcto

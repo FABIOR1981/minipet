@@ -94,6 +94,7 @@ Object.assign(Minigames, {
           Minigames.updateHudScore(score);
           AudioEffects.playTone(800, 'sine', 0.05);
           pet.cheer();
+          Minigames.celebrar(canvas.parentElement, '✨', '+5');
           itemY = 0;
           itemX = Math.random() * 250 + 10;
           currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];

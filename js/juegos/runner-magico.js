@@ -97,9 +97,13 @@ Object.assign(Minigames, {
           score += 10;
           Minigames.updateHudScore(score);
           pet.cheer();
+          Minigames.celebrar(canvas.parentElement, '✨', '+10');
         }
 
-        if (obstacleX < 45 && obstacleX > 15 && playerY > STAND - 30) gameOver = true;
+        if (obstacleX < 45 && obstacleX > 15 && playerY > STAND - 30) {
+          gameOver = true;
+          Minigames.sacudir(canvas.parentElement);
+        }
 
         Minigames.paisaje(ctx, W, H, 'pista');
 

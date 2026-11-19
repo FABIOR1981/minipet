@@ -136,11 +136,13 @@ Object.assign(Minigames, {
               Minigames.updateHudScore(score);
               AudioEffects.playTone(800, 'sine', 0.05);
               pet.cheer();
+              Minigames.celebrar(canvas.parentElement, '⭐', '+5');
             } else {
               lives--;
               document.getElementById('hud-lives').innerHTML = ico('felicidad').repeat(lives) + ico('felicidad', 'vida-perdida').repeat(3 - lives);
               AudioEffects.playTone(260, 'sine', 0.15);
               pet.oops();
+              Minigames.sacudir(canvas.parentElement);
               if (lives <= 0) gameOver = true;
             }
             items.splice(i, 1);

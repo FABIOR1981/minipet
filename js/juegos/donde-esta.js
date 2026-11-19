@@ -17,7 +17,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         <h3 class="game-title" style="text-align:center;">🎁 ¿Dónde Está?</h3>
         ${Minigames.renderHUD('🎁', best)}
-        <div class="hide-stage" id="hide-stage">
+        <div class="game-stage hide-stage" id="hide-stage">
           ${CUPS.map(i => `
             <button class="hide-cup" data-cup="${i}" aria-label="Caja">
               <span class="hide-pet"></span>
@@ -93,10 +93,12 @@ Object.assign(Minigames, {
           Minigames.updateHudScore(score);
           AudioEffects.playTone(880, 'triangle', 0.12);
           pet.cheer();
+          Minigames.celebrar(stage, '✨', '+10');
           setStatus('La encontraste. 🎉');
           later(startRound, 1100);
         } else {
           AudioEffects.playTone(300, 'sine', 0.15);
+          Minigames.sacudir(stage);
           setStatus('Estaba aquí.');
           later(() => { cups[petCup].classList.add('open'); pet.cheer(); }, 350);
           later(() => {

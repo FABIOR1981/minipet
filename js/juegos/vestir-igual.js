@@ -20,7 +20,7 @@ Object.assign(Minigames, {
       content.innerHTML = `
         <h3 class="game-title" style="text-align:center;">👗 Vestirla Igual</h3>
         ${Minigames.renderHUD('👗', best)}
-        <div id="dress-area" class="dress-area"></div>
+        <div class="game-stage stage-dom"><div id="dress-area" class="dress-area"></div></div>
       `;
 
       const area = document.getElementById('dress-area');
@@ -106,11 +106,13 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(880, 'triangle', 0.12);
             preview.cheer();
+            Minigames.celebrar(area.parentElement, '✨', '+10');
             document.getElementById('dress-status').innerText = 'Igualita. 🎉';
             later(startRound, 1100);
           } else {
             // Muestra el look correcto al lado del armado
             AudioEffects.playTone(300, 'sine', 0.15);
+            Minigames.sacudir(area.parentElement);
             document.getElementById('dress-status').innerText = 'Era así 👉';
             const answer = Minigames.createMiniPet(84, target);
             document.getElementById('dress-show').appendChild(answer.el);

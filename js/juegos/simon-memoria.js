@@ -28,12 +28,12 @@ Object.assign(Minigames, {
       content.innerHTML = `
         ${Minigames.renderHeader('🎯 Simón Memoria', Minigames.renderHUD('🧠', best))}
         <p id="simon-status" style="margin-top:5px; text-align:center; font-weight:bold; color:#7e57c2;">Memoriza la secuencia.</p>
-        <div class="simon-grid">
+        <div class="game-stage stage-dom"><div class="simon-grid">
           <button id="simon-0" class="simon-pad" data-simon="0" style="--c:#ff80ab; --d:#f50057;" aria-label="Botón 0"></button>
           <button id="simon-1" class="simon-pad" data-simon="1" style="--c:#80deea; --d:#00acc1;" aria-label="Botón 1"></button>
           <button id="simon-2" class="simon-pad" data-simon="2" style="--c:#b388ff; --d:#673ab7;" aria-label="Botón 2"></button>
           <button id="simon-3" class="simon-pad" data-simon="3" style="--c:#ffe082; --d:#ffb300;" aria-label="Botón 3"></button>
-        </div>
+        </div></div>
       `;
 
       content.querySelectorAll('[data-simon]').forEach((b) => {
@@ -108,6 +108,7 @@ Object.assign(Minigames, {
       this.clearSimonTimers();
       const reward = this.simonScore * 10;
       const isRecord = Minigames.saveBestScore('simon', this.simonScore);
+      Minigames.sacudir(document.querySelector('.game-stage'));
       Minigames.showResult('Se rompió la secuencia. ¿Otra ronda?', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
       return;
     }
@@ -117,6 +118,7 @@ Object.assign(Minigames, {
       this.simonScore++;
       Minigames.updateHudScore(this.simonScore);
       Minigames.spectate('cheer');
+      Minigames.celebrar(document.querySelector('.game-stage'), '✨');
       const roundTimeout = setTimeout(() => this.nextSimonRound(), 1000);
       this.simonTimers.push(roundTimeout);
     }

@@ -27,6 +27,7 @@ Object.assign(Minigames, {
 
       content.innerHTML = `
         ${Minigames.renderHeader('🃏 Parejas', hud)}
+        <div class="game-stage stage-dom">
         <div class="pairs-grid" id="pairs-grid">
           ${deck.map((item, i) => `
             <button class="pair-card" data-index="${i}" aria-label="Carta ${i + 1}">
@@ -35,6 +36,7 @@ Object.assign(Minigames, {
                 <span class="pair-front"><img src="${item.image}" alt="${item.name}"></span>
               </span>
             </button>`).join('')}
+        </div>
         </div>
         <p class="game-hint">Encuentra las dos cartas iguales</p>
       `;
@@ -81,6 +83,7 @@ Object.assign(Minigames, {
           document.getElementById('pairs-found').innerText = found;
           AudioEffects.playTone(880, 'triangle', 0.12);
           Minigames.spectate('cheer');
+          Minigames.celebrar(grid.parentElement, '✨');
           if (found === PAIRS) timers.push(setTimeout(finish, 700));
         } else {
           locked = true;
