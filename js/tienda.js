@@ -3,6 +3,7 @@ import { Catalogo } from './catalogo.js';
 import { ico, tituloPantalla } from './iconos.js';
 import { Minigames } from './juegos/juegos-base.js';
 import { PetState } from './mascota-estado.js';
+import { Staff } from './staff.js';
 import { switchTab } from './navegacion.js';
 import { AudioEffects } from './sonidos.js';
 // =========================================================
@@ -26,11 +27,26 @@ export const Store = {
     return `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
   },
 
+  // El tendero de la tienda: lo ocupa el personaje que queda libre (ver js/staff.js).
+  // Por ahora cada personaje se ve como un emoji hasta tener su dibujo.
+  tenderoHTML() {
+    const id = Staff.ocupante(PetState.petSpecies, 'tienda');
+    const info = Catalogo.species.find(s => s.id === id);
+    if (!info) return '';
+    const emoji = { buho: '🦉', pollito: '🐥', conejita: '🐰', gatito: '🐱', gotita: '💧', mochi: '🍡', nube: '☁️' }[id] || '⭐';
+    return `
+      <div class="tendero">
+        <span class="tendero-avatar" aria-hidden="true">${emoji}</span>
+        <p class="tendero-globo">¡Bienvenido! Soy ${info.name}, elegí lo que quieras.</p>
+      </div>`;
+  },
+
   renderStore(category = this.storeCategory) {
     this.storeCategory = category;
     const content = document.getElementById('modal-content');
     content.innerHTML = `
       ${tituloPantalla('tienda', 'Tienda')}
+      ${this.tenderoHTML()}
       <div class="store-tabs" role="tablist" aria-label="Categorías de la tienda">
         <button class="store-tab ${category === 'all' ? 'active' : ''}" data-category="all">Todos</button>
         <button class="store-tab ${category === 'acc' ? 'active' : ''}" data-category="acc">Accesorios</button>
