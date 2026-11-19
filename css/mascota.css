@@ -1041,3 +1041,20 @@
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-nube .kawaii-face { padding-bottom: 0; }
+
+/* Nube flota: sube y baja sin tocar transform (usa la propiedad translate),
+   y su sombra en el piso se achica y se aclara mientras está en el aire. */
+#pet.species-nube {
+  animation: nubeFlota 2.8s ease-in-out infinite;
+}
+@keyframes nubeFlota {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+body:has(.species-nube) .pet-shadow {
+  scale: 0.55;
+  opacity: 0.35;
+}
+@media (prefers-reduced-motion: reduce) {
+  #pet.species-nube { animation: none; }
+}
