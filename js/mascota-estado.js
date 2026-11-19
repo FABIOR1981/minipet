@@ -175,6 +175,8 @@ export const PetState = {
   setSpecies(id) {
     if (!Catalogo.species.some(s => s.id === id && s.disponible)) return;
     this.petSpecies = id;
+    const color = Catalogo.species.find(s => s.id === id).color;
+    if (color) this.petColor = color;
     AudioEffects.playTone(700, 'sine', 0.1);
     this.saveData();
     this.updateUI();

@@ -1201,3 +1201,10 @@ body:has(.species-nube) .pet-shadow {
 
 /* Búho: ojos un poco más grandes para que se lea como búho y no como gato */
 .pet-sprite.species-buho .kawaii-face { scale: 1.12; }
+
+/* Búho: anillo alrededor de los ojos para que se lea como búho */
+.pet-sprite.species-buho .kawaii-face .eye { box-shadow: 0 0 0 3px #fff3e0, 0 0 0 5px #8d6e63; }
+/* Accesorios de cabeza: se bajan un poco en los personajes de silueta más redonda */
+.pet-sprite.species-pollito .accessory.pos-head,
+.pet-sprite.species-gotita .accessory.pos-head,
+.pet-sprite.species-buho .accessory.pos-head { translate: 0 8px; }

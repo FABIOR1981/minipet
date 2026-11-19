@@ -8,12 +8,12 @@ export const Catalogo = {
   // Personajes elegibles en Mi Pet > Personaje. 'disponible': ya tiene diseño
   species: [
     { id: 'mochi',    name: 'Mochi',           disponible: true },
-    { id: 'gotita',   name: 'Gotita',          disponible: true },
-    { id: 'nube',     name: 'Nube',            disponible: true },
-    { id: 'pollito',  name: 'Pollito',         disponible: true },
-    { id: 'gatito',   name: 'Gatito de lazo',  disponible: true },
-    { id: 'conejita', name: 'Conejita',        disponible: true },
-    { id: 'buho',     name: 'Vendedora búho',  disponible: true },
+    { id: 'gotita',   name: 'Gotita',          disponible: true, color: '#81d4fa' },
+    { id: 'nube',     name: 'Nube',            disponible: true, color: '#cfd8dc' },
+    { id: 'pollito',  name: 'Pollito',         disponible: true, color: '#ffe082' },
+    { id: 'gatito',   name: 'Gatito de lazo',  disponible: true, color: '#ffab91' },
+    { id: 'conejita', name: 'Conejita',        disponible: true, color: '#b388ff' },
+    { id: 'buho',     name: 'Vendedora búho',  disponible: true, color: '#bcaaa4' },
   ],
 
   // Las formas de mascota disponibles (elegibles en Mi Pet)
