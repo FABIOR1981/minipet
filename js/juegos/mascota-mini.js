@@ -92,7 +92,7 @@ Object.assign(Minigames, {
       sprite.querySelectorAll('.heart-particle, .food-bite').forEach(node => node.remove());
       // Conserva solo la forma; fuera tamaño, caminata, saltos y mirada
       sprite.className = sprite.className.split(/\s+/)
-        .filter(c => c === 'pet-sprite' || c === 'with-back' || c.startsWith('shape-')).join(' ');
+        .filter(c => c === 'pet-sprite' || c === 'with-back' || c.startsWith('shape-') || c.startsWith('species-')).join(' ');
       sprite.style.left = '';
       sprite.style.top = '';
       sprite.style.scale = '';
