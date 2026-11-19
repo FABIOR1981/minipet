@@ -150,6 +150,10 @@ export const Store = {
       <label class="mypet-name">Nombre
         <input id="mypet-name" type="text" maxlength="14" placeholder="Luna" autocomplete="off">
       </label>
+      <button id="sonido-toggle" class="sonido-toggle" aria-pressed="${!AudioEffects.silenciado}">
+        <span class="sonido-estado">${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}</span>
+        <span class="sonido-pista">Toca para ${AudioEffects.silenciado ? 'encenderlo' : 'apagarlo'}</span>
+      </button>
       <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
@@ -160,6 +164,12 @@ export const Store = {
       btn.onclick = () => { this.myPetTab = btn.dataset.tab; this.renderMyPet(); };
     });
     this.refreshPetPreview();
+
+    content.querySelector('#sonido-toggle').onclick = () => {
+      const conSonido = AudioEffects.alternar();
+      if (conSonido) AudioEffects.playCoin(); // confirma que ya suena
+      this.renderMyPet();
+    };
 
     // El nombre se guarda mientras se escribe, sin redibujar la ventana
     const nameInput = content.querySelector('#mypet-name');

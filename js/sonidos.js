@@ -1,7 +1,21 @@
 // Sonidos sintetizados con Web Audio (sin archivos de audio)
 // Motor Sintetizador de Sonidos
+const CLAVE_SONIDO = 'mipetkawaii-sonido';
+
 export const AudioEffects = {
   ctx: null,
+
+  // Silencio guardado en este dispositivo (clave propia, aparte del guardado de la mascota)
+  silenciado: (() => {
+    try { return localStorage.getItem(CLAVE_SONIDO) === '0'; } catch (e) { return false; }
+  })(),
+
+  // Cambia entre con sonido y en silencio. Devuelve true si quedó con sonido.
+  alternar() {
+    this.silenciado = !this.silenciado;
+    try { localStorage.setItem(CLAVE_SONIDO, this.silenciado ? '0' : '1'); } catch (e) { /* sin guardado */ }
+    return !this.silenciado;
+  },
 
   init() {
     if (!this.ctx) {
@@ -10,6 +24,7 @@ export const AudioEffects = {
   },
 
   playTone(freq, type, duration) {
+    if (this.silenciado) return;
     try {
       this.init();
       const osc = this.ctx.createOscillator();

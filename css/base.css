@@ -727,3 +727,10 @@ img.dibujo {
   color: transparent;
 }
 .brand-heart { font-size: 0.9rem; }
+
+/* Legibilidad: títulos de tarjetas más grandes y con más contraste */
+.item-card .card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4a148c;
+}

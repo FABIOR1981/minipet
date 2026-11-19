@@ -578,3 +578,21 @@
 }
 .games-grid .game-emoji .ico { width: 2.2rem; height: 2.2rem; }
 .games-grid .card-title { font-size: 0.9rem; font-weight: 700; color: #4a148c; letter-spacing: 0.1px; }
+
+/* Pantalla de resultado, acabado premium: título más firme, monedas como
+   insignia y botones con relieve. Solo visual. */
+.result-title { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.2px; }
+.result-coins-box {
+  padding: 10px 18px;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #ffe0b2, 0 10px 18px -12px rgba(230, 81, 0, 0.5);
+}
+.result-actions button {
+  border-radius: 16px;
+  font-weight: 800;
+  padding: 12px;
+  box-shadow: 0 4px 0 rgba(74, 20, 140, 0.25);
+}
+.result-actions button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(74, 20, 140, 0.25); }

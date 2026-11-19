@@ -983,3 +983,25 @@
   font-size: 0.8rem;
   margin: 10px 6px 4px;
 }
+
+/* Mi Pet: interruptor de sonido, arriba del selector de pestañas */
+.sonido-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin: 2px 0 8px;
+  padding: 8px 12px;
+  border: 1px solid #eadcf7;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #4a148c;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #ecdcf7;
+}
+.sonido-toggle:active { transform: translateY(2px); box-shadow: 0 1px 0 #ecdcf7; }
+.sonido-estado { font-weight: 700; font-size: 0.85rem; }
+.sonido-pista { font-size: 0.72rem; color: #7b1fa2; }
+.sonido-toggle[aria-pressed="false"] .sonido-estado { color: #8e8e93; }
