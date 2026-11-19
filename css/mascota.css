@@ -1276,8 +1276,10 @@ body:has(.species-nube) .pet-shadow {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(circle 5px at 36% 34%, rgba(255,255,255,0.95) 98%, transparent);
 }
-.pet-sprite.species-pollito::after {
-  content: ''; position: absolute; left: 50%; top: 53%; transform: translateX(-50%);
+/* Pico del pollito: va en la boca, así se mueve con la cara al mirar a un lado */
+.pet-sprite.species-pollito .mouth { position: relative; }
+.pet-sprite.species-pollito .mouth::before {
+  content: ''; position: absolute; left: 50%; top: -9px; transform: translateX(-50%);
   width: 14px; height: 9px; pointer-events: none;
   background: #ff9800;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
