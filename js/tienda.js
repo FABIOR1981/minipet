@@ -346,7 +346,8 @@ export const Store = {
   },
 
   renderScenery() {
-    this.renderCollection(tituloPantalla('escenario', 'Escenario'), 'bg', () => this.renderScenery());
+    const saludo = Staff.saludoHTML(PetState.petSpecies, 'escenario', '¡Elegí un fondo! Soy {nombre}, te lo decoro.');
+    this.renderCollection(tituloPantalla('escenario', 'Escenario') + saludo, 'bg', () => this.renderScenery());
   },
 
 

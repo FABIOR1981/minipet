@@ -57,6 +57,13 @@ export const Staff = {
       </div>`;
   },
 
+  // Nombre (texto) de quien ocupa un puesto
+  nombreDe(principal, puestoId) {
+    const id = this.ocupante(principal, puestoId);
+    const info = Catalogo.species.find(s => s.id === id);
+    return info ? info.name : '';
+  },
+
   // Qué personaje ocupa un puesto, dada la mascota principal
   ocupante(principal, puestoId) {
     const asignacion = this.asignar(principal);

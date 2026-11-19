@@ -3,6 +3,7 @@ import { Avisos } from './avisos.js';
 import { Catalogo } from './catalogo.js';
 import { ico } from './iconos.js';
 import { Minigames } from './juegos/juegos-base.js';
+import { Staff } from './staff.js';
 import { PetState } from './mascota-estado.js';
 import { closeModal, switchTab } from './navegacion.js';
 import { AudioEffects } from './sonidos.js';
@@ -65,7 +66,7 @@ export const Vestidor = {
       Ambiente.fit();
       this.walkTo(0.4, 0.42);
     });
-    PetState.showDialogue(this.phrase('welcome'));
+    PetState.showDialogue(`¡Probemos looks! Soy ${Staff.nombreDe(PetState.petSpecies, 'vestidor')}, tu estilista.`);
   },
 
   close() {

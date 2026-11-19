@@ -1,5 +1,6 @@
 import { Avisos } from './avisos.js';
 import { Catalogo } from './catalogo.js';
+import { Staff } from './staff.js';
 import { AudioEffects } from './sonidos.js';
 // =========================================================
 // MASCOTA-ESTADO.JS — Datos de la mascota (stats, inventario,
@@ -109,6 +110,7 @@ export const PetState = {
     this.updateUI();
     this.showEating();
     this.floatText(`+${this.hunger - before}`, 'hambre');
+    this.showDialogue(`${Staff.nombreDe(this.petSpecies, 'cuidados')}: ¡Buen provecho!`);
   },
 
   heal() {
@@ -276,7 +278,7 @@ export const PetState = {
       if (!this.isSick && (this.hunger < 40 || this.happiness < 40) && Math.random() < 0.2) {
         this.isSick = true;
         // Aviso visible: sin esto el cambio pasa casi desapercibido
-        this.floatText('¡Me siento mal!', 'felicidad');
+        this.floatText(`¡Me siento mal! ${Staff.nombreDe(this.petSpecies, 'cuidados')} dice: usá la medicina.`, 'felicidad');
       }
     }
     this.saveData();
