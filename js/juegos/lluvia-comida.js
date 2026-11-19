@@ -121,7 +121,7 @@ Object.assign(Minigames, {
 
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.font = '26px sans-serif';
+        ctx.font = '34px sans-serif';
         // Color opaco: los emojis heredan la transparencia del fillStyle (venía el de la sombra)
         ctx.fillStyle = '#000';
 

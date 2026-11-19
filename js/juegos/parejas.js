@@ -17,6 +17,8 @@ Object.assign(Minigames, {
       // Seis accesorios al azar, cada uno dos veces, mezclados
       const accessories = Minigames.shuffle(Catalogo.items.filter(i => i.category === 'acc')).slice(0, PAIRS);
       const deck = Minigames.shuffle([...accessories, ...accessories]);
+      // Un color pastel por accesorio: las dos cartas de un par van del mismo tono
+      const TONOS = ['#ffd6e8', '#d6f0ff', '#e4d6ff', '#d6ffe6', '#fff0c2', '#ffe0cc'];
 
       const hud = `
         <div class="game-hud">
@@ -30,7 +32,7 @@ Object.assign(Minigames, {
         <div class="game-stage stage-dom">
         <div class="pairs-grid" id="pairs-grid">
           ${deck.map((item, i) => `
-            <button class="pair-card" data-index="${i}" aria-label="Carta ${i + 1}">
+            <button class="pair-card" data-index="${i}" aria-label="Carta ${i + 1}" style="--tono:${TONOS[accessories.indexOf(item) % TONOS.length]}">
               <span class="pair-inner">
                 <span class="pair-back">${ico('mipet')}</span>
                 <span class="pair-front"><img src="${item.image}" alt="${item.name}"></span>

@@ -309,20 +309,20 @@
 }
 
 .pair-back {
-  background: linear-gradient(135deg, #ce93d8, #b388ff);
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.14) 0 5px, transparent 5px 10px), linear-gradient(135deg, #ce93d8, #9575cd);
   border: 2px solid #9575cd;
   box-shadow: 0 3px 0 #7e57c2;
   font-size: 1.3rem;
 }
 
 .pair-front {
-  background: #fffdf7;
-  border: 2px solid #ffd54f;
-  box-shadow: 0 3px 0 #ffca28;
+  background: linear-gradient(180deg, #ffffff 0%, var(--tono, #fff8e1) 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 0 #d7c7e6;
   transform: rotateY(180deg);
 }
 
-.pair-front img { width: 78%; height: 78%; object-fit: contain; }
+.pair-front img { width: 82%; height: 82%; object-fit: contain; filter: drop-shadow(0 2px 2px rgba(74, 20, 140, 0.18)); }
 
 .pair-card.matched .pair-front {
   background: #e8f5e9;

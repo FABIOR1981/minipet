@@ -93,6 +93,14 @@ Object.assign(Minigames, {
         ctx.textBaseline = 'middle';
 
         bubbles.forEach(b => {
+          // Aro de vidrio detrás del dibujo, para que se lea como burbuja
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r * 1.15, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+          ctx.stroke();
           ctx.font = `${b.r * 2}px sans-serif`;
           Dibujos.dibujar(ctx, b.isGolden ? '🌟' : '🫧', b.x, b.y);
         });

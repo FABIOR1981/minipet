@@ -114,7 +114,7 @@ Object.assign(Minigames, {
         pet.place(basketX + 30, GROUND);
 
         // Dulce cayendo
-        ctx.font = '26px sans-serif';
+        ctx.font = '34px sans-serif';
         // Color opaco: los emojis heredan la transparencia del fillStyle (venía el de la sombra)
         ctx.fillStyle = '#000';
         Dibujos.dibujar(ctx, currentCandy, itemX, itemY);

@@ -83,7 +83,7 @@ Object.assign(Minigames, {
           balloons.push({
             x: Math.random() * 260 + 20,
             y: H + 20,
-            radius: 18,
+            radius: 24,
             speed: Math.random() * 1.5 + 1.2
           });
         }
