@@ -874,3 +874,62 @@ button:disabled {
   border-radius: 22px;
   box-shadow: 0 6px 16px rgba(123, 31, 162, 0.10);
 }
+
+/* =========================================================
+   DIRECCIÓN NUEVA: cielo, lavanda y durazno; botones 3D
+   ========================================================= */
+body {
+  background: linear-gradient(180deg, #d6ecff 0%, #efe4ff 55%, #ffe9e4 100%);
+}
+#app-container { background: #fdfbff; }
+
+/* Barra inferior: botones grandes con relieve y brillo */
+.bottom-nav {
+  gap: 8px;
+  padding: 10px;
+  background: linear-gradient(180deg, #f7f2ff 0%, #ece3fb 100%);
+  border: 2px solid #ffffff;
+}
+.bottom-nav button {
+  position: relative;
+  border: none;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 5px 0 #d7c6ee, 0 8px 14px rgba(123, 31, 162, 0.12);
+  padding: 9px 4px 8px;
+  font-weight: 700;
+  overflow: hidden;
+}
+.bottom-nav button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 40%;
+  border-radius: 20px 20px 50% 50%;
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+.bottom-nav button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #d7c6ee;
+}
+
+/* Barra superior: cápsulas con icono y número destacados */
+.stat-box {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 10px 9px;
+  box-shadow: 0 3px 0 #d9c8f0, 0 6px 12px rgba(123, 31, 162, 0.10);
+}
+
+/* Cabeceras de pantalla: insignia del icono más marcada */
+.titulo-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  box-shadow: 0 3px 0 rgba(123, 31, 162, 0.18);
+}
+.titulo-pantalla { font-size: 1.25rem; font-weight: 800; }
+
+/* Globo de diálogo: más redondo, como en las referencias */
+.thought-bubble { border-radius: 22px; border-color: #b8d8ff; }
