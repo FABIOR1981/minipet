@@ -1099,7 +1099,7 @@ body:has(.species-nube) .pet-shadow {
 
 /* Estilista en el encabezado del vestidor: dibujo chico, sin la sombra del globo */
 .vestidor-estilista { display: inline-flex; margin-left: 6px; }
-.vestidor-estilista .staff-avatar { width: 40px; height: 40px; box-shadow: none; background: transparent; }
+.vestidor-estilista .staff-avatar { width: 52px; height: 52px; box-shadow: none; background: transparent; }
 
 /* Personajes del elenco (silueta con máscara, igual que Nube; la cara la pone el juego) */
 .pet-sprite.species-gotita {
@@ -1347,5 +1347,5 @@ body:has(.species-nube) .pet-shadow {
 .staff-avatar { overflow: hidden; position: relative; }
 .staff-figura { position: absolute; inset: 0; }
 .staff-figura .pet-sprite { position: absolute; left: 50%; top: 50%; margin: -60px 0 0 -60px; transform: scale(0.44); pointer-events: none; }
-.vestidor-estilista .staff-avatar { width: 40px; height: 40px; }
-.vestidor-estilista .staff-figura .pet-sprite { transform: scale(0.3); }
+.vestidor-estilista .staff-avatar { width: 52px; height: 52px; }
+.vestidor-estilista .staff-figura .pet-sprite { transform: scale(0.38); }
