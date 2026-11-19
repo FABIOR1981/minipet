@@ -134,3 +134,23 @@
 .vestidor-item-emoji.tinte-tienda { color: var(--c); display: flex; justify-content: center; }
 .vestidor-item-emoji.tinte-tienda .ico { width: 26px; height: 26px; }
 .vestidor-item-emoji.sin-nada { display: flex; align-items: flex-end; justify-content: center; height: 36px; }
+
+/* Marca de seleccionado, igual que en las tarjetas de la tienda */
+.vestidor-item { position: relative; }
+.vestidor-item.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff4081;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 0 #c2185b;
+  pointer-events: none;
+}

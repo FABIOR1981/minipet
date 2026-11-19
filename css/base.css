@@ -77,7 +77,42 @@ body {
   color: #4a148c;
   box-shadow: 0 2px 0 #ecdcf7;
   border: 1px solid #efe3fa;
+  position: relative;
+  padding-bottom: 10px;
+  --c: #7b1fa2;
 }
+/* Color de cada estadística, usado por el icono y la barra de nivel */
+.stat-box:has(.ico-hambre) { --c: #ff8a50; }
+.stat-box:has(.ico-felicidad) { --c: #ec407a; }
+.stat-box:has(.ico-energia) { --c: #ffb300; }
+.stat-box:has(.ico-moneda) { --c: #ffb300; padding-bottom: 7px; }
+.stat-box .ico {
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c) 16%, white);
+}
+/* Barra de nivel: pista + relleno proporcional (variable --p) */
+.stat-box::before,
+.stat-box::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 3px;
+}
+.stat-box::before { background: #f3ebfb; }
+.stat-box::after {
+  background: var(--c);
+  right: auto;
+  width: calc((100% - 24px) * var(--p, 100) / 100);
+  transition: width 0.4s ease;
+}
+.stat-box:has(.ico-moneda)::before,
+.stat-box:has(.ico-moneda)::after { display: none; }
 
 /* Iconos SVG de la interfaz */
 .ico {
@@ -100,11 +135,11 @@ body {
   background: #ffffff;
   padding: 8px 16px;
   border-radius: 18px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: #4a148c;
   border: 2px solid #ce93d8;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 14px rgba(123, 31, 162, 0.14);
   z-index: 10;
   max-width: 80%;
   text-align: center;
@@ -800,4 +835,22 @@ button:disabled {
   .modal:not(.hidden) { animation: none; }
   .item-card { transition: none; }
   .item-card.tocable:hover { transform: none; }
+}
+
+/* Tarjeta seleccionada: marca circular en la esquina */
+.item-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 5px;   /* dentro de la tarjeta: los contenedores con scroll no la recortan */
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff4081;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 0 #c2185b;
 }
