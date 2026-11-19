@@ -614,3 +614,13 @@
   box-shadow: 0 2px 0 #e6d6f5;
 }
 .ayuda-juegos:active { transform: translateY(1px); box-shadow: none; }
+
+/* Resultado de cualquier minijuego: el contenido se centra en el cuadro y las
+   monedas llevan su rótulo. Solo visual. */
+.result-screen { min-height: 360px; }
+.result-coins-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e65100;
+  opacity: 0.85;
+}

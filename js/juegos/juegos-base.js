@@ -224,6 +224,7 @@ export const Minigames = {
         <div class="result-coins-box">
           ${ico('moneda', 'ico-moneda')}
           <span id="result-coin-num">0</span>
+          <span class="result-coins-label">monedas</span>
         </div>
         <div class="result-actions">
           <button class="card-btn con-ico result-btn-again" id="result-again">${ico('repetir')}Jugar de nuevo</button>
