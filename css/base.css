@@ -69,8 +69,8 @@ body {
   gap: 5px;
   white-space: nowrap;
   border-radius: 14px;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
   color: #4a148c;
   box-shadow: 0 2px 0 #ecdcf7;
@@ -765,3 +765,18 @@ img.dibujo {
 .mypet-cabecera .sonido-toggle { margin: 0; padding: 6px 10px; }
 .mypet-cabecera .sonido-pista { display: none; }
 .mypet-datos { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+
+/* Estados de foco y deshabilitado comunes a toda la app.
+   El foco se ve al navegar con teclado; las reglas propias de cada
+   campo (outline: none) siguen mandando donde ya están definidas. */
+button:focus-visible,
+[role="tab"]:focus-visible,
+a:focus-visible {
+  outline: 3px solid #b388ff;
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  filter: saturate(0.6);
+}
