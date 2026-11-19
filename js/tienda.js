@@ -11,6 +11,9 @@ import { AudioEffects } from './sonidos.js';
 // brillantina). Usa los datos de Catalogo (catalogo.js) y el
 // estado de PetState — no define datos propios.
 // =========================================================
+// Rasgos que se dejan de ofrecer en Mi Pet (se siguen dibujando si ya estaban puestos)
+const RASGOS_OCULTOS = { eyes: ['button'], mouth: ['omega'], cheeks: ['big'] };
+
 export const Store = {
   storeCategory: 'all',
 
@@ -209,9 +212,16 @@ export const Store = {
 
   bindTraits(content) {
     const current = { eyes: PetState.petEyes, mouth: PetState.petMouth, cheeks: PetState.petCheeks };
+    // Rasgos que ya no se ofrecen: si la mascota los tenía puestos, vuelve al primero disponible
+    Object.keys(RASGOS_OCULTOS).forEach(kind => {
+      if (!RASGOS_OCULTOS[kind].includes(current[kind])) return;
+      const primero = Catalogo.traits[kind].find(o => !RASGOS_OCULTOS[kind].includes(o.id));
+      PetState.setTrait(kind, primero.id);
+      current[kind] = primero.id;
+    });
     content.querySelectorAll('.trait-row').forEach(row => {
       const kind = row.dataset.kind;
-      Catalogo.traits[kind].forEach(option => {
+      Catalogo.traits[kind].filter(o => !(RASGOS_OCULTOS[kind] || []).includes(o.id)).forEach(option => {
         const btn = document.createElement('button');
         btn.className = `trait-option ${current[kind] === option.id ? 'selected' : ''}`;
         btn.setAttribute('aria-label', option.name);
