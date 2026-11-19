@@ -671,3 +671,15 @@ img.dibujo {
   transform: translateX(-50%) rotate(45deg);
   border-radius: 0 0 4px 0;
 }
+
+/* Tienda, Armario y Escenario: mismas tarjetas premium que el menú de minijuegos,
+   a tamaño de 3 columnas. Solo visual. */
+.grid-container .item-card.tocable {
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf5ff 100%);
+  border-color: #eadcf7;
+  box-shadow: 0 4px 0 #e1cdf0, 0 10px 16px -12px rgba(74, 20, 140, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.grid-container .item-card.tocable:hover { transform: translateY(-2px); border-color: #d1b3ec; }
+.grid-container .item-card.tocable:active { transform: translateY(3px); box-shadow: 0 1px 0 #e1cdf0; }
