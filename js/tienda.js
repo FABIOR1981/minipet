@@ -166,8 +166,9 @@ export const Store = {
       <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
+        <button class="store-tab ${tab === 'personaje' ? 'active' : ''}" data-tab="personaje">Personaje</button>
       </div>
-      ${tab === 'cuerpo' ? this.renderPetCustomization() : this.renderTraits()}
+      ${tab === 'cuerpo' ? this.renderPetCustomization() : tab === 'rasgos' ? this.renderTraits() : this.renderPersonaje()}
       <p class="privacidad-enlace"><a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a></p>
     `;
     content.querySelectorAll('.store-tab').forEach(btn => {
@@ -187,7 +188,45 @@ export const Store = {
     nameInput.oninput = () => PetState.setName(nameInput.value);
 
     if (tab === 'cuerpo') this.bindPetCustomization(content);
-    else this.bindTraits(content);
+    else if (tab === 'rasgos') this.bindTraits(content);
+    else this.bindPersonaje(content);
+  },
+
+  renderPersonaje() {
+    return `
+      <section class="pet-customization-panel" aria-label="Elegir personaje">
+        <p class="wardrobe-label">Elegí tu personaje</p>
+        <div class="personaje-grid"></div>
+      </section>
+    `;
+  },
+
+  bindPersonaje(content) {
+    const grid = content.querySelector('.personaje-grid');
+    Catalogo.species.forEach(especie => {
+      const btn = document.createElement('button');
+      const elegido = PetState.petSpecies === especie.id;
+      btn.className = `personaje-card ${elegido ? 'selected' : ''} ${especie.disponible ? '' : 'proximamente'}`;
+      btn.setAttribute('aria-label', especie.name + (especie.disponible ? '' : ' (próximamente)'));
+      btn.setAttribute('aria-pressed', String(elegido));
+      // Vista previa de la especie; la silueta se muestra aunque sea la de otro personaje
+      const mini = Minigames.createMiniPet(84);
+      const sprite = mini.el.querySelector('.pet-sprite');
+      if (sprite && especie.disponible) sprite.classList.add(`species-${especie.id}`);
+      const nombre = document.createElement('span');
+      nombre.className = 'personaje-nombre';
+      nombre.textContent = especie.name;
+      const pista = document.createElement('span');
+      pista.className = 'personaje-pista';
+      pista.textContent = especie.disponible ? (elegido ? 'Tu personaje' : 'Elegir') : 'Pronto';
+      btn.append(mini.el, nombre, pista);
+      if (especie.disponible) {
+        btn.onclick = () => { PetState.setSpecies(especie.id); this.renderMyPet(); };
+      } else {
+        btn.disabled = true;
+      }
+      grid.appendChild(btn);
+    });
   },
 
   // Vista previa: una copia de la mascota tal como está ahora

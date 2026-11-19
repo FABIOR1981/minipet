@@ -17,7 +17,7 @@ import './juegos/vestir-igual.js';
 import './mascota-visual.js';
 import './particulas.js';
 import './sonidos.js';
-import './tienda.js';
+import { Store } from './tienda.js';
 import { Avisos } from './avisos.js';
 import { PetState } from './mascota-estado.js';
 import { closeModal, switchTab } from './navegacion.js';
@@ -39,11 +39,15 @@ function mostrarBienvenida() {
     return; // sin localStorage no hay forma de recordar: mejor no molestar
   }
   setTimeout(() => {
-    Avisos.aviso('Dale de comer, cuidala y jugá minijuegos para ganar monedas. Podés ponerle nombre en Mi Pet.', {
-      titulo: '¡Hola! Soy tu mascota',
+    Avisos.aviso('Mochi y Nube ya están listos y pronto llegan los demás. Después podés ponerle nombre en Mi Pet.', {
+      titulo: '¡Hola! Elegí tu personaje',
       icono: 'mipet',
       tinte: 'mipet',
-      aceptar: '¡Vamos!'
+      aceptar: 'Elegir'
+    }).then(() => {
+      // Primera vez: se abre directo la pestaña para elegir personaje
+      Store.myPetTab = 'personaje';
+      switchTab('my-pet');
     });
   }, 600);
 }

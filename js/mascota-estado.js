@@ -53,7 +53,7 @@ export const PetState = {
   petMouth: 'cat',
   petCheeks: 'round',
   petShape: 'shape-circle',
-  // Personaje elegido: 'mochi' (bola) o 'nube'. Cambia la silueta, no la forma elegida en Mi Pet
+  // Personaje elegido (ver Catalogo.species). Cambia la silueta, no la forma elegida en Mi Pet
   petSpecies: 'mochi',
   petSize: 'medium',
   glitterEnabled: false,
@@ -164,6 +164,15 @@ export const PetState = {
     const field = { eyes: 'petEyes', mouth: 'petMouth', cheeks: 'petCheeks' }[kind];
     if (!field || !Catalogo.traits[kind].some(option => option.id === id)) return;
     this[field] = id;
+    AudioEffects.playTone(700, 'sine', 0.1);
+    this.saveData();
+    this.updateUI();
+  },
+
+  // Cambia el personaje (solo los que ya tienen diseño)
+  setSpecies(id) {
+    if (!Catalogo.species.some(s => s.id === id && s.disponible)) return;
+    this.petSpecies = id;
     AudioEffects.playTone(700, 'sine', 0.1);
     this.saveData();
     this.updateUI();
@@ -349,7 +358,7 @@ export const PetState = {
       this.petMouth = data.petMouth || 'cat';
       this.petCheeks = data.petCheeks || 'round';
       this.petShape = data.petShape || 'shape-circle';
-      this.petSpecies = ['mochi', 'nube'].includes(data.petSpecies) ? data.petSpecies : 'mochi';
+      this.petSpecies = Catalogo.species.some(s => s.id === data.petSpecies && s.disponible) ? data.petSpecies : 'mochi';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);
       this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));

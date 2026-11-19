@@ -1047,6 +1047,18 @@
 #pet.species-nube {
   animation: nubeFlota 2.8s ease-in-out infinite;
 }
+/* Mi Pet > Personaje: una tarjeta por personaje */
+.personaje-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+.personaje-card {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 8px 4px; border: 2px solid #f0e6ff; border-radius: 16px;
+  background: #fff; color: #6a1b9a; font: inherit; cursor: pointer;
+}
+.personaje-card.selected { border-color: #ff4081; background: #fff0f6; box-shadow: 0 0 0 2px #ff80ab; }
+.personaje-card.proximamente { opacity: 0.5; cursor: default; }
+.personaje-nombre { font-size: 0.85rem; font-weight: 800; }
+.personaje-pista { font-size: 0.7rem; font-weight: 600; color: #8e6fb0; }
+
 @keyframes nubeFlota {
   0%, 100% { translate: 0 0; }
   50% { translate: 0 -14px; }
@@ -1058,3 +1070,6 @@ body:has(.species-nube) .pet-shadow {
 @media (prefers-reduced-motion: reduce) {
   #pet.species-nube { animation: none; }
 }
+
+/* Tarjetas de Personaje: la nube entra completa en la miniatura */
+.personaje-card .pet-sprite.species-nube { width: 96px; height: 90px; }

@@ -5,6 +5,17 @@
 // Sin lógica de UI ni acceso al DOM — solo datos.
 // =========================================================
 export const Catalogo = {
+  // Personajes elegibles en Mi Pet > Personaje. 'disponible': ya tiene diseño
+  species: [
+    { id: 'mochi',    name: 'Mochi',           disponible: true },
+    { id: 'gotita',   name: 'Gotita',          disponible: false },
+    { id: 'nube',     name: 'Nube',            disponible: true },
+    { id: 'pollito',  name: 'Pollito',         disponible: false },
+    { id: 'gatito',   name: 'Gatito de lazo',  disponible: false },
+    { id: 'conejita', name: 'Conejita',        disponible: false },
+    { id: 'buho',     name: 'Vendedora búho',  disponible: false },
+  ],
+
   // Las formas de mascota disponibles (elegibles en Mi Pet)
   shapes: [
     { id: 'shape-circle',   name: 'Círculo',   emoji: '⚪' },
