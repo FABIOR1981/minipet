@@ -1274,7 +1274,7 @@ body:has(.species-nube) .pet-shadow {
 /* Detalles propios de cada personaje (una capa extra con ::after, por encima de la cara) */
 .pet-sprite.species-gotita::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(circle 5px at 38% 46%, rgba(255,255,255,0.95) 98%, transparent);
+  background: radial-gradient(circle 5px at 36% 34%, rgba(255,255,255,0.95) 98%, transparent);
 }
 .pet-sprite.species-pollito::after {
   content: ''; position: absolute; left: 50%; top: 53%; transform: translateX(-50%);
@@ -1297,3 +1297,9 @@ body:has(.species-nube) .pet-shadow {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(ellipse 22px 15px at 50% 82%, rgba(255, 243, 224, 0.9) 98%, transparent);
 }
+
+/* Caras propias de cada personaje: mismas piezas, otras proporciones */
+.pet-sprite.species-gotita .kawaii-face { translate: 0 -4px; }
+.pet-sprite.species-pollito .cheek { width: 16px; height: 10px; opacity: 0.6; }
+.pet-sprite.species-gatito .eye { width: 12px; height: 15px; }
+.pet-sprite.species-conejita .eye { width: 17px; height: 19px; }
