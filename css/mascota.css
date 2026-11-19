@@ -1278,8 +1278,9 @@ body:has(.species-nube) .pet-shadow {
 }
 .pet-sprite.species-pollito::after {
   content: ''; position: absolute; left: 50%; top: 53%; transform: translateX(-50%);
-  width: 0; height: 0; pointer-events: none;
-  border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid #ff9800;
+  width: 14px; height: 9px; pointer-events: none;
+  background: #ff9800;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 .pet-sprite.species-gatito::after {
   content: ''; position: absolute; left: 50%; top: 22%; transform: translateX(-50%);
