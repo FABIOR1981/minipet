@@ -1005,3 +1005,9 @@
 .sonido-estado { font-weight: 700; font-size: 0.85rem; }
 .sonido-pista { font-size: 0.72rem; color: #7b1fa2; }
 .sonido-toggle[aria-pressed="false"] .sonido-estado { color: #8e8e93; }
+
+/* Mi Pet sin scroll: secciones más juntas */
+.pet-customization-panel .wardrobe-label { margin: 6px 4px 4px; }
+.pet-customization-panel .glitter-intensity { margin: 4px 6px 2px; }
+.pet-customization-panel .color-picker { gap: 6px; }
+.pet-customization-panel .shape-picker .shape-muestra { height: 30px; }

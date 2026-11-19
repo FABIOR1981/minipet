@@ -146,7 +146,9 @@ export const Store = {
     const tab = this.myPetTab;
     content.innerHTML = `
       ${tituloPantalla('mipet', 'Mi Pet')}
+      <div class="mypet-cabecera">
       <div id="mypet-preview" class="mypet-preview"></div>
+      <div class="mypet-datos">
       <label class="mypet-name">Nombre
         <input id="mypet-name" type="text" maxlength="14" placeholder="Luna" autocomplete="off">
       </label>
@@ -154,6 +156,8 @@ export const Store = {
         <span class="sonido-estado">${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}</span>
         <span class="sonido-pista">Toca para ${AudioEffects.silenciado ? 'encenderlo' : 'apagarlo'}</span>
       </button>
+      </div>
+      </div>
       <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
