@@ -3,8 +3,8 @@ import { Minigames } from './juegos-base.js';
 import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // RUNNER-MAGICO.JS — La mascota corre y salta los hongos que
-// se acercan; cada uno esquivado suma monedas. Soporte de
-// teclado y táctil.
+// se acercan; cada uno esquivado suma monedas. Tiene doble salto
+// (el segundo se hace en el aire). Soporte de teclado y táctil.
 // =========================================================
 Object.assign(Minigames, {
   startRunnerGame() {
@@ -30,6 +30,7 @@ Object.assign(Minigames, {
       let playerY = STAND;
       let playerVY = 0;
       let isJumping = false;
+      let saltos = 0; // saltos usados desde el piso: 2 como máximo (doble salto)
       const obstacles = []; // { x, tipo, w, contado }
       let score = 0;
       let gameOver = false;
@@ -46,10 +47,12 @@ Object.assign(Minigames, {
 
       const jump = (e) => {
         if (e) e.preventDefault();
-        if (!isJumping) {
-          playerVY = -11;
+        // Primer salto desde el piso; el segundo sale desde donde esté la mascota en el aire
+        if (saltos < 2) {
+          playerVY = saltos === 0 ? -11 : -10;
+          saltos++;
           isJumping = true;
-          AudioEffects.playTone(550, 'square', 0.08);
+          AudioEffects.playTone(saltos === 1 ? 550 : 660, 'square', 0.08);
         }
       };
 
@@ -88,6 +91,7 @@ Object.assign(Minigames, {
         if (playerY >= STAND) {
           playerY = STAND;
           isJumping = false;
+          saltos = 0;
         }
         pet.run(!isJumping); // trota en el piso, se estira en el aire
 
