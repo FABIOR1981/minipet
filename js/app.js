@@ -25,8 +25,28 @@ import { Vestidor } from './vestidor.js';
 // Inicialización del Juego y Registro del Service Worker PWA
 document.addEventListener('DOMContentLoaded', () => {
   PetState.init();
+  mostrarBienvenida();
   registerServiceWorker();
 });
+
+// Bienvenida: se muestra una sola vez por dispositivo, en la primera visita
+function mostrarBienvenida() {
+  const CLAVE = 'mipetkawaii-bienvenida-v1';
+  try {
+    if (localStorage.getItem(CLAVE)) return;
+    localStorage.setItem(CLAVE, '1');
+  } catch (e) {
+    return; // sin localStorage no hay forma de recordar: mejor no molestar
+  }
+  setTimeout(() => {
+    Avisos.aviso('Dale de comer, cuidala y jugá minijuegos para ganar monedas. Podés ponerle nombre en Mi Pet.', {
+      titulo: '¡Hola! Soy tu mascota',
+      icono: 'mipet',
+      tinte: 'mipet',
+      aceptar: '¡Vamos!'
+    });
+  }, 600);
+}
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
