@@ -251,6 +251,25 @@ export const Store = {
       };
       container.appendChild(card);
     });
+
+    // Escenarios: al final, una tarjeta que invita a la Tienda con lo que falta comprar
+    if (category === 'bg') {
+      const total = Catalogo.items.filter(i => i.category === 'bg').length;
+      const faltan = total - PetState.inventory.filter(id => Catalogo.items.find(i => i.id === id)?.category === 'bg').length;
+      if (faltan > 0) {
+        const teaser = document.createElement('div');
+        teaser.className = 'item-card tocable tienda-teaser';
+        teaser.setAttribute('role', 'button');
+        teaser.tabIndex = 0;
+        teaser.setAttribute('data-action', 'tienda');
+        teaser.innerHTML = `
+          <span class="teaser-icono">${ico('tienda')}</span>
+          <span class="card-title">${faltan === 1 ? '1 escenario más' : `${faltan} escenarios más`}</span>
+          <span class="teaser-sub">Ir a la Tienda</span>
+        `;
+        container.appendChild(teaser);
+      }
+    }
   },
 
   renderScenery() {

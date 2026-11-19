@@ -92,7 +92,7 @@ body {
 
 .thought-bubble {
   position: absolute;
-  top: 62px;
+  top: 98px;
   left: 50%;
   transform: translateX(-50%);
   background: #ffffff;
@@ -683,3 +683,47 @@ img.dibujo {
 }
 .grid-container .item-card.tocable:hover { transform: translateY(-2px); border-color: #d1b3ec; }
 .grid-container .item-card.tocable:active { transform: translateY(3px); box-shadow: 0 1px 0 #e1cdf0; }
+
+/* Escenario: tarjeta de invitación a la Tienda al final de la lista */
+.item-card.tienda-teaser {
+  border-style: dashed;
+  border-color: #d1b3ec;
+  background: linear-gradient(180deg, #fbf5ff 0%, #f3e8ff 100%);
+  box-shadow: none;
+}
+.item-card.tienda-teaser .teaser-icono {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #a66bea;
+}
+.item-card.tienda-teaser .teaser-sub {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #7b1fa2;
+}
+
+/* Marca de la app, arriba de la barra de estadísticas */
+.brand-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px 0;
+  background: #fdf8ff;
+}
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  background: linear-gradient(90deg, #7b1fa2, #e91e63);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-heart { font-size: 0.9rem; }
