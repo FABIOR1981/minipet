@@ -841,8 +841,9 @@
 .kawaii-face.bored .eyes { animation: miraLados 4.5s ease-in-out infinite; }
 .kawaii-face.bored .eyebrow { opacity: 0.75; translate: 0 3px; }
 
-/* Enferma: mejillas apagadas */
+/* Enferma: mejillas apagadas y termómetro más visible */
 .kawaii-face.sick .cheek { filter: saturate(0.4); }
+.kawaii-face.sick .extra-prop { font-size: 1.9rem; top: -16px; }
 .kawaii-face.sick .sparkle { display: none; }
 
 /* Ojos "sonrientes" (arcos): los párpados no se recortan, quedan las cejas */

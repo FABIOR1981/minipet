@@ -391,6 +391,16 @@ body {
 /* Pulso de una stat cuando sube (comer, curar, acariciar, ganar monedas) */
 .stat-box.bump { animation: statBump 0.45s ease; }
 
+/* Medicina: pulsa mientras la mascota está enferma */
+.bottom-nav button.nav-medicina.necesita-atencion { animation: pulsoMedicina 1.4s ease-in-out infinite; }
+@keyframes pulsoMedicina {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240, 82, 124, 0.55); }
+  50% { box-shadow: 0 0 0 8px rgba(240, 82, 124, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bottom-nav button.nav-medicina.necesita-atencion { animation: none; }
+}
+
 @keyframes statBump {
   0%, 100% { transform: scale(1); }
   40% { transform: scale(1.18); background: #f3e5f5; }

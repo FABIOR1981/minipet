@@ -1,3 +1,4 @@
+import { Avisos } from './avisos.js';
 import { Catalogo } from './catalogo.js';
 import { AudioEffects } from './sonidos.js';
 // =========================================================
@@ -54,6 +55,7 @@ export const PetState = {
   petShape: 'shape-circle',
   petSize: 'medium',
   glitterEnabled: false,
+  avisoGuardadoMostrado: false,
   guardadoBloqueado: false, // true si hay un guardado de una versión más nueva
   glitterIntensity: 0,
   isSick: false,
@@ -262,15 +264,32 @@ export const PetState = {
 
       if (!this.isSick && (this.hunger < 40 || this.happiness < 40) && Math.random() < 0.2) {
         this.isSick = true;
+        // Aviso visible: sin esto el cambio pasa casi desapercibido
+        this.floatText('¡Me siento mal!', 'felicidad');
       }
     }
     this.saveData();
     this.updateUI();
   },
 
+  // Aviso una sola vez por sesión: el progreso no se guarda porque
+  // hay una partida de una versión más nueva en este navegador
+  avisarGuardadoBloqueado() {
+    if (this.avisoGuardadoMostrado) return;
+    if (typeof document === 'undefined' || !document.body) return;
+    this.avisoGuardadoMostrado = true;
+    Avisos.aviso(
+      'Tu progreso no se está guardando en este navegador porque hay una partida de una versión más nueva del juego. Recargá la página para usar la versión actual.',
+      { titulo: 'Guardado en pausa', icono: 'mipet' }
+    );
+  },
+
   saveData() {
     // Un guardado de una versión más nueva no se pisa
-    if (this.guardadoBloqueado) return;
+    if (this.guardadoBloqueado) {
+      this.avisarGuardadoBloqueado();
+      return;
+    }
     const datos = JSON.stringify({
       version: VERSION_GUARDADO,
       coins: this.coins,

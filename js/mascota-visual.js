@@ -246,6 +246,9 @@ Object.assign(PetState, {
     else delete thought.dataset.name;
     thought.style.setProperty('--name-color', this.petColor);
 
+    // El botón de medicina llama la atención mientras la mascota está enferma
+    document.querySelector('.nav-medicina')?.classList.toggle('necesita-atencion', !!this.isSick);
+
     // Rasgos elegidos en Mi Pet: ojos y mejillas por clase, boca por texto
     face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks}`;
     const mouthEl = face.querySelector('.mouth');
