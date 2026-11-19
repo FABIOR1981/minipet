@@ -64,7 +64,7 @@ const Store = {
           <div style="margin: 8px 0; text-align:center;">
             <p class="wardrobe-label">Color</p>
             <div class="color-picker">
-              ${Catalogo.colors.map(c => `<button class="color-option ${PetState.petColor === c.hex ? 'selected' : ''}" onclick="PetState.setColor('${c.hex}'); Store.renderMyPet();" aria-label="Color ${c.name}" style="background:${c.hex};"></button>`).join('')}
+              ${Catalogo.colors.map(c => `<button class="color-option ${PetState.petColor === c.hex ? 'selected' : ''}" data-color="${c.hex}" aria-label="Color ${c.name}" style="background:${c.hex};"></button>`).join('')}
             </div>
           </div>
           <div style="margin: 8px 0; text-align:center;">
@@ -95,6 +95,9 @@ const Store = {
   },
 
   bindPetCustomization(content) {
+    content.querySelectorAll('[data-color]').forEach(btn => {
+      btn.onclick = () => { PetState.setColor(btn.dataset.color); this.renderMyPet(); };
+    });
     const shapePicker = content.querySelector('#shape-picker');
     Catalogo.shapes.forEach(shape => {
       const isSelected = PetState.petShape === shape.id;

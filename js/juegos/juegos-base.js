@@ -62,48 +62,52 @@ const Minigames = {
       Gana monedas y haz feliz a tu mascota.
     </p>
     <div class="grid-container games-grid">
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCatchGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startCatchGame">
         <span class="game-emoji tinte-medicina"><svg class="ico" aria-hidden="true"><use href="#i-juego-atrapa"/></svg></span>
         <span class="card-title">Atrapa Dulces</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPopGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startPopGame">
         <span class="game-emoji tinte-mipet"><svg class="ico" aria-hidden="true"><use href="#i-juego-globos"/></svg></span>
         <span class="card-title">Explotar Globos</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startCakeGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startCakeGame">
         <span class="game-emoji tinte-comer"><svg class="ico" aria-hidden="true"><use href="#i-juego-torre"/></svg></span>
         <span class="card-title">Torre de Postres</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startSimonGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startSimonGame">
         <span class="game-emoji tinte-juegos"><svg class="ico" aria-hidden="true"><use href="#i-juego-simon"/></svg></span>
         <span class="card-title">Simón Memoria</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startRunnerGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startRunnerGame">
         <span class="game-emoji tinte-dormir"><svg class="ico" aria-hidden="true"><use href="#i-juego-runner"/></svg></span>
         <span class="card-title">Runner Mágico</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startBubbleGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startBubbleGame">
         <span class="game-emoji tinte-armario"><svg class="ico" aria-hidden="true"><use href="#i-juego-burbujas"/></svg></span>
         <span class="card-title">Burbujas Mágicas</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startPairsGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startPairsGame">
         <span class="game-emoji tinte-tienda"><svg class="ico" aria-hidden="true"><use href="#i-juego-parejas"/></svg></span>
         <span class="card-title">Parejas</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startHideGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startHideGame">
         <span class="game-emoji tinte-escenario"><svg class="ico" aria-hidden="true"><use href="#i-juego-donde"/></svg></span>
         <span class="card-title">¿Dónde Está?</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startDressGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startDressGame">
         <span class="game-emoji tinte-mipet"><svg class="ico" aria-hidden="true"><use href="#i-juego-vestir"/></svg></span>
         <span class="card-title">Vestirla Igual</span>
       </div>
-      <div class="item-card tocable" role="button" tabindex="0" onclick="Minigames.startFoodGame()">
+      <div class="item-card tocable" role="button" tabindex="0" data-juego="startFoodGame">
         <span class="game-emoji tinte-medicina"><svg class="ico" aria-hidden="true"><use href="#i-juego-comida"/></svg></span>
         <span class="card-title">Lluvia de Comida</span>
       </div>
     </div>
   `;
+  // Cada tarjeta lleva el nombre del método que la inicia en data-juego
+  content.querySelectorAll('[data-juego]').forEach((card) => {
+    card.onclick = () => Minigames[card.dataset.juego]();
+  });
 },
 
   // Conteo Regresivo Estilo Kawaii

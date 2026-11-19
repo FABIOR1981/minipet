@@ -21,7 +21,7 @@ const Dibujos = {
   mapa: {
     '☁': 'cloud', '⚪': 'white-circle', '⚽': 'soccer-ball',
     '⛩': 'shinto-shrine', '⛺': 'tent', '✨': 'sparkles',
-    '❄': 'snowflake', '❤': 'red-heart', '⭐': 'star',
+    '❄': 'snowflake', '❤': 'red-heart', '⭐': 'star', '🏴': 'pirate-flag',
     '🌈': 'rainbow', '🌋': 'volcano', '🌌': 'milky-way',
     '🌙': 'crescent-moon', '🌟': 'glowing-star', '🌡': 'thermometer',
     '🌲': 'evergreen-tree', '🌳': 'deciduous-tree', '🌸': 'cherry-blossom',

@@ -180,7 +180,7 @@
   color: #6a1b9a;
   border: 2px solid transparent;
   padding: 6px 2px;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
 }
 
 .size-picker {
@@ -897,7 +897,7 @@
   border: 2px solid #efe3fa;
   border-radius: 14px;
   box-shadow: none;
-  font-size: 0.62rem;
+  font-size: 0.7rem;
 }
 .shape-muestra { height: 36px; display: flex; align-items: flex-end; justify-content: center; pointer-events: none; }
 .shape-option.selected { outline: none; border-color: #ff80ab; background: #fff0f6; }
