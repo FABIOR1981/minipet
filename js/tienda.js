@@ -27,18 +27,9 @@ export const Store = {
     return `<img src="${item.image}" class="card-icon" alt="${item.name}">`;
   },
 
-  // El tendero de la tienda: lo ocupa el personaje que queda libre (ver js/staff.js).
-  // Por ahora cada personaje se ve como un emoji hasta tener su dibujo.
+  // El tendero de la tienda: lo ocupa el personaje que queda libre (ver js/staff.js)
   tenderoHTML() {
-    const id = Staff.ocupante(PetState.petSpecies, 'tienda');
-    const info = Catalogo.species.find(s => s.id === id);
-    if (!info) return '';
-    const emoji = { buho: '🦉', pollito: '🐥', conejita: '🐰', gatito: '🐱', gotita: '💧', mochi: '🍡', nube: '☁️' }[id] || '⭐';
-    return `
-      <div class="tendero">
-        <span class="tendero-avatar" aria-hidden="true">${emoji}</span>
-        <p class="tendero-globo">¡Bienvenido! Soy ${info.name}, elegí lo que quieras.</p>
-      </div>`;
+    return Staff.saludoHTML(PetState.petSpecies, 'tienda', '¡Bienvenido! Soy {nombre}, elegí lo que quieras.');
   },
 
   renderStore(category = this.storeCategory) {

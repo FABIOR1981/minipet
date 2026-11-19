@@ -5,6 +5,7 @@
 // es la mascota principal, el puesto lo toma otro que no eligió.
 // Sin DOM: solo datos y cálculo (se prueba en tests/).
 // =========================================================
+import { Catalogo } from './catalogo.js';
 export const Staff = {
   // Puestos del staff, en orden. 'preferido' es quien encaja mejor
   puestos: [
@@ -38,6 +39,22 @@ export const Staff = {
       }
     });
     return asignacion;
+  },
+
+  // Emoji provisorio de cada personaje hasta tener su dibujo
+  emojis: { buho: '🦉', pollito: '🐥', conejita: '🐰', gatito: '🐱', gotita: '💧', mochi: '🍡', nube: '☁️' },
+
+  // Globo de saludo de quien ocupa un puesto. En 'frase', {nombre} se cambia por el nombre del personaje
+  saludoHTML(principal, puestoId, frase) {
+    const id = this.ocupante(principal, puestoId);
+    const info = Catalogo.species.find(s => s.id === id);
+    if (!info) return '';
+    const texto = frase.replace('{nombre}', info.name);
+    return `
+      <div class="staff-saludo">
+        <span class="staff-avatar" aria-hidden="true">${this.emojis[id] || '⭐'}</span>
+        <p class="staff-globo">${texto}</p>
+      </div>`;
   },
 
   // Qué personaje ocupa un puesto, dada la mascota principal

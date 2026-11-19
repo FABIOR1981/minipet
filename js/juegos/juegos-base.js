@@ -1,6 +1,7 @@
 import { ico, tituloPantalla } from '../iconos.js';
 import { Avisos } from '../avisos.js';
 import { PetState } from '../mascota-estado.js';
+import { Staff } from '../staff.js';
 import { AudioEffects } from '../sonidos.js';
 // =========================================================
 // JUEGOS-BASE.JS — Estado y utilidades compartidas por los
@@ -97,6 +98,7 @@ export const Minigames = {
     <p style="margin-bottom:14px; font-size:0.85rem; color:#7b1fa2; text-align:center; font-weight:600;">
       Gana monedas y haz feliz a tu mascota.
     </p>
+    ${Staff.saludoHTML(PetState.petSpecies, 'minijuegos', '¡Elegí un juego! Soy {nombre} y te cuento cómo jugar.')}
     <div style="text-align:center; margin:-4px 0 12px;">
       <button id="ayuda-juegos" class="ayuda-juegos"><span aria-hidden="true">?</span> ¿Cómo jugar?</button>
     </div>
