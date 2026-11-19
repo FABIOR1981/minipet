@@ -30,7 +30,7 @@ Object.assign(Minigames, {
       let playerY = STAND;
       let playerVY = 0;
       let isJumping = false;
-      const obstacles = []; // { x, tipo, offs, contado }
+      const obstacles = []; // { x, tipo, w, contado }
       let score = 0;
       let gameOver = false;
       let stopped = false; // Salida forzada: las monedas ya las cobra forceExitIfActive()
@@ -96,13 +96,15 @@ Object.assign(Minigames, {
         obstacles.forEach((o) => { o.x -= velocidad * f; });
 
         // Un obstáculo nuevo aparece cuando el anterior ya se alejó lo suficiente.
-        // Tres tipos: hongo (saltar), doble (saltar con más aire) y estrella
-        // voladora (no saltar tan alto: se esquiva quedándose en el piso).
+        // Tres tipos: hongo (saltar), barra (saltar sobre un tramo largo, hay
+        // que caer bien) y estrella voladora (no saltar tan alto: se esquiva
+        // quedándose en el piso).
         const ultimo = obstacles[obstacles.length - 1];
         if (!ultimo || ultimo.x < W - (170 + Math.random() * 90)) {
           const r = Math.random();
-          const tipo = score < 40 || r < 0.55 ? 'hongo' : r < 0.8 ? 'doble' : 'estrella';
-          obstacles.push({ x: W, tipo, offs: tipo === 'doble' ? [0, 34] : [0], contado: false });
+          const tipo = score < 40 || r < 0.55 ? 'hongo' : r < 0.8 ? 'barra' : 'estrella';
+          const w = tipo === 'barra' ? 62 : tipo === 'estrella' ? 30 : 22;
+          obstacles.push({ x: W, tipo, w, contado: false });
         }
 
         for (let i = obstacles.length - 1; i >= 0; i--) {
@@ -117,16 +119,14 @@ Object.assign(Minigames, {
           if (o.x < -60) obstacles.splice(i, 1);
         }
 
-        // Choque: hongos y dobles con la mascota en el piso; la estrella si salta alto
+        // Choque: hongos y barras con la mascota en el piso; la estrella si salta alto
         for (const o of obstacles) {
-          for (const off of o.offs) {
-            const x = o.x + off;
-            if (x <= 12 || x >= 48) continue;
-            const choca = o.tipo === 'estrella' ? playerY < STAND - 45 : playerY > STAND - 30;
-            if (choca) {
-              gameOver = true;
-              Minigames.sacudir(canvas.parentElement);
-            }
+          const toca = o.x < 48 && o.x + o.w > 12; // se superpone con la zona de la mascota
+          if (!toca) continue;
+          const choca = o.tipo === 'estrella' ? playerY < STAND - 45 : playerY > STAND - 30;
+          if (choca) {
+            gameOver = true;
+            Minigames.sacudir(canvas.parentElement);
           }
         }
 
@@ -162,9 +162,19 @@ Object.assign(Minigames, {
         ctx.fillStyle = '#000';
         obstacles.forEach((o) => {
           if (o.tipo === 'estrella') {
-            Dibujos.dibujar(ctx, '⭐', o.x + 10, STAND - 45);
+            Dibujos.dibujar(ctx, '⭐', o.x + 15, STAND - 45);
+          } else if (o.tipo === 'barra') {
+            // Tramo de piso con rayas, de lado a lado de la barra
+            ctx.fillStyle = '#f48fb1';
+            ctx.beginPath();
+            ctx.roundRect(o.x, GROUND - 24, o.w, 24, 8);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            for (let x = o.x + 8; x < o.x + o.w - 8; x += 16) ctx.fillRect(x, GROUND - 20, 6, 16);
+            ctx.font = '28px sans-serif';
+            ctx.fillStyle = '#000';
           } else {
-            o.offs.forEach((off) => Dibujos.dibujar(ctx, '🍄', o.x + off + 10, GROUND - 1));
+            Dibujos.dibujar(ctx, '🍄', o.x + 10, GROUND - 1);
           }
         });
 
