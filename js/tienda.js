@@ -186,9 +186,15 @@ export const Store = {
       <div class="mypet-cabecera">
       <div id="mypet-preview" class="mypet-preview"></div>
       <div class="mypet-datos">
-      <button id="sonido-toggle" class="sonido-toggle" aria-pressed="${!AudioEffects.silenciado}">
-        <span class="sonido-estado">${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}</span>
-        <span class="sonido-pista">Toca para ${AudioEffects.silenciado ? 'encenderlo' : 'apagarlo'}</span>
+      <button id="sonido-toggle" class="sonido-toggle" aria-pressed="${!AudioEffects.silenciado}"
+        aria-label="${AudioEffects.silenciado ? 'Sonido apagado, toca para encenderlo' : 'Sonido encendido, toca para apagarlo'}"
+        title="${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}">
+        <svg class="sonido-icono" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="none"/>
+          ${AudioEffects.silenciado
+            ? '<path d="M16 9l6 6M22 9l-6 6"/>'
+            : '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/>'}
+        </svg>
       </button>
       </div>
       </div>

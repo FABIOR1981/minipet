@@ -1773,3 +1773,15 @@ body:has(.mypet-cabecera) .close-btn { top: 10px; right: 10px; }
 /* Alineación: la X centrada con el título y el campo de nombre; preview un poco más bajo */
 body:has(.mypet-cabecera) .close-btn { top: 27px; right: 10px; }
 .mypet-cabecera .mypet-preview { height: 120px; width: 120px; }
+
+/* Sonido: botón circular con ícono de altavoz (activo en rosa, apagado en gris) */
+.mypet-cabecera .sonido-toggle {
+  width: 46px; height: 46px; padding: 0; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: #fff; color: #ff7fa8;
+  border: 2px solid #ead8f5; box-shadow: 0 2px 0 #e6d3f2;
+}
+.mypet-cabecera .sonido-toggle::before, .mypet-cabecera .sonido-toggle::after { display: none; }
+.mypet-cabecera .sonido-toggle[aria-pressed="false"] { color: #9a8aaa; }
+.mypet-cabecera .sonido-icono { width: 24px; height: 24px; }
+.mypet-cabecera .sonido-toggle .sonido-estado { display: none; }
