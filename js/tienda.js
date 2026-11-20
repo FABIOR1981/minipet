@@ -216,6 +216,10 @@ export const Store = {
     });
     // Escenario, Tienda y Armario se dibujan dentro del mismo panel
     const hub = content.querySelector('#hub-contenido');
+    // La brillantina va bajo el altavoz, en la columna de la cabecera (sigue siendo el mismo control)
+    const brillo = content.querySelector('#hub-contenido .glitter-intensity');
+    const datosCab = content.querySelector('.mypet-datos');
+    if (brillo && datosCab) datosCab.appendChild(brillo);
     const redibujar = () => this.renderMyPet();
     if (tab === 'escenario') {
       this.renderCollection('', 'bg', redibujar, hub);

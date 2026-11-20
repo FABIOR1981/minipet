@@ -1785,3 +1785,13 @@ body:has(.mypet-cabecera) .close-btn { top: 27px; right: 10px; }
 .mypet-cabecera .sonido-toggle[aria-pressed="false"] { color: #9a8aaa; }
 .mypet-cabecera .sonido-icono { width: 24px; height: 24px; }
 .mypet-cabecera .sonido-toggle .sonido-estado { display: none; }
+
+/* Brillantina bajo el altavoz, dentro de la cabecera */
+.mypet-cabecera .glitter-intensity { width: 100%; margin: 0; }
+.mypet-cabecera .glitter-intensity label { font-size: 12px; }
+.mypet-cabecera .glitter-intensity input[type="range"] { width: 100%; }
+/* Mascota de la cabecera centrada con el altavoz (solo en la vista previa de Mi Pet) */
+.mypet-cabecera .mypet-preview .pet-sprite { translate: 0 -25px; }
+/* Mascota de la cabecera: centrada en su vista previa y a la altura del altavoz */
+.mypet-cabecera .mypet-preview { position: relative; }
+.mypet-cabecera .mypet-preview .pet-sprite { top: 50%; left: 50%; translate: -50% calc(-50% - 26px); }
