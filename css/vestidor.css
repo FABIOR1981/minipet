@@ -154,3 +154,15 @@
   box-shadow: 0 2px 0 #c2185b;
   pointer-events: none;
 }
+
+/* En el vestidor, el globo se corre a la izquierda y arriba para no tapar el espejo */
+#app-container.en-vestidor .thought-bubble {
+  top: 90px;
+  left: 38%;
+  max-width: 44%;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+}
