@@ -1802,3 +1802,9 @@ body:has(.mypet-cabecera) .close-btn { top: 27px; right: 10px; }
   -webkit-mask-image: none; mask-image: none; padding-right: 0;
 }
 .hub-tabs .store-tab { flex: initial; min-width: 0; }
+
+/* Mi Pet: el encabezado y las pestañas quedan fijos; solo se desplaza la lista de personajes/artículos */
+body:has(.mypet-cabecera) .modal { overflow: hidden; }
+body:has(.mypet-cabecera) #modal-content { overflow: hidden; }
+body:has(.mypet-cabecera) .hub-contenido { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+body:has(.mypet-cabecera) .privacidad-enlace { flex: 0 0 auto; margin: 6px 0 0; }
