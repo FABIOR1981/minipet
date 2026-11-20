@@ -214,11 +214,12 @@ export const Store = {
     } else if (tab === 'tienda') {
       this.renderStore(this.storeCategory, hub);
     } else if (tab === 'armario') {
-      hub.innerHTML = `
-        <div class="hub-armario">
-          <p class="hub-armario-texto">Probá looks y guardalos en el armario.</p>
-          <button class="card-btn hub-armario-boton" data-action="armario-desde-hub">Abrir el armario</button>
-        </div>`;
+      // Accesorios que ya son tuyos, tocar para probarlos; el espejo queda para el vestidor completo
+      this.renderCollection('', 'acc', redibujar, hub);
+      hub.insertAdjacentHTML('beforeend', `
+        <div class="hub-armario-pie">
+          <button class="card-btn hub-armario-boton" data-action="armario-desde-hub">Probar looks en el espejo</button>
+        </div>`);
     }
     this.refreshPetPreview();
 

@@ -1543,3 +1543,4 @@ body:has(.species-nube) .pet-shadow {
 .hub-armario { text-align: center; padding: 18px 10px; }
 .hub-armario-texto { margin: 0 0 12px; color: #6a1b9a; font-weight: 700; font-size: 0.9rem; }
 .hub-armario-boton { width: auto; padding: 8px 18px; }
+.hub-armario-pie { padding: 8px 0 4px; text-align: center; }
