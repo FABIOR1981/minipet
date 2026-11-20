@@ -1599,3 +1599,13 @@ body:has(.species-nube) .pet-shadow {
 @media (prefers-reduced-motion: reduce) {
   .bienvenida-mini { animation: none; }
 }
+
+/* Cansada: el cuerpo se aplasta un poco hacia el piso */
+#pet.cansada { scale: 1.04 0.93; transform-origin: 50% 100%; }
+
+/* Tienda se distingue de Personalizar: pestaña activa en durazno */
+.store-tabs[aria-label="Categorías de la tienda"] .store-tab.active {
+  background: #ffb074;
+  border-color: #ffb074;
+  box-shadow: 0 2px 0 #f0954f;
+}

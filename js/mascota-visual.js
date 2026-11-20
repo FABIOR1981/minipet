@@ -202,6 +202,8 @@ Object.assign(PetState, {
       roomEl.className = `room ${sceneId}`;
       // Al dormir se hace de noche en la habitación
       roomEl.classList.toggle('sleeping', this.isSleeping);
+      // Cansada: el cuerpo se aplasta un poco (sin dormir todavía)
+      if (petEl) petEl.classList.toggle('cansada', !this.isSleeping && this.energy < 30);
     }
 
     if (typeof Particles !== 'undefined') {
