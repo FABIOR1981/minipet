@@ -1829,3 +1829,11 @@ body:has(.mypet-cabecera) .privacidad-enlace { flex: 0 0 auto; margin: 6px 0 0; 
     linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) right 1px center / 17px 1.2px no-repeat,
     linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) right 1px bottom 1px / 17px 1.2px no-repeat;
 }
+
+/* Gotita: gota en la punta (una burbuja de agua sobre la silueta) */
+.pet-sprite.species-gotita::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/><circle cx='60' cy='11' r='7'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/><circle cx='60' cy='11' r='7'/></g></svg>") center / 100% 100% no-repeat;
+}
+/* Nube: mejillas más esponjosas */
+.pet-sprite.species-nube .cheek { width: 16px; height: 10px; border-radius: 50%; opacity: 0.75; }
