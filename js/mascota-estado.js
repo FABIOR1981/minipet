@@ -284,14 +284,17 @@ export const PetState = {
 
   tick() {
     if (this.isSleeping) {
-      this.energy = Math.min(100, this.energy + 10);
+      this.energy = Math.min(100, this.energy + 5);
       if (this.energy === 100) this.isSleeping = false;
     } else {
-      this.hunger = Math.max(0, this.hunger - 3);
-      this.happiness = Math.max(0, this.happiness - 3);
-      this.energy = Math.max(0, this.energy - 2);
+      // Cada tick son 8 s: a este ritmo la comida y la felicidad tardan
+      // unos 13 min en vaciarse, y la energía un poco más
+      this.hunger = Math.max(0, this.hunger - 1);
+      this.happiness = Math.max(0, this.happiness - 1);
+      this.energy = Math.max(0, this.energy - 1);
 
-      if (!this.isSick && (this.hunger < 40 || this.happiness < 40) && Math.random() < 0.2) {
+      // Enfermarse es poco frecuente y solo cuando ya está bastante bajo
+      if (!this.isSick && (this.hunger < 25 || this.happiness < 25) && Math.random() < 0.05) {
         this.isSick = true;
         // Aviso visible: sin esto el cambio pasa casi desapercibido
         this.floatText(`¡Me siento mal! ${Staff.nombreDe(this.petSpecies, 'cuidados')} dice: usá la medicina.`, 'felicidad');
