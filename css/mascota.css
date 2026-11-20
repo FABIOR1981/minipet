@@ -1609,3 +1609,11 @@ body:has(.species-nube) .pet-shadow {
   border-color: #ffb074;
   box-shadow: 0 2px 0 #f0954f;
 }
+
+/* Conejita: nariz y bigotes reemplazan al ":3" (no se cruzan con la boca) */
+.pet-sprite.species-conejita .mouth { color: transparent; }
+
+/* Búho: ojos más chicos y cara a escala normal (antes se leía como extraterrestre) */
+.pet-sprite.species-buho .kawaii-face { scale: 1; }
+.pet-sprite.species-buho .eye { width: 16px; height: 16px; }
+.pet-sprite.species-buho .kawaii-face .eye { box-shadow: 0 0 0 2px #fff3e0, 0 0 0 3px #8d6e63; }
