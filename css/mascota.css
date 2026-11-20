@@ -815,6 +815,14 @@
   transition: opacity 0.4s ease, rotate 0.4s ease, translate 0.4s ease;
 }
 
+/* Cejas propias por personaje (en reposo). Van antes de los estados,
+   así cualquier estado (hambre, sueño, etc.) sigue mandando */
+.pet-sprite.species-gatito .eyebrow { opacity: 0.6; }
+.pet-sprite.species-gatito .eyebrow.left { rotate: -10deg; }
+.pet-sprite.species-gatito .eyebrow.right { rotate: 10deg; }
+.pet-sprite.species-conejita .eyebrow,
+.pet-sprite.species-gotita .eyebrow { opacity: 0.45; }
+
 /* Contenta: brillo que titila y mejillas que laten */
 .kawaii-face.happy .sparkle { animation: brilloOjo 2.2s ease-in-out infinite; }
 .kawaii-face.happy .cheek { animation: latidoMejilla 2.6s ease-in-out infinite; }
