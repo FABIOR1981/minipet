@@ -1568,3 +1568,15 @@ body:has(.species-nube) .pet-shadow {
   .extra-prop { animation: none; }
 }
 .extra-prop:empty { display: none; }
+
+/* Estadísticas por nivel: el número cambia de color y el icono late cuando está bajo */
+.stat-box[data-nivel="medio"] .stat-val { color: #ef6c00; }
+.stat-box[data-nivel="bajo"] .stat-val { color: #d32f2f; }
+.stat-box[data-nivel="bajo"] .ico { animation: alertaStat 1.6s ease-in-out infinite; }
+@keyframes alertaStat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-box[data-nivel="bajo"] .ico { animation: none; }
+}

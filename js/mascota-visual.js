@@ -162,6 +162,9 @@ Object.assign(PetState, {
       // Nivel de la barra fina bajo cada estadística (las monedas no tienen barra)
       if (key !== 'coin') {
         el.closest('.stat-box').style.setProperty('--p', Math.max(0, Math.min(100, stats[key])));
+        // Nivel de la estadística: el color del número avisa cuando está baja
+        const v = stats[key];
+        el.closest('.stat-box').dataset.nivel = v < 25 ? 'bajo' : v < 55 ? 'medio' : 'alto';
       }
       // Pulso en la barra superior cuando el valor sube
       if (this.lastStats && stats[key] > this.lastStats[key]) {
