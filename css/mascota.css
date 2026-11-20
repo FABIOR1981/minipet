@@ -1423,3 +1423,20 @@ body:has(.species-nube) .pet-shadow {
 .pet-sprite.species-conejita.forma-alt2::after {
   display: none;
 }
+
+/* Conejita: nariz y bigotes sobre la boca (todas las formas) */
+.pet-sprite.species-conejita .mouth { position: relative; }
+.pet-sprite.species-conejita .mouth::before {
+  content: ''; position: absolute; left: 50%; top: -8px; transform: translateX(-50%);
+  width: 9px; height: 7px; pointer-events: none;
+  background: #e91e63; border-radius: 50% 50% 55% 55%;
+}
+.pet-sprite.species-conejita .mouth::after {
+  content: ''; position: absolute; left: 50%; top: -1px; transform: translateX(-50%);
+  width: 60px; height: 12px; pointer-events: none;
+  background:
+    linear-gradient(rgba(90, 40, 60, 0.5), rgba(90, 40, 60, 0.5)) left 1px center / 18px 1.5px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.5), rgba(90, 40, 60, 0.5)) left 1px bottom 1px / 18px 1.5px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.5), rgba(90, 40, 60, 0.5)) right 1px center / 18px 1.5px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.5), rgba(90, 40, 60, 0.5)) right 1px bottom 1px / 18px 1.5px no-repeat;
+}
