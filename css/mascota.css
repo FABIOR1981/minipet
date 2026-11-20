@@ -1209,7 +1209,7 @@ body:has(.species-nube) .pet-shadow {
 
 /* Volumen y contorno de los personajes del elenco: brillo arriba a la izquierda, sombra abajo y borde suave */
 .pet-sprite.species-nube {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-nube::before {
   background:
@@ -1219,7 +1219,7 @@ body:has(.species-nube) .pet-shadow {
   filter: none;
 }
 .pet-sprite.species-gotita {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-gotita::before {
   background:
@@ -1229,7 +1229,7 @@ body:has(.species-nube) .pet-shadow {
   filter: none;
 }
 .pet-sprite.species-pollito {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-pollito::before {
   background:
@@ -1239,7 +1239,7 @@ body:has(.species-nube) .pet-shadow {
   filter: none;
 }
 .pet-sprite.species-gatito {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-gatito::before {
   background:
@@ -1249,7 +1249,7 @@ body:has(.species-nube) .pet-shadow {
   filter: none;
 }
 .pet-sprite.species-conejita {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-conejita::before {
   background:
@@ -1259,7 +1259,7 @@ body:has(.species-nube) .pet-shadow {
   filter: none;
 }
 .pet-sprite.species-buho {
-  filter: drop-shadow(1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(-1.5px 0 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 -1.5px 0 rgba(74, 20, 140, 0.32)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
+  filter: drop-shadow(1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(-1.5px 0 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 -1.5px 0 color-mix(in srgb, currentColor 65%, #4a148c)) drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 .pet-sprite.species-buho::before {
   background:
@@ -1349,3 +1349,18 @@ body:has(.species-nube) .pet-shadow {
 .staff-figura .pet-sprite { position: absolute; left: 50%; top: 50%; margin: -60px 0 0 -60px; transform: scale(0.44); pointer-events: none; }
 .vestidor-estilista .staff-avatar { width: 52px; height: 52px; }
 .vestidor-estilista .staff-figura .pet-sprite { transform: scale(0.38); }
+
+/* Parpadeo de los ojos de cada personaje */
+.pet-sprite.species-nube .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+.pet-sprite.species-gotita .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+.pet-sprite.species-pollito .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+.pet-sprite.species-gatito .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+.pet-sprite.species-conejita .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+.pet-sprite.species-buho .eye { animation: parpadeo 4.8s ease-in-out infinite; transform-origin: center 60%; }
+@keyframes parpadeo {
+  0%, 92%, 100% { scale: 1 1; }
+  95% { scale: 1 0.12; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pet-sprite[class*="species-"] .eye { animation: none; }
+}
