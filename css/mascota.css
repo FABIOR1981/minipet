@@ -1499,3 +1499,16 @@ body:has(.species-nube) .pet-shadow {
   width: 3px; height: 3px; border-radius: 50%; background: #fff;
 }
 .pet-sprite.species-conejita .eye { width: 13px; height: 16px; border-radius: 50% 50% 45% 45%; }
+
+/* Interfaz: respuesta al pasar el mouse y transiciones suaves en
+   pestañas, opciones de rasgos y tarjetas */
+.store-tab,
+.trait-option,
+.item-card,
+.personaje-card {
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.store-tab:hover:not(.active) { background: #fdf0ff; transform: translateY(-1px); }
+.trait-option:hover:not(.selected) { transform: translateY(-2px); border-color: #f8bbd9; }
+.item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(106, 27, 154, 0.12); }
+.personaje-card:hover { transform: translateY(-2px); }
