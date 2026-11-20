@@ -13,7 +13,7 @@ export const Catalogo = {
     { id: 'pollito',  name: 'Pollito',         disponible: true, color: '#ffe082', boca: 'w', formaAlt: 'Bebé', formaAlt2: 'Grande' },
     { id: 'gatito',   name: 'Gatito de lazo',  disponible: true, color: '#ffab91', boca: 'cat', formaAlt: 'Sentado', formaAlt2: 'Estirado' },
     { id: 'conejita', name: 'Conejita',        disponible: true, color: '#b388ff', boca: 'omega', formaAlt: 'Lop', formaAlt2: 'Bola' },
-    { id: 'buho',     name: 'Vendedora búho',  disponible: true, color: '#bcaaa4', boca: 'smile', formaAlt: 'Redondo', formaAlt2: 'Alto' },
+    { id: 'buho',     name: 'Vendedora búho',  disponible: true, color: '#d7b48c', boca: 'smile', formaAlt: 'Redondo', formaAlt2: 'Alto' },
   ],
 
   // Las formas de mascota disponibles (elegibles en Mi Pet)
