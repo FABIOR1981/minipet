@@ -217,9 +217,13 @@ export const Store = {
       btn.setAttribute('aria-label', especie.name + (especie.disponible ? '' : ' (próximamente)'));
       btn.setAttribute('aria-pressed', String(elegido));
       // Vista previa de la especie; la silueta se muestra aunque sea la de otro personaje
-      const mini = Minigames.createMiniPet(84);
+      // Cada tarjeta muestra su propio personaje: color por defecto y sin accesorio
+      const mini = Minigames.createMiniPet(84, { color: especie.color || '#ff80ab', accessory: null });
       const sprite = mini.el.querySelector('.pet-sprite');
-      if (sprite && especie.disponible) sprite.classList.add(`species-${especie.id}`);
+      if (sprite) {
+        sprite.className = sprite.className.replace(/\bspecies-\S+/g, '').trim();
+        if (especie.disponible) sprite.classList.add(`species-${especie.id}`);
+      }
       const nombre = document.createElement('span');
       nombre.className = 'personaje-nombre';
       nombre.textContent = especie.name;
