@@ -1379,8 +1379,8 @@ body:has(.species-nube) .pet-shadow {
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='72' rx='40' ry='42'/><path d='M26 54 L28 16 L52 40 Z'/><path d='M94 54 L92 16 L68 40 Z'/></g></svg>") center / 100% 100% no-repeat;
 }
 .pet-sprite.species-conejita.forma-alt::before {
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M38 46 C14 36 0 56 2 86 C4 108 22 110 30 98 C36 88 38 70 38 56 Z' fill='white'/><path d='M82 46 C106 36 120 56 118 86 C116 108 98 110 90 98 C84 88 82 70 82 56 Z' fill='white'/><circle cx='60' cy='62' r='30' fill='white' stroke='black' stroke-width='6'/></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M38 46 C14 36 0 56 2 86 C4 108 22 110 30 98 C36 88 38 70 38 56 Z' fill='white'/><path d='M82 46 C106 36 120 56 118 86 C116 108 98 110 90 98 C84 88 82 70 82 56 Z' fill='white'/><circle cx='60' cy='62' r='30' fill='white' stroke='black' stroke-width='6'/></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M36 40 C22 30 10 44 12 72 C13 92 24 98 30 88 C34 80 36 62 36 48 Z' fill='white'/><path d='M84 40 C98 30 110 44 108 72 C107 92 96 98 90 88 C86 80 84 62 84 48 Z' fill='white'/><circle cx='60' cy='64' r='36' fill='white' stroke='black' stroke-width='6'/></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M36 40 C22 30 10 44 12 72 C13 92 24 98 30 88 C34 80 36 62 36 48 Z' fill='white'/><path d='M84 40 C98 30 110 44 108 72 C107 92 96 98 90 88 C86 80 84 62 84 48 Z' fill='white'/><circle cx='60' cy='64' r='36' fill='white' stroke='black' stroke-width='6'/></svg>") center / 100% 100% no-repeat;
   mask-mode: luminance;
   -webkit-mask-mode: luminance;
 }
