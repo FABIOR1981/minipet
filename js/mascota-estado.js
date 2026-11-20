@@ -177,6 +177,9 @@ export const PetState = {
     this.petSpecies = id;
     const color = Catalogo.species.find(s => s.id === id).color;
     if (color) this.petColor = color;
+    // Cada personaje arranca con su boca característica (el jugador la puede cambiar en Mi Pet)
+    const boca = Catalogo.species.find(s => s.id === id).boca;
+    if (boca) this.petMouth = boca;
     AudioEffects.playTone(700, 'sine', 0.1);
     this.saveData();
     this.updateUI();
