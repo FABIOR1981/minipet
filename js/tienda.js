@@ -105,10 +105,6 @@ export const Store = {
           <p class="wardrobe-label">Forma</p>
           <div id="shape-picker" class="shape-picker"></div>
         </div>
-        <div class="glitter-intensity">
-          <label for="glitter-intensity">Brillantina <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
-          <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}">
-        </div>
       </section>
     `;
   },
@@ -158,14 +154,6 @@ export const Store = {
       btn.onclick = () => { PetState.setSize(btn.dataset.size); Store.renderMyPet(); };
     });
 
-    const glitterIntensity = content.querySelector('#glitter-intensity');
-    const glitterIntensityValue = content.querySelector('#glitter-intensity-value');
-    glitterIntensity.oninput = event => {
-      glitterIntensityValue.value = `${event.target.value}%`;
-      glitterIntensityValue.textContent = `${event.target.value}%`;
-      PetState.setGlitterIntensity(event.target.value);
-      this.refreshPetPreview();
-    };
   },
 
   // Mi Pet tiene dos pestañas: Cuerpo (color, tamaño, forma, brillantina)
@@ -186,6 +174,10 @@ export const Store = {
       <div class="mypet-cabecera">
       <div id="mypet-preview" class="mypet-preview"></div>
       <div class="mypet-datos">
+      <div class="glitter-intensity">
+        <label for="glitter-intensity">Brillantina <output id="glitter-intensity-value">${PetState.glitterIntensity}%</output></label>
+        <input id="glitter-intensity" type="range" min="0" max="100" value="${PetState.glitterIntensity}">
+      </div>
       <button id="sonido-toggle" class="sonido-toggle" aria-pressed="${!AudioEffects.silenciado}"
         aria-label="${AudioEffects.silenciado ? 'Sonido apagado, toca para encenderlo' : 'Sonido encendido, toca para apagarlo'}"
         title="${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}">
@@ -216,10 +208,14 @@ export const Store = {
     });
     // Escenario, Tienda y Armario se dibujan dentro del mismo panel
     const hub = content.querySelector('#hub-contenido');
-    // La brillantina va bajo el altavoz, en la columna de la cabecera (sigue siendo el mismo control)
-    const brillo = content.querySelector('#hub-contenido .glitter-intensity');
-    const datosCab = content.querySelector('.mypet-datos');
-    if (brillo && datosCab) datosCab.appendChild(brillo);
+    const glitterIntensity = content.querySelector('#glitter-intensity');
+    const glitterIntensityValue = content.querySelector('#glitter-intensity-value');
+    glitterIntensity.oninput = event => {
+      glitterIntensityValue.value = `${event.target.value}%`;
+      glitterIntensityValue.textContent = `${event.target.value}%`;
+      PetState.setGlitterIntensity(event.target.value);
+      this.refreshPetPreview();
+    };
     const redibujar = () => this.renderMyPet();
     if (tab === 'escenario') {
       this.renderCollection('', 'bg', redibujar, hub);
