@@ -1623,3 +1623,9 @@ body:has(.species-nube) .pet-shadow {
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/></g></svg>") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/></g></svg>") center / 100% 100% no-repeat;
 }
+
+/* Pollito: alas más grandes y penacho de tres plumas (antes eran dos bolitas chicas) */
+.pet-sprite.species-pollito::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='68' r='42'/><ellipse cx='16' cy='74' rx='10' ry='18' transform='rotate(-15 16 74)'/><ellipse cx='104' cy='74' rx='10' ry='18' transform='rotate(15 104 74)'/><circle cx='50' cy='30' r='6'/><circle cx='62' cy='22' r='8'/><circle cx='72' cy='30' r='6'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='68' r='42'/><ellipse cx='16' cy='74' rx='10' ry='18' transform='rotate(-15 16 74)'/><ellipse cx='104' cy='74' rx='10' ry='18' transform='rotate(15 104 74)'/><circle cx='50' cy='30' r='6'/><circle cx='62' cy='22' r='8'/><circle cx='72' cy='30' r='6'/></g></svg>") center / 100% 100% no-repeat;
+}
