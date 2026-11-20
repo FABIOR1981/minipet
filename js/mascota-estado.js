@@ -56,6 +56,7 @@ export const PetState = {
   petShape: 'shape-circle',
   // Personaje elegido (ver Catalogo.species). Cambia la silueta, no la forma elegida en Mi Pet
   petSpecies: 'mochi',
+  petForma: 'original',
   petSize: 'medium',
   glitterEnabled: false,
   avisoGuardadoMostrado: false,
@@ -171,10 +172,20 @@ export const PetState = {
     this.updateUI();
   },
 
+  // Forma alternativa del personaje (solo los que no son Mochi)
+  setForma(forma) {
+    if (forma !== 'original' && forma !== 'alt') return;
+    if (this.petSpecies === 'mochi') return;
+    this.petForma = forma;
+    this.saveData();
+    this.updateUI();
+  },
+
   // Cambia el personaje (solo los que ya tienen diseño)
   setSpecies(id) {
     if (!Catalogo.species.some(s => s.id === id && s.disponible)) return;
     this.petSpecies = id;
+    this.petForma = 'original';
     const color = Catalogo.species.find(s => s.id === id).color;
     if (color) this.petColor = color;
     // Cada personaje arranca con su boca característica (el jugador la puede cambiar en Mi Pet)
@@ -321,6 +332,7 @@ export const PetState = {
       petCheeks: this.petCheeks,
       petShape: this.petShape,
       petSpecies: this.petSpecies,
+      petForma: this.petForma,
       petSize: this.petSize,
       glitterEnabled: this.glitterEnabled,
       glitterIntensity: this.glitterIntensity,
@@ -366,6 +378,7 @@ export const PetState = {
       this.petCheeks = data.petCheeks || 'round';
       this.petShape = data.petShape || 'shape-circle';
       this.petSpecies = Catalogo.species.some(s => s.id === data.petSpecies && s.disponible) ? data.petSpecies : 'mochi';
+      this.petForma = data.petForma === 'alt' ? 'alt' : 'original';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);
       this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));

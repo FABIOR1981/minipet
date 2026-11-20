@@ -118,7 +118,26 @@ export const Store = {
       btn.onclick = () => { PetState.setColor(btn.dataset.color); this.renderMyPet(); };
     });
     const shapePicker = content.querySelector('#shape-picker');
-    Catalogo.shapes.forEach(shape => {
+    if (PetState.petSpecies !== 'mochi') {
+      // Personajes que no son Mochi: dos formas (original o alternativa)
+      const especie = Catalogo.species.find(e => e.id === PetState.petSpecies);
+      [['original', 'Original'], ['alt', especie?.formaAlt || 'Alternativa']].forEach(([forma, etiqueta]) => {
+        const btn = document.createElement('button');
+        btn.className = `card-btn shape-option ${PetState.petForma === forma ? 'selected' : ''}`;
+        btn.setAttribute('aria-label', `Forma ${etiqueta}`);
+        const muestra = document.createElement('span');
+        muestra.className = 'shape-muestra';
+        const mini = Minigames.createMiniPet(34, { accessory: null });
+        mini.el.querySelector('.pet-sprite')?.classList.toggle('forma-alt', forma === 'alt');
+        muestra.appendChild(mini.el);
+        const nombre = document.createElement('span');
+        nombre.textContent = etiqueta;
+        btn.append(muestra, nombre);
+        btn.onclick = () => { PetState.setForma(forma); Store.renderMyPet(); };
+        shapePicker.appendChild(btn);
+      });
+    }
+    Catalogo.shapes.filter(() => PetState.petSpecies === 'mochi').forEach(shape => {
       const isSelected = PetState.petShape === shape.id;
       const btn = document.createElement('button');
       btn.className = `card-btn shape-option ${isSelected ? 'selected' : ''}`;
@@ -171,9 +190,9 @@ export const Store = {
       </div>
       </div>
       <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
+        <button class="store-tab ${tab === 'personaje' ? 'active' : ''}" data-tab="personaje">Personaje</button>
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
-        <button class="store-tab ${tab === 'personaje' ? 'active' : ''}" data-tab="personaje">Personaje</button>
       </div>
       ${tab === 'cuerpo' ? this.renderPetCustomization() : tab === 'rasgos' ? this.renderTraits() : this.renderPersonaje()}
       <p class="privacidad-enlace"><a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a></p>
