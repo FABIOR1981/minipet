@@ -1650,3 +1650,14 @@ body:has(.species-nube) .pet-shadow {
   border-color: #ffb074;
   box-shadow: 0 2px 0 #f0954f;
 }
+
+/* Más espacio para el escenario: menú y encabezado más compactos */
+.top-bar { padding-top: 4px; padding-bottom: 4px; }
+.top-bar .stat-box { padding-top: 3px; padding-bottom: 3px; }
+.bottom-nav { gap: 4px; }
+.nav-grupo { gap: 2px; }
+.nav-grupo-titulo { font-size: 10px; line-height: 1.1; }
+.nav-grupo-botones { gap: 6px; }
+.nav-grupo-botones button { min-height: 0; padding-top: 4px; padding-bottom: 4px; }
+.nav-grupo-botones .btn-icon { width: 30px; height: 30px; }
+.nav-grupo-botones.nav-una button { height: 44px; min-height: 0; }
