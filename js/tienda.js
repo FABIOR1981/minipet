@@ -277,6 +277,8 @@ export const Store = {
         <div class="trait-row" data-kind="eyes"></div>
         <p class="wardrobe-label">Boca</p>
         <div class="trait-row" data-kind="mouth"></div>
+        <p class="wardrobe-label">Cejas</p>
+        <div class="trait-row" data-kind="brows"></div>
         <p class="wardrobe-label">Mejillas</p>
         <div class="trait-row" data-kind="cheeks"></div>
       </section>
@@ -284,7 +286,7 @@ export const Store = {
   },
 
   bindTraits(content) {
-    const current = { eyes: PetState.petEyes, mouth: PetState.petMouth, cheeks: PetState.petCheeks };
+    const current = { eyes: PetState.petEyes, mouth: PetState.petMouth, cheeks: PetState.petCheeks, brows: PetState.petBrows };
     // Rasgos que ya no se ofrecen: si la mascota los tenía puestos, vuelve al primero disponible
     Object.keys(RASGOS_OCULTOS).forEach(kind => {
       if (!RASGOS_OCULTOS[kind].includes(current[kind])) return;

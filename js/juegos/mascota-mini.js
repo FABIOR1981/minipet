@@ -24,7 +24,7 @@ Object.assign(Minigames, {
   applyLook(sprite, look) {
     const face = sprite.querySelector('.kawaii-face');
     if (face) {
-      ['eyes', 'cheeks'].forEach(kind => {
+      ['eyes', 'cheeks', 'brows'].forEach(kind => {
         if (!look[kind]) return;
         face.className = face.className.replace(new RegExp(`\\b${kind}-\\S+`, 'g'), '').trim();
         face.classList.add(`${kind}-${look[kind]}`);

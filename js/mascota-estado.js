@@ -53,6 +53,7 @@ export const PetState = {
   petEyes: 'round',
   petMouth: 'cat',
   petCheeks: 'round',
+  petBrows: 'none',
   petShape: 'shape-circle',
   // Personaje elegido (ver Catalogo.species). Cambia la silueta, no la forma elegida en Mi Pet
   petSpecies: 'mochi',
@@ -164,7 +165,7 @@ export const PetState = {
 
   // Cambia un rasgo de la cara: kind es 'eyes', 'mouth' o 'cheeks'
   setTrait(kind, id) {
-    const field = { eyes: 'petEyes', mouth: 'petMouth', cheeks: 'petCheeks' }[kind];
+    const field = { eyes: 'petEyes', mouth: 'petMouth', cheeks: 'petCheeks', brows: 'petBrows' }[kind];
     if (!field || !Catalogo.traits[kind].some(option => option.id === id)) return;
     this[field] = id;
     AudioEffects.playTone(700, 'sine', 0.1);
@@ -333,6 +334,7 @@ export const PetState = {
       petEyes: this.petEyes,
       petMouth: this.petMouth,
       petCheeks: this.petCheeks,
+      petBrows: this.petBrows,
       petShape: this.petShape,
       petSpecies: this.petSpecies,
       petForma: this.petForma,
@@ -379,6 +381,7 @@ export const PetState = {
       this.petEyes = data.petEyes || 'round';
       this.petMouth = data.petMouth || 'cat';
       this.petCheeks = data.petCheeks || 'round';
+      this.petBrows = data.petBrows || 'none';
       this.petShape = data.petShape || 'shape-circle';
       this.petSpecies = Catalogo.species.some(s => s.id === data.petSpecies && s.disponible) ? data.petSpecies : 'mochi';
       this.petForma = ['alt', 'alt2'].includes(data.petForma) ? data.petForma : 'original';

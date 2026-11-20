@@ -258,7 +258,7 @@ Object.assign(PetState, {
     document.querySelector('.nav-medicina')?.classList.toggle('necesita-atencion', !!this.isSick);
 
     // Rasgos elegidos en Mi Pet: ojos y mejillas por clase, boca por texto
-    face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks}`;
+    face.className = `kawaii-face eyes-${this.petEyes} cheeks-${this.petCheeks} brows-${this.petBrows || 'none'}`;
     const mouthEl = face.querySelector('.mouth');
     if (mouthEl) mouthEl.innerText = Catalogo.mouthText(this.petMouth);
     extraProp.innerText = '';

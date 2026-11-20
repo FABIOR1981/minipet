@@ -153,6 +153,12 @@ export const Catalogo = {
       { id: 'tongue', name: 'Lengüita', text: ':P' },
       { id: 'omega', name: 'Mimosa', text: 'ω' }
     ],
+    brows: [
+      { id: 'none', name: 'Sin cejas' },
+      { id: 'soft', name: 'Suaves' },
+      { id: 'arched', name: 'Arqueadas' },
+      { id: 'sly', name: 'Pícaras' }
+    ],
     cheeks: [
       { id: 'round', name: 'Rosadas' },
       { id: 'hearts', name: 'Corazones' },
