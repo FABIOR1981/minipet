@@ -121,14 +121,15 @@ export const Store = {
     if (PetState.petSpecies !== 'mochi') {
       // Personajes que no son Mochi: dos formas (original o alternativa)
       const especie = Catalogo.species.find(e => e.id === PetState.petSpecies);
-      [['original', 'Original'], ['alt', especie?.formaAlt || 'Alternativa']].forEach(([forma, etiqueta]) => {
+      [['original', 'Original'], ['alt', especie?.formaAlt || 'Alternativa'], ['alt2', especie?.formaAlt2 || 'Otra']].forEach(([forma, etiqueta]) => {
         const btn = document.createElement('button');
         btn.className = `card-btn shape-option ${PetState.petForma === forma ? 'selected' : ''}`;
         btn.setAttribute('aria-label', `Forma ${etiqueta}`);
         const muestra = document.createElement('span');
         muestra.className = 'shape-muestra';
         const mini = Minigames.createMiniPet(34, { accessory: null });
-        mini.el.querySelector('.pet-sprite')?.classList.toggle('forma-alt', forma === 'alt');
+        const sprite = mini.el.querySelector('.pet-sprite');
+        if (sprite) { sprite.classList.remove('forma-alt', 'forma-alt2'); if (forma !== 'original') sprite.classList.add(`forma-${forma}`); }
         muestra.appendChild(mini.el);
         const nombre = document.createElement('span');
         nombre.textContent = etiqueta;

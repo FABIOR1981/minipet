@@ -174,7 +174,7 @@ export const PetState = {
 
   // Forma alternativa del personaje (solo los que no son Mochi)
   setForma(forma) {
-    if (forma !== 'original' && forma !== 'alt') return;
+    if (!['original', 'alt', 'alt2'].includes(forma)) return;
     if (this.petSpecies === 'mochi') return;
     this.petForma = forma;
     this.saveData();
@@ -378,7 +378,7 @@ export const PetState = {
       this.petCheeks = data.petCheeks || 'round';
       this.petShape = data.petShape || 'shape-circle';
       this.petSpecies = Catalogo.species.some(s => s.id === data.petSpecies && s.disponible) ? data.petSpecies : 'mochi';
-      this.petForma = data.petForma === 'alt' ? 'alt' : 'original';
+      this.petForma = ['alt', 'alt2'].includes(data.petForma) ? data.petForma : 'original';
       this.petSize = ['small', 'medium', 'large'].includes(data.petSize) ? data.petSize : 'medium';
       const savedGlitterIntensity = data.glitterIntensity ?? (data.glitterEnabled ? 50 : 0);
       this.glitterIntensity = Math.max(0, Math.min(100, Number(savedGlitterIntensity)));

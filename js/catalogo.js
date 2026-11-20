@@ -8,12 +8,12 @@ export const Catalogo = {
   // Personajes elegibles en Mi Pet > Personaje. 'disponible': ya tiene diseño
   species: [
     { id: 'mochi',    name: 'Mochi',           disponible: true, boca: 'cat' },
-    { id: 'gotita',   name: 'Gotita',          disponible: true, color: '#81d4fa', boca: 'omega', formaAlt: 'Lágrima' },
-    { id: 'nube',     name: 'Nube',            disponible: true, color: '#cfd8dc', boca: 'smile', formaAlt: 'Baja' },
-    { id: 'pollito',  name: 'Pollito',         disponible: true, color: '#ffe082', boca: 'w', formaAlt: 'Bebé' },
-    { id: 'gatito',   name: 'Gatito de lazo',  disponible: true, color: '#ffab91', boca: 'cat', formaAlt: 'Sentado' },
-    { id: 'conejita', name: 'Conejita',        disponible: true, color: '#b388ff', boca: 'omega', formaAlt: 'Lop' },
-    { id: 'buho',     name: 'Vendedora búho',  disponible: true, color: '#bcaaa4', boca: 'smile', formaAlt: 'Redondo' },
+    { id: 'gotita',   name: 'Gotita',          disponible: true, color: '#81d4fa', boca: 'omega', formaAlt: 'Lágrima', formaAlt2: 'Gorda' },
+    { id: 'nube',     name: 'Nube',            disponible: true, color: '#cfd8dc', boca: 'smile', formaAlt: 'Baja', formaAlt2: 'Alta' },
+    { id: 'pollito',  name: 'Pollito',         disponible: true, color: '#ffe082', boca: 'w', formaAlt: 'Bebé', formaAlt2: 'Grande' },
+    { id: 'gatito',   name: 'Gatito de lazo',  disponible: true, color: '#ffab91', boca: 'cat', formaAlt: 'Sentado', formaAlt2: 'Estirado' },
+    { id: 'conejita', name: 'Conejita',        disponible: true, color: '#b388ff', boca: 'omega', formaAlt: 'Lop', formaAlt2: 'Bola' },
+    { id: 'buho',     name: 'Vendedora búho',  disponible: true, color: '#bcaaa4', boca: 'smile', formaAlt: 'Redondo', formaAlt2: 'Alto' },
   ],
 
   // Las formas de mascota disponibles (elegibles en Mi Pet)

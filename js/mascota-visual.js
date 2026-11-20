@@ -181,9 +181,9 @@ Object.assign(PetState, {
       petEl.className = petEl.className.replace(/\bshape-\S+/g, '').trim();
       petEl.classList.add(this.petShape || 'shape-circle');
       // Personaje: cambia la silueta y la posición de la cara (ver css/mascota.css)
-      petEl.className = petEl.className.replace(/\bspecies-\S+/g, '').replace(/\bforma-alt\b/g, '').trim();
+      petEl.className = petEl.className.replace(/\bspecies-\S+/g, '').replace(/\bforma-\S+/g, '').trim();
       petEl.classList.add(`species-${this.petSpecies || 'mochi'}`);
-      if (this.petForma === 'alt' && this.petSpecies !== 'mochi') petEl.classList.add('forma-alt');
+      if (this.petForma !== 'original' && this.petSpecies !== 'mochi') petEl.classList.add(`forma-${this.petForma}`);
       petEl.className = petEl.className.replace(/\bsize-\S+/g, '').trim();
       petEl.classList.add(`size-${this.petSize || 'medium'}`);
       const glitterEl = document.getElementById('pet-glitter');

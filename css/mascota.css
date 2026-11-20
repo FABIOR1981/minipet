@@ -1390,3 +1390,28 @@ body:has(.species-nube) .pet-shadow {
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='26' cy='66' r='16'/><circle cx='52' cy='56' r='22'/><circle cx='84' cy='64' r='18'/><rect x='14' y='64' width='92' height='26' rx='13'/></g></svg>") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='26' cy='66' r='16'/><circle cx='52' cy='56' r='22'/><circle cx='84' cy='64' r='18'/><rect x='14' y='64' width='92' height='26' rx='13'/></g></svg>") center / 100% 100% no-repeat;
 }
+/* Tercera forma (forma-alt2) */
+.pet-sprite.species-gotita.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='40'/><path d='M60 30 L72 44 L48 44 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='40'/><path d='M60 30 L72 44 L48 44 Z'/></g></svg>") center / 100% 100% no-repeat;
+}
+.pet-sprite.species-pollito.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='68' rx='48' ry='42'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='68' rx='48' ry='42'/></g></svg>") center / 100% 100% no-repeat;
+}
+.pet-sprite.species-gatito.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='50' ry='34'/><path d='M22 52 L24 20 L48 40 Z'/><path d='M98 52 L96 20 L72 40 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='50' ry='34'/><path d='M22 52 L24 20 L48 40 Z'/><path d='M98 52 L96 20 L72 40 Z'/></g></svg>") center / 100% 100% no-repeat;
+}
+.pet-sprite.species-conejita.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='76' r='36'/><path d='M36 52 C30 40 32 26 40 22 C48 20 52 40 52 56 Z'/><path d='M84 52 C90 40 88 26 80 22 C72 20 68 40 68 56 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='76' r='36'/><path d='M36 52 C30 40 32 26 40 22 C48 20 52 40 52 56 Z'/><path d='M84 52 C90 40 88 26 80 22 C72 20 68 40 68 56 Z'/></g></svg>") center / 100% 100% no-repeat;
+}
+.pet-sprite.species-buho.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='64' rx='40' ry='50'/><path d='M34 22 L40 6 L50 20 Z'/><path d='M86 22 L80 6 L70 20 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='64' rx='40' ry='50'/><path d='M34 22 L40 6 L50 20 Z'/><path d='M86 22 L80 6 L70 20 Z'/></g></svg>") center / 100% 100% no-repeat;
+}
+.pet-sprite.species-nube.forma-alt2::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='30' r='24'/><circle cx='40' cy='54' r='18'/><circle cx='80' cy='54' r='18'/><rect x='24' y='50' width='72' height='40' rx='20'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><circle cx='60' cy='30' r='24'/><circle cx='40' cy='54' r='18'/><circle cx='80' cy='54' r='18'/><rect x='24' y='50' width='72' height='40' rx='20'/></g></svg>") center / 100% 100% no-repeat;
+}
