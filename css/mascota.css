@@ -1617,3 +1617,9 @@ body:has(.species-nube) .pet-shadow {
 .pet-sprite.species-buho .kawaii-face { scale: 1; }
 .pet-sprite.species-buho .eye { width: 16px; height: 16px; }
 .pet-sprite.species-buho .kawaii-face .eye { box-shadow: 0 0 0 2px #fff3e0, 0 0 0 3px #8d6e63; }
+
+/* Gotita: punta redondeada (antes terminaba en un pico agudo) */
+.pet-sprite.species-gotita::before {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><path d='M50 16 Q60 2 70 16 C84 36 104 60 104 86 A44 44 0 0 1 16 86 C16 60 36 36 50 16 Z'/></g></svg>") center / 100% 100% no-repeat;
+}
