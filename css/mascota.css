@@ -1795,3 +1795,10 @@ body:has(.mypet-cabecera) .close-btn { top: 27px; right: 10px; }
 /* Mascota de la cabecera: centrada en su vista previa y a la altura del altavoz */
 .mypet-cabecera .mypet-preview { position: relative; }
 .mypet-cabecera .mypet-preview .pet-sprite { top: 50%; left: 50%; translate: -50% calc(-50% - 26px); }
+/* Pestañas de Mi Pet: dos renglones de tres, sin desplazamiento horizontal */
+.hub-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  overflow: visible; flex-wrap: wrap;
+  -webkit-mask-image: none; mask-image: none; padding-right: 0;
+}
+.hub-tabs .store-tab { flex: initial; min-width: 0; }
