@@ -157,7 +157,8 @@ Object.assign(PetState, {
     const stats = { coin: this.coins, happy: this.happiness, hunger: this.hunger, energy: this.energy };
     Object.keys(stats).forEach(key => {
       const el = document.getElementById(`${key}-count`);
-      el.innerText = stats[key];
+      // Monedas con separador de miles (99.999 en vez de 99999)
+      el.innerText = key === 'coin' ? stats[key].toLocaleString('es-UY') : stats[key];
       // Nivel de la barra fina bajo cada estadística (las monedas no tienen barra)
       if (key !== 'coin') {
         el.closest('.stat-box').style.setProperty('--p', Math.max(0, Math.min(100, stats[key])));
