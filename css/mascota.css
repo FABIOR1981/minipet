@@ -1512,3 +1512,14 @@ body:has(.species-nube) .pet-shadow {
 .trait-option:hover:not(.selected) { transform: translateY(-2px); border-color: #f8bbd9; }
 .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(106, 27, 154, 0.12); }
 .personaje-card:hover { transform: translateY(-2px); }
+
+/* Brillantina en personajes que no son Mochi: el brillo se recorta a un
+   óvalo central para que no se vea el cuadrado del efecto ni destellos
+   fuera del cuerpo. Mochi, que es redondo, no cambia. */
+#pet:not(.species-mochi) .pet-glitter {
+  clip-path: ellipse(40% 37% at 50% 56%);
+  border-radius: 0;
+}
+#pet.species-nube .pet-glitter {
+  clip-path: ellipse(44% 33% at 50% 60%);
+}
