@@ -1475,3 +1475,17 @@ body:has(.species-nube) .pet-shadow {
   height: 11px;
   border-radius: 50% 50% 45% 45%;
 }
+
+/* Caras propias: Gotita con brillo grande, Pollito con ojitos redondos,
+   Conejita con ojos altos */
+.pet-sprite.species-gotita .eye { width: 15px; height: 17px; }
+.pet-sprite.species-gotita .eye::after {
+  content: ''; position: absolute; left: 3px; top: 3px;
+  width: 5px; height: 5px; border-radius: 50%; background: #fff;
+}
+.pet-sprite.species-pollito .eye { width: 11px; height: 11px; }
+.pet-sprite.species-pollito .eye::after {
+  content: ''; position: absolute; left: 2px; top: 2px;
+  width: 3px; height: 3px; border-radius: 50%; background: #fff;
+}
+.pet-sprite.species-conejita .eye { width: 13px; height: 16px; border-radius: 50% 50% 45% 45%; }
