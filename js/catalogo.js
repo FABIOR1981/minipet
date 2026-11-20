@@ -168,10 +168,29 @@ export const Catalogo = {
     ]
   },
 
-  // Texto de la boca para un id (o el de por defecto si no existe)
-  mouthText(id) {
-    const mouth = this.traits.mouth.find(m => m.id === id) || this.traits.mouth[0];
-    return mouth.text;
+  // Bocas por especie: cada personaje tiene su propio juego. Pollito y Búho tienen pico, sin boca.
+  mouthsFor(species) {
+    if (['pollito', 'buho'].includes(species)) return [];
+    if (['gatito', 'conejita'].includes(species)) return ['cat', 'w', 'omega'];
+    return ['smile', 'tongue', 'w', 'cat', 'omega'];
+  },
+
+  // Dibujo SVG de una boca (trazo del color del texto). 'o' es la boca abierta de sorpresa o comer.
+  mouthSvg(id, species = null) {
+    const lista = species ? this.mouthsFor(species) : null;
+    if (lista && lista.length === 0) return '';
+    const usable = lista && !lista.includes(id) ? lista[0] : id;
+    const trazo = 'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"';
+    const dibujos = {
+      smile: `<path d="M4 4 Q12 13 20 4" ${trazo}/>`,
+      tongue: `<path d="M4 4 Q12 13 20 4" ${trazo}/><ellipse cx="12" cy="9.8" rx="2.8" ry="2.6" fill="#ff8fb1" stroke="#c2185b" stroke-width="1.1"/>`,
+      cat: `<path d="M4 5 Q8 11 12 6 Q16 11 20 5" ${trazo}/>`,
+      w: `<path d="M5 4 q2 5 3.5 0 q2 5 3.5 0 q2 5 3.5 0" ${trazo}/>`,
+      omega: `<path d="M3 4 Q6 12 9 4 Q12 12 15 4 Q18 12 21 4" ${trazo}/>`,
+      o: `<ellipse cx="12" cy="7" rx="3.4" ry="4.2" fill="#6b2b5b" stroke="none"/>`
+    };
+    const cuerpo = dibujos[usable] || dibujos.smile;
+    return `<svg class="boca-svg" viewBox="0 0 24 14" aria-hidden="true">${cuerpo}</svg>`;
   },
 
   accessoryFits: {

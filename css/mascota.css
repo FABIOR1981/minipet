@@ -1808,3 +1808,7 @@ body:has(.mypet-cabecera) .modal { overflow: hidden; }
 body:has(.mypet-cabecera) #modal-content { overflow: hidden; }
 body:has(.mypet-cabecera) .hub-contenido { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 body:has(.mypet-cabecera) .privacidad-enlace { flex: 0 0 auto; margin: 6px 0 0; }
+
+/* Bocas dibujadas en SVG (cada especie tiene su juego) */
+.mouth svg.boca-svg { width: 26px; height: 15px; display: block; margin: 0 auto; overflow: visible; }
+.pet-sprite.species-conejita .mouth { color: #5b3a5b; }

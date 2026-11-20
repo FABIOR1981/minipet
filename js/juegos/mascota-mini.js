@@ -30,7 +30,7 @@ Object.assign(Minigames, {
         face.classList.add(`${kind}-${look[kind]}`);
       });
       const mouthEl = face.querySelector('.mouth');
-      if (look.mouth && mouthEl) mouthEl.innerText = Catalogo.mouthText(look.mouth);
+      if (look.mouth && mouthEl) { mouthEl.innerHTML = Catalogo.mouthSvg(look.mouth); mouthEl.dataset.boca = look.mouth; }
     }
     if (look.color) {
       sprite.style.backgroundColor = look.color;
@@ -113,7 +113,7 @@ Object.assign(Minigames, {
     wrap.appendChild(sprite);
 
     const mouth = sprite.querySelector('.mouth');
-    let normalMouth = mouth ? mouth.innerText : '';
+    let normalMouth = mouth ? mouth.innerHTML : '';
     let mouthTimer = null;
 
     // Reinicia y lanza una animación corta (clase que se quita sola)
@@ -138,10 +138,11 @@ Object.assign(Minigames, {
       oops() {                            // sorpresa
         react('oops', 550);
         if (mouth) {
-          if (mouth.innerText !== 'o') normalMouth = mouth.innerText; // puede haber cambiado con setLook
-          mouth.innerText = 'o';
+          if (mouth.dataset.boca !== 'o') normalMouth = mouth.innerHTML; // puede haber cambiado con setLook
+          mouth.innerHTML = Catalogo.mouthSvg('o');
+          mouth.dataset.boca = 'o';
           clearTimeout(mouthTimer);
-          mouthTimer = setTimeout(() => { mouth.innerText = normalMouth; }, 700);
+          mouthTimer = setTimeout(() => { mouth.innerHTML = normalMouth; mouth.dataset.boca = 'normal'; }, 700);
         }
       },
       party(on = true) { wrap.classList.toggle('party', on); },  // festejo continuo

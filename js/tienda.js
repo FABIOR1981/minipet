@@ -13,7 +13,7 @@ import { AudioEffects } from './sonidos.js';
 // estado de PetState — no define datos propios.
 // =========================================================
 // Rasgos que se dejan de ofrecer en Mi Pet (se siguen dibujando si ya estaban puestos)
-const RASGOS_OCULTOS = { eyes: ['button'], mouth: ['omega'], cheeks: ['big'] };
+const RASGOS_OCULTOS = { eyes: ['button'], mouth: [], cheeks: ['big'] };
 
 export const Store = {
   storeCategory: 'all',
@@ -328,7 +328,11 @@ export const Store = {
     });
     content.querySelectorAll('.trait-row').forEach(row => {
       const kind = row.dataset.kind;
-      Catalogo.traits[kind].filter(o => !(RASGOS_OCULTOS[kind] || []).includes(o.id)).forEach(option => {
+      const opciones = kind === 'mouth'
+        ? Catalogo.mouthsFor(PetState.petSpecies).map(id => Catalogo.traits.mouth.find(m => m.id === id)).filter(Boolean)
+        : Catalogo.traits[kind].filter(o => !(RASGOS_OCULTOS[kind] || []).includes(o.id));
+      if (kind === 'mouth' && opciones.length === 0) { row.style.display = 'none'; return; }
+      opciones.forEach(option => {
         const btn = document.createElement('button');
         btn.className = `trait-option ${current[kind] === option.id ? 'selected' : ''}`;
         btn.setAttribute('aria-label', option.name);
