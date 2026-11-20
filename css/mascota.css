@@ -1544,3 +1544,27 @@ body:has(.species-nube) .pet-shadow {
 .hub-armario-texto { margin: 0 0 12px; color: #6a1b9a; font-weight: 700; font-size: 0.9rem; }
 .hub-armario-boton { width: auto; padding: 8px 18px; }
 .hub-armario-pie { padding: 8px 0 4px; text-align: center; }
+
+/* Estados de la mascota: el icono (💤, 💧, 🌡️) va en una insignia blanca
+   que flota suave, para que se vea de un vistazo */
+.extra-prop {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(74, 20, 140, 0.22), inset 0 1px 0 #ffffff;
+  font-size: 1rem;
+  line-height: 1;
+  animation: insigniaFlota 2.4s ease-in-out infinite;
+}
+.kawaii-face.sick .extra-prop { width: 36px; height: 36px; font-size: 1.25rem; top: -18px; }
+@keyframes insigniaFlota {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .extra-prop { animation: none; }
+}
+.extra-prop:empty { display: none; }
