@@ -1188,8 +1188,8 @@ body:has(.species-nube) .pet-shadow {
   position: absolute;
   inset: 0;
   background: currentColor;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M20 46 L16 18 L42 36 Z'/><path d='M100 46 L104 18 L78 36 Z'/></g></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M20 46 L16 18 L42 36 Z'/><path d='M100 46 L104 18 L78 36 Z'/></g></svg>") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M30 46 L22 14 L46 38 Z'/><path d='M90 46 L98 14 L74 38 Z'/></g></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='black' stroke='black' stroke-width='8' stroke-linejoin='round'><ellipse cx='60' cy='70' rx='46' ry='44'/><path d='M30 46 L22 14 L46 38 Z'/><path d='M90 46 L98 14 L74 38 Z'/></g></svg>") center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 8px rgba(74, 20, 140, 0.18));
 }
 
@@ -1454,7 +1454,7 @@ body:has(.species-nube) .pet-shadow {
 }
 
 /* Búho: ojos grandes y pico (la boca se reemplaza por el pico) */
-.pet-sprite.species-buho .eye { width: 26px; height: 26px; }
+.pet-sprite.species-buho .eye { width: 22px; height: 22px; }
 .pet-sprite.species-buho .mouth { color: transparent; position: relative; }
 .pet-sprite.species-buho .mouth::before {
   content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
