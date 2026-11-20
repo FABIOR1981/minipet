@@ -177,13 +177,15 @@ export const Store = {
     const content = document.getElementById('modal-content');
     const tab = this.myPetTab;
     content.innerHTML = `
+      <div class="mypet-topbar">
       ${tituloPantalla('mipet', 'Mi Pet')}
-      <div class="mypet-cabecera">
-      <div id="mypet-preview" class="mypet-preview"></div>
-      <div class="mypet-datos">
       <label class="mypet-name">Nombre
         <input id="mypet-name" type="text" maxlength="14" placeholder="Luna" autocomplete="off">
       </label>
+      </div>
+      <div class="mypet-cabecera">
+      <div id="mypet-preview" class="mypet-preview"></div>
+      <div class="mypet-datos">
       <button id="sonido-toggle" class="sonido-toggle" aria-pressed="${!AudioEffects.silenciado}">
         <span class="sonido-estado">${AudioEffects.silenciado ? 'Sonido apagado' : 'Sonido encendido'}</span>
         <span class="sonido-pista">Toca para ${AudioEffects.silenciado ? 'encenderlo' : 'apagarlo'}</span>

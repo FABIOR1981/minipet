@@ -1734,3 +1734,42 @@ body:has(.mypet-cabecera) .titulo-pantalla { margin-bottom: 0; }
 .mypet-cabecera .mypet-preview { height: 130px; width: 130px; padding: 0; justify-self: center; }
 .mypet-cabecera .mypet-datos { display: flex; flex-direction: column; gap: 8px; }
 .mypet-cabecera { margin-top: -10px; }
+
+/* Propuesta Mi Pet, segunda vuelta: interruptor de sonido completo y pestañas con desvanecido al borde */
+.mypet-cabecera .sonido-toggle::after {
+  width: 40px; height: 22px; border-radius: 11px;
+  background:
+    radial-gradient(circle 8px at right 11px center, #fff 98%, transparent),
+    #d9c6ea;
+}
+.mypet-cabecera .sonido-toggle[aria-pressed="true"]::after {
+  background:
+    radial-gradient(circle 8px at right 11px center, #fff 98%, transparent),
+    #ff7fa8;
+}
+.mypet-cabecera .sonido-toggle[aria-pressed="false"]::after {
+  background:
+    radial-gradient(circle 8px at left 11px center, #fff 98%, transparent),
+    #d9c6ea;
+}
+.hub-tabs {
+  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+          mask-image: linear-gradient(to right, #000 88%, transparent);
+  padding-right: 24px;
+}
+
+/* Mi Pet: título a la izquierda, X en el extremo derecho, nombre a la derecha bajo la X */
+body:has(.mypet-cabecera) .titulo-pantalla { justify-content: flex-start; padding-left: 4px; margin-top: 2px; }
+body:has(.mypet-cabecera) .close-btn { top: 10px; right: 10px; }
+.mypet-cabecera .mypet-datos { align-self: center; }
+
+/* Mi Pet: barra superior con título, nombre y X en una sola fila */
+.mypet-topbar { display: flex; align-items: center; gap: 8px; padding-right: 56px; margin-bottom: 6px; }
+.mypet-topbar .titulo-pantalla { margin: 0; flex: 0 0 auto; }
+.mypet-topbar .mypet-name { flex: 1 1 auto; min-width: 0; font-size: 0; }
+.mypet-topbar .mypet-name input { width: 100%; box-sizing: border-box; height: 36px; font-size: 16px; }
+.mypet-cabecera { margin-top: 0; }
+.mypet-cabecera .sonido-toggle { margin-left: auto; }
+/* Alineación: la X centrada con el título y el campo de nombre; preview un poco más bajo */
+body:has(.mypet-cabecera) .close-btn { top: 27px; right: 10px; }
+.mypet-cabecera .mypet-preview { height: 120px; width: 120px; }
