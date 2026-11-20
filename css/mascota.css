@@ -1452,3 +1452,13 @@ body:has(.species-nube) .pet-shadow {
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='16' viewBox='0 0 12 16'><path d='M3 2 Q9 8 3 14' fill='none' stroke='rgba(140,30,80,0.6)' stroke-width='2' stroke-linecap='round'/></svg>") right 8% top 56% / 12px 16px no-repeat,
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='16' viewBox='0 0 12 16'><path d='M3 2 Q9 8 3 14' fill='none' stroke='rgba(140,30,80,0.6)' stroke-width='2' stroke-linecap='round'/></svg>") right 8% top 70% / 12px 16px no-repeat;
 }
+
+/* Búho: ojos grandes y pico (la boca se reemplaza por el pico) */
+.pet-sprite.species-buho .eye { width: 26px; height: 26px; }
+.pet-sprite.species-buho .mouth { color: transparent; position: relative; }
+.pet-sprite.species-buho .mouth::before {
+  content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+  width: 14px; height: 10px; pointer-events: none;
+  background: #ff9800;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
