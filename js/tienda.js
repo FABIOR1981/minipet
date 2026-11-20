@@ -32,12 +32,12 @@ export const Store = {
     return Staff.saludoHTML(PetState.petSpecies, 'tienda', '¡Bienvenido! Soy {nombre}, elegí lo que quieras.');
   },
 
-  renderStore(category = this.storeCategory) {
+  renderStore(category = this.storeCategory, destino = null) {
     this.storeCategory = category;
-    const content = document.getElementById('modal-content');
+    const content = destino || document.getElementById('modal-content');
     content.innerHTML = `
-      ${tituloPantalla('tienda', 'Tienda')}
-      ${this.tenderoHTML()}
+      ${destino ? '' : tituloPantalla('tienda', 'Tienda')}
+      ${destino ? '' : this.tenderoHTML()}
       <div class="store-tabs" role="tablist" aria-label="Categorías de la tienda">
         <button class="store-tab ${category === 'all' ? 'active' : ''}" data-category="all">Todos</button>
         <button class="store-tab ${category === 'acc' ? 'active' : ''}" data-category="acc">Accesorios</button>
@@ -47,7 +47,7 @@ export const Store = {
     `;
 
     content.querySelectorAll('.store-tab').forEach(tab => {
-      tab.onclick = () => this.renderStore(tab.dataset.category);
+      tab.onclick = () => this.renderStore(tab.dataset.category, destino);
     });
     
     const container = content.querySelector('.grid-container');
@@ -190,17 +190,36 @@ export const Store = {
       </button>
       </div>
       </div>
-      <div class="store-tabs" role="tablist" aria-label="Secciones de Mi Pet">
+      <div class="store-tabs hub-tabs" role="tablist" aria-label="Secciones de Mi Pet">
         <button class="store-tab ${tab === 'personaje' ? 'active' : ''}" data-tab="personaje">Personaje</button>
         <button class="store-tab ${tab === 'cuerpo' ? 'active' : ''}" data-tab="cuerpo">Cuerpo</button>
         <button class="store-tab ${tab === 'rasgos' ? 'active' : ''}" data-tab="rasgos">Rasgos</button>
+        <button class="store-tab ${tab === 'escenario' ? 'active' : ''}" data-tab="escenario">Escenario</button>
+        <button class="store-tab ${tab === 'tienda' ? 'active' : ''}" data-tab="tienda">Tienda</button>
+        <button class="store-tab ${tab === 'armario' ? 'active' : ''}" data-tab="armario">Armario</button>
       </div>
-      ${tab === 'cuerpo' ? this.renderPetCustomization() : tab === 'rasgos' ? this.renderTraits() : this.renderPersonaje()}
+      <div id="hub-contenido" class="hub-contenido">
+      ${tab === 'cuerpo' ? this.renderPetCustomization() : tab === 'rasgos' ? this.renderTraits() : (tab === 'escenario' || tab === 'tienda' || tab === 'armario') ? '' : this.renderPersonaje()}
+      </div>
       <p class="privacidad-enlace"><a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a></p>
     `;
     content.querySelectorAll('.store-tab').forEach(btn => {
       btn.onclick = () => { this.myPetTab = btn.dataset.tab; this.renderMyPet(); };
     });
+    // Escenario, Tienda y Armario se dibujan dentro del mismo panel
+    const hub = content.querySelector('#hub-contenido');
+    const redibujar = () => this.renderMyPet();
+    if (tab === 'escenario') {
+      this.renderCollection('', 'bg', redibujar, hub);
+    } else if (tab === 'tienda') {
+      this.renderStore(this.storeCategory, hub);
+    } else if (tab === 'armario') {
+      hub.innerHTML = `
+        <div class="hub-armario">
+          <p class="hub-armario-texto">Probá looks y guardalos en el armario.</p>
+          <button class="card-btn hub-armario-boton" data-action="armario-desde-hub">Abrir el armario</button>
+        </div>`;
+    }
     this.refreshPetPreview();
 
     content.querySelector('#sonido-toggle').onclick = () => {
@@ -216,7 +235,7 @@ export const Store = {
 
     if (tab === 'cuerpo') this.bindPetCustomization(content);
     else if (tab === 'rasgos') this.bindTraits(content);
-    else this.bindPersonaje(content);
+    else if (tab === 'personaje') this.bindPersonaje(content);
   },
 
   renderPersonaje() {
@@ -314,8 +333,8 @@ export const Store = {
     });
   },
 
-  renderCollection(title, category, rerender) {
-    const content = document.getElementById('modal-content');
+  renderCollection(title, category, rerender, destino = null) {
+    const content = destino || document.getElementById('modal-content');
     content.innerHTML = `
       ${title}
       <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
