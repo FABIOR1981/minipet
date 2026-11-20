@@ -1812,3 +1812,20 @@ body:has(.mypet-cabecera) .privacidad-enlace { flex: 0 0 auto; margin: 6px 0 0; 
 /* Bocas dibujadas en SVG (cada especie tiene su juego) */
 .mouth svg.boca-svg { width: 26px; height: 15px; display: block; margin: 0 auto; overflow: visible; }
 .pet-sprite.species-conejita .mouth { color: #5b3a5b; }
+
+/* Gatito: nariz rosada en triángulo y bigotes, como rasgos propios de la especie */
+.pet-sprite.species-gatito .mouth { position: relative; }
+.pet-sprite.species-gatito .mouth::before {
+  content: ''; position: absolute; left: 50%; top: -9px; transform: translateX(-50%);
+  width: 9px; height: 6px; pointer-events: none;
+  background: #e91e63; clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.pet-sprite.species-gatito .mouth::after {
+  content: ''; position: absolute; left: 50%; top: 1px; transform: translateX(-50%);
+  width: 58px; height: 10px; pointer-events: none;
+  background:
+    linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) left 1px center / 17px 1.2px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) left 1px bottom 1px / 17px 1.2px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) right 1px center / 17px 1.2px no-repeat,
+    linear-gradient(rgba(90, 40, 60, 0.45), rgba(90, 40, 60, 0.45)) right 1px bottom 1px / 17px 1.2px no-repeat;
+}
