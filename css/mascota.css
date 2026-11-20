@@ -1462,3 +1462,16 @@ body:has(.species-nube) .pet-shadow {
   background: #ff9800;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
+
+/* Ojos propios por personaje: el gatito tiene ojos almendrados y la nube
+   ojos un poco caídos, para que no compartan la misma cara */
+.pet-sprite.species-gatito .eye {
+  width: 12px;
+  height: 17px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+.pet-sprite.species-nube .eye {
+  width: 15px;
+  height: 11px;
+  border-radius: 50% 50% 45% 45%;
+}
