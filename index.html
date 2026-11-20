@@ -111,40 +111,50 @@
       <div id="test-badge" class="test-badge" hidden>🧪 Modo prueba</div>
     </main>
 
-    <!-- Menú Inferior en Rejilla 4x2 -->
+    <!-- Menú inferior en dos grupos: cuidar y jugar, personalizar -->
     <nav class="bottom-nav">
-      <button class="nav-comer" data-action="comer">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-comer"/></svg></span>
-        <span class="btn-text">Comer</span>
-      </button>
-      <button class="nav-medicina" data-action="medicina">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-medicina"/></svg></span>
-        <span class="btn-text">Medicina</span>
-      </button>
-      <button class="nav-dormir" data-action="dormir">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-dormir"/></svg></span>
-        <span class="btn-text">Dormir</span>
-      </button>
-      <button class="nav-juegos" data-action="juegos">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-juegos"/></svg></span>
-        <span class="btn-text">Juegos</span>
-      </button>
-      <button class="nav-mipet" data-action="mi-pet">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-mipet"/></svg></span>
-        <span class="btn-text">Mi Pet</span>
-      </button>
-      <button class="nav-armario" data-action="armario">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-armario"/></svg></span>
-        <span class="btn-text">Armario</span>
-      </button>
-      <button class="nav-escenario" data-action="escenario">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-escenario"/></svg></span>
-        <span class="btn-text">Escenario</span>
-      </button>
-      <button class="nav-tienda" data-action="tienda">
-        <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-tienda"/></svg></span>
-        <span class="btn-text">Tienda</span>
-      </button>
+      <div class="nav-grupo">
+        <span class="nav-grupo-titulo">Cuidar y jugar</span>
+        <div class="nav-grupo-botones">
+        <button class="nav-comer" data-action="comer">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-comer"/></svg></span>
+          <span class="btn-text">Comer</span>
+        </button>
+        <button class="nav-medicina" data-action="medicina">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-medicina"/></svg></span>
+          <span class="btn-text">Medicina</span>
+        </button>
+        <button class="nav-dormir" data-action="dormir">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-dormir"/></svg></span>
+          <span class="btn-text">Dormir</span>
+        </button>
+        <button class="nav-juegos" data-action="juegos">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-juegos"/></svg></span>
+          <span class="btn-text">Juegos</span>
+        </button>
+        </div>
+      </div>
+      <div class="nav-grupo">
+        <span class="nav-grupo-titulo">Personalizar</span>
+        <div class="nav-grupo-botones">
+        <button class="nav-mipet" data-action="mi-pet">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-mipet"/></svg></span>
+          <span class="btn-text">Mi Pet</span>
+        </button>
+        <button class="nav-armario" data-action="armario">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-armario"/></svg></span>
+          <span class="btn-text">Armario</span>
+        </button>
+        <button class="nav-escenario" data-action="escenario">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-escenario"/></svg></span>
+          <span class="btn-text">Escenario</span>
+        </button>
+        <button class="nav-tienda" data-action="tienda">
+          <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-tienda"/></svg></span>
+          <span class="btn-text">Tienda</span>
+        </button>
+        </div>
+      </div>
     </nav>
 
     <!-- Panel del vestidor: reemplaza a la botonera mientras la mascota se prueba cosas -->

@@ -1523,3 +1523,13 @@ body:has(.species-nube) .pet-shadow {
 .pet-sprite.species-nube .pet-glitter {
   clip-path: ellipse(44% 33% at 50% 60%);
 }
+
+/* Barra inferior en dos grupos: "Cuidar y jugar" y "Personalizar" */
+.bottom-nav { display: flex; flex-direction: column; gap: 8px; }
+.nav-grupo { display: flex; flex-direction: column; gap: 4px; }
+.nav-grupo-titulo {
+  padding-left: 6px;
+  font-size: 0.66rem; font-weight: 800; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #8e44ad;
+}
+.nav-grupo-botones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
