@@ -1687,3 +1687,50 @@ body:has(.species-nube) .pet-shadow {
 }
 .hub-tabs .store-tab[data-tab="tienda"].active,
 .store-tabs[aria-label="Categorías de la tienda"] .store-tab.active { color: #4a148c; }
+
+/* ===== Propuesta Mi Pet (vista previa) ===== */
+/* Una sola fila de pestañas desplazable */
+.hub-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 6px; scrollbar-width: none; }
+.hub-tabs::-webkit-scrollbar { display: none; }
+.hub-tabs .store-tab { flex: 0 0 auto; }
+/* Un solo color de acento: el rosa de la marca */
+.hub-tabs .store-tab.active,
+.store-tabs[aria-label="Categorías de la tienda"] .store-tab.active {
+  background: #ff7fa8; border-color: #ff7fa8; color: #fff; box-shadow: 0 2px 0 #e35d8a;
+}
+/* Mascota protagonista */
+.mypet-preview { width: 150px; height: 150px; }
+/* Interruptor visible en el sonido */
+.sonido-toggle { position: relative; padding-right: 58px; }
+.sonido-toggle::after {
+  content: ''; position: absolute; right: 12px; top: 50%; translate: 0 -50%;
+  width: 36px; height: 20px; border-radius: 10px; background: #d9c6ea; transition: background .2s;
+}
+.sonido-toggle::before {
+  content: ''; position: absolute; right: 14px; top: 50%; translate: 0 -50%; z-index: 1;
+  width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: right .2s;
+}
+.sonido-toggle[aria-pressed="true"]::after { background: #ff7fa8; }
+.sonido-toggle[aria-pressed="true"]::before { right: 14px; }
+.mypet-cabecera .mypet-preview { width: 140px; height: 140px; }
+
+/* Mi Pet compacto: cerrar solo con el ícono, nombre sin etiqueta visible y sonido en una pastilla chica */
+body:has(.mypet-cabecera) .close-btn { font-size: 0; padding: 10px; min-width: 0; gap: 0; }
+body:has(.mypet-cabecera) .close-btn .ico { width: 18px; height: 18px; }
+.mypet-cabecera .mypet-name { font-size: 0; }
+.mypet-cabecera .mypet-name input { height: 36px; font-size: 16px; }
+.mypet-cabecera .sonido-toggle { width: auto; display: inline-flex; align-items: center; padding: 5px 12px 5px 12px; font-size: 13px; gap: 6px; }
+.mypet-cabecera .sonido-toggle .sonido-estado { font-size: 13px; }
+.mypet-cabecera .sonido-toggle::after, .mypet-cabecera .sonido-toggle::before { position: static; translate: none; }
+.mypet-cabecera .sonido-toggle { white-space: nowrap; }
+.mypet-cabecera .sonido-toggle::before { display: none; }
+.mypet-cabecera .sonido-toggle::after { display: inline-block; flex: 0 0 auto; width: 36px; height: 20px; border-radius: 10px; background: #d9c6ea; }
+.mypet-cabecera .sonido-toggle[aria-pressed="true"]::after { background: #ff7fa8; }
+
+/* Mi Pet: distribución ordenada. Cerrar en la esquina del título, sin hueco arriba de la cabecera */
+body:has(.mypet-cabecera) .close-btn { position: absolute; top: 12px; right: 12px; z-index: 2; }
+body:has(.mypet-cabecera) .titulo-pantalla { margin-bottom: 0; }
+.mypet-cabecera { margin-top: 2px; grid-template-columns: 0.8fr 1.2fr; gap: 10px; }
+.mypet-cabecera .mypet-preview { height: 130px; width: 130px; padding: 0; justify-self: center; }
+.mypet-cabecera .mypet-datos { display: flex; flex-direction: column; gap: 8px; }
+.mypet-cabecera { margin-top: -10px; }
