@@ -1660,4 +1660,7 @@ body:has(.species-nube) .pet-shadow {
 .nav-grupo-botones { gap: 6px; }
 .nav-grupo-botones button { min-height: 0; padding-top: 4px; padding-bottom: 4px; }
 .nav-grupo-botones .btn-icon { width: 30px; height: 30px; }
-.nav-grupo-botones.nav-una button { height: 44px; min-height: 0; }
+.nav-grupo-botones.nav-una button { height: 54px; min-height: 0; }
+
+/* Dormida: el cuerpo se achata hacia el piso (sin tapar la animación de respiración) */
+.room.sleeping #pet { scale: 1.08 0.86; transform-origin: 50% 100%; }
