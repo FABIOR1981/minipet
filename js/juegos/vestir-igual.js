@@ -1,5 +1,6 @@
 import { Catalogo } from '../catalogo.js';
 import { ico } from '../iconos.js';
+import { PetState } from '../mascota-estado.js';
 import { Minigames } from './juegos-base.js';
 import { AudioEffects } from '../sonidos.js';
 // =========================================================
@@ -13,9 +14,11 @@ Object.assign(Minigames, {
       const content = document.getElementById('modal-content');
       const best = Minigames.getBestScore('dress');
       const COLORS = ['#ff80ab', '#b388ff', '#80cbc4'];
-      const SHAPES = Catalogo.shapes.map(s => s.id);
+      // Mochi usa las formas de cuerpo; los demás personajes usan sus formas (original, alternativa, otra)
+      const ES_MOCHI = !PetState.petSpecies || PetState.petSpecies === 'mochi';
+      const SHAPES = ES_MOCHI ? Catalogo.shapes.map(s => s.id) : ['forma-original', 'forma-alt', 'forma-alt2'];
       const ACCESSORIES = Catalogo.items.filter(i => i.category === 'acc');
-      const NEUTRAL = { color: '#d7ccc8', shape: 'shape-circle', accessory: null };
+      const NEUTRAL = { color: '#d7ccc8', shape: ES_MOCHI ? 'shape-circle' : 'forma-original', accessory: null };
 
       content.innerHTML = `
         <h3 class="game-title" style="text-align:center;">👗 Vestirla Igual</h3>

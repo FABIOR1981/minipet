@@ -37,8 +37,16 @@ Object.assign(Minigames, {
       sprite.style.color = look.color;
     }
     if (look.shape) {
-      sprite.className = sprite.className.replace(/\bshape-\S+/g, '').trim();
-      sprite.classList.add(look.shape);
+      const esMochi = /\bspecies-mochi\b/.test(sprite.className) || !/\bspecies-/.test(sprite.className);
+      if (look.shape.startsWith('forma-')) {
+        // Personajes con formas alternativas: forma-original (sin clase), forma-alt, forma-alt2
+        sprite.className = sprite.className.replace(/\bshape-\S+/g, '').replace(/\bforma-\S+/g, '').trim();
+        sprite.classList.add('shape-circle');
+        if (look.shape !== 'forma-original') sprite.classList.add(look.shape);
+      } else if (esMochi) {
+        sprite.className = sprite.className.replace(/\bshape-\S+/g, '').trim();
+        sprite.classList.add(look.shape);
+      }
     }
     if ('accessory' in look) {
       const accessoryEl = sprite.querySelector('.accessory');

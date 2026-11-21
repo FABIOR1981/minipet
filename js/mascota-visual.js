@@ -183,7 +183,9 @@ Object.assign(PetState, {
       petEl.style.color = this.petColor;
       // No pisa 'walking'/'happy-jump' u otras clases temporales que ya tenga el elemento
       petEl.className = petEl.className.replace(/\bshape-\S+/g, '').trim();
-      petEl.classList.add(this.petShape || 'shape-circle');
+      // Las formas de cuerpo (Círculo, Mochi, Gotita, Squircle, Dumpling) son solo del Mochi:
+      // en los demás personajes pisarían su silueta (el Dumpling hacía desaparecer el cuerpo)
+      petEl.classList.add(this.petSpecies === 'mochi' || !this.petSpecies ? (this.petShape || 'shape-circle') : 'shape-circle');
       // Personaje: cambia la silueta y la posición de la cara (ver css/mascota.css)
       petEl.className = petEl.className.replace(/\bspecies-\S+/g, '').replace(/\bforma-\S+/g, '').trim();
       petEl.classList.add(`species-${this.petSpecies || 'mochi'}`);

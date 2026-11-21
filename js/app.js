@@ -51,7 +51,7 @@ function mostrarTarjetaBienvenida() {
     <section class="bienvenida-card" role="dialog" aria-modal="true" aria-labelledby="bienvenida-titulo">
       <div class="bienvenida-mascotas"></div>
       <h2 id="bienvenida-titulo" class="bienvenida-titulo">¡Hola! Te damos la bienvenida</h2>
-      <p class="bienvenida-texto">Mochi y Nube ya están listos y pronto llegan los demás. Después podés ponerle nombre en Mi Pet.</p>
+      <p class="bienvenida-texto">Tenés 7 personajes para elegir. Después podés ponerle nombre en Mi Pet.</p>
       <button class="card-btn bienvenida-boton">Elegir mi personaje</button>
     </section>`;
 
