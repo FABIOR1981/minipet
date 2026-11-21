@@ -27,6 +27,10 @@ Object.assign(Minigames, {
       let score = 0;
       let gameOver = false;
 
+      // El pastelero del staff sostiene la capa que se mueve y la suelta cuando tocás
+      const STAFF_SIZE = 40;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'tienda');
+
       const dropLayer = (e) => {
         if (e) e.preventDefault();
         if (gameOver) return;
@@ -35,6 +39,7 @@ Object.assign(Minigames, {
 
         if (Math.abs(diff) > prev.width) {
           gameOver = true;
+          if (tirador) { tirador.oops(); tirador.destroy(); }
           Minigames.sacudir(canvas.parentElement);
           const isRecord = Minigames.saveBestScore('cake', score);
           Minigames.showResult('La torre cayó. ¿Otra?', '🍰', score, () => Minigames.startCakeGame(), isRecord);
@@ -45,6 +50,7 @@ Object.assign(Minigames, {
         Minigames.updateHudScore(score);
         AudioEffects.playTone(700, 'sine', 0.1);
         Minigames.spectate('cheer');
+        if (tirador) tirador.cheer();
         Minigames.celebrar(canvas.parentElement, '✨', '+10');
         const newWidth = prev.width - Math.abs(diff);
         const newX = diff > 0 ? currentX : prev.x;
@@ -69,6 +75,7 @@ Object.assign(Minigames, {
         canvas.onclick = null;
         window.removeEventListener('keydown', handleSpace);
         gameOver = true;
+        if (tirador) tirador.destroy();
         return score;
       };
 
@@ -112,6 +119,8 @@ Object.assign(Minigames, {
         ctx.roundRect(currentX, currentY, prevWidth, 22, 6);
         ctx.fill();
         ctx.restore();
+        // El pastelero lleva la capa por encima
+        if (tirador) tirador.place(currentX + prevWidth / 2, currentY - 2 + camY);
 
         requestAnimationFrame(loop);
       }

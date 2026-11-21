@@ -27,11 +27,19 @@ Object.assign(Minigames, {
       let timeLeft = 15;
       let stopped = false;
 
+      // Quien sopla las burbujas: la cuidadora del staff, abajo (si no hay, aparecen solas)
+      const STAFF_SIZE = 44;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'cuidados');
+      let staffX = W / 2;
+      let pendiente = null; // { x, y, r, isGolden } esperando que el staff llegue
+      if (tirador) tirador.place(staffX, H - 8);
+
       const timer = setInterval(() => {
         timeLeft--;
         Minigames.updateHudTimer(timeLeft);
         if (timeLeft <= 0) {
           clearInterval(timer);
+          if (tirador) tirador.destroy();
           const isRecord = Minigames.saveBestScore('bubble', score);
           Minigames.showResult('Se acabó el tiempo', '✨', score, () => Minigames.startBubbleGame(), isRecord);
         }
@@ -54,6 +62,7 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(b.isGolden ? 1000 : 750, 'sine', 0.1);
             Minigames.spectate('cheer');
+            if (tirador) tirador.cheer();
             Minigames.celebrar(canvas.parentElement, b.isGolden ? '🌟' : '✨', `+${b.isGolden ? 15 : 5}`);
             bubbles.splice(i, 1);
           }
@@ -67,6 +76,7 @@ Object.assign(Minigames, {
       Minigames.exitHandler = () => {
         stopped = true;
         clearInterval(timer);
+        if (tirador) tirador.destroy();
         canvas.removeEventListener('touchstart', handleTouchBubble);
         canvas.onclick = null;
         return score;
@@ -78,21 +88,38 @@ Object.assign(Minigames, {
         const f = frameClock(now); // 1 = un frame a 60 Hz
         if (stopped || timeLeft <= 0) return;
 
-        if (Math.random() < 0.08 * f && bubbles.length < 7) {
-          const isGolden = Math.random() < 0.3;
-          bubbles.push({
+        if (!pendiente && Math.random() < 0.08 * f && bubbles.length < 7) {
+          pendiente = {
             x: Math.random() * 250 + 25,
             y: Math.random() * (H - 110) + 40,
             r: Math.random() * 8 + 16,
-            isGolden: isGolden
-          });
+            isGolden: Math.random() < 0.3
+          };
         }
+        if (pendiente) {
+          if (!tirador) {
+            bubbles.push({ ...pendiente, tx: pendiente.x, ty: pendiente.y });
+            pendiente = null;
+          } else {
+            // La cuidadora se desliza hasta debajo del lugar elegido y sopla; la burbuja sube hasta ahí
+            staffX += (pendiente.x - staffX) * Math.min(1, 0.2 * f);
+            if (Math.abs(pendiente.x - staffX) < 4) {
+              bubbles.push({ x: staffX, y: H - 52, tx: pendiente.x, ty: pendiente.y, r: pendiente.r, isGolden: pendiente.isGolden });
+              if (pendiente.isGolden) tirador.cheer(); else tirador.nod();
+              pendiente = null;
+            }
+          }
+        }
+        if (tirador) tirador.place(staffX, H - 8);
 
         Minigames.paisaje(ctx, W, H, 'burbujas');
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
         bubbles.forEach(b => {
+          // La burbuja soplada viaja hasta su lugar
+          b.x += (b.tx - b.x) * Math.min(1, 0.1 * f);
+          b.y += (b.ty - b.y) * Math.min(1, 0.1 * f);
           // Aro de vidrio detrás del dibujo, para que se lea como burbuja
           ctx.beginPath();
           ctx.arc(b.x, b.y, b.r * 1.15, 0, Math.PI * 2);

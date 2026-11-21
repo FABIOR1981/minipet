@@ -42,6 +42,11 @@ Object.assign(Minigames, {
       const pet = Minigames.createActor(canvas, PET_SIZE);
       pet.run();
       pet.place(35, GROUND);
+
+      // Quien pone los obstáculos: el decorador del staff, parado al borde derecho de la pista
+      const STAFF_SIZE = 40;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'escenario');
+      if (tirador) tirador.place(W - 22, GROUND + 6);
       let groundOffset = 0; // desplazamiento de las marcas del piso
       let cloudX = 220;
 
@@ -68,6 +73,7 @@ Object.assign(Minigames, {
         canvas.removeEventListener('pointerdown', jump);
         stopped = true;
         pet.destroy();
+        if (tirador) tirador.destroy();
         return score;
       };
 
@@ -80,6 +86,7 @@ Object.assign(Minigames, {
           window.removeEventListener('keydown', handleKeyDown);
           canvas.removeEventListener('pointerdown', jump);
           pet.destroy();
+          if (tirador) tirador.destroy();
           const isRecord = Minigames.saveBestScore('runner', score);
           Minigames.showResult('Fin del juego', '🦄', score, () => Minigames.startRunnerGame(), isRecord);
           return;
@@ -114,6 +121,7 @@ Object.assign(Minigames, {
           const tipo = score < 40 || r < 0.55 ? 'hongo' : r < 0.8 ? 'barra' : 'estrella';
           const w = tipo === 'barra' ? 62 : tipo === 'estrella' ? 30 : 22;
           obstacles.push({ x: W, tipo, w, contado: false });
+          if (tirador) tirador.nod(); // los va poniendo en la pista
         }
 
         for (let i = obstacles.length - 1; i >= 0; i--) {
@@ -124,6 +132,7 @@ Object.assign(Minigames, {
             score += 10;
             Minigames.updateHudScore(score);
             pet.cheer();
+            if (tirador) tirador.cheer();
             Minigames.celebrar(canvas.parentElement, '✨', '+10');
           }
           if (o.x < -60) obstacles.splice(i, 1);
@@ -137,6 +146,7 @@ Object.assign(Minigames, {
           const choca = o.tipo === 'estrella' ? playerY < STAND - 45 : playerY > STAND - 22;
           if (choca) {
             gameOver = true;
+            if (tirador) tirador.oops();
             Minigames.sacudir(canvas.parentElement);
           }
         }
