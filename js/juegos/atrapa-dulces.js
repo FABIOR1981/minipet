@@ -39,6 +39,20 @@ Object.assign(Minigames, {
       const pet = Minigames.createActor(canvas, PET_SIZE);
       pet.place(basketX + 30, GROUND);
 
+      // Quien tira los dulces: el anfitrión del staff (si no hay, caen del cielo como antes)
+      const STAFF_SIZE = 44, STAFF_Y = 54, MANO = 26;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'minijuegos');
+      let staffX = W / 2;
+      let objetivoX = itemX;
+      let apuntando = tirador ? 28 : 0; // frames de espera antes de soltar
+      if (tirador) { tirador.place(staffX, STAFF_Y); itemY = -999; }
+      const nuevoDulce = () => {
+        currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
+        itemX = Math.random() * 250 + 10;
+        if (tirador) { objetivoX = itemX; itemY = -999; apuntando = 24; }
+        else itemY = 0;
+      };
+
       // Teclado
       const keys = {};
       const handleKeyDown = (e) => keys[e.key] = true;
@@ -65,6 +79,7 @@ Object.assign(Minigames, {
         canvas.removeEventListener('touchmove', handleTouch);
         stopped = true;
         pet.destroy();
+        if (tirador) tirador.destroy();
         return score;
       };
 
@@ -79,6 +94,7 @@ Object.assign(Minigames, {
           canvas.removeEventListener('touchstart', handleTouch);
           canvas.removeEventListener('touchmove', handleTouch);
           pet.destroy();
+          if (tirador) tirador.destroy();
           const isRecord = Minigames.saveBestScore('catch', score);
           Minigames.showResult('Fin del juego', '🎈', score, () => Minigames.startCatchGame(), isRecord);
           return;
@@ -87,20 +103,33 @@ Object.assign(Minigames, {
         if (keys['ArrowLeft']) basketX = Math.max(0, basketX - 6 * f);
         if (keys['ArrowRight']) basketX = Math.min(240, basketX + 6 * f);
 
-        itemY += 3.8 * f;
+        if (tirador && itemY === -999) {
+          // El anfitrión se desliza hasta su posición y suelta el dulce
+          const meta = Math.max(STAFF_SIZE / 2, Math.min(W - STAFF_SIZE / 2, objetivoX - MANO));
+          staffX += (meta - staffX) * Math.min(1, 0.12 * f);
+          if (Math.abs(meta - staffX) < 3) {
+            apuntando -= f;
+            if (apuntando <= 0) {
+              itemX = Math.max(10, Math.min(W - 10, staffX + MANO));
+              itemY = STAFF_Y - 20;
+              tirador.nod();
+            }
+          }
+        } else {
+          itemY += (tirador ? 4.1 : 3.8) * f;
+        }
 
         if (itemY >= GROUND - 36 && itemX >= basketX - 10 && itemX <= basketX + 60) {
           score += 5;
           Minigames.updateHudScore(score);
           AudioEffects.playTone(800, 'sine', 0.05);
           pet.cheer();
+          if (tirador) tirador.cheer();
           Minigames.celebrar(canvas.parentElement, '✨', '+5');
-          itemY = 0;
-          itemX = Math.random() * 250 + 10;
-          currentCandy = CANDY_EMOJIS[Math.floor(Math.random() * CANDY_EMOJIS.length)];
+          nuevoDulce();
         }
 
-        if (itemY > H) gameOver = true;
+        if (itemY > H) { gameOver = true; if (tirador) tirador.oops(); }
 
         Minigames.paisaje(ctx, W, H, 'dulces');
         ctx.textAlign = 'center';
@@ -113,11 +142,14 @@ Object.assign(Minigames, {
         ctx.fill();
         pet.place(basketX + 30, GROUND);
 
-        // Dulce cayendo
-        ctx.font = '34px sans-serif';
+        if (tirador) tirador.place(staffX, STAFF_Y);
+
+        // Dulce cayendo (o sostenido por el anfitrión mientras apunta)
+        ctx.font = (tirador && itemY === -999 ? '24px' : '34px') + ' sans-serif';
         // Color opaco: los emojis heredan la transparencia del fillStyle (venía el de la sombra)
         ctx.fillStyle = '#000';
-        Dibujos.dibujar(ctx, currentCandy, itemX, itemY);
+        if (tirador && itemY === -999) Dibujos.dibujar(ctx, currentCandy, staffX + MANO, STAFF_Y - 22);
+        else Dibujos.dibujar(ctx, currentCandy, itemX, itemY);
 
         requestAnimationFrame(loop);
       }

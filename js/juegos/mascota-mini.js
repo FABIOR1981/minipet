@@ -1,5 +1,7 @@
 import { Catalogo } from '../catalogo.js';
 import { Minigames } from './juegos-base.js';
+import { Staff } from '../staff.js';
+import { PetState } from '../mascota-estado.js';
 // =========================================================
 // MASCOTA-MINI.JS — La mascota dentro de los minijuegos.
 //
@@ -190,6 +192,24 @@ Object.assign(Minigames, {
   spectate(action) {
     const pet = this.spectator;
     if (pet && pet.el.isConnected && typeof pet[action] === 'function') pet[action]();
+  },
+
+
+  // Personaje del staff que ocupa un puesto (null si no hay), montado sobre el canvas
+  // como createActor(). Sirve para que el staff interactúe con la mascota del jugador.
+  createStaffActor(canvas, size, puestoId) {
+    const id = Staff.ocupante(PetState.petSpecies || 'mochi', puestoId);
+    const info = Catalogo.species.find(s => s.id === id);
+    if (!info) return null;
+    const actor = this.createActor(canvas, size);
+    const sprite = actor.el.querySelector('.pet-sprite');
+    if (sprite) {
+      sprite.className = `pet-sprite shape-circle species-${id}`;
+      sprite.style.backgroundColor = '';
+      this.applyLook(sprite, { color: info.color || '#ff80ab', mouth: info.boca || 'smile', accessory: null });
+    }
+    actor.especie = id;
+    return actor;
   },
 
   // ---------------------------------------------------------
