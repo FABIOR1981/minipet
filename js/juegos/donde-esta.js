@@ -30,6 +30,8 @@ Object.assign(Minigames, {
       const stage = document.getElementById('hide-stage');
       const cups = [...stage.querySelectorAll('.hide-cup')];
       const pet = Minigames.createMiniPet(56);
+      // El anfitrión del staff es quien mezcla las cajas
+      Minigames.mountHost(stage, 44, 'minijuegos');
       const slots = [0, 1, 2]; // slots[i] = lugar (0 a 2) que ocupa la caja i
       let petCup = 0;
       let round = 0;
@@ -56,6 +58,7 @@ Object.assign(Minigames, {
         [slots[a], slots[b]] = [slots[b], slots[a]];
         layout(ms);
         AudioEffects.playTone(420, 'sine', 0.04);
+        Minigames.hostReact('nod');
         later(() => shuffleCups(swapsLeft - 1, ms, done), ms + 60);
       };
 
@@ -93,11 +96,13 @@ Object.assign(Minigames, {
           Minigames.updateHudScore(score);
           AudioEffects.playTone(880, 'triangle', 0.12);
           pet.cheer();
+          Minigames.hostReact('cheer');
           Minigames.celebrar(stage, '✨', '+10');
           setStatus('La encontraste. 🎉');
           later(startRound, 1100);
         } else {
           AudioEffects.playTone(300, 'sine', 0.15);
+          Minigames.hostReact('oops');
           Minigames.sacudir(stage);
           setStatus('Estaba aquí.');
           later(() => { cups[petCup].classList.add('open'); pet.cheer(); }, 350);

@@ -27,6 +27,8 @@ Object.assign(Minigames, {
       `;
 
       const area = document.getElementById('dress-area');
+      // La estilista del staff presenta el look y juzga el resultado
+      Minigames.mountHost(area.parentElement, 46, 'vestidor');
       let round = 0;
       let score = 0;
       let timers = [];
@@ -49,6 +51,7 @@ Object.assign(Minigames, {
         const shown = Minigames.createMiniPet(110, target);
         document.getElementById('dress-show').appendChild(shown.el);
         shown.cheer();
+        Minigames.hostReact('nod');
 
         later(() => build(target), viewMs);
       };
@@ -109,12 +112,14 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(880, 'triangle', 0.12);
             preview.cheer();
+            Minigames.hostReact('cheer');
             Minigames.celebrar(area.parentElement, '✨', '+10');
             document.getElementById('dress-status').innerText = 'Igualita. 🎉';
             later(startRound, 1100);
           } else {
             // Muestra el look correcto al lado del armado
             AudioEffects.playTone(300, 'sine', 0.15);
+            Minigames.hostReact('oops');
             Minigames.sacudir(area.parentElement);
             document.getElementById('dress-status').innerText = 'Era así 👉';
             const answer = Minigames.createMiniPet(84, target);

@@ -41,6 +41,7 @@ Object.assign(Minigames, {
       });
 
       Minigames.mountSpectator();
+      Minigames.mountHost(content.querySelector('.game-stage'), 40, 'minijuegos'); // dicta la secuencia
 
       this.simonSequence = [];
       this.userSequence = [];
@@ -91,6 +92,7 @@ Object.assign(Minigames, {
     const freqs = [350, 450, 550, 650];
     AudioEffects.playTone(freqs[index], 'sine', 0.15);
     Minigames.spectate('nod'); // cabecea al ritmo de la secuencia
+    Minigames.hostReact('nod');
     btn.classList.add('on');
     setTimeout(() => btn.classList.remove('on'), 350);
   },
@@ -108,6 +110,7 @@ Object.assign(Minigames, {
       this.clearSimonTimers();
       const reward = this.simonScore * 10;
       const isRecord = Minigames.saveBestScore('simon', this.simonScore);
+      Minigames.hostReact('oops');
       Minigames.sacudir(document.querySelector('.game-stage'));
       Minigames.showResult('Se rompió la secuencia. ¿Otra ronda?', '🧠', reward, () => Minigames.startSimonGame(), isRecord);
       return;
@@ -118,6 +121,7 @@ Object.assign(Minigames, {
       this.simonScore++;
       Minigames.updateHudScore(this.simonScore);
       Minigames.spectate('cheer');
+      Minigames.hostReact('cheer');
       Minigames.celebrar(document.querySelector('.game-stage'), '✨');
       const roundTimeout = setTimeout(() => this.nextSimonRound(), 1000);
       this.simonTimers.push(roundTimeout);

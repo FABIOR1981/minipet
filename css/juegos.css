@@ -624,3 +624,12 @@
   color: #e65100;
   opacity: 0.85;
 }
+
+/* Anfitrión del staff en la esquina del escenario (juegos sin canvas) */
+.stage-host {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  z-index: 3;
+  pointer-events: none;
+}

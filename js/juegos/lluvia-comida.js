@@ -43,6 +43,13 @@ Object.assign(Minigames, {
       const pet = Minigames.createActor(canvas, PET_SIZE);
       pet.place(petX, GROUND);
 
+      // Quien tira la comida: la cuidadora del staff, arriba (si no hay, cae sola)
+      const STAFF_SIZE = 44, STAFF_Y = 54, MANO = 26;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'cuidados');
+      let staffX = W / 2;
+      let pendiente = null; // { x, good, emoji, speed } esperando que el staff llegue
+      if (tirador) tirador.place(staffX, STAFF_Y);
+
       // Teclado
       const keys = {};
       const handleKeyDown = (e) => keys[e.key] = true;
@@ -69,6 +76,7 @@ Object.assign(Minigames, {
         canvas.removeEventListener('touchmove', handlePointer);
         canvas.removeEventListener('mousemove', handlePointer);
         pet.destroy();
+        if (tirador) tirador.destroy();
       };
 
       Minigames.inProgress = true;
@@ -96,19 +104,32 @@ Object.assign(Minigames, {
 
         // Aparición: cada vez más seguida, hasta un tope
         nextSpawn -= f;
-        if (nextSpawn <= 0) {
+        if (nextSpawn <= 0 && !pendiente) {
           const good = Math.random() < 0.65;
           const list = good ? FOOD : NOT_FOOD;
-          items.push({
+          pendiente = {
             x: Math.random() * 260 + 20,
-            y: -16,
+            y: tirador ? STAFF_Y - 20 : -16,
             good,
             emoji: list[Math.floor(Math.random() * list.length)],
             // Velocidad: sube de a poco durante el primer minuto
             speed: 2.2 + Math.min(2.2, elapsed / 60 * 0.045) + Math.random() * 0.6
-          });
-          nextSpawn = Math.max(24, 58 - elapsed / 60 * 0.7);
+          };
+          if (!tirador) { items.push(pendiente); pendiente = null; nextSpawn = Math.max(24, 58 - elapsed / 60 * 0.7); }
         }
+        if (pendiente && tirador) {
+          // La cuidadora se desliza hasta la posición y suelta lo que trae
+          const meta = Math.max(STAFF_SIZE / 2, Math.min(W - STAFF_SIZE / 2, pendiente.x - MANO));
+          staffX += (meta - staffX) * Math.min(1, 0.2 * f);
+          if (Math.abs(meta - staffX) < 4) {
+            pendiente.x = Math.max(20, Math.min(W - 20, staffX + MANO));
+            items.push(pendiente);
+            pendiente = null;
+            tirador.nod();
+            nextSpawn = Math.max(24, 58 - elapsed / 60 * 0.7);
+          }
+        }
+        if (tirador) tirador.place(staffX, STAFF_Y);
 
         Minigames.paisaje(ctx, W, H, 'comida');
 
@@ -136,12 +157,14 @@ Object.assign(Minigames, {
               Minigames.updateHudScore(score);
               AudioEffects.playTone(800, 'sine', 0.05);
               pet.cheer();
+              if (tirador) tirador.cheer();
               Minigames.celebrar(canvas.parentElement, '⭐', '+5');
             } else {
               lives--;
               document.getElementById('hud-lives').innerHTML = ico('felicidad').repeat(lives) + ico('felicidad', 'vida-perdida').repeat(3 - lives);
               AudioEffects.playTone(260, 'sine', 0.15);
               pet.oops();
+              if (tirador) tirador.oops();
               Minigames.sacudir(canvas.parentElement);
               if (lives <= 0) gameOver = true;
             }

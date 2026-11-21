@@ -43,6 +43,7 @@ Object.assign(Minigames, {
         <p class="game-hint">Encuentra las dos cartas iguales</p>
       `;
       Minigames.mountSpectator();
+      Minigames.mountHost(content.querySelector('.game-stage'), 40, 'minijuegos'); // reparte las cartas
 
       const grid = document.getElementById('pairs-grid');
       let first = null;   // primera carta dada vuelta del intento
@@ -85,6 +86,7 @@ Object.assign(Minigames, {
           document.getElementById('pairs-found').innerText = found;
           AudioEffects.playTone(880, 'triangle', 0.12);
           Minigames.spectate('cheer');
+          Minigames.hostReact('cheer');
           Minigames.celebrar(grid.parentElement, '✨');
           if (found === PAIRS) timers.push(setTimeout(finish, 700));
         } else {
@@ -92,6 +94,7 @@ Object.assign(Minigames, {
           const a = first;
           first = null;
           Minigames.spectate('nod');
+          Minigames.hostReact('nod');
           timers.push(setTimeout(() => {
             a.classList.remove('open');
             second.classList.remove('open');

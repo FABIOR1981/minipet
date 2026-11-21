@@ -195,21 +195,48 @@ Object.assign(Minigames, {
   },
 
 
-  // Personaje del staff que ocupa un puesto (null si no hay), montado sobre el canvas
-  // como createActor(). Sirve para que el staff interactúe con la mascota del jugador.
-  createStaffActor(canvas, size, puestoId) {
+  // Convierte la copia en el personaje del staff que ocupa un puesto (null si no hay)
+  _vestirComoStaff(pet, puestoId) {
     const id = Staff.ocupante(PetState.petSpecies || 'mochi', puestoId);
     const info = Catalogo.species.find(s => s.id === id);
-    if (!info) return null;
-    const actor = this.createActor(canvas, size);
-    const sprite = actor.el.querySelector('.pet-sprite');
+    if (!info) { pet.destroy && pet.destroy(); return null; }
+    const sprite = pet.el.querySelector('.pet-sprite');
     if (sprite) {
       sprite.className = `pet-sprite shape-circle species-${id}`;
       sprite.style.backgroundColor = '';
       this.applyLook(sprite, { color: info.color || '#ff80ab', mouth: info.boca || 'smile', accessory: null });
     }
-    actor.especie = id;
-    return actor;
+    pet.especie = id;
+    return pet;
+  },
+
+  // Staff sobre un canvas (como createActor). Sirve para que el staff interactúe con la mascota del jugador.
+  createStaffActor(canvas, size, puestoId) {
+    return this._vestirComoStaff(this.createActor(canvas, size), puestoId);
+  },
+
+  // ---------------------------------------------------------
+  // ANFITRIÓN FLOTANTE (juegos de pantalla sin canvas)
+  // ---------------------------------------------------------
+  host: null,
+
+  // Sienta al staff en la esquina del escenario; reacciona con hostReact()
+  mountHost(stage, size = 44, puestoId = 'minijuegos') {
+    this.host = null;
+    if (!stage) return null;
+    const pet = this._vestirComoStaff(this.createMiniPet(size), puestoId);
+    if (!pet) return null;
+    const holder = document.createElement('div');
+    holder.className = 'stage-host';
+    holder.appendChild(pet.el);
+    stage.appendChild(holder);
+    this.host = pet;
+    return pet;
+  },
+
+  hostReact(action) {
+    const pet = this.host;
+    if (pet && pet.el.isConnected && typeof pet[action] === 'function') pet[action]();
   },
 
   // ---------------------------------------------------------
