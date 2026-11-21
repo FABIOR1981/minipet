@@ -27,11 +27,20 @@ Object.assign(Minigames, {
       let timeLeft = 20;
       let stopped = false;
 
+      // Quien suelta los globos: el anfitrión del staff, que camina por el pasto
+      // (si no hay, los globos aparecen solos como antes)
+      const STAFF_SIZE = 44;
+      const tirador = Minigames.createStaffActor(canvas, STAFF_SIZE, 'minijuegos');
+      let staffX = W / 2;
+      let objetivoX = null;
+      if (tirador) tirador.place(staffX, H - 8);
+
       const timerInterval = setInterval(() => {
         timeLeft--;
         Minigames.updateHudTimer(timeLeft);
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
+          if (tirador) tirador.destroy();
           const isRecord = Minigames.saveBestScore('pop', score);
           Minigames.showResult('Se acabó el tiempo', '🌸', score, () => Minigames.startPopGame(), isRecord);
         }
@@ -55,6 +64,7 @@ Object.assign(Minigames, {
             Minigames.updateHudScore(score);
             AudioEffects.playTone(900, 'triangle', 0.08);
             Minigames.spectate('cheer');
+            if (tirador) tirador.cheer();
             Minigames.celebrar(canvas.parentElement, '✨', '+5');
             balloons.splice(index, 1);
           }
@@ -68,6 +78,7 @@ Object.assign(Minigames, {
       Minigames.exitHandler = () => {
         stopped = true;
         clearInterval(timerInterval);
+        if (tirador) tirador.destroy();
         canvas.removeEventListener('touchstart', handlePop);
         canvas.onclick = null;
         return score;
@@ -79,7 +90,21 @@ Object.assign(Minigames, {
         const f = frameClock(now); // 1 = un frame a 60 Hz
         if (stopped || timeLeft <= 0) return;
 
-        if (Math.random() < 0.05 * f && balloons.length < 6) {
+        if (tirador) {
+          // El anfitrión elige dónde soltar el próximo globo, se desliza y lo suelta
+          if (objetivoX === null && balloons.length < 6 && Math.random() < 0.05 * f) {
+            objetivoX = Math.random() * 260 + 20;
+          }
+          if (objetivoX !== null) {
+            staffX += (objetivoX - staffX) * Math.min(1, 0.18 * f);
+            if (Math.abs(objetivoX - staffX) < 3) {
+              balloons.push({ x: staffX, y: H - 52, radius: 24, speed: Math.random() * 1.5 + 1.2 });
+              tirador.nod();
+              objetivoX = null;
+            }
+          }
+          tirador.place(staffX, H - 8);
+        } else if (Math.random() < 0.05 * f && balloons.length < 6) {
           balloons.push({
             x: Math.random() * 260 + 20,
             y: H + 20,
@@ -102,6 +127,7 @@ Object.assign(Minigames, {
           if (b.y < -20) {
             balloons.splice(index, 1);
             Minigames.spectate('oops'); // se escapó un globo
+            if (tirador) tirador.oops();
           }
         }
 
